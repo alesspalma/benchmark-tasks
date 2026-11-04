@@ -1,5 +1,5 @@
 {
-  "status": "native_isaac_demonstration_validated_dream_deferred",
+  "status": "native_and_single_dream_evaluation_recorded_media_upload_pending",
   "licensed_visual": {
     "file": "assets/d405.stl",
     "sha256": "8a9a84dd9c9a67687e5ad0b37a7ed334dbfea6b0f995fef28524cc8da5f21ed2",
@@ -26,12 +26,15 @@
     "isaac_execution": "native PhysX on local RTX GPU",
     "native_demonstration": "validation/demo-native.json",
     "native_drop_control": "validation/drop-native.json",
-    "dream_run": "not_run_deferred_until_final_step",
+    "dream_run": "validation/dream-native.json",
     "measured_trial_runtime_s": 111.95145348797087,
     "demonstration_control_steps": 643,
     "demonstration_simulated_s": 32.15,
     "score": 1.0,
     "real_hardware_trial": "not_run",
-    "inspect_robots_evaluation": "validation/inspect-robots-native.json"
+    "inspect_robots_evaluation": "validation/inspect-robots-native.json",
+    "dream_score": 0.0,
+    "dream_control_steps": 2400,
+    "dream_elapsed_wall_s": 2671.7588611170067
   }
 }

@@ -2,7 +2,7 @@
 
 Remove an unpowered camera and its attached plate from a bench fixture and place the assembly on a green pad. A passive rotating cam retains the front of the plate; a fixed rear lip retains its other edge. Robot contacts must operate the mechanism and transfer the free payload. No task-body actuators or execution-time attachments, pose writes, collision changes or joint-limit changes supply the solution.
 
-**Validation status:** three fresh native PhysX demonstrations reached 1.0 in 643 actions (32.15 simulated seconds), including the registered Inspect Robots `task_score` path with 320 × 176 observations. A direct-lift control scored zero, and a deliberate 49 mm unsupported descent permanently invalidated another trial despite its final upright pad placement. Nine scorer tests, all five offline URDF plans and three exported USD checks pass. See [validation/README.md](validation/README.md) for measured evidence and limits. Dream-1 evaluation remains the final pre-submission step; `task.draft.json` has no model score or media ID yet.
+**Validation status:** three fresh native PhysX demonstrations reached 1.0 in 643 actions (32.15 simulated seconds), including the registered Inspect Robots `task_score` path with 320 × 176 observations. One hosted Dream-1 trial scored 0.0 after the full 2,400-step budget; no repeat trial was made. A direct-lift control scored zero, and a deliberate 49 mm unsupported descent permanently invalidated another trial despite its final upright pad placement. Nine scorer tests, all five offline URDF plans and three exported USD checks pass. See [validation/README.md](validation/README.md) for measured evidence and run conditions. `task.json` contains measured scores; its media ID remains pending upload.
 
 ## Instruction and relevance
 
@@ -106,13 +106,26 @@ inspect-robots run --embodiment camera_release --policy camera_release_scripted 
 
 This registered route reached `task_score: 1.0` with seed 3 in 239.52 wall-clock seconds, including frame/action logging. Use `--seed 3` to repeat it. `inspect-robots video /path/to/log.json --out /path/to/videos` renders its three stored streams; this path was also verified. Scoring comes from the registered task scorer, rather than visual annotation.
 
-## Final Dream-1 evaluation and submission
+## Dream-1 evaluation and submission
 
-Run Dream-1 **only after native validation, the successful demonstration, scoring review, documentation and media checks are complete**. This task's recorder never calls Dream-1. The final required model run uses the same embodiment/instruction, `--policy dream`, 20 Hz, 320 × 176 images, `task_score` and the declared 2,400-step budget. A failed Dream-1 attempt is acceptable; its real result must be reported.
+The required Dream-1 attempt was performed on November 4, 2026, after native validation and successful demonstration. One epoch with model `dreamlabs/dream-1-beta`, seed 0, 20 Hz, 320 × 176 inputs and the exact declared instruction reached the 2,400-step limit with `task_score: 0.0`. The camera remained in the mount. The evaluator completed without an evaluation error, and the executable source remained unchanged. The trial lasted 120 simulated seconds and 2,671.76 wall-clock seconds (44 min 31.76 s) on the local GPU. No second trial was run.
 
-For that final step, configure `DREAM_API_KEY` through the operator's environment or Dream client credentials file, then run the Inspect Robots command above with `--policy dream`, a fresh log directory and a recorded seed. This invokes hosted inference and uses Dream Labs credits. Use `inspect-robots video` on its actual resulting log. Do not label a scripted recording as the model's run.
+The SDK returned 50 action chunks through 99 request attempts, including 49 expired-session retries; it reported 2,115 predicted rows outside the declared joint limits. The ordinary YAM adapter clips targets to its limits. The observed score is reported with these conditions, rather than treated as an isolated measurement of task difficulty. The public [run summary](validation/dream-native.json) records counts and the source/log/video hashes without credentials or gateway session IDs.
 
-After that final run, finish `task.json` from the draft, fill `scores` with actual scorer outputs, and upload the real Dream-1 video, full-score demo and setup screenshot using upstream `tools/upload_media.py`. Its returned media ID supplies `media`. Check the live board and the final-stage guide again, then submit only this task folder in one PR from the team's registered account.
+To reproduce the model evaluation, configure `DREAM_API_KEY` through the operator's environment or Dream client credentials file, then run:
+
+```bash
+inspect-robots run --embodiment camera_release --policy dream \
+  -E device=cuda:0 -E object_jitter=0 -E control_hz=20 -E cam_width=320 -E cam_height=176 \
+  -P model=dreamlabs/dream-1-beta -P rows_per_request=48 -P record=false \
+  --instruction "Remove the camera and its attached plate from the bench mount and set the assembly upright on the green pad. Keep the camera attached to the plate, do not drop it, and leave the assembly released." \
+  --scorer task_score --max-steps 2400 --epochs 1 --seed 0 \
+  --store-frames --log-dir /path/to/fresh/dream
+```
+
+That command uses hosted inference credits. Encoding stored frames is local and needs no further inference. The task's `run.py` recorder supports only local scripted controls and never calls Dream-1. All model frames were retained, and one untrimmed composite video was encoded: top view above both wrists, 640 × 528, 20 fps, 2,401 frames including the initial image, H.264/yuv420p, 120.05 s, 3,223,363 bytes. An actual initial top frame is retained as the setup screenshot. There are no overlays or generated frames.
+
+`task.json` now records `Dream-1 run: 0.0; demo: 1.0`. Upload the actual model video, existing full-score demo and setup screenshot using upstream `tools/upload_media.py`; its real returned media ID supplies the remaining `media` field. Check the live board and final-stage guide again before opening the single-task PR from a registered account.
 
 Videos must be H.264 MP4 and at most 50 MB each; the setup image at most 10 MB. Avoid team identifiers in task text and media. The full submission is incomplete until the required Dream-1 evidence and media ID exist.
 

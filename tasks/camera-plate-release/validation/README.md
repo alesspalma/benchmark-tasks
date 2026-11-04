@@ -9,6 +9,7 @@ These are measured local executions of the submitted task with native PhysX and 
 | First full demonstration | 0 | 643 / 32.15 s | 1.0 | No validity violations; 7,716 physics audit samples. |
 | [Repeated demonstration](demo-native.json) | 1 | 643 / 32.15 s | 1.0 | No validity violations; 7,716 physics audit samples. |
 | [Inspect Robots evaluation](inspect-robots-native.json) | 3 | 643 / 32.15 s | 1.0 | Registered `task_score`, successful termination, 320 × 176 observations. |
+| [Single hosted Dream-1 evaluation](dream-native.json) | 0 | 2,400 / 120 s | 0.0 | Ended at the step limit; one epoch, no repeat trial; gateway retries and target clipping recorded below. |
 | [Gentle direct lift](direct-native.json) | 0 | 201 / 10.05 s | 0.0 | Cam remained engaged; payload remained retained; no violation. |
 | [Deliberate drop](drop-native.json) | 2 | 697 / 34.85 s | 0.0 | 49.16 mm unsupported descent; permanent `drop` flag despite final upright pad placement. |
 
@@ -32,4 +33,8 @@ Earlier development failures are retained locally: the first simulator trial fai
 
 The full-score runs demonstrate feasibility inside the 2,400-action budget for this fixed native simulator setup. A real mount's friction, manufacturing tolerances, compliance and damage behavior have not been calibrated. The scene uses a nominal rigid mechanism, a licensed camera appearance and simplified collision geometry, as disclosed in the task specification.
 
-Dream-1 has not been called. Its required final evaluation, video, measured score and portal media ID remain outstanding before submission.
+The final hosted Dream-1 evaluation used the same executable source and instruction as the demonstrations. It completed one epoch without an evaluation error and scored 0.0 at the 2,400-step limit. The camera remained in its mount in the inspected middle/final views. Runtime was 2,671.76 wall-clock seconds, with 120 simulated seconds of robot control.
+
+Its transcript contains 50 returned action chunks through 99 request attempts, 49 expired-session retries, 50 distinct gateway sessions and 2,115 predicted rows beyond the declared limits, which the ordinary adapter clips. These conditions limit interpretation as a clean measurement of task difficulty; the measured result is retained without a rerun. No gateway session identifiers or credentials are included in the public summary.
+
+Exactly one model video was encoded locally from all 2,401 synchronized observations per camera, including the initial frame: H.264/yuv420p, 640 × 528, 20 fps, 120.05 s, 3,223,363 bytes. The first top frame is 55,027 bytes. Only native frames were resized and stacked. The video and setup image hashes are in [the run summary](dream-native.json). Media upload and the real portal media ID remain outstanding; no submission PR has been opened.
