@@ -14,5 +14,6 @@
   "run_limit": "2,400 control steps (120 seconds at 20 Hz)",
   "reset_notes": "Restore the single declared layout, initialize the passive cam at zero, reset both arms and settle for 0.5 simulated seconds. Jitter is disabled. No consumables.",
   "fidelity": "Nominal rigid cam-and-lip mount with simplified collision boxes and an exact licensed camera appearance. Camera and plate are one rigid body. No deformation, fracture, wear, electrical function or material damage is simulated. Friction and cam damping are authored assumptions. Physics-step contact/motion monitoring implements the operational no-drop rule; complete robot collision envelopes supply conservative release clearance. Three native scripted demonstrations, including the registered Inspect Robots scorer, reached full score; a direct-lift control and a deliberate-drop trial exercise retention and the permanent no-drop rule. No real-hardware trial has been performed. The single Dream-1 attempt had gateway-session expiry retries and standard joint-target clipping; its measured score is reported without a rerun.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-PRZQHX"
 }

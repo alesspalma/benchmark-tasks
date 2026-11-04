@@ -1,5 +1,5 @@
 {
-  "status": "native_and_single_dream_evaluation_recorded_media_upload_pending",
+  "status": "native_and_single_dream_evaluation_validated_media_uploaded",
   "licensed_visual": {
     "file": "assets/d405.stl",
     "sha256": "8a9a84dd9c9a67687e5ad0b37a7ed334dbfea6b0f995fef28524cc8da5f21ed2",
@@ -35,6 +35,7 @@
     "inspect_robots_evaluation": "validation/inspect-robots-native.json",
     "dream_score": 0.0,
     "dream_control_steps": 2400,
-    "dream_elapsed_wall_s": 2671.7588611170067
+    "dream_elapsed_wall_s": 2671.7588611170067,
+    "media": "M-PRZQHX"
   }
 }

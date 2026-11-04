@@ -2,7 +2,7 @@
 
 Remove an unpowered camera and its attached plate from a bench fixture and place the assembly on a green pad. A passive rotating cam retains the front of the plate; a fixed rear lip retains its other edge. Robot contacts must operate the mechanism and transfer the free payload. No task-body actuators or execution-time attachments, pose writes, collision changes or joint-limit changes supply the solution.
 
-**Validation status:** three fresh native PhysX demonstrations reached 1.0 in 643 actions (32.15 simulated seconds), including the registered Inspect Robots `task_score` path with 320 × 176 observations. One hosted Dream-1 trial scored 0.0 after the full 2,400-step budget; no repeat trial was made. A direct-lift control scored zero, and a deliberate 49 mm unsupported descent permanently invalidated another trial despite its final upright pad placement. Nine scorer tests, all five offline URDF plans and three exported USD checks pass. See [validation/README.md](validation/README.md) for measured evidence and run conditions. `task.json` contains measured scores; its media ID remains pending upload.
+**Validation status:** three fresh native PhysX demonstrations reached 1.0 in 643 actions (32.15 simulated seconds), including the registered Inspect Robots `task_score` path with 320 × 176 observations. One hosted Dream-1 trial scored 0.0 after the full 2,400-step budget; no repeat trial was made. A direct-lift control scored zero, and a deliberate 49 mm unsupported descent permanently invalidated another trial despite its final upright pad placement. Nine scorer tests, all five offline URDF plans and three exported USD checks pass. See [validation/README.md](validation/README.md) for measured evidence and run conditions. `task.json` contains the actual scores and uploaded media ID `M-PRZQHX`.
 
 ## Instruction and relevance
 
@@ -11,6 +11,8 @@ Remove an unpowered camera and its attached plate from a bench fixture and place
 Camera and robotics technicians remove mounted sensors for servicing and reconfiguration. The mechanical prerequisite, rear-edge clearance and supported transfer distinguish this task from placing a loose camera or operating an isolated switch. Any physically valid method may count; scoring does not demand a particular hand or a prescribed failed pull. Commercial [quick-release camera adapters](https://www.manfrotto.com/global-en/camera-video-supports/quick-change-rectangular-plate-adapter-universal-threads-323/) establish the application; this authored cam-and-lip geometry is not a replica of that product.
 
 The nearest known task families are camera/tripod assembly, DIN-rail snap mounting, two-latch lid removal and transport-key release. This task instead uses a captive rotary cam plus a separate fixed retaining edge, followed by supported dismounting of the camera/plate as one payload. Novelty depends on that mechanism and objective, not the camera appearance, color or a reversed mounting instruction.
+
+The live board also contains pending task `TK-NCPNT9`, "Clamp a blank with an eccentric cam": it measures registration of a loose workpiece against stops and over-centre clamp closure against a compliant backstop. This camera task starts with a captured plate and measures rotary-toe release, clearance of an independent rear retaining lip and supported removal to a separate pad. Both involve passive rotary retention; this is a mechanism/objective distinction for reviewers to assess, not a claim of acceptance.
 
 ## Environment
 
@@ -131,9 +133,9 @@ inspect-robots run --embodiment camera_release --policy dream \
 
 That command uses hosted inference credits. Encoding stored frames is local and needs no further inference. The task's `run.py` recorder supports only local scripted controls and never calls Dream-1. All model frames were retained, and one untrimmed composite video was encoded: top view above both wrists, 640 × 528, 20 fps, 2,401 frames including the initial image, H.264/yuv420p, 120.05 s, 3,223,363 bytes. An actual initial top frame is retained as the setup screenshot. There are no overlays or generated frames.
 
-`task.json` now records `Dream-1 run: 0.0; demo: 1.0`. Upload the actual model video, existing full-score demo and setup screenshot using upstream `tools/upload_media.py`; its real returned media ID supplies the remaining `media` field. Check the live board and final-stage guide again before opening the single-task PR from a registered account.
+`task.json` records `Dream-1 run: 0.0; demo: 1.0` and media ID `M-PRZQHX`. The actual model video, existing full-score demo and model's initial top-camera screenshot were uploaded together using upstream `tools/upload_media.py`. The model and demo video hashes are retained in the validation records.
 
-Videos must be H.264 MP4 and at most 50 MB each; the setup image at most 10 MB. Avoid team identifiers in task text and media. The full submission is incomplete until the required Dream-1 evidence and media ID exist.
+Both uploaded videos are H.264 MP4 below 50 MB; the setup image is below 10 MB. Task text and media contain no team identifiers.
 
 ## Fidelity and provenance
 
