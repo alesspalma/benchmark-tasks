@@ -1,6 +1,6 @@
 # Native validation
 
-These are measured local executions of the submitted task with native PhysX and robot joint/gripper targets. They are scripted demonstrations and controls, not Dream-1 evaluations or hardware trials. The local installation uses Python 3.12.12, Isaac Sim 6.1.0.0, Isaac Lab package metadata 17.0.2, Arena package metadata 0.3.0, YAM 0.1.0 and Inspect Robots 0.60.0. Source revisions are pinned in the task README. Execution used an NVIDIA RTX PRO 6000 Blackwell Max-Q, driver 580.178.04.
+These are measured local executions of the submitted task with native PhysX and robot joint/gripper targets, including scripted demonstrations/controls and one hosted Dream-1 trial. No hardware trial was performed. The local installation uses Python 3.12.12, Isaac Sim 6.1.0.0, Isaac Lab package metadata 17.0.2, Arena package metadata 0.3.0, YAM 0.1.0 and Inspect Robots 0.60.0. Source revisions are pinned in the task README. Execution used an NVIDIA RTX PRO 6000 Blackwell Max-Q, driver 580.178.04.
 
 ## Measurements
 

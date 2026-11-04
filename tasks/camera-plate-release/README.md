@@ -8,7 +8,9 @@ Remove an unpowered camera and its attached plate from a bench fixture and place
 
 “Remove the camera and its attached plate from the bench mount and set the assembly upright on the green pad. Keep the camera attached to the plate, do not drop it, and leave the assembly released.”
 
-Camera and robotics technicians remove mounted sensors for servicing and reconfiguration. The mechanical prerequisite, rear-edge clearance and supported transfer distinguish this task from placing a loose camera or operating an isolated switch. Any physically valid method may count; scoring does not demand a particular hand or a prescribed failed pull.
+Camera and robotics technicians remove mounted sensors for servicing and reconfiguration. The mechanical prerequisite, rear-edge clearance and supported transfer distinguish this task from placing a loose camera or operating an isolated switch. Any physically valid method may count; scoring does not demand a particular hand or a prescribed failed pull. Commercial [quick-release camera adapters](https://www.manfrotto.com/global-en/camera-video-supports/quick-change-rectangular-plate-adapter-universal-threads-323/) establish the application; this authored cam-and-lip geometry is not a replica of that product.
+
+The nearest known task families are camera/tripod assembly, DIN-rail snap mounting, two-latch lid removal and transport-key release. This task instead uses a captive rotary cam plus a separate fixed retaining edge, followed by supported dismounting of the camera/plate as one payload. Novelty depends on that mechanism and objective, not the camera appearance, color or a reversed mounting instruction.
 
 ## Environment
 
@@ -27,6 +29,8 @@ The upstream simulator/YAM dependencies must already be installed. The new embod
 
 Coordinates are metres: x forward from the arms, y left, z up. The calibrated station's tabletop is z = 0.7475 m; the arm bases are x = 0, y = ±0.305 m, z = 0.75 m. Both arms start in the station ready pose. There is no layout randomization; `object_jitter=0` is mandatory. Seeds are recorded but do not change this setup.
 
+The standard station includes a 1,100 × 1,300 × 60 mm nominal wooden tabletop centred at `(0.36, 0, 0.7175)` m, two standard YAM arms with metal mechanisms and polymer covers, and their calibrated three-camera observation rig. Its fixed overhead-camera support has a 110 × 110 × 16 mm foot, a 24 mm diameter mast with 928.321 mm capsule spine, an 18 mm diameter arm with 53.852 mm capsule spine (nominal painted steel), and a 50 × 42 × 22 mm nominal ABS camera housing. These are background station parts, distinct from the removable task camera. [setup-layout.json](setup-layout.json) gives their exact positions/orientations, capsule radius/spine conventions, background floor, and every custom task part. Robot CAD and camera calibration are supplied by the pinned public YAM revision.
+
 The fixture's root is `(0.28, 0, 0.7675)` m. The payload is spawned with its plate underside at `(0.28, 0, 0.7775)` m, then settles by 1 mm to z = 0.7765 m on the adapter before the initial image. The fixed receiving pad centre is `(0.20, 0.14, 0.7495)` m; its top is at z = 0.7515 m. Orientations start aligned to the world axes. The cam starts at zero and can rotate positively by 0.95 rad. Its lever is orange for visibility; the other mount parts are grey or dark metal.
 
 | Part | Dimensions and nominal material |
@@ -34,30 +38,32 @@ The fixture's root is `(0.28, 0, 0.7675)` m. The payload is spawned with its pla
 | Fixture foot | 110 × 110 × 8 mm aluminium, secured to the bench |
 | Short stand post | 26 × 26 × 8 mm aluminium |
 | Adapter body | 70 × 52 × 9 mm aluminium |
-| Rear rail | 54 × 6 × 6 mm metal |
-| Rear lip | 54 × 10 × 3 mm metal |
-| Two side guides | Each 4 × 38 × 4 mm metal |
+| Rear rail | 54 × 6 × 6 mm aluminium |
+| Rear lip | 54 × 10 × 3 mm aluminium |
+| Two side guides | Each 4 × 38 × 4 mm aluminium |
 | Two visible mounting screws | 6 mm diameter, 2 mm visible height, steel |
-| Cam lever | 24 × 14 × 7 mm metal, orange finish |
-| Cam bridge | 22 × 8 × 5 mm metal |
-| Cam retaining toe | 28 × 8 × 4 mm metal |
-| Cam pivot | 8 mm diameter × 8 mm long, metal |
+| Cam lever | 24 × 14 × 7 mm aluminium, orange finish |
+| Cam bridge | 22 × 8 × 5 mm aluminium |
+| Cam retaining toe | 28 × 8 × 4 mm steel |
+| Cam pivot | 8 mm diameter × 8 mm long, steel |
 | Camera plate | 50 × 38 × 5 mm aluminium |
-| Camera | D405 appearance mesh; simplified 23 × 42 × 42 mm collision box in its mounted orientation |
-| Rigid camera-to-plate spacer | 12 mm diameter × 7 mm long, metal |
-| Receiving pad | 130 × 110 × 4 mm green nominal polymer |
+| Camera | Unpowered D405, aluminium housing; licensed appearance mesh and simplified 23 × 42 × 42 mm collision box in its mounted orientation |
+| Rigid camera-to-plate spacer | 12 mm diameter × 7 mm long, aluminium |
+| Receiving pad | 130 × 110 × 4 mm green nominal polyurethane |
 
 The camera/plate/spacer are one free 83 g rigid body. The cam is 18 g. The secured fixture has a nominal 0.4 kg assigned mass and fixed base. `build_scene.py` lists every subpart's local position and collider. No camera cable is present. Reset restores the fixed layout, initializes the passive cam angle and lets the native scene settle for 0.5 simulated seconds before the first screenshot.
 
+Material names specify nominal physical reconstruction, not calibrated elasticity, density or friction. The simulation assigns the stated aggregate masses and contact coefficients independently of the display colors. The camera's nominal size and aluminium peripheral housing are supported by the [manufacturer's D400-series datasheet](https://dev.realsenseai.com/download/42003/); aggregate payload mass and fixture geometry are authored task parameters. For hardware reproduction secure the fixture to the bench, keep the camera unpowered and keep hands outside the moving arms' workspace. A full hardware trial has not been performed.
+
 ## Scoring
 
-The endpoint score is the highest applicable tier in the current state, provided no episode-wide invalidation has occurred. The runtime uses explicit XYZW quaternions. Distances to robot surfaces are conservative lower bounds from enclosing collision boxes, rather than TCP distance.
+The endpoint score is the highest applicable tier in the current state, provided no episode-wide invalidation has occurred. The runtime uses explicit XYZW quaternions. Distances to robot surfaces are conservative lower bounds from enclosing collision boxes, rather than TCP distance. The scored mount clearance uses the foot, post, adapter, rear rail/lip, both guides and cam lever/bridge/toe/pivot envelopes in `camera_release/config.py`; the two fixed mounting-screw heads do not define that clearance. They remain physical colliders. These are bounding-envelope distances, not exact mesh-surface distances.
 
 | Score | Condition |
 | --- | --- |
 | 0 | No tier below applies, or an irreversible invalidation occurred. |
-| 0.25 | Cam at least 0.8 rad open; the payload is still within 10 mm of the fixture and has native supporting contact. |
-| 0.5 | Entire payload at least 10 mm clear of the fixture's collision envelopes and has supporting contact, but is not placed on the pad. |
+| 0.25 | Cam at least 0.8 rad open; payload-to-scored-mount clearance is less than 10 mm and native contact is present. |
+| 0.5 | Payload-to-scored-mount clearance is at least 10 mm and native contact is present, but the pad-placement tier does not apply. |
 | 0.75 | Plate centre within 20 mm horizontally of pad centre; all payload collision geometry over the pad; plate underside within 5 mm of pad top; tilt at most 10 degrees; native supporting contact. Final release/stability is incomplete. |
 | 1.0 | The 0.75 condition holds, every robot collision envelope is at least 30 mm from the payload envelope, and every sampled pose during a full one-second window is within 2 mm and 2 degrees of that window's initial pose. |
 
@@ -65,7 +71,7 @@ An episode is permanently invalidated by fixture translation over 5 mm or rotati
 
 The operational drop criterion is more than 10 mm downward travel during an uninterrupted absence of measured native contact. Contact is detected above 0.02 N, using the payload's normal contacts and separate robot-finger partners so opposing grasp forces do not cancel. The post-physics audit samples at 240 Hz. This is a no-drop contact/motion criterion, not a material damage model. Fixture and joint diagnostics are checked at 20 Hz. All violation flags reset only with a new trial.
 
-For real-world scoring use a ruler, the marked cam release angle, video and visible support/release. The fixture must be secured, all parts intact, and the camera kept attached. Native geometric/contact diagnostics are simulation implementations of these observable criteria, not independent wrist-force sensing.
+For real-world scoring use a ruler, protractor and video to measure the declared clearances/angles and visible support/release. Cam angle is measured relative to its initial zero-angle pose; the simulation does not contain a separate release-angle marking. A real-world drop is more than 10 mm downward travel during continuous absence of visible support, rather than movement while held or sliding under continuous contact. The fixture must be secured, all parts intact, and the camera kept attached. Native geometric/contact diagnostics are simulation approximations of these observable criteria, not independent wrist-force sensing. The 0.02 N native contact threshold is a numerical contact-presence threshold, not a required real-world force measurement.
 
 ## Runs, recording and reproduction
 
@@ -131,6 +137,6 @@ Videos must be H.264 MP4 and at most 50 MB each; the setup image at most 10 MB. 
 
 ## Fidelity and provenance
 
-Rigid, simplified colliders represent an unpowered nominal camera mount. The plate and camera cannot separate in the model. Materials do not deform, fracture or wear. Uniform contact friction is 0.6 static and 0.5 dynamic; the passive cam has authored friction/damping. These nominal settings produced the recorded native demonstrations; they are not manufacturer measurements or real-hardware validation. Gripper control/gains and calibrated cameras come from the pinned YAM adapter.
+Rigid, simplified colliders represent an unpowered nominal camera mount. The plate and camera cannot separate in the model. Materials do not deform, fracture or wear. Task-owned mount, payload and pad contact materials use 0.6 static friction, 0.5 dynamic friction and zero restitution; robot/station material defaults and PhysX combination behavior come from the pinned integration/runtime. The passive cam has authored friction/damping. These nominal settings produced the recorded native demonstrations; they are not manufacturer measurements or real-hardware validation. Gripper control/gains and calibrated cameras come from the pinned YAM adapter.
 
 The camera appearance retains its MIT source license under `assets/LICENSE.i2rt`; provenance/hashes are in `SOURCE.json`. The original authored mechanism and this adaptation are covered by `LICENSE`. The fixture is not a claimed replica of a named manufacturer's product. Camera electrical function and calibration are outside the task.
