@@ -1,0 +1,17 @@
+{
+  "title": "Release a camera from a cam-clamped quick-release mount",
+  "category": "Impact on jobs",
+  "keywords": [
+    "camera servicing",
+    "mechanical release",
+    "bimanual",
+    "manipulation under resistance"
+  ],
+  "instruction": "Remove the camera and its attached plate from the bench mount and set the assembly upright on the green pad. Keep the camera attached to the plate, do not drop it, and leave the assembly released.",
+  "context": "Camera and robotics technicians remove mounted sensors for servicing and reconfiguration. A passive cam and rear retaining edge must be cleared before the camera assembly can be transferred to a supported resting place.",
+  "setup": "Fixed calibrated bimanual YAM station, tabletop z=0.7475 m, x forward and y left from the midpoint between arm bases. Secured nominal aluminium fixture root (0.28,0,0.7675) m with 110x110x8 mm foot, 26x26x8 mm post, 70x52x9 mm adapter, 54x6x6 mm rear rail, 54x10x3 mm rear lip, two 4x38x4 mm guides and two 6 mm diameter screws with 2 mm visible height. Passive 18 g metal cam: 24x14x7 mm orange-finished lever, 22x8x5 mm bridge, 28x8x4 mm toe and 8 mm diameter by 8 mm pivot; pivot offset (25,-30,17) mm from fixture root, initially zero rotation, positive travel 0.95 rad. Camera and aluminium 50x38x5 mm plate plus 12 mm diameter by 7 mm spacer form one 83 g payload, spawned with plate underside (0.28,0,0.7775) m and settled to z=0.7765 m before the initial image. Camera uses a D405 appearance and a 23x42x42 mm collision box in its mounted orientation. Fixed green polymer pad 130x110x4 mm centred (0.20,0.14,0.7495) m, top z=0.7515 m. No cable. All initial orientations aligned with the world; both arms in ready pose. build_scene.py and README.md specify the subpart positions and reset.",
+  "scoring": "0.25 for cam at least 0.8 rad open while the intact payload stays supported on the fixture; 0.5 for supported payload fully clear of fixture by at least 10 mm; 0.75 for upright pad placement with centre within 20 mm, entire collision envelope over pad, underside within 5 mm of pad top and tilt at most 10 degrees; 1.0 adds 30 mm clearance from both robot collision envelopes and each sampled pose within 2 mm and 2 degrees of the first pose throughout one second. Fixture movement over 5 mm or 5 degrees, detached apparatus, workspace escape, numerical invalidity or unsupported downward travel over 10 mm permanently scores zero. Full numeric definitions are in README.md and camera_release/scoring.py. The endpoint score applies; every permanent violation overrides all tiers.",
+  "run_limit": "2,400 control steps (120 seconds at 20 Hz)",
+  "reset_notes": "Restore the single declared layout, initialize the passive cam at zero, reset both arms and settle for 0.5 simulated seconds. Jitter is disabled. No consumables.",
+  "fidelity": "Nominal rigid cam-and-lip mount with simplified collision boxes and an exact licensed camera appearance. Camera and plate are one rigid body. No deformation, fracture, wear, electrical function or material damage is simulated. Friction and cam damping are authored assumptions. Physics-step contact/motion monitoring implements the operational no-drop rule; complete robot collision envelopes supply conservative release clearance. Three native scripted demonstrations, including the registered Inspect Robots scorer, reached full score; a direct-lift control and a deliberate-drop trial exercise retention and the permanent no-drop rule. No real-hardware trial has been performed."
+}
