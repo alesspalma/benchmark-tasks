@@ -1,0 +1,19 @@
+{
+  "title": "Join a drive-chain service joint",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "maintenance",
+    "chain assembly",
+    "connecting link"
+  ],
+  "instruction": "Join the two ends of the open chain on the connecting link. Slide the blue forked retaining plate sideways under both pin heads toward the chain, until both pin stems reach the closed ends of its slots. Leave the retained joint in its service cradle and release both hands. This is an unpowered training assembly.",
+  "context": "Joining an open chain during unpowered machinery maintenance requires bringing two articulated ends onto a common connector and retaining the joint. This task isolates that assembly operation using large reusable training parts.",
+  "setup": "Two standard calibrated YAM arms with parallel grippers at (0,+/-0.305,0.75) m face a 1.10 x 1.30 x 0.06 m wood-top table, top z=0.7475 m, with standard top/wrist cameras, stand, floor and lights. A static aluminium service deck, 0.60 x 0.48 x 0.012 m, centred (0.42,0,0.831) m, is supported by four 25 mm square posts. Two fixed polymer mandrels of radius 65 mm and height 14 mm are at (0.405,+/-0.073,0.844) m. Eleven 35 g lightweight polymer links with metal hinge pins form an open 100 mm pitch chain around them; ten passive hinges and the exact fixed poses are listed in setup-layout.json. End links have 32 mm bores and 20 mm diameter x 40 mm orange grip posts. An orange 120 g connector rests at (0.195,0,0.840) m inside a 4 mm-high shallow cradle: backing 45 x 140 x 6 mm, two 8 mm diameter x 26 mm stems 100 mm apart with tapered 24 mm diameter x 10 mm heads. A blue 75 g polymer keeper, 80 x 128 x 8 mm with a 24 x 30 x 60 mm grip, rests at (0.180,-0.350,0.7515) m, identity orientation. Its two 18 mm slots open on the +x edge for sideways entry beneath the pin heads. Dimensions and full custom-solid inventory are in setup-layout.json and scene-inventory.json. No powered machinery.",
+  "scoring": "Current-state primary score: 0 otherwise; 0.4 when both chain-end hole centres are within 12 mm radially of their respective pin stems, at height 3\u201314 mm in connector coordinates and normal dot product >0.98. 0.7 additionally requires keeper height 16\u201325 mm, relative orientation <=0.10 rad, and both stem centres in actual open-slot regions. 1 additionally requires both stems in retained narrow regions, connector within 15 mm and 10 degrees of its cradle pose, all parts below 20 mm/s and 0.3 rad/s, both openings >=70 mm and whole-robot clearance >=25 mm continuously for 1 s. Exact aperture and retention bounds are listed in README.md. Any moving solid leaving x=[-0.19,0.91], y=[-0.65,0.65], z>=0.7415 m, or nonfinite native state, permanently scores 0. Every physics step is audited.",
+  "run_limit": "2400 control steps (120 seconds at 20 Hz)",
+  "reset_notes": "Reset all free parts and ten passive hinges to the fixed layout; open grippers in the standard ready pose, settle 0.5 s, then start scoring. Nothing is consumed.",
+  "fidelity": "Rigid native PhysX chain with ten passive revolute hinges and real contact between pins, chain bores and forked keeper. Enlarged custom polymer training parts and simplified metal pins; no software attachments or latches. Mandrels are stationary, not driven sprockets. No motor, elasticity, spring clip, fracture, wear, rated load or vibration-locking claim. Keeper is retained vertically under heads and can be removed by reversing its slide.",
+  "scores": "Pending rendered reference and Dream-1 evaluation; camera-free physics evidence is documented separately.",
+  "development_status": "Not submission-ready: screenshot, full-score video, hosted model run and media ID are pending."
+}

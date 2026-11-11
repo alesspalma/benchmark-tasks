@@ -1,0 +1,29 @@
+test_both_ends_without_keeper_only_partial (test_scoring.AssemblyScoreTests.test_both_ends_without_keeper_only_partial) ... ok
+test_connector_must_remain_in_cradle (test_scoring.AssemblyScoreTests.test_connector_must_remain_in_cradle) ... ok
+test_either_missing_end_forces_zero (test_scoring.AssemblyScoreTests.test_either_missing_end_forces_zero) ... ok
+test_escape_violation_is_permanent (test_scoring.AssemblyScoreTests.test_escape_violation_is_permanent) ... ok
+test_every_chain_link_must_settle (test_scoring.AssemblyScoreTests.test_every_chain_link_must_settle) ... ok
+test_hands_must_open_and_clear (test_scoring.AssemblyScoreTests.test_hands_must_open_and_clear) ... ok
+test_interruption_restarts_hold (test_scoring.AssemblyScoreTests.test_interruption_restarts_hold) ... ok
+test_lifted_end_rejected (test_scoring.AssemblyScoreTests.test_lifted_end_rejected) ... ok
+test_nearby_valid_hole_offset (test_scoring.AssemblyScoreTests.test_nearby_valid_hole_offset) ... ok
+test_no_peak_score_survives_disassembly (test_scoring.AssemblyScoreTests.test_no_peak_score_survives_disassembly) ... ok
+test_nonfinite_physics_coordinate_is_invalid (test_scoring.AssemblyScoreTests.test_nonfinite_physics_coordinate_is_invalid) ... ok
+test_nonfinite_state_or_velocity_forces_zero (test_scoring.AssemblyScoreTests.test_nonfinite_state_or_velocity_forces_zero) ... ok
+test_one_stem_outside_slot (test_scoring.AssemblyScoreTests.test_one_stem_outside_slot) ... ok
+test_plate_above_heads_is_not_seated (test_scoring.AssemblyScoreTests.test_plate_above_heads_is_not_seated) ... ok
+test_plate_below_chain_is_not_seated (test_scoring.AssemblyScoreTests.test_plate_below_chain_is_not_seated) ... ok
+test_radial_clearance_not_axis_aligned_square (test_scoring.AssemblyScoreTests.test_radial_clearance_not_axis_aligned_square) ... ok
+test_reversed_keeper_rejected (test_scoring.AssemblyScoreTests.test_reversed_keeper_rejected) ... ok
+test_slot_mouths_never_count_as_retained (test_scoring.AssemblyScoreTests.test_slot_mouths_never_count_as_retained) ... ok
+test_success_requires_one_second (test_scoring.AssemblyScoreTests.test_success_requires_one_second) ... ok
+test_trace_inputs_are_not_mutated (test_scoring.AssemblyScoreTests.test_trace_inputs_are_not_mutated) ... ok
+test_closed_slot_ends_open_mouths_and_connected_bridge (test_scoring.PhysicalApertureTests.test_closed_slot_ends_open_mouths_and_connected_bridge) ... ok
+test_heads_cannot_pass_vertically_through_slots (test_scoring.PhysicalApertureTests.test_heads_cannot_pass_vertically_through_slots) ... ok
+test_stems_can_enter_from_the_open_edge (test_scoring.PhysicalApertureTests.test_stems_can_enter_from_the_open_edge) ... ok
+test_stems_fit_but_heads_are_blocked_by_necks (test_scoring.PhysicalApertureTests.test_stems_fit_but_heads_are_blocked_by_necks) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.396s
+
+OK

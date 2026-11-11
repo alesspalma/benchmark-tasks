@@ -1,0 +1,149 @@
+{
+  "scope": "Camera-free native CPU PhysX validation only. No rendered media or Dream-1 evidence.",
+  "source_sha256": "750db4ee7b179650a0d61181904a1c05b3f7ac807b2d88f906208753b1415a07",
+  "instruction_sha256": "5869a1c3ebb67c7fca53e755171df551f51bee99cf32921fa6d290db33161c81",
+  "control_hz": 20,
+  "physics_hz": 240,
+  "runtime": {
+    "isaacsim": "6.1.0.0",
+    "isaaclab": "17.0.2",
+    "isaaclab-arena": "0.3.0",
+    "yam-arena": "0.1.0",
+    "inspect-robots": "1.0.0",
+    "inspect-robots-yam": "0.38.0",
+    "inspect-robots-dream": "0.1.0",
+    "numpy": "2.3.1"
+  },
+  "registered_reference": {
+    "framework": "Inspect Robots",
+    "evaluation_seed": 0,
+    "derived_trial_seed": 1415158438,
+    "status": "success",
+    "primary_score": 1.0,
+    "errored_trials": 0,
+    "control_actions": 790,
+    "simulated_seconds": 39.5,
+    "expected_and_enforced_physics_samples": 9480,
+    "wall_seconds": 68.38530725007877,
+    "images_recorded": false,
+    "report_sha256": "5f018fc7625a566b034bf2a29f270c7913aa60b4d62e096835152903cb2d1707"
+  },
+  "negative_control": {
+    "policy": "unlocked",
+    "status": "completed",
+    "final_metrics": {
+      "score": 0.4,
+      "success": false,
+      "violations": [],
+      "ends_joined": true,
+      "plate_seated": false,
+      "retained": false,
+      "parked": true,
+      "settled": false,
+      "hands_clear": true,
+      "robot_clearance_m": 0.08941298572782765,
+      "end_points_local": {
+        "right": [
+          -0.00635795652199193,
+          -0.04003442265317777,
+          0.00888269832481407
+        ],
+        "left": [
+          0.0024189626895809776,
+          0.05178910717484167,
+          0.00840402733081677
+        ]
+      },
+      "keeper_local": [
+        -0.09346552260583418,
+        -0.0054145514368458495,
+        -0.05493522643473345
+      ],
+      "pins_in_keeper": [
+        [
+          0.028362555519928154,
+          -0.042470505991696474,
+          -0.1197758643343903
+        ],
+        [
+          0.029368987165731004,
+          0.05750416439388856,
+          -0.11776281276129119
+        ]
+      ],
+      "physics_samples": 8820
+    },
+    "control_actions": 735,
+    "source_unchanged": true,
+    "receipt_sha256": "d09c82fc1db8e0e7fbebc06d9cff28d2366e39e9aa3b20a6b0127cf72a0e8e96"
+  },
+  "retention_probe": {
+    "policy": "retention",
+    "commanded_upward_motion_m": 0.008,
+    "status": "completed",
+    "actual_height_change_m": {
+      "connector": 0.0019722580909729004,
+      "keeper": 0.0028069615364074707
+    },
+    "final_metrics": {
+      "score": 0.7,
+      "success": false,
+      "violations": [],
+      "ends_joined": true,
+      "plate_seated": true,
+      "retained": true,
+      "parked": true,
+      "settled": true,
+      "hands_clear": false,
+      "robot_clearance_m": 0.0,
+      "end_points_local": {
+        "right": [
+          -0.009402128941327708,
+          -0.0464299407514141,
+          0.0077509528808165605
+        ],
+        "left": [
+          -0.011338967950340915,
+          0.05360778009546885,
+          0.007640850820505857
+        ]
+      },
+      "keeper_local": [
+        0.014706923506562565,
+        -0.0011011217415879404,
+        0.02498825513093368
+      ],
+      "pins_in_keeper": [
+        [
+          -0.015216033601440576,
+          -0.048742706590177334,
+          -0.0009956996868623188
+        ],
+        [
+          -0.014172317319357457,
+          0.05125184653263018,
+          -0.0009942531244386923
+        ]
+      ],
+      "physics_samples": 9588
+    },
+    "source_unchanged": true,
+    "receipt_sha256": "84c03668687dd8c8f76d395c4dd9b4a2d9c7ac51de5bea9b562306b892744266",
+    "interpretation": "Keeper remained around both stems; the free connector rose under contact. Gripper stayed closed, so full task success was correctly withheld. This is not a rated-load test."
+  },
+  "checks": {
+    "unit_and_geometry_tests": 24,
+    "usd_structure_assets": 4,
+    "lint": "ruff check --select F: passed",
+    "format": "ruff format: applied"
+  },
+  "pending": [
+    "visual review of calibrated camera views",
+    "valid reset screenshot",
+    "rendered full-score reference",
+    "one Dream-1 evaluation after visual validation",
+    "media upload and final task.json",
+    "submission PR"
+  ],
+  "dream_requests": 0
+}
