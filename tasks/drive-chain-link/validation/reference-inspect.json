@@ -1,0 +1,35 @@
+{
+  "scope": "Registered Inspect Robots reference with three actual rendered cameras",
+  "source_sha256": "894ec5142f012f92e09e5f29fef5e0b1dfc626311adbc9ddea4b0554d08dfdff",
+  "status": "success",
+  "error": null,
+  "results": {
+    "abstentions": {},
+    "errored_trials": 0,
+    "metrics": {
+      "task_score": 1.0
+    },
+    "total_scenes": 1,
+    "total_trials": 1
+  },
+  "steps": 790,
+  "simulated_seconds": 39.5,
+  "wall_seconds": 297.20587474200875,
+  "evaluation_seed": 0,
+  "environment_id": "chain-link-894ec5142f012f92",
+  "native_camera_size": [
+    320,
+    176
+  ],
+  "frames_per_camera": 791,
+  "control_hz": 20,
+  "physics_hz": 240,
+  "physics_device": "cpu",
+  "render_device": "cuda:0",
+  "instruction": "Join the two ends of the open chain on the connecting link. Slide the blue forked retaining plate sideways under both pin heads toward the chain, until both pin stems reach the closed ends of its slots. Leave the retained joint in its service cradle and release both hands. This is an unpowered training assembly.",
+  "termination_reasons": [
+    "success"
+  ],
+  "native_log_sha256": "708f5b03d76b67c11c23a06c5c27d27e246f6876a560a03cb36cf69dd015abcc",
+  "dream_api_used": false
+}

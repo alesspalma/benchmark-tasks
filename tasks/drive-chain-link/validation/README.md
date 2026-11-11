@@ -1,11 +1,17 @@
-# Camera-free validation
+# Validation evidence
 
-The finalized source reaches primary score **1.0 through Inspect Robots 1.0**, in **790 actions / 39.5 simulated seconds**. The registered trial completed with zero errors. Its environment ID records the executable source fingerprint in `cpu-validation.json`.
+The rendered native reference and the registered Inspect Robots 1.0 reference both reach **1.0 in 790 actions / 39.5 simulated seconds**. Both ran with CPU PhysX and GPU RGB rendering. The registered reference records all 791 initial/action frames from each of the three calibrated cameras.
 
-All **24** scorer and physical-geometry tests pass, and all four generated USD files pass schema/compliance and joint-target checks. An omitted-keeper native control scores **0.4**, not full success. A separate bounded upward probe leaves the keeper around both stems and raises the free connector by about **2 mm** through physical contact. The gripper remains closed during that probe, and the primary scorer correctly withholds full success.
+The **single** hosted Dream-1 episode completed its **2,400-action / 120-second** budget with **score 0.0 and zero errored trials**. It returned 50 chunks in 50 request attempts. There was no second episode or automatic episode rerun. All 2,401 frames from each camera were preserved. Its three initial frames are pixel-identical to the registered reference's initial frames.
 
-These are actual native CPU PhysX executions with no cameras and no model requests. They establish controller/scorer integration and provide mechanical checks. They do not establish visual quality or replace the required submission video and screenshot. No Dream-1 score is claimed.
+The actual setup, both chain-end insertions, keeper routing and insertion, keeper release and final hand clearance were visually reviewed. The videos contain the native top view above both native wrist views; processing only resizes/stacks and encodes H.264. The setup screenshot is an actual reset image. Media ID and reported scores are in `task.json`.
 
-`cpu-validation.json` records the final executable fingerprint, runtime versions, numeric results and hashes of the full local receipts. `unit-tests.txt` and `usd-structure.json` contain the non-rendering check results. Earlier development failures are not included as successful evidence.
+- `reference-native.json`, `reference-inspect.json`: actual full-score rendered executions, source fingerprint and report hashes.
+- `reference-media.json`, `model-media.json`: frame counts, composition, codecs, file sizes and SHA-256 hashes.
+- `model-native.json`: actual hosted episode settings, score, request counts, tracking and frame checks, without credentials or service session identifiers.
+- `rules-check.json`, `submission-checklist.md`: current authoritative rules and submission review.
+- `unit-tests.txt`: all **24** scorer and physical-slot geometry tests pass. `usd-structure.json`: all four generated assets pass schema/compliance and joint-target checks.
 
-Remaining gates are a visually reviewed rendered full-score reference, the matching setup screenshot, one hosted Dream-1 evaluation, final media upload and a submission PR. Regenerate these validation records after any executable change.
+`cpu-validation.json` preserves earlier camera-free development evidence, including the omitted-keeper control (0.4) and the bounded upward contact probe (0.7 because the gripper stays closed). Its executable fingerprint predates a scene-description correction from “keyhole” to “forked”; physics and control logic were unchanged. The current source is validated by the rendered receipts. The probe raised the free connector about 2 mm through contact with the keeper; it is not a rated-load test.
+
+`files.sha256.json` hashes the packaged task files. Full raw local reports and recordings are retained separately; no failed development run is represented as successful evidence. No additional Dream call is needed to reproduce or inspect these saved results.

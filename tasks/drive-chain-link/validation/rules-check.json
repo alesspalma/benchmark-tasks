@@ -1,0 +1,30 @@
+{
+  "checked_at_utc": "2026-11-11T08:49:47.685945+00:00",
+  "pages": {
+    "guide": {
+      "url": "https://tasks.robocurve.org/",
+      "sha256": "b30fd0af4d6e1f04cef6b373d6e7c004b2d83fcb2716de15d46f6a43e3c1d6a9",
+      "changed": false
+    },
+    "submit": {
+      "url": "https://tasks.robocurve.org/submit",
+      "sha256": "924fc42081979e40402d3739fcf2b8ae5f1e43ce44bc2088d27f8826abf3f876",
+      "changed": false
+    },
+    "walkthrough": {
+      "url": "https://tasks.robocurve.org/walkthrough",
+      "sha256": "a347fbd4cbcddcafe23f46f6a75ad48fc2badb68aedd1d4a3ba30cde9328ed39",
+      "changed": false
+    }
+  },
+  "task_board": {
+    "checked_at_utc": "2026-11-11T08:47:57+00:00",
+    "counts": {
+      "pending": 1472,
+      "accepted": 20,
+      "pilot": 90
+    },
+    "direct_chain_joint_duplicate_found": false
+  },
+  "source_sha256": "894ec5142f012f92e09e5f29fef5e0b1dfc626311adbc9ddea4b0554d08dfdff"
+}

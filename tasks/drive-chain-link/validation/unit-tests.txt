@@ -24,6 +24,6 @@ test_stems_can_enter_from_the_open_edge (test_scoring.PhysicalApertureTests.test
 test_stems_fit_but_heads_are_blocked_by_necks (test_scoring.PhysicalApertureTests.test_stems_fit_but_heads_are_blocked_by_necks) ... ok
 
 ----------------------------------------------------------------------
-Ran 24 tests in 0.396s
+Ran 24 tests in 0.410s
 
 OK
