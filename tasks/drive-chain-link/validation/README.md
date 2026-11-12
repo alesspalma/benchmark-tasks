@@ -1,17 +1,15 @@
-# Validation evidence
+# Revised repair validation
 
-The rendered native reference and the registered Inspect Robots 1.0 reference both reach **1.0 in 790 actions / 39.5 simulated seconds**. Both ran with CPU PhysX and GPU RGB rendering. The registered reference records all 791 initial/action frames from each of the three calibrated cameras.
+This evidence applies to the chain-drive repair revision, not the earlier bench-only joint exercise.
 
-The **single** hosted Dream-1 episode completed its **2,400-action / 120-second** budget with **score 0.0 and zero errored trials**. It returned 50 chunks in 50 request attempts. There was no second episode or automatic episode rerun. All 2,401 frames from each camera were preserved. Its three initial frames are pixel-identical to the registered reference's initial frames.
+- The rendered reference scores **1.0 in 773 actions / 38.65 simulated seconds**. The joint is closed and retained, both sprockets have winding magnitude 1, every scored seat is within **1.974 mm**, all parts settle and both hands clear the assembly. All 9,276 native physics samples pass the work-area audit.
+- The registered Inspect Robots native run also scores **1.0 in 773 actions**, with zero errored trials.
+- The native omitted-keeper control scores **0.4** and does not report a closed retained loop.
+- All **24** scorer/physical-geometry tests pass, including assembled joints off the wheels, loops lifted above the wheels, a derailed wheel, crossed/backtracked loops, incomplete retention, hand contact and permanent work-area violations.
+- Four generated USD files pass compliance and joint-target checks. Lint passes.
 
-The actual setup, both chain-end insertions, keeper routing and insertion, keeper release and final hand clearance were visually reviewed. The videos contain the native top view above both native wrist views; processing only resizes/stacks and encodes H.264. The setup screenshot is an actual reset image. Media ID and reported scores are in `task.json`.
+The reset, connector insertion, right-hand withdrawal, keeper insertion and final routed loop were visually reviewed. The demo preserves every actual native initial/action frame in order, showing top view above both wrists. Processing only resizes/stacks and encodes H.264. The setup screenshot is an actual reset image.
 
-- `reference-native.json`, `reference-inspect.json`: actual full-score rendered executions, source fingerprint and report hashes.
-- `reference-media.json`, `model-media.json`: frame counts, composition, codecs, file sizes and SHA-256 hashes.
-- `model-native.json`: actual hosted episode settings, score, request counts, tracking and frame checks, without credentials or service session identifiers.
-- `rules-check.json`, `submission-checklist.md`: current authoritative rules and submission review.
-- `unit-tests.txt`: all **24** scorer and physical-slot geometry tests pass. `usd-structure.json`: all four generated assets pass schema/compliance and joint-target checks.
+`reference-native.json`, `inspect-native.json`, `negative-control.json`, `reference-media.json`, `unit-tests.txt` and `usd-structure.json` preserve numeric results, source identity and hashes. `rules-check.json` records the current authoritative rules and task-board screen. `files.sha256.json` covers the packaged files.
 
-`cpu-validation.json` preserves earlier camera-free development evidence, including the omitted-keeper control (0.4) and the bounded upward contact probe (0.7 because the gripper stays closed). Its executable fingerprint predates a scene-description correction from “keyhole” to “forked”; physics and control logic were unchanged. The current source is validated by the rendered receipts. The probe raised the free connector about 2 mm through contact with the keeper; it is not a rated-load test.
-
-`files.sha256.json` hashes the packaged task files. Full raw local reports and recordings are retained separately; no failed development run is represented as successful evidence. No additional Dream call is needed to reproduce or inspect these saved results.
+**A fresh hosted-model video remains required for this changed task.** The previous Dream recording and M-96PM3V belong to the old joint-only objective and are not used here. No additional paid episode has been run. The user was asked whether to authorize one new episode after reviewing the revised demo. The current metadata is deliberately `task.draft.json`, without a media ID; no submission PR has been opened.

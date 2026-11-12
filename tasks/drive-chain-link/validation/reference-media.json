@@ -1,51 +1,18 @@
 {
-  "source_sha256": "894ec5142f012f92e09e5f29fef5e0b1dfc626311adbc9ddea4b0554d08dfdff",
+  "source_sha256": "c9b7d047e4ed0db05966fe4dcffdc7069d507a5309a2add7fa6da035b93675e1",
   "score": 1.0,
-  "steps": 790,
-  "simulated_seconds": 39.5,
+  "steps": 773,
+  "simulated_seconds": 38.65,
   "visually_reviewed": true,
   "three_cameras_valid": true,
+  "composition": "Every actual native initial/action frame in order; top above both wrists; resize/stack/encode only.",
   "reviewed_stages": [
-    "reset",
-    "two chain-end grasps",
-    "both holes lowered onto connector pins",
-    "released chain ends",
-    "keeper pickup and route",
-    "sideways insertion beneath both heads",
-    "keeper release and both hands clear"
+    "missing link, routed chain on both sprockets",
+    "right inserts connecting link",
+    "right releases and withdraws",
+    "left picks and fits keeper beneath joint",
+    "closed retained loop remains seated; both hands clear"
   ],
-  "composition": "Native top stream above both native wrist streams, resize/stack only, all initial/action frames in order, no overlays or generated frames.",
-  "native_receipt_sha256": "0122469e1a3488721e53f602a72c08cb9a1d673cc18e0255eb776d526c696f0c",
-  "registered_report_sha256": "708f5b03d76b67c11c23a06c5c27d27e246f6876a560a03cb36cf69dd015abcc",
-  "registered_camera_quality": {
-    "top_cam": {
-      "frames": 791,
-      "shape": [
-        176,
-        320,
-        3
-      ],
-      "minimum_frame_std": 59.56859149702055
-    },
-    "left_cam": {
-      "frames": 791,
-      "shape": [
-        176,
-        320,
-        3
-      ],
-      "minimum_frame_std": 53.715117949764505
-    },
-    "right_cam": {
-      "frames": 791,
-      "shape": [
-        176,
-        320,
-        3
-      ],
-      "minimum_frame_std": 50.659803810415184
-    }
-  },
   "ffprobe": {
     "programs": [],
     "stream_groups": [],
@@ -56,22 +23,22 @@
         "height": 540,
         "pix_fmt": "yuv420p",
         "r_frame_rate": "20/1",
-        "nb_frames": "791"
+        "nb_frames": "774"
       }
     ],
     "format": {
-      "duration": "39.550000",
-      "size": "2383515"
+      "duration": "38.700000",
+      "size": "1846462"
     }
   },
   "files": {
     "demo.mp4": {
-      "bytes": 2383515,
-      "sha256": "b9dbd3c86ed573182f60028b0a99bff5b7dd72412d010d6e525a227c2d22e116"
+      "bytes": 1846462,
+      "sha256": "86d11d091a6a9869ebdcebf4c900a8cf6ff82baa2a42d61ac3c61df184a30ffb"
     },
     "setup.png": {
-      "bytes": 202114,
-      "sha256": "d9135eafad45c1b74ea0a9cdb3a2b07b6f3d78cfd3ed4e7e6b36b715cdd65c0f"
+      "bytes": 225022,
+      "sha256": "d10953732ec7eae79af7eff94e2a4b385bfa6c80c763f222191e69d20a9b2ddd"
     }
   }
 }

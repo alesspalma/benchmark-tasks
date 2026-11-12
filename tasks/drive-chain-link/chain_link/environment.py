@@ -91,9 +91,9 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 (
                     JOINT_GUIDE,
                     ROOM_DOCS["station"],
-                    "An open jointed training chain rests around two fixed service mandrels. Orange tabs "
-                    "provide chain-end grips. A free orange two-pin connecting link rests in its cradle. "
-                    "A blue forked retaining plate lies on the right. All hardware is unpowered.",
+                    "An open drive chain rests on two locked toothed sprockets. The orange connector "
+                    "rests on a pickup stand to the right. "
+                    "A blue forked retaining plate lies to the left. Leave the chain routed on both sprockets. All hardware is unpowered.",
                 )
             ),
             environment_id="chain-link-" + source_fingerprint()[:16],
