@@ -1,0 +1,14 @@
+{
+  "scope": "Instruction-only clarification; no simulation, controller, geometry or scoring changes",
+  "recorded_source_sha256": "351312a14af87500a658f3be457e78ef7299ccfceeb72c9270c97db990a54cfc",
+  "current_source_sha256": "4fd741ea6a2a2c9257dcd609a1066d796fcf2beb18cad6d395ccb505c9eb2910",
+  "previous_instruction": "Pick up the yellow connecting link and place it in the empty service cradle. Join the two bare ends of the open chain on its pins. Pick up the blue forked retaining plate from the left side of the table and slide it sideways under both pin heads toward the chain, until both pin stems reach the closed ends of its slots. Leave the retained joint in its service cradle with the chain seated on the toothed guide, and release both hands. This is an unpowered training assembly.",
+  "current_instruction": "Pick up the yellow connecting link and place it in the empty service cradle. Join the two bare ends of the open chain on its pins. Pick up the blue forked retaining plate from the left side of the table and slide it sideways under both pin heads toward the chain, until both pin stems reach the closed ends of its slots. Leave the retained joint in its service cradle with the chain seated on the toothed guide, and release both hands.",
+  "removed_sentence": "This is an unpowered training assembly.",
+  "reconstructed_recorded_source_matches": true,
+  "all_other_executable_source_bytes_identical": true,
+  "scripted_reference_uses_instruction_for_actions": false,
+  "existing_scripted_reference_remains_valid_for_physical_task": true,
+  "matching_hosted_model_run": "pending; must use the current shorter instruction",
+  "new_paid_calls": 0
+}

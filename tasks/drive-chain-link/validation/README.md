@@ -8,7 +8,7 @@ The chain and fixed toothed former are dark grey against the light back plate. T
 - Native control omitting the left arm's keeper-locking slide: 0.4.
 - 32 scorer, aperture and bare-rail/keeper-clearance tests pass; all four generated USD assets pass structure checks.
 
-All evidence uses the same frozen executable-source fingerprint. Geometry, contact parameters and scoring are unchanged from the previous task revision; only colours, keeper starting side, instruction and reference arm control changed. Every primitive colour is included in the scene inventory. `reference-roles.json` records actual left/right TCP motion during keeper handling.
+The recorded evidence uses the same frozen executable-source fingerprint. A later prompt-only edit removes the final explanatory training sentence; `instruction-update.json` and its patch record the original/current text and source hashes. All other executable source is byte-identical, and the scripted reference does not use instruction text to choose actions. The existing physical demonstration remains applicable; the final hosted-model episode must use the shorter prompt. Geometry, contact parameters and scoring are unchanged from the previous task revision; only colours, keeper starting side, instruction and reference arm control changed. Every primitive colour is included in the scene inventory. `reference-roles.json` records actual left/right TCP motion during keeper handling.
 
 Final media spatially combine every actual camera frame: 640x360 overhead above two 320x180 wrist views, 20fps H.264/yuv420p, with no temporal edits, overlays or generated frames. The screenshot is the actual initial overhead view. Frame counts, full decode checks and file hashes are in `reference-media.json`.
 

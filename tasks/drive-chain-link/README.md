@@ -2,7 +2,7 @@
 
 The right YAM arm picks up a loose yellow two-pin connecting link and slides it into an empty service cradle. Both arms pinch the bare dark grey end links, lift and align their holes, then lower them over the pins. The left arm picks up the blue forked keeper from the left side of the table and slides it under both heads, releases it and withdraws. A fixed toothed service former guides the loop throughout assembly. This is an unpowered maintenance assembly exercise.
 
-The actual three-camera native reference reaches **1.0 in 1,180 actions / 59.0 simulated seconds**; the native CPU reference and registered Inspect evaluation also reach **1.0**. Omitting the left arm’s keeper-locking slide scores **0.4**, and all **32** scorer, aperture and clearance tests pass. `validation/` records the matching source, results and camera checks. `task.draft.json` has no media ID or claimed hosted-model score; a matching Dream-1 run is reserved for the final paid step.
+The actual three-camera native reference reaches **1.0 in 1,180 actions / 59.0 simulated seconds**; the native CPU reference and registered Inspect evaluation also reach **1.0**. Omitting the left arm’s keeper-locking slide scores **0.4**, and all **32** scorer, aperture and clearance tests pass. `validation/` records the original source, results, camera checks and the later prompt-only clarification. `task.draft.json` has no media ID or claimed hosted-model score; a matching Dream-1 run is reserved for the final paid step.
 
 ## Install and run
 
