@@ -1,7 +1,8 @@
 {
   "status": "pending",
-  "source_revision": "bare grey links; loose yellow connector placed first; open-front cradle; taller guide pins",
-  "paid_rollouts_for_this_revision": 0,
+  "source_sha256": "351312a14af87500a658f3be457e78ef7299ccfceeb72c9270c97db990a54cfc",
+  "source_revision": "dark grey chain/former; blue keeper starts on left and left arm fits it",
+  "paid_rollouts_for_revision": 0,
   "previous_media_reused": false,
-  "note": "Generate a matching hosted Dream-1 episode only at the final paid step. No model score or media ID is claimed."
+  "note": "Matching Dream-1 episode is reserved for the final paid step; no model score or uploaded media ID claimed."
 }

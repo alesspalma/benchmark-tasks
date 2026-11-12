@@ -14,6 +14,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -30,6 +35,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -46,6 +56,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -62,6 +77,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -78,6 +98,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -94,6 +119,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -110,6 +140,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -126,6 +161,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -142,6 +182,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -158,6 +203,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -174,6 +224,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -190,6 +245,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -206,6 +266,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -222,6 +287,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -238,6 +308,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -254,6 +329,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -270,6 +350,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -286,6 +371,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -302,6 +392,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -318,6 +413,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -334,6 +434,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -350,6 +455,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -366,6 +476,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -382,6 +497,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -398,6 +518,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -414,6 +539,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -430,6 +560,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -446,6 +581,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -462,6 +602,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -478,6 +623,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -494,6 +644,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -510,6 +665,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -526,6 +686,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -542,6 +707,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -558,6 +728,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -574,6 +749,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -590,6 +770,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -606,6 +791,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -622,6 +812,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -638,6 +833,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -654,6 +854,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -670,6 +875,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -686,6 +896,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/RailThickening0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.03,
       0.006,
@@ -702,6 +917,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/RailThickening2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.03,
       0.006,
@@ -718,6 +938,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -734,6 +959,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -750,6 +980,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -766,6 +1001,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -782,6 +1022,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -798,6 +1043,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -814,6 +1064,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -830,6 +1085,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -846,6 +1106,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -862,6 +1127,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -878,6 +1148,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -894,6 +1169,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -910,6 +1190,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -926,6 +1211,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -942,6 +1232,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -958,6 +1253,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -974,6 +1274,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -990,6 +1295,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1006,6 +1316,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1022,6 +1337,11 @@
     "asset": "chain",
     "solid": "/Chain/Link00/KeeperShoulder19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1049,6 +1369,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1065,6 +1390,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1081,6 +1411,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1097,6 +1432,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1113,6 +1453,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1129,6 +1474,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1145,6 +1495,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1161,6 +1516,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1177,6 +1537,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1193,6 +1558,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1209,6 +1579,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1225,6 +1600,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1241,6 +1621,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1257,6 +1642,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1273,6 +1663,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1289,6 +1684,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1305,6 +1705,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1321,6 +1726,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1337,6 +1747,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1353,6 +1768,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1369,6 +1789,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1385,6 +1810,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1401,6 +1831,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1417,6 +1852,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1433,6 +1873,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1449,6 +1894,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1465,6 +1915,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1481,6 +1936,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1497,6 +1957,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1513,6 +1978,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1529,6 +1999,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1545,6 +2020,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1561,6 +2041,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1577,6 +2062,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1593,6 +2083,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1609,6 +2104,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1625,6 +2125,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1641,6 +2146,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1657,6 +2167,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1673,6 +2188,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1689,6 +2209,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -1705,6 +2230,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -1721,6 +2251,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1737,6 +2272,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1753,6 +2293,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1769,6 +2314,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1785,6 +2335,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1801,6 +2356,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1817,6 +2377,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1833,6 +2398,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1849,6 +2419,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1865,6 +2440,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1881,6 +2461,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1897,6 +2482,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1913,6 +2503,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1929,6 +2524,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1945,6 +2545,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1961,6 +2566,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1977,6 +2587,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -1993,6 +2608,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2009,6 +2629,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2025,6 +2650,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2041,6 +2671,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2057,6 +2692,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2073,6 +2713,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2089,6 +2734,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2105,6 +2755,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2121,6 +2776,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2137,6 +2797,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2153,6 +2818,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2169,6 +2839,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2185,6 +2860,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2201,6 +2881,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2217,6 +2902,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2233,6 +2923,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2249,6 +2944,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2265,6 +2965,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2281,6 +2986,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2297,6 +3007,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2313,6 +3028,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2329,6 +3049,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2345,6 +3070,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Ring1_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2361,6 +3091,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Rail1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -2377,6 +3112,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/Rail1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -2393,6 +3133,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/HingePin0",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -2406,6 +3151,11 @@
     "asset": "chain",
     "solid": "/Chain/Link01/HingePin1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -2442,6 +3192,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2458,6 +3213,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2474,6 +3234,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2490,6 +3255,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2506,6 +3276,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2522,6 +3297,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2538,6 +3318,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2554,6 +3339,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2570,6 +3360,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2586,6 +3381,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2602,6 +3402,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2618,6 +3423,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2634,6 +3444,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2650,6 +3465,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2666,6 +3486,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2682,6 +3507,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2698,6 +3528,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2714,6 +3549,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2730,6 +3570,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2746,6 +3591,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2762,6 +3612,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2778,6 +3633,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2794,6 +3654,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2810,6 +3675,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2826,6 +3696,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2842,6 +3717,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2858,6 +3738,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2874,6 +3759,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2890,6 +3780,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2906,6 +3801,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2922,6 +3822,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2938,6 +3843,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2954,6 +3864,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2970,6 +3885,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -2986,6 +3906,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3002,6 +3927,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3018,6 +3948,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3034,6 +3969,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3050,6 +3990,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3066,6 +4011,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3082,6 +4032,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -3098,6 +4053,11 @@
     "asset": "chain",
     "solid": "/Chain/Link02/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -3137,6 +4097,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3153,6 +4118,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3169,6 +4139,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3185,6 +4160,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3201,6 +4181,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3217,6 +4202,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3233,6 +4223,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3249,6 +4244,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3265,6 +4265,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3281,6 +4286,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3297,6 +4307,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3313,6 +4328,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3329,6 +4349,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3345,6 +4370,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3361,6 +4391,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3377,6 +4412,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3393,6 +4433,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3409,6 +4454,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3425,6 +4475,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3441,6 +4496,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3457,6 +4517,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3473,6 +4538,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3489,6 +4559,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3505,6 +4580,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3521,6 +4601,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3537,6 +4622,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3553,6 +4643,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3569,6 +4664,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3585,6 +4685,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3601,6 +4706,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3617,6 +4727,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3633,6 +4748,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3649,6 +4769,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3665,6 +4790,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3681,6 +4811,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3697,6 +4832,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3713,6 +4853,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3729,6 +4874,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3745,6 +4895,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3761,6 +4916,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3777,6 +4937,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -3793,6 +4958,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -3809,6 +4979,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3825,6 +5000,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3841,6 +5021,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3857,6 +5042,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3873,6 +5063,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3889,6 +5084,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3905,6 +5105,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3921,6 +5126,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3937,6 +5147,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3953,6 +5168,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3969,6 +5189,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -3985,6 +5210,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4001,6 +5231,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4017,6 +5252,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4033,6 +5273,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4049,6 +5294,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4065,6 +5315,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4081,6 +5336,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4097,6 +5357,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4113,6 +5378,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4129,6 +5399,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4145,6 +5420,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4161,6 +5441,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4177,6 +5462,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4193,6 +5483,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4209,6 +5504,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4225,6 +5525,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4241,6 +5546,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4257,6 +5567,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4273,6 +5588,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4289,6 +5609,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4305,6 +5630,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4321,6 +5651,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4337,6 +5672,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4353,6 +5693,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4369,6 +5714,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4385,6 +5735,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4401,6 +5756,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4417,6 +5777,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4433,6 +5798,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Ring1_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4449,6 +5819,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Rail1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -4465,6 +5840,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/Rail1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -4481,6 +5861,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/HingePin0",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -4494,6 +5879,11 @@
     "asset": "chain",
     "solid": "/Chain/Link03/HingePin1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -4530,6 +5920,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4546,6 +5941,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4562,6 +5962,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4578,6 +5983,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4594,6 +6004,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4610,6 +6025,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4626,6 +6046,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4642,6 +6067,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4658,6 +6088,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4674,6 +6109,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4690,6 +6130,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4706,6 +6151,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4722,6 +6172,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4738,6 +6193,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4754,6 +6214,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4770,6 +6235,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4786,6 +6256,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4802,6 +6277,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4818,6 +6298,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4834,6 +6319,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4850,6 +6340,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4866,6 +6361,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4882,6 +6382,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4898,6 +6403,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4914,6 +6424,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4930,6 +6445,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4946,6 +6466,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4962,6 +6487,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4978,6 +6508,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -4994,6 +6529,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5010,6 +6550,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5026,6 +6571,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5042,6 +6592,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5058,6 +6613,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5074,6 +6634,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5090,6 +6655,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5106,6 +6676,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5122,6 +6697,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5138,6 +6718,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5154,6 +6739,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5170,6 +6760,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -5186,6 +6781,11 @@
     "asset": "chain",
     "solid": "/Chain/Link04/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -5225,6 +6825,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5241,6 +6846,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5257,6 +6867,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5273,6 +6888,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5289,6 +6909,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5305,6 +6930,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5321,6 +6951,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5337,6 +6972,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5353,6 +6993,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5369,6 +7014,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5385,6 +7035,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5401,6 +7056,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5417,6 +7077,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5433,6 +7098,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5449,6 +7119,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5465,6 +7140,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5481,6 +7161,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5497,6 +7182,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5513,6 +7203,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5529,6 +7224,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5545,6 +7245,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5561,6 +7266,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5577,6 +7287,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5593,6 +7308,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5609,6 +7329,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5625,6 +7350,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5641,6 +7371,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5657,6 +7392,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5673,6 +7413,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5689,6 +7434,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5705,6 +7455,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5721,6 +7476,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5737,6 +7497,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5753,6 +7518,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5769,6 +7539,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5785,6 +7560,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5801,6 +7581,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5817,6 +7602,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5833,6 +7623,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5849,6 +7644,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5865,6 +7665,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -5881,6 +7686,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -5897,6 +7707,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5913,6 +7728,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5929,6 +7749,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5945,6 +7770,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5961,6 +7791,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5977,6 +7812,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -5993,6 +7833,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6009,6 +7854,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6025,6 +7875,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6041,6 +7896,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6057,6 +7917,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6073,6 +7938,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6089,6 +7959,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6105,6 +7980,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6121,6 +8001,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6137,6 +8022,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6153,6 +8043,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6169,6 +8064,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6185,6 +8085,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6201,6 +8106,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6217,6 +8127,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6233,6 +8148,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6249,6 +8169,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6265,6 +8190,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6281,6 +8211,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6297,6 +8232,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6313,6 +8253,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6329,6 +8274,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6345,6 +8295,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6361,6 +8316,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6377,6 +8337,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6393,6 +8358,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6409,6 +8379,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6425,6 +8400,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6441,6 +8421,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6457,6 +8442,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6473,6 +8463,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6489,6 +8484,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6505,6 +8505,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6521,6 +8526,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Ring1_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6537,6 +8547,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Rail1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -6553,6 +8568,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/Rail1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -6569,6 +8589,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/HingePin0",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -6582,6 +8607,11 @@
     "asset": "chain",
     "solid": "/Chain/Link05/HingePin1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -6618,6 +8648,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6634,6 +8669,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6650,6 +8690,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6666,6 +8711,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6682,6 +8732,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6698,6 +8753,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6714,6 +8774,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6730,6 +8795,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6746,6 +8816,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6762,6 +8837,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6778,6 +8858,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6794,6 +8879,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6810,6 +8900,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6826,6 +8921,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6842,6 +8942,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6858,6 +8963,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6874,6 +8984,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6890,6 +9005,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6906,6 +9026,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6922,6 +9047,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6938,6 +9068,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6954,6 +9089,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6970,6 +9110,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -6986,6 +9131,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7002,6 +9152,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7018,6 +9173,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7034,6 +9194,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7050,6 +9215,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7066,6 +9236,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7082,6 +9257,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7098,6 +9278,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7114,6 +9299,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7130,6 +9320,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7146,6 +9341,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7162,6 +9362,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7178,6 +9383,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7194,6 +9404,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7210,6 +9425,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7226,6 +9446,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7242,6 +9467,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7258,6 +9488,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -7274,6 +9509,11 @@
     "asset": "chain",
     "solid": "/Chain/Link06/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -7313,6 +9553,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7329,6 +9574,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7345,6 +9595,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7361,6 +9616,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7377,6 +9637,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7393,6 +9658,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7409,6 +9679,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7425,6 +9700,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7441,6 +9721,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7457,6 +9742,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7473,6 +9763,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7489,6 +9784,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7505,6 +9805,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7521,6 +9826,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7537,6 +9847,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7553,6 +9868,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7569,6 +9889,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7585,6 +9910,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7601,6 +9931,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7617,6 +9952,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7633,6 +9973,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7649,6 +9994,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7665,6 +10015,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7681,6 +10036,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7697,6 +10057,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7713,6 +10078,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7729,6 +10099,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7745,6 +10120,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7761,6 +10141,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7777,6 +10162,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7793,6 +10183,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7809,6 +10204,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7825,6 +10225,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7841,6 +10246,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7857,6 +10267,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7873,6 +10288,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7889,6 +10309,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7905,6 +10330,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7921,6 +10351,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7937,6 +10372,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -7953,6 +10393,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -7969,6 +10414,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -7985,6 +10435,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8001,6 +10456,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8017,6 +10477,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8033,6 +10498,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8049,6 +10519,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8065,6 +10540,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8081,6 +10561,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8097,6 +10582,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8113,6 +10603,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8129,6 +10624,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8145,6 +10645,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8161,6 +10666,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8177,6 +10687,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8193,6 +10708,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8209,6 +10729,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8225,6 +10750,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8241,6 +10771,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8257,6 +10792,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8273,6 +10813,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8289,6 +10834,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8305,6 +10855,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8321,6 +10876,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8337,6 +10897,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8353,6 +10918,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8369,6 +10939,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8385,6 +10960,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8401,6 +10981,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8417,6 +11002,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8433,6 +11023,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8449,6 +11044,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8465,6 +11065,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8481,6 +11086,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8497,6 +11107,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8513,6 +11128,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8529,6 +11149,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8545,6 +11170,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8561,6 +11191,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8577,6 +11212,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8593,6 +11233,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8609,6 +11254,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Ring1_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8625,6 +11275,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Rail1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -8641,6 +11296,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/Rail1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -8657,6 +11317,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/HingePin0",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -8670,6 +11335,11 @@
     "asset": "chain",
     "solid": "/Chain/Link07/HingePin1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -8706,6 +11376,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8722,6 +11397,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8738,6 +11418,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8754,6 +11439,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8770,6 +11460,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8786,6 +11481,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8802,6 +11502,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8818,6 +11523,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8834,6 +11544,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8850,6 +11565,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8866,6 +11586,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8882,6 +11607,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8898,6 +11628,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8914,6 +11649,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8930,6 +11670,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8946,6 +11691,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8962,6 +11712,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8978,6 +11733,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -8994,6 +11754,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9010,6 +11775,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9026,6 +11796,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9042,6 +11817,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9058,6 +11838,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9074,6 +11859,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9090,6 +11880,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9106,6 +11901,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9122,6 +11922,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9138,6 +11943,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9154,6 +11964,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9170,6 +11985,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9186,6 +12006,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9202,6 +12027,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9218,6 +12048,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9234,6 +12069,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9250,6 +12090,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9266,6 +12111,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9282,6 +12132,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9298,6 +12153,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9314,6 +12174,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9330,6 +12195,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9346,6 +12216,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -9362,6 +12237,11 @@
     "asset": "chain",
     "solid": "/Chain/Link08/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -9401,6 +12281,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9417,6 +12302,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9433,6 +12323,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9449,6 +12344,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9465,6 +12365,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9481,6 +12386,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9497,6 +12407,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9513,6 +12428,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9529,6 +12449,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9545,6 +12470,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9561,6 +12491,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9577,6 +12512,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9593,6 +12533,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9609,6 +12554,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9625,6 +12575,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9641,6 +12596,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9657,6 +12617,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9673,6 +12638,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9689,6 +12659,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9705,6 +12680,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9721,6 +12701,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9737,6 +12722,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9753,6 +12743,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9769,6 +12764,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9785,6 +12785,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9801,6 +12806,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9817,6 +12827,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9833,6 +12848,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9849,6 +12869,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9865,6 +12890,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9881,6 +12911,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9897,6 +12932,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9913,6 +12953,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9929,6 +12974,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9945,6 +12995,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9961,6 +13016,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9977,6 +13037,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -9993,6 +13058,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10009,6 +13079,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10025,6 +13100,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10041,6 +13121,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -10057,6 +13142,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -10073,6 +13163,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10089,6 +13184,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10105,6 +13205,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10121,6 +13226,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10137,6 +13247,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10153,6 +13268,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10169,6 +13289,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10185,6 +13310,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10201,6 +13331,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10217,6 +13352,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10233,6 +13373,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10249,6 +13394,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10265,6 +13415,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10281,6 +13436,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10297,6 +13457,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10313,6 +13478,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10329,6 +13499,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10345,6 +13520,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10361,6 +13541,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10377,6 +13562,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10393,6 +13583,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10409,6 +13604,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10425,6 +13625,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10441,6 +13646,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10457,6 +13667,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10473,6 +13688,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10489,6 +13709,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10505,6 +13730,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10521,6 +13751,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10537,6 +13772,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10553,6 +13793,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10569,6 +13814,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10585,6 +13835,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10601,6 +13856,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10617,6 +13877,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10633,6 +13898,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10649,6 +13919,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10665,6 +13940,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10681,6 +13961,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10697,6 +13982,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Ring1_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10713,6 +14003,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Rail1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -10729,6 +14024,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/Rail1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -10745,6 +14045,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/HingePin0",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -10758,6 +14063,11 @@
     "asset": "chain",
     "solid": "/Chain/Link09/HingePin1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.004,
     "height_m": 0.02,
     "center_m": [
@@ -10794,6 +14104,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10810,6 +14125,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10826,6 +14146,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10842,6 +14167,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10858,6 +14188,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10874,6 +14209,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10890,6 +14230,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10906,6 +14251,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10922,6 +14272,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10938,6 +14293,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10954,6 +14314,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10970,6 +14335,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -10986,6 +14356,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11002,6 +14377,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11018,6 +14398,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11034,6 +14419,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11050,6 +14440,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11066,6 +14461,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11082,6 +14482,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11098,6 +14503,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_0_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11114,6 +14524,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11130,6 +14545,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11146,6 +14566,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11162,6 +14587,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11178,6 +14608,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11194,6 +14629,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11210,6 +14650,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11226,6 +14671,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11242,6 +14692,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11258,6 +14713,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11274,6 +14734,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11290,6 +14755,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11306,6 +14776,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11322,6 +14797,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11338,6 +14818,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11354,6 +14839,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11370,6 +14860,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11386,6 +14881,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11402,6 +14902,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11418,6 +14923,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Ring0_1_19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11434,6 +14944,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Rail0_0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -11450,6 +14965,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/Rail0_2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1,
       0.006,
@@ -11466,6 +14986,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/RailThickening0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.03,
       0.006,
@@ -11482,6 +15007,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/RailThickening2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.03,
       0.006,
@@ -11498,6 +15028,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder0",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11514,6 +15049,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11530,6 +15070,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11546,6 +15091,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11562,6 +15112,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11578,6 +15133,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11594,6 +15154,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11610,6 +15175,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11626,6 +15196,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11642,6 +15217,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11658,6 +15238,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder10",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11674,6 +15259,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder11",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11690,6 +15280,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder12",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11706,6 +15301,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder13",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11722,6 +15322,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder14",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11738,6 +15343,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder15",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11754,6 +15364,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder16",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11770,6 +15385,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder17",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11786,6 +15406,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder18",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11802,6 +15427,11 @@
     "asset": "chain",
     "solid": "/Chain/Link10/KeeperShoulder19",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.007,
       0.0075,
@@ -11841,6 +15471,11 @@
     "asset": "connector",
     "solid": "/Connector/Body/Backing",
     "kind": "box",
+    "display_color_rgb": [
+      0.95,
+      0.48,
+      0.07
+    ],
     "size_m": [
       0.045,
       0.14,
@@ -11857,6 +15492,11 @@
     "asset": "connector",
     "solid": "/Connector/Body/Stem0",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.38,
+      0.41,
+      0.45
+    ],
     "radius_m": 0.004,
     "height_m": 0.027,
     "center_m": [
@@ -11870,6 +15510,11 @@
     "asset": "connector",
     "solid": "/Connector/Body/Head0",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.95,
+      0.48,
+      0.07
+    ],
     "radius_m": 0.012,
     "height_m": 0.006,
     "center_m": [
@@ -11883,6 +15528,11 @@
     "asset": "connector",
     "solid": "/Connector/Body/Lead0",
     "kind": "cone",
+    "display_color_rgb": [
+      0.95,
+      0.48,
+      0.07
+    ],
     "radius_m": 0.012,
     "height_m": 0.004,
     "center_m": [
@@ -11896,6 +15546,11 @@
     "asset": "connector",
     "solid": "/Connector/Body/Stem1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.38,
+      0.41,
+      0.45
+    ],
     "radius_m": 0.004,
     "height_m": 0.027,
     "center_m": [
@@ -11909,6 +15564,11 @@
     "asset": "connector",
     "solid": "/Connector/Body/Head1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.95,
+      0.48,
+      0.07
+    ],
     "radius_m": 0.012,
     "height_m": 0.006,
     "center_m": [
@@ -11922,6 +15582,11 @@
     "asset": "connector",
     "solid": "/Connector/Body/Lead1",
     "kind": "cone",
+    "display_color_rgb": [
+      0.95,
+      0.48,
+      0.07
+    ],
     "radius_m": 0.012,
     "height_m": 0.004,
     "center_m": [
@@ -11946,6 +15611,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Cell00",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.014000000000000002,
       0.0050000000000000044,
@@ -11962,6 +15632,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Cell01",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.014000000000000002,
       0.017999999999999995,
@@ -11978,6 +15653,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Cell02",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.014000000000000002,
       0.082,
@@ -11994,6 +15674,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Cell03",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.014000000000000002,
       0.017999999999999995,
@@ -12010,6 +15695,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Cell04",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.014000000000000002,
       0.0050000000000000044,
@@ -12026,6 +15716,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Cell05",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.066,
       0.0050000000000000044,
@@ -12042,6 +15737,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Cell06",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.066,
       0.082,
@@ -12058,6 +15758,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Cell07",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.066,
       0.0050000000000000044,
@@ -12074,6 +15779,11 @@
     "asset": "keeper",
     "solid": "/Keeper/Body/Grip",
     "kind": "box",
+    "display_color_rgb": [
+      0.08,
+      0.36,
+      0.85
+    ],
     "size_m": [
       0.024,
       0.03,
@@ -12090,6 +15800,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/Deck",
     "kind": "box",
+    "display_color_rgb": [
+      0.55,
+      0.57,
+      0.6
+    ],
     "size_m": [
       0.6,
       0.48,
@@ -12106,6 +15821,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/Post00",
     "kind": "box",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "size_m": [
       0.025,
       0.025,
@@ -12122,6 +15842,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/Post01",
     "kind": "box",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "size_m": [
       0.025,
       0.025,
@@ -12138,6 +15863,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/Post10",
     "kind": "box",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "size_m": [
       0.025,
       0.025,
@@ -12154,6 +15884,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/Post11",
     "kind": "box",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "size_m": [
       0.025,
       0.025,
@@ -12170,6 +15905,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/ConnectorEdge0",
     "kind": "box",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "size_m": [
       0.055,
       0.01,
@@ -12186,6 +15926,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/ConnectorEdge1",
     "kind": "box",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "size_m": [
       0.055,
       0.01,
@@ -12202,6 +15947,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/ConnectorSide0",
     "kind": "box",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "size_m": [
       0.005,
       0.14,
@@ -12218,6 +15968,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerHub",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "radius_m": 0.145,
     "height_m": 0.008,
     "center_m": [
@@ -12231,6 +15986,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerBoss",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.025,
     "height_m": 0.014,
     "center_m": [
@@ -12244,6 +16004,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerCap",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "radius_m": 0.012,
     "height_m": 0.003,
     "center_m": [
@@ -12257,6 +16022,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke1",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1986025403784439,
       0.022,
@@ -12273,6 +16043,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12286,6 +16061,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead1",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12299,6 +16079,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke2",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1986025403784439,
       0.022,
@@ -12315,6 +16100,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth2",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12328,6 +16118,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead2",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12341,6 +16136,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke3",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.19860254037844385,
       0.022,
@@ -12357,6 +16157,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth3",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12370,6 +16175,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead3",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12383,6 +16193,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke4",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1986025403784439,
       0.022,
@@ -12399,6 +16214,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth4",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12412,6 +16232,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead4",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12425,6 +16250,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke5",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.19860254037844394,
       0.022,
@@ -12441,6 +16271,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth5",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12454,6 +16289,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead5",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12467,6 +16307,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke6",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.19860254037844388,
       0.022,
@@ -12483,6 +16328,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth6",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12496,6 +16346,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead6",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12509,6 +16364,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke7",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1986025403784439,
       0.022,
@@ -12525,6 +16385,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth7",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12538,6 +16403,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead7",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12551,6 +16421,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke8",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.1986025403784439,
       0.022,
@@ -12567,6 +16442,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth8",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12580,6 +16460,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead8",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12593,6 +16478,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerSpoke9",
     "kind": "box",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
     "size_m": [
       0.19860254037844388,
       0.022,
@@ -12609,6 +16499,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerTooth9",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.05,
     "center_m": [
@@ -12622,6 +16517,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerToothLead9",
     "kind": "cone",
+    "display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ],
     "radius_m": 0.006,
     "height_m": 0.003,
     "center_m": [
@@ -12635,6 +16535,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerBolt0",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.0045,
     "height_m": 0.003,
     "center_m": [
@@ -12648,6 +16553,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerBolt1",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.0045,
     "height_m": 0.003,
     "center_m": [
@@ -12661,6 +16571,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerBolt2",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.0045,
     "height_m": 0.003,
     "center_m": [
@@ -12674,6 +16589,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerBolt3",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.0045,
     "height_m": 0.003,
     "center_m": [
@@ -12687,6 +16607,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerBolt4",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.0045,
     "height_m": 0.003,
     "center_m": [
@@ -12700,6 +16625,11 @@
     "asset": "fixtures",
     "solid": "/Fixtures/FormerBolt5",
     "kind": "cylinder",
+    "display_color_rgb": [
+      0.13,
+      0.16,
+      0.19
+    ],
     "radius_m": 0.0045,
     "height_m": 0.003,
     "center_m": [

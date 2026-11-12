@@ -305,15 +305,20 @@
       "centre_local_z_m": 0.0065,
       "ring_centre_radius_m": 0.0195
     },
-    "material": "nominal printed polymer links and metal pins",
+    "material": "nominal dark grey printed polymer links and metal pins",
     "bare_end_rails": {
       "width_m": 0.006,
       "central_length_m": 0.03,
       "central_total_height_m": 0.02,
       "central_bottom_local_z_m": -0.004,
       "central_top_local_z_m": 0.016,
-      "material": "same grey polymer as the link; no added grasp posts"
-    }
+      "material": "same dark grey polymer as the link; no added grasp posts"
+    },
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ]
   },
   "former": {
     "type": "fixed toothed chain-assembly former with open front service sector",
@@ -419,7 +424,17 @@
     "boss_radius_m": 0.025,
     "boss_height_m": 0.014,
     "material": "nominal metal, rigidly fixed to service deck",
-    "role": "positive location of chain windows throughout the 40mm end lift and subsequent assembly; no powered drive"
+    "role": "positive location of chain windows throughout the 40mm end lift and subsequent assembly; no powered drive",
+    "display_color_rgb": [
+      0.075,
+      0.09,
+      0.105
+    ],
+    "tooth_display_color_rgb": [
+      0.13,
+      0.15,
+      0.17
+    ]
   },
   "connector": {
     "position_m": [
@@ -456,7 +471,7 @@
   "keeper": {
     "position_m": [
       0.18,
-      -0.35,
+      0.35,
       0.7515000000000001
     ],
     "rotation_xyzw": [
@@ -478,7 +493,8 @@
     ],
     "slot_width_m": 0.018,
     "closed_slot_x_m": -0.026,
-    "material": "nominal printed polymer"
+    "material": "nominal printed polymer",
+    "reference_arm": "left"
   },
   "fixture": {
     "deck_size_m": [

@@ -4,7 +4,7 @@
   "assets": [
     {
       "file": "chain.usda",
-      "sha256": "cf8e6a626d38e85afd232c2b765841a46229a4c0fe1d9c778dd940b41eb940a1",
+      "sha256": "46ed148cf3c271a82c71abd55f9f925d0e29e00e37bf6f89cafc2ca28a3578f8",
       "errors": [],
       "failed_checks": [],
       "joints": [
@@ -99,7 +99,7 @@
     },
     {
       "file": "fixtures.usda",
-      "sha256": "7b7fb6939bad29d4a0f6ebae2aeb1f1046170d612ce61e2fa787b979595d816b",
+      "sha256": "8857ac57e264753b6434d0d9211f4588f7c7126914e5e34a889966e2625dcc25",
       "errors": [],
       "failed_checks": [],
       "joints": [],

@@ -91,9 +91,9 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 (
                     JOINT_GUIDE,
                     ROOM_DOCS["station"],
-                    "An open training chain with bare end links is located by a fixed toothed assembly former. "
+                    "A dark grey open training chain with bare end links is located by a dark grey fixed toothed assembly former. "
                     "A separate yellow two-pin connecting link lies on the table; its service cradle is empty. "
-                    "A blue forked retaining plate lies on the right. All hardware is unpowered.",
+                    "A blue forked retaining plate lies on the left. All hardware is unpowered.",
                 )
             ),
             environment_id="chain-link-" + source_fingerprint()[:16],

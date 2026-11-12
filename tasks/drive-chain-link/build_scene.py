@@ -75,6 +75,7 @@ def create_assets(directory):
                 asset=Path(stage.GetRootLayer().identifier).stem,
                 solid=path,
                 kind="box",
+                display_color_rgb=list(color),
                 size_m=list(map(float, size)),
                 center_m=list(map(float, pos)),
                 yaw_rad=yaw,
@@ -94,6 +95,7 @@ def create_assets(directory):
                 asset=Path(stage.GetRootLayer().identifier).stem,
                 solid=path,
                 kind="cylinder",
+                display_color_rgb=list(color),
                 radius_m=radius,
                 height_m=height,
                 center_m=list(map(float, pos)),
@@ -114,6 +116,7 @@ def create_assets(directory):
                 asset=Path(stage.GetRootLayer().identifier).stem,
                 solid=path,
                 kind="cone",
+                display_color_rgb=list(color),
                 radius_m=radius,
                 height_m=height,
                 center_m=list(map(float, pos)),
@@ -127,6 +130,8 @@ def create_assets(directory):
         (0.08, 0.36, 0.85),
         (0.13, 0.16, 0.19),
     )
+    chain_grey = (0.075, 0.09, 0.105)
+    tooth_grey = (0.13, 0.15, 0.17)
     stage, mat = stage_at("chain")
     yaws = []
     for n, (a, b) in enumerate(zip(NODES[:-1], NODES[1:])):
@@ -156,7 +161,7 @@ def create_assets(directory):
                         path + f"/Ring{layer}_{end}_{j}",
                         (0.007, 0.0075, height),
                         (x0 + 0.0195 * math.cos(theta), 0.0195 * math.sin(theta), z),
-                        grey,
+                        chain_grey,
                         theta,
                     )
             for side in (-1, 1):
@@ -166,7 +171,7 @@ def create_assets(directory):
                     path + f"/Rail{layer}_{side + 1}",
                     (PITCH, 0.006, height),
                     (0, side * 0.020, z),
-                    grey,
+                    chain_grey,
                 )
         if n % 2:
             for j, x0 in enumerate((-PITCH / 2, PITCH / 2)):
@@ -184,7 +189,7 @@ def create_assets(directory):
                     path + f"/RailThickening{side + 1}",
                     (0.030, 0.006, 0.012),
                     (0, side * 0.020, 0.010),
-                    grey,
+                    chain_grey,
                 )
             # Raised shoulders support the keeper above a flat end link.
             # Their bore is identical to the original end hole.
@@ -197,7 +202,7 @@ def create_assets(directory):
                     path + f"/KeeperShoulder{j}",
                     (0.007, 0.0075, 0.005),
                     (x0 + 0.0195 * math.cos(theta), 0.0195 * math.sin(theta), 0.0065),
-                    grey,
+                    chain_grey,
                     theta,
                 )
         if n:
@@ -254,7 +259,7 @@ def create_assets(directory):
     stage, mat = stage_at("keeper")
     body(stage, "/Keeper/Body", 0.075)
     # Two side-entry forks admit the 8 mm stems below the 24 mm heads.
-    # The narrow outer outline clears the chain-end grip posts.
+    # The narrow outer outline clears the raised bare end-link rails.
     xs = [-0.040, -0.026, 0.040]
     ys = [-0.064, -0.059, -0.041, 0.041, 0.059, 0.064]
     n = 0
@@ -328,7 +333,7 @@ def create_assets(directory):
         0.145,
         0.008,
         (cx, cy, DECK_TOP + 0.004),
-        (0.52, 0.55, 0.59),
+        chain_grey,
     )
     cylinder(
         stage,
@@ -346,7 +351,7 @@ def create_assets(directory):
         0.012,
         0.003,
         (cx, cy, DECK_TOP + 0.0155),
-        grey,
+        chain_grey,
     )
     for n in range(1, 10):
         point = (NODES[n] + NODES[n + 1]) / 2 + CHAIN_POSITION
@@ -359,7 +364,7 @@ def create_assets(directory):
             f"/Fixtures/FormerSpoke{n}",
             (radius + 0.012, 0.022, 0.004),
             (cx + delta[0] / 2, cy + delta[1] / 2, DECK_TOP),
-            grey,
+            chain_grey,
             angle,
         )
         cylinder(
@@ -369,7 +374,7 @@ def create_assets(directory):
             0.006,
             0.050,
             (point[0], point[1], DECK_TOP + 0.025),
-            (0.66, 0.68, 0.71),
+            tooth_grey,
         )
         cone(
             stage,
@@ -378,7 +383,7 @@ def create_assets(directory):
             0.006,
             0.003,
             (point[0], point[1], DECK_TOP + 0.0515),
-            (0.66, 0.68, 0.71),
+            tooth_grey,
         )
     for n, angle in enumerate(np.deg2rad([45, 90, 135, 225, 270, 315])):
         cylinder(

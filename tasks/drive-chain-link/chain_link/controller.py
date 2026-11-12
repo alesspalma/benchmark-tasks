@@ -133,37 +133,37 @@ def demo_plan(mode="demo", initial_state=None):
         1.0,
         **{a: (g + [0, 0, 0.065], 0.85) for a, g in seats.items()},
     )
-    rotations["left"] = down
-    add("park left hand", 1.5, left=([0.15, 0.30, 0.95], 1.0))
+    rotations["right"] = down
+    add("park right hand after joining", 1.5, right=([0.15, -0.30, 0.95], 1.0))
     add("let chain settle onto backing", 1.0)
     if mode == "ends":
         return plan + [dict(phase="hold joined ends", seconds=3.0)]
-    rotations["right"] = down
+    rotations["left"] = down
     new = KEEPER_POSITION + [0, 0, 0.050]
-    add("approach retaining plate", 2.0, right=(new + [0, 0, 0.12], 0.8))
-    add("lower to blue grip", 1.5, right=(new, 0.8))
-    add("grasp retaining plate", 0.8, right=(new, 0.20))
-    add("lift retaining plate", 1.5, right=(new + [0, 0, 0.13], 0.20))
+    add("approach retaining plate", 2.0, left=(new + [0, 0, 0.12], 0.8))
+    add("lower to blue grip", 1.5, left=(new, 0.8))
+    add("grasp retaining plate", 0.8, left=(new, 0.20))
+    add("lift retaining plate", 1.5, left=(new + [0, 0, 0.13], 0.20))
     outside = new.copy()
     outside[0] = CONNECTOR_POSITION[0] - 0.070
     outside[2] += 0.13
-    add("route keeper outside chain grips", 1.5, right=(outside, 0.20))
+    add("route keeper outside chain grips", 1.5, left=(outside, 0.20))
     entry = CONNECTOR_POSITION + [-0.070, 0, 0.074]
-    add("carry plate beside connecting link", 3.0, right=(entry + [0, 0, 0.026], 0.20))
-    add("lower keeper beside pin heads", 3.0, right=(entry, 0.20))
+    add("carry plate beside connecting link", 3.0, left=(entry + [0, 0, 0.026], 0.20))
+    add("lower keeper beside pin heads", 3.0, left=(entry, 0.20))
     add("settle keeper approach", 0.8)
     locked = entry + [0.084, 0, 0]
     if mode != "unlocked":
-        add("slide keeper under both heads", 4.0, right=(locked, 0.20))
+        add("slide keeper under both heads", 4.0, left=(locked, 0.20))
         add("settle retained keeper", 1.5)
     end = entry if mode == "unlocked" else locked
     if mode == "retention":
-        add("bounded upward retention probe", 2.0, right=(end + [0, 0, 0.008], 0.20))
+        add("bounded upward retention probe", 2.0, left=(end + [0, 0, 0.008], 0.20))
         add("hold retention probe", 2.0)
         return plan
-    add("release retaining plate", 0.8, right=(end, 0.85))
-    add("lift right hand from plate", 1.0, right=(end + [0, 0, 0.030], 0.85))
-    add("park right hand", 1.5, right=([0.15, -0.30, 0.95], 1.0))
+    add("release retaining plate", 0.8, left=(end, 0.85))
+    add("lift left hand from plate", 1.0, left=(end + [0, 0, 0.030], 0.85))
+    add("park left hand", 1.5, left=([0.15, 0.30, 0.95], 1.0))
     add("hold released retained joint", 3.0)
     return plan
 
@@ -207,7 +207,7 @@ class ScriptedPolicy(PolicyBase):
         )
         self.keeper_end = next(
             (
-                np.array(s["right"]["position"])
+                np.array(s["left"]["position"])
                 for s in self.plan
                 if s["phase"] == "release retaining plate"
             ),
@@ -341,7 +341,7 @@ class ScriptedPolicy(PolicyBase):
                 "slide keeper under both heads",
                 "settle retained keeper",
             }:
-                pos, rot, grip = targets["right"]
+                pos, rot, grip = targets["left"]
                 desired_body = pos - np.array([0, 0, 0.050])
                 desired_r = np.eye(3)
                 if self.phase not in {
@@ -353,14 +353,14 @@ class ScriptedPolicy(PolicyBase):
                     desired_body = c[:3] + desired_r @ (
                         desired_body - CONNECTOR_POSITION
                     )
-                hand = state["hands"]["right_robot"]
+                hand = state["hands"]["left_robot"]
                 tcp = np.array(hand["tcp"][:3])
                 body = np.array(state["keeper"]["pose"][:3])
                 body_r = quat_xyzw_to_matrix(np.array(state["keeper"]["pose"][3:]))
                 hp = hand["poses"][hand["names"].index("gripper")]
                 hand_r = quat_xyzw_to_matrix(np.array(hp[3:]))
                 relative_tcp = body_r.T @ (tcp - body)
-                targets["right"] = (
+                targets["left"] = (
                     desired_body + desired_r @ relative_tcp,
                     desired_r @ body_r.T @ hand_r,
                     grip,
@@ -368,10 +368,10 @@ class ScriptedPolicy(PolicyBase):
             if self.phase == "release retaining plate":
                 if self.release_position is None:
                     self.release_position = np.array(
-                        state["hands"]["right_robot"]["tcp"][:3]
+                        state["hands"]["left_robot"]["tcp"][:3]
                     )
-                _, rot, grip = targets["right"]
-                targets["right"] = (self.release_position, rot, grip)
+                _, rot, grip = targets["left"]
+                targets["left"] = (self.release_position, rot, grip)
             if self.phase == "release both bare chain ends":
                 if self.chain_release_positions is None:
                     self.chain_release_positions = {
@@ -392,50 +392,50 @@ class ScriptedPolicy(PolicyBase):
                             g,
                         )
                 elif self.phase in {
-                    "park left hand",
+                    "park right hand after joining",
                     "let chain settle onto backing",
                     "hold joined ends",
                 }:
-                    _, r, g = targets["right"]
-                    targets["right"] = (
-                        self.chain_release_positions["right"] + [0, 0, 0.065],
+                    _, r, g = targets["left"]
+                    targets["left"] = (
+                        self.chain_release_positions["left"] + [0, 0, 0.065],
                         r,
                         g,
                     )
-                    if self.phase == "park left hand":
-                        p, r, g = targets["left"]
-                        targets["left"] = (
+                    if self.phase == "park right hand after joining":
+                        p, r, g = targets["right"]
+                        targets["right"] = (
                             p
                             + (1 - f)
                             * (
-                                self.chain_release_positions["left"]
-                                - self.chain_seats["left"]
+                                self.chain_release_positions["right"]
+                                - self.chain_seats["right"]
                             ),
                             r,
                             g,
                         )
                 elif self.phase == "approach retaining plate":
-                    p, r, g = targets["right"]
-                    targets["right"] = (
+                    p, r, g = targets["left"]
+                    targets["left"] = (
                         p
                         + (1 - f)
                         * (
-                            self.chain_release_positions["right"]
-                            - self.chain_seats["right"]
+                            self.chain_release_positions["left"]
+                            - self.chain_seats["left"]
                         ),
                         r,
                         g,
                     )
             if self.release_position is not None:
-                p, r, g = targets["right"]
-                if self.phase == "lift right hand from plate":
-                    targets["right"] = (
+                p, r, g = targets["left"]
+                if self.phase == "lift left hand from plate":
+                    targets["left"] = (
                         self.release_position + [0, 0, 0.030 * self.stage_progress],
                         r,
                         g,
                     )
-                elif self.phase == "park right hand":
-                    targets["right"] = (
+                elif self.phase == "park left hand":
+                    targets["left"] = (
                         p
                         + (1 - self.stage_progress)
                         * (self.release_position - self.keeper_end),

@@ -1,0 +1,20 @@
+{
+  "scope": "Measured native CPU reference arm roles during keeper pickup/transport/insertion",
+  "source_sha256": "351312a14af87500a658f3be457e78ef7299ccfceeb72c9270c97db990a54cfc",
+  "keeper_initial_world_m": [
+    0.18000000715255737,
+    0.34999996423721313,
+    0.7514999508857727
+  ],
+  "reference_roles": {
+    "yellow_connector": "right arm",
+    "bare_chain_end_alignment": "both arms",
+    "blue_retaining_plate": "left arm"
+  },
+  "keeper_phase_tcp_path_m": {
+    "left": 1.0457624166621615,
+    "right": 6.209787697710701e-06
+  },
+  "right_arm_parked_during_keeper_phase": true,
+  "score": 1.0
+}

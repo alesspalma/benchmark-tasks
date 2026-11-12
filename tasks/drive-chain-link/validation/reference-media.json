@@ -1,17 +1,20 @@
 {
-  "scope": "Actual native camera frames, every initial/action frame preserved; spatial composition only",
-  "recorded_source_sha256": "658b7a84754d8bfadc6ee663ad66fd0c3e3657929dc75c26abd06cc5421b6bf4",
-  "current_source_sha256": "c71568e77f6205c443bb7deb8cb57ade82483f5fdb15323cb4e4d499770b01e6",
-  "source_equivalence": "validation/reference-controller-equivalence.json; all 1180 actions replay identically within 4.5e-12",
-  "native_trace_sha256": "f1f724b4aa2308f1e44c8bfc670f96f6c15cc31254010133c3933e813dc7f884",
-  "native_receipt_sha256": "38acf698b1dc551f27af0374fbc090be61b2507b05d16633bdcaec8311091c0b",
+  "scope": "Actual native cameras; all initial/action frames preserved; spatial composition only",
+  "source_sha256": "351312a14af87500a658f3be457e78ef7299ccfceeb72c9270c97db990a54cfc",
+  "source_unchanged": true,
   "native_score": 1.0,
   "steps": 1180,
   "physics_audits": 14160,
-  "no_paid_model_calls": true,
+  "native_receipt_sha256": "fc8e2e8b286eb05e4ea21d0e5badc523144778ee99103c11a8bf00e2102ea928",
+  "native_trace_sha256": "450304b3094711e97176c9cef20030819683674997816fbb00b7653e79014c76",
+  "reference_roles": {
+    "yellow_connector": "right",
+    "chain_end_joining": "both",
+    "blue_keeper": "left"
+  },
   "tracks": {
     "top_cam": {
-      "sha256": "9fcfcc1cd367eed662a2f2c3f26172b13710bd302efa6adf6edc377547a635cb",
+      "sha256": "c09cce2a4d2f0e85a6d6f88062d67c08c9dfa0e79ae0d3f0e6df16b4c4d49e9a",
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -27,15 +30,15 @@
           }
         ],
         "format": {
-          "size": "1136448"
+          "size": "1123562"
         }
       },
       "all_frames_decoded": 1181,
-      "minimum_frame_mean": 161.84375,
-      "minimum_frame_std": 54.38227342657011
+      "minimum_frame_mean": 155.8075810185185,
+      "minimum_frame_std": 55.12614836686993
     },
     "left_cam": {
-      "sha256": "8d9b6368156133c900d0bca5312a9aa1760132fa6f4e52fed84ba3c45e757746",
+      "sha256": "a9b440c3800f4900e29d951372292dff4d7761032dc62b55e60955d7d6f7f5a0",
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -51,15 +54,15 @@
           }
         ],
         "format": {
-          "size": "1046713"
+          "size": "1794456"
         }
       },
       "all_frames_decoded": 1181,
-      "minimum_frame_mean": 79.00361689814815,
-      "minimum_frame_std": 58.1726934627686
+      "minimum_frame_mean": 59.75969328703704,
+      "minimum_frame_std": 57.296678111981365
     },
     "right_cam": {
-      "sha256": "b2ed982279b6f0ee4c02186e35bf6b799d59ec9407b8a08f4a6a094e078011d6",
+      "sha256": "933ce45f3387b669aea2d56bf5ba7789cbbb689001b0bc8c39366c1598344081",
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -75,16 +78,16 @@
           }
         ],
         "format": {
-          "size": "2195086"
+          "size": "1453135"
         }
       },
       "all_frames_decoded": 1181,
-      "minimum_frame_mean": 112.20934606481481,
-      "minimum_frame_std": 50.32029811368349
+      "minimum_frame_mean": 89.01880787037037,
+      "minimum_frame_std": 59.03629543707819
     }
   },
-  "composition": "top 640x360 above left/right 320x180; 20fps; no overlays, generated frames, temporal edits or speed changes",
-  "demo_sha256": "34ff02d108329bd5a20ad205adaba084010d8f52e21c4fe4b09bedeb57965afc",
+  "composition": "640x360 overhead above two 320x180 wrist views; no overlays, generated frames, temporal edits or speed changes",
+  "demo_sha256": "dbb2cdff991b18f55d41316a142c4c7bf803c562b37083d810c474460e7168ac",
   "demo_probe": {
     "programs": [],
     "stream_groups": [],
@@ -100,9 +103,10 @@
       }
     ],
     "format": {
-      "size": "2920059"
+      "size": "2886875"
     }
   },
-  "setup_sha256": "7b78a39de7108dbce194dce32324be8ce0600aad1f43514fcfc11036d14bcd99",
-  "final_top_sha256": "f5bec69eadfaf5f9fab41664d5e975457f1da9a7daf7beb3dc276dca6b2a3d62"
+  "setup_sha256": "c165c8cab3487a756e57540ae9c7c78b032fb46b96421f89745c92adfc53d648",
+  "final_top_sha256": "4fa0f02fa542d1eef3f20a305b4992760bbdd4c2c81be69f0bf0dac6bd976c9f",
+  "dream_api_used": false
 }
