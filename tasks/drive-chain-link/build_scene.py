@@ -1,4 +1,4 @@
-"""Original physical chain and headed-pin keeper. No runtime snaps or attachments."""
+"""Unfinished compact chain drive, built from native physical primitives."""
 
 from pathlib import Path
 import json
@@ -18,6 +18,8 @@ def create_assets(directory):
         ROOT_YAW,
         SPROCKET_CENTERS,
         CONNECTOR_POSITION,
+        CRANK_RADIUS,
+        KEEPER_POSITION,
     )
 
     directory = Path(directory)
@@ -35,6 +37,11 @@ def create_assets(directory):
         api.CreateStaticFrictionAttr(0.65)
         api.CreateDynamicFrictionAttr(0.5)
         api.CreateRestitutionAttr(0)
+        if name in ("fixtures","chain","wheel0","wheel1"):
+            # Lubricated bearing/tooth contact and a low-friction service bed.
+            api.CreateStaticFrictionAttr(0.03)
+            api.CreateDynamicFrictionAttr(0.02)
+            PhysxSchema.PhysxMaterialAPI.Apply(mat.GetPrim()).CreateFrictionCombineModeAttr("min")
         return stage, mat
 
     def body(stage, path, mass, pos=(0, 0, 0), yaw=0):
@@ -229,60 +236,40 @@ def create_assets(directory):
     box(stage, mat, "/Connector/Body/Backing", (0.045, 0.140, 0.006), (0, 0, 0), orange)
     for n, y in enumerate((-PITCH / 2, PITCH / 2)):
         cylinder(
-            stage, mat, f"/Connector/Body/Stem{n}", 0.005, 0.040, (0, y, -0.023), grey
+            stage, mat, f"/Connector/Body/Stem{n}", 0.010, 0.032, (0, y, 0.019), grey
         )
         cylinder(
-            stage, mat, f"/Connector/Body/Head{n}", 0.012, 0.006, (0, y, -0.046), orange
+            stage, mat, f"/Connector/Body/Head{n}", 0.014, 0.004, (0, y, 0.037), orange
         )
-    box(
-        stage, mat, "/Connector/Body/Grip", (0.024, 0.030, 0.040), (0, 0, 0.024), orange
-    )
     for n, y in enumerate((-PITCH / 2, PITCH / 2)):
         cone(
             stage,
             mat,
             f"/Connector/Body/Lead{n}",
-            0.012,
-            0.008,
-            (0, y, -0.053),
+            0.014,
+            0.002,
+            (0, y, 0.040),
             orange,
-            direction=-1,
+            direction=1,
         )
     stage.GetRootLayer().Save()
 
     stage, mat = stage_at("keeper")
     body(stage, "/Keeper/Body", 0.075)
-    # Two side-entry forks admit the 8 mm stems below the 24 mm heads.
-    # The narrow outer outline clears the chain-end grip posts.
-    xs = [-0.040, -0.026, 0.040]
-    ys = [-0.064, -0.060, -0.040, 0.040, 0.060, 0.064]
+    # Compact retaining plate: no permanent lever or extended handle.
+    xs = [-0.022, -0.020, 0.022]
+    ys = [-0.068, -0.062, -0.038, 0.038, 0.062, 0.068]
     n = 0
     for xa, xb in zip(xs[:-1], xs[1:]):
         for ya, yb in zip(ys[:-1], ys[1:]):
             x, y = (xa + xb) / 2, (ya + yb) / 2
-            empty = any(
-                -0.026 < x and abs(y - center) < 0.010
-                for center in (-PITCH / 2, PITCH / 2)
-            )
+            empty = x > -0.020 and any(abs(y - c) < 0.012 for c in (-PITCH/2, PITCH/2))
             if not empty:
-                box(
-                    stage,
-                    mat,
-                    f"/Keeper/Body/Cell{n:02}",
-                    (xb - xa, yb - ya, 0.012),
-                    (x, y, 0),
-                    blue,
-                )
+                box(stage, mat, f"/Keeper/Body/Cell{n:02}",
+                    (xb-xa, yb-ya, 0.006), (x, y, 0), blue)
                 n += 1
-    box(
-        stage,
-        mat,
-        "/Keeper/Body/HandleBridge",
-        (0.024, 0.100, 0.008),
-        (0, 0.110, 0),
-        blue,
-    )
-    box(stage, mat, "/Keeper/Body/Grip", (0.024, 0.030, 0.070), (0, 0.140, 0.035), blue)
+    # Short in-plane installation tab, within the circulation clearance.
+    box(stage,mat,"/Keeper/Body/GripTab",(0.028,0.024,0.006),(-0.036,0,0),blue)
     stage.GetRootLayer().Save()
 
     stage, mat = stage_at("fixtures")
@@ -321,118 +308,40 @@ def create_assets(directory):
                 (x, y, (DECK_TOP - 0.012 + TABLE_TOP) / 2),
                 dark,
             )
+    # Fixed upper guides clear the compact connector and retain the chain plane.
+    # The front service window admits the connector and the horizontal keeper grip.
     for n, (x, y) in enumerate(SPROCKET_CENTERS):
-        cylinder(
-            stage,
-            mat,
-            f"/Fixtures/Wheel{n}Shaft",
-            0.022,
-            CHAIN_Z - DECK_TOP,
-            (x, y, (CHAIN_Z + DECK_TOP) / 2),
-            orange,
-        )
-        cylinder(
-            stage, mat, f"/Fixtures/Wheel{n}Hub", 0.065, 0.012, (x, y, CHAIN_Z), dark
-        )
-        for tooth in range(6):
-            angle = tooth * math.tau / 6
-            box(
-                stage,
-                mat,
-                f"/Fixtures/Wheel{n}Tooth{tooth}",
-                (0.050, 0.032, 0.012),
-                (x + 0.090 * math.cos(angle), y + 0.090 * math.sin(angle), CHAIN_Z),
-                grey,
-                angle,
-            )
-        # A visible rim keeps the chain on its working plane. The first wheel
-        # has a service window at the missing connecting link.
         for sector in range(48):
             angle = (sector + 0.5) * math.tau / 48
             if n == 0 and 120 < math.degrees(angle) < 240:
                 continue
-            box(
-                stage,
-                mat,
-                f"/Fixtures/Wheel{n}Guide{sector}",
-                (0.016, 0.017, 0.006),
-                (
-                    x + 0.124 * math.cos(angle),
-                    y + 0.124 * math.sin(angle),
-                    CHAIN_Z + 0.025,
-                ),
-                orange,
-                angle,
-            )
-        # Three radial supports connect the guide rim to the hub. They pass
-        # above the chain, with a 1 mm gap over the pin caps.
-        for spoke in range(3):
-            angle = spoke * math.tau / 3
-            if n == 0 and 120 <= math.degrees(angle) <= 240:
+            box(stage, mat, f"/Fixtures/Wheel{n}Guide{sector}",
+                (0.010, 0.017, 0.006),
+                (x+0.124*math.cos(angle), y+0.124*math.sin(angle), CHAIN_Z+0.040),
+                orange, angle)
+        # Supports approach from outside the chain; none crosses a rotating shaft.
+        for side in (-1,1):
+            box(stage,mat,f"/Fixtures/GuidePost{n}_{side+1}",
+                (0.018,0.018,CHAIN_Z+0.040-DECK_TOP),
+                (x,y+side*0.170,(CHAIN_Z+0.040+DECK_TOP)/2),dark)
+            box(stage,mat,f"/Fixtures/GuideBridge{n}_{side+1}",
+                (0.018,0.055,0.006),(x,y+side*0.147,CHAIN_Z+0.040),orange)
+    # Passive continuous side guides replace the obstructing end-holder channels.
+    for n, (x, y) in enumerate(SPROCKET_CENTERS):
+        for sector in range(48):
+            angle = (sector + 0.5) * math.tau / 48
+            outer = math.cos(angle) < 0 if n == 0 else math.cos(angle) > 0
+            service = n == 0 and 145 < math.degrees(angle) < 215
+            if not outer or service:
                 continue
-            box(
-                stage,
-                mat,
-                f"/Fixtures/Wheel{n}GuideSupport{spoke}",
-                (0.120, 0.009, 0.006),
-                (
-                    x + 0.065 * math.cos(angle),
-                    y + 0.065 * math.sin(angle),
-                    CHAIN_Z + 0.025,
-                ),
-                orange,
-                angle,
-            )
-        cylinder(
-            stage,
-            mat,
-            f"/Fixtures/Wheel{n}TopHub",
-            0.025,
-            0.030,
-            (x, y, CHAIN_Z + 0.010),
-            orange,
-        )
-    # Real service-holder channels keep the two free ends aligned while the
-    # missing link is inserted. The underside remains open for the keeper.
-    for end, (a, b, inner) in enumerate(
-        ((NODES[0], NODES[1], NODES[1]), (NODES[-2], NODES[-1], NODES[-2]))
-    ):
-        midpoint = (a + b) / 2
-        angle = math.atan2((b - a)[1], (b - a)[0])
-        normal = np.array([-math.sin(angle), math.cos(angle), 0.0])
-        low, high = CHAIN_Z - 0.011, CHAIN_Z + 0.004
-        for side in (-1, 1):
-            q = midpoint + side * 0.026 * normal
-            box(
-                stage,
-                mat,
-                f"/Fixtures/EndHolder{end}Rail{side + 1}",
-                (0.100, 0.004, high - low),
-                (q[0], q[1], (low + high) / 2),
-                dark,
-                angle,
-            )
-            q = inner + side * 0.034 * normal
-            box(
-                stage,
-                mat,
-                f"/Fixtures/EndHolder{end}Post{side + 1}",
-                (0.012, 0.012, high - DECK_TOP),
-                (q[0], q[1], (DECK_TOP + high) / 2),
-                dark,
-                angle,
-            )
-            q = inner + side * 0.030 * normal
-            box(
-                stage,
-                mat,
-                f"/Fixtures/EndHolder{end}Bridge{side + 1}",
-                (0.012, 0.020, 0.004),
-                (q[0], q[1], high - 0.002),
-                dark,
-                angle,
-            )
-    # Connector pickup stand: supports its backing while downward pins hang free.
+            box(stage, mat, f"/Fixtures/SideGuide{n}_{sector}",
+                (0.006, 0.018, 0.040),
+                (x+0.130*math.cos(angle), y+0.130*math.sin(angle), CHAIN_Z-0.010),
+                dark, angle)
+    for side in (-1, 1):
+        box(stage, mat, f"/Fixtures/StraightGuide{side+1}",
+            (0.30, 0.006, 0.040), (0.45, side*0.130, CHAIN_Z-0.010), dark)
+    # Connector pickup stand: leaves room to grip the backing from the side.
     x, y, z = CONNECTOR_POSITION
     for i, dy in enumerate((-0.069, 0.069)):
         height = z - 0.003 - TABLE_TOP
@@ -444,19 +353,77 @@ def create_assets(directory):
             (x, y + dy, TABLE_TOP + height / 2),
             dark,
         )
-    box(
-        stage,
-        mat,
-        "/Fixtures/KeeperHandleRest",
-        (0.050, 0.030, DECK_TOP - TABLE_TOP),
-        (0.18, 0.30, (DECK_TOP + TABLE_TOP) / 2),
-        dark,
-    )
+    # Pickup stand leaves the underside accessible to a horizontal plate grip.
+    for side in (-1, 1):
+        box(stage, mat, f"/Fixtures/KeeperStand{side+1}",
+            (0.040, 0.012, KEEPER_POSITION[2]-0.003-TABLE_TOP),
+            (KEEPER_POSITION[0], KEEPER_POSITION[1]+side*0.059, (KEEPER_POSITION[2]-0.003+TABLE_TOP)/2), dark)
     stage.GetRootLayer().Save()
+    # Two native passive axles. Only contact with the chain/crank can turn them.
+    for n in range(2):
+        stage, mat = stage_at(f"wheel{n}")
+        root = f"/Wheel{n}"
+        UsdPhysics.ArticulationRootAPI.Apply(stage.GetPrimAtPath(root))
+        api = PhysxSchema.PhysxArticulationAPI.Apply(stage.GetPrimAtPath(root))
+        api.CreateEnabledSelfCollisionsAttr(False)
+        api.CreateSolverPositionIterationCountAttr(32)
+        api.CreateSolverVelocityIterationCountAttr(8)
+        body(stage, root+"/Base", 1.0)
+        base_mass = UsdPhysics.MassAPI(stage.GetPrimAtPath(root+"/Base"))
+        base_mass.CreateCenterOfMassAttr(Gf.Vec3f(0,0,0))
+        base_mass.CreateDiagonalInertiaAttr(Gf.Vec3f(0.001,0.001,0.001))
+        cylinder(stage, mat, root+"/Base/Shaft", 0.020, CHAIN_Z-DECK_TOP,
+                 (0, 0, -(CHAIN_Z-DECK_TOP)/2), dark)
+        fixed = UsdPhysics.FixedJoint.Define(stage, root+"/Mount")
+        fixed.CreateBody1Rel().SetTargets([root+"/Base"])
+        body(stage, root+"/Rotor", 0.30)
+        rotor_mass = UsdPhysics.MassAPI(stage.GetPrimAtPath(root+"/Rotor"))
+        rotor_mass.CreateCenterOfMassAttr(Gf.Vec3f(0,0,0))
+        rotor_mass.CreateDiagonalInertiaAttr(Gf.Vec3f(0.002,0.002,0.003))
+        cylinder(stage, mat, root+"/Rotor/Hub", 0.065, 0.012, (0, 0, 0), dark)
+        for tooth in range(6):
+            angle = tooth*math.tau/6
+            cylinder(stage,mat,root+f"/Rotor/Tooth{tooth}",0.038,0.012,
+                (0.0866025403784*math.cos(angle),0.0866025403784*math.sin(angle),0),grey)
+        cylinder(stage, mat, root+"/Rotor/Spindle", 0.017, 0.040, (0,0,0.017), orange)
+        box(stage, mat, root+"/Rotor/Marker", (0.050,0.012,0.008),
+            (0.028,0,0.040), orange if n == 0 else blue)
+        if n == 0:
+            box(stage, mat, root+"/Rotor/CrankArm", (CRANK_RADIUS+0.018,0.018,0.010),
+                (CRANK_RADIUS/2,0,0.040), orange)
+            body(stage,root+"/Knob",0.025,(CRANK_RADIUS,0,0.066))
+            cylinder(stage,mat,root+"/Knob/Grip",0.012,0.036,(0,0,0),orange)
+            bearing=UsdPhysics.RevoluteJoint.Define(stage,root+"/KnobBearing")
+            bearing.CreateBody0Rel().SetTargets([root+"/Rotor"])
+            bearing.CreateBody1Rel().SetTargets([root+"/Knob"])
+            bearing.CreateLocalPos0Attr(Gf.Vec3f(CRANK_RADIUS,0,0.066))
+            bearing.CreateLocalPos1Attr(Gf.Vec3f(0,0,0))
+            bearing.CreateAxisAttr("Z")
+            bearing.CreateLowerLimitAttr(-3600)
+            bearing.CreateUpperLimitAttr(3600)
+            bearing.CreateCollisionEnabledAttr(False)
+            PhysxSchema.PhysxJointAPI.Apply(bearing.GetPrim()).CreateJointFrictionAttr(0.00001)
+            inventory.append(dict(asset=f"wheel{n}",joint="KnobBearing",axis="Z",
+                limits_deg=[-3600,3600],parent=root+"/Rotor",child=root+"/Knob"))
+        joint = UsdPhysics.RevoluteJoint.Define(stage, root+"/Axle")
+        joint.CreateBody0Rel().SetTargets([root+"/Base"])
+        joint.CreateBody1Rel().SetTargets([root+"/Rotor"])
+        joint.CreateLocalPos0Attr(Gf.Vec3f(0,0,0))
+        joint.CreateLocalPos1Attr(Gf.Vec3f(0,0,0))
+        joint.CreateLocalRot0Attr(Gf.Quatf(1))
+        joint.CreateLocalRot1Attr(Gf.Quatf(1))
+        joint.CreateAxisAttr("Z")
+        joint.CreateLowerLimitAttr(-3600)
+        joint.CreateUpperLimitAttr(3600)
+        joint.CreateCollisionEnabledAttr(False)
+        PhysxSchema.PhysxJointAPI.Apply(joint.GetPrim()).CreateJointFrictionAttr(0.0001)
+        inventory.append(dict(asset=f"wheel{n}",joint="Axle",axis="Z",limits_deg=[-3600,3600],
+                              parent=root+"/Base",child=root+"/Rotor"))
+        stage.GetRootLayer().Save()
     (directory / "geometry-inventory.json").write_text(
         json.dumps(inventory, indent=2) + "\n"
     )
     return {
         n: directory / (n + ".usda")
-        for n in ("chain", "connector", "keeper", "fixtures")
+        for n in ("chain", "connector", "keeper", "fixtures", "wheel0", "wheel1")
     }

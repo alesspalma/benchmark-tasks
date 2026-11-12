@@ -1,9 +1,10 @@
 {
   "scope": "Offline USD/schema structure only; no physics or feasibility claim",
+  "hostname": "tengu",
   "assets": [
     {
       "file": "chain.usda",
-      "sha256": "52221bc7d08fe29c8fe16157348680d0202c87d353261731250700ff92ef94d7",
+      "sha256": "db7f806d09db588d40141ae76a6fe61c71933b09f27e88e9b7953b27f388dfa1",
       "errors": [],
       "failed_checks": [],
       "joints": [
@@ -82,7 +83,7 @@
     },
     {
       "file": "connector.usda",
-      "sha256": "18582ee5617c354639a99fe7e3ac229ec727a9fd62924efb31c42a0306648835",
+      "sha256": "9c39aac6e44d242f7cfc2ec332c62a6a4c957b0df4ca6f3dff458e5938994bcb",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -90,7 +91,7 @@
     },
     {
       "file": "keeper.usda",
-      "sha256": "928ab1575018b0e7f6d34feb5764882d1656a6d5af2b909d95cbbab89647e348",
+      "sha256": "8864d2d5340176e6c1c5be84a8c0c909365ee011a5f54e7d873ee255043237db",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -98,10 +99,61 @@
     },
     {
       "file": "fixtures.usda",
-      "sha256": "36f9f6e3e9b393446ece04ac957d45e75b13756ace47f9bede813a49c13e7845",
+      "sha256": "3ecc7641f8f7edfd10c6cb1bf9ab8dd2d1c9363aad99988d85c6ecb3bf8ab792",
       "errors": [],
       "failed_checks": [],
       "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "wheel0.usda",
+      "sha256": "8146eb08025251432f086d61123ca556251c602c9aede4d1b99587bfcc959390",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [
+        {
+          "path": "/Wheel0/Mount",
+          "bodies": [
+            "/Wheel0/Base"
+          ]
+        },
+        {
+          "path": "/Wheel0/KnobBearing",
+          "bodies": [
+            "/Wheel0/Rotor",
+            "/Wheel0/Knob"
+          ]
+        },
+        {
+          "path": "/Wheel0/Axle",
+          "bodies": [
+            "/Wheel0/Base",
+            "/Wheel0/Rotor"
+          ]
+        }
+      ],
+      "structure_passed": true
+    },
+    {
+      "file": "wheel1.usda",
+      "sha256": "eb7d0794f6857bd27a0cba81239d06f2d04bd22c46364576aaf4959a5e6378c1",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [
+        {
+          "path": "/Wheel1/Mount",
+          "bodies": [
+            "/Wheel1/Base"
+          ]
+        },
+        {
+          "path": "/Wheel1/Axle",
+          "bodies": [
+            "/Wheel1/Base",
+            "/Wheel1/Rotor"
+          ]
+        }
+      ],
       "structure_passed": true
     }
   ]

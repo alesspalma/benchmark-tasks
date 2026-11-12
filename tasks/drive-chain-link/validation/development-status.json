@@ -1,0 +1,31 @@
+{
+  "status": "unfinished; feasibility not achieved",
+  "source_sha256": "08a7398ff887c59c3c2752a07f0169f8cdcfa41d18d868b8592f95bca148284f",
+  "submission_ready": false,
+  "full_score_demo": false,
+  "matching_model_episode": false,
+  "paid_episodes_for_revision": 0,
+  "unit_tests": {
+    "passed": 15,
+    "scope": "failure gates and fork geometry only"
+  },
+  "usd_structure": {
+    "passed": true,
+    "assets": 6,
+    "scope": "offline schemas and joint target structure only"
+  },
+  "offline_reference_ik": {
+    "passed": false,
+    "phase": "approach hand crank",
+    "error_m": 0.00428,
+    "tolerance_m": 0.003
+  },
+  "native_development": {
+    "scope": "exploratory preassembled mechanism probes; not source-bound robot feasibility evidence",
+    "isolated_driver": "turns freely",
+    "open_chain": "moves and drives follower",
+    "closed_chain": "binds after small rotation",
+    "final_pitch_adjustment": "produced nonfinite physics and was reverted"
+  },
+  "further_work": "Resolve closed-link binding and retention, correct the approach, then obtain full robot and rendered validation before any paid evaluation."
+}

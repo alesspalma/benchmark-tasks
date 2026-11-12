@@ -1,29 +1,20 @@
-test_heads_blocked_but_stems_fit (test_scoring.PhysicalForkTests.test_heads_blocked_but_stems_fit) ... ok
-test_two_stems_can_slide_from_open_edges (test_scoring.PhysicalForkTests.test_two_stems_can_slide_from_open_edges) ... ok
-test_all_links_must_settle (test_scoring.RepairTests.test_all_links_must_settle) ... ok
-test_both_ends_without_keeper_only_partial (test_scoring.RepairTests.test_both_ends_without_keeper_only_partial) ... ok
-test_chain_derailed_from_one_wheel_is_zero (test_scoring.RepairTests.test_chain_derailed_from_one_wheel_is_zero) ... ok
-test_chain_not_on_pitch_seats_fails (test_scoring.RepairTests.test_chain_not_on_pitch_seats_fails) ... ok
-test_closed_loop_lifted_above_sprockets_gets_zero (test_scoring.RepairTests.test_closed_loop_lifted_above_sprockets_gets_zero) ... ok
-test_each_hand_must_open (test_scoring.RepairTests.test_each_hand_must_open) ... ok
-test_either_end_missing_is_zero (test_scoring.RepairTests.test_either_end_missing_is_zero) ... ok
-test_escape_violation_permanent (test_scoring.RepairTests.test_escape_violation_permanent) ... ok
-test_hold_restarts_after_contact (test_scoring.RepairTests.test_hold_restarts_after_contact) ... ok
-test_invalid_state_fails_closed (test_scoring.RepairTests.test_invalid_state_fails_closed) ... ok
-test_inverted_keeper_rejected (test_scoring.RepairTests.test_inverted_keeper_rejected) ... ok
-test_joint_assembled_off_the_sprockets_gets_zero (test_scoring.RepairTests.test_joint_assembled_off_the_sprockets_gets_zero) ... ok
-test_keeper_at_slot_mouth_not_full (test_scoring.RepairTests.test_keeper_at_slot_mouth_not_full) ... ok
-test_keeper_under_heads_or_above_chain_rejected (test_scoring.RepairTests.test_keeper_under_heads_or_above_chain_rejected) ... ok
-test_real_closed_routed_loop_passes_after_hold (test_scoring.RepairTests.test_real_closed_routed_loop_passes_after_hold) ... ok
-test_routed_but_disconnected_reset_is_zero (test_scoring.RepairTests.test_routed_but_disconnected_reset_is_zero) ... ok
-test_score_does_not_keep_past_success (test_scoring.RepairTests.test_score_does_not_keep_past_success) ... ok
-test_self_crossing_and_folded_loops_rejected (test_scoring.RepairTests.test_self_crossing_and_folded_loops_rejected) ... ok
-test_small_irrelevant_routing_offset_is_allowed (test_scoring.RepairTests.test_small_irrelevant_routing_offset_is_allowed) ... ok
-test_state_not_mutated (test_scoring.RepairTests.test_state_not_mutated) ... ok
-test_stems_at_closed_slot_ends_are_valid (test_scoring.RepairTests.test_stems_at_closed_slot_ends_are_valid) ... ok
-test_whole_robot_must_clear (test_scoring.RepairTests.test_whole_robot_must_clear) ... ok
+test_stems_fit_and_heads_are_blocked_at_both_closed_ends (test_scoring.CompactKeeperGeometry.test_stems_fit_and_heads_are_blocked_at_both_closed_ends) ... ok
+test_break_discards_previous_movement_history (test_scoring.FunctionalScoreGates.test_break_discards_previous_movement_history) ... ok
+test_closed_joint_off_wheels_is_zero (test_scoring.FunctionalScoreGates.test_closed_joint_off_wheels_is_zero) ... ok
+test_crossing_and_backtracking_are_rejected (test_scoring.FunctionalScoreGates.test_crossing_and_backtracking_are_rejected) ... ok
+test_disconnected_motion_does_not_count (test_scoring.FunctionalScoreGates.test_disconnected_motion_does_not_count) ... ok
+test_either_missing_end_is_zero (test_scoring.FunctionalScoreGates.test_either_missing_end_is_zero) ... ok
+test_escape_permanently_fails (test_scoring.FunctionalScoreGates.test_escape_permanently_fails) ... ok
+test_evaluation_does_not_mutate_input (test_scoring.FunctionalScoreGates.test_evaluation_does_not_mutate_input) ... ok
+test_invalid_state_permanently_fails (test_scoring.FunctionalScoreGates.test_invalid_state_permanently_fails) ... ok
+test_keeper_in_slot_mouth_is_not_retained (test_scoring.FunctionalScoreGates.test_keeper_in_slot_mouth_is_not_retained) ... ok
+test_missing_keeper_is_only_partial (test_scoring.FunctionalScoreGates.test_missing_keeper_is_only_partial) ... ok
+test_reset_clears_movement_history (test_scoring.FunctionalScoreGates.test_reset_clears_movement_history) ... ok
+test_reset_layout_is_zero (test_scoring.FunctionalScoreGates.test_reset_layout_is_zero) ... ok
+test_spinning_axles_without_chain_travel_never_completes (test_scoring.FunctionalScoreGates.test_spinning_axles_without_chain_travel_never_completes) ... ok
+test_stationary_repair_is_only_partial_even_after_two_minutes (test_scoring.FunctionalScoreGates.test_stationary_repair_is_only_partial_even_after_two_minutes) ... ok
 
 ----------------------------------------------------------------------
-Ran 24 tests in 0.486s
+Ran 15 tests in 0.855s
 
 OK

@@ -27,6 +27,8 @@ from .config import (
     ROOT_QUATERNION,
     CONNECTOR_POSITION,
     KEEPER_POSITION,
+    SPROCKET_CENTERS,
+    CHAIN_Z,
 )
 from .geometry import local_solids, world_points, robot_clearance
 from .scoring import Scorer
@@ -91,9 +93,9 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 (
                     JOINT_GUIDE,
                     ROOM_DOCS["station"],
-                    "An open drive chain rests on two locked toothed sprockets. The orange connector "
+                    "An open drive chain rests on two freely rotating toothed sprockets. The orange connector "
                     "rests on a pickup stand to the right. "
-                    "A blue forked retaining plate lies to the left. Leave the chain routed on both sprockets. All hardware is unpowered.",
+                    "A compact blue forked retaining plate lies to the left. The front sprocket has a hand crank. All hardware is unpowered.",
                 )
             ),
             environment_id="chain-link-" + source_fingerprint()[:16],
@@ -205,6 +207,14 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 initial_pose=Pose(),
             ),
         ]
+        objects += [
+            Object(
+                name=f"wheel{n}", object_type=ObjectType.ARTICULATION,
+                usd_path=str(assets[f"wheel{n}"]),
+                initial_pose=Pose(position_xyz=(float(x),float(y),CHAIN_Z)),
+            )
+            for n,(x,y) in enumerate(SPROCKET_CENTERS)
+        ]
         all_objects = [*task_room("station", self.rig.top_cam), *objects]
         # Arena mutates init_state when applying a pose. Supply a separate
         # supported configuration object to each asset, avoiding shared defaults.
@@ -224,6 +234,9 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
             from isaaclab_physx.physics.physx_manager_cfg import PhysxCfg
 
             cfg = env_cfg_callback(CONTROL_HZ)(cfg)
+            # Use the standard PhysX actuator path. Empty passive actuator groups
+            # must not enter the optional Newton actuator wrapper.
+            cfg.sim.use_newton_actuators = False
             if self.physics_device == "cpu":
                 cfg.sim.use_fabric = False
             # Capacity settings only: avoid reserving multi-environment buffers
@@ -283,7 +296,20 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                     for n in ("connector", "keeper")
                 }
             )
+            wheel_states = {}
+            for n in range(2):
+                wheel = self._base.scene[f"wheel{n}"]
+                wp = numpy(wheel.root_view.get_link_transforms())[0]
+                poses.update({f"wheel{n}:"+name:p for name,p in zip(wheel.body_names,wp)})
+                wheel_states[f"wheel{n}"] = float(numpy(wheel.root_view.get_dof_positions())[0,0])
             self.scorer.observe_physics(world_points(self._local, poses))
+            self.scorer.observe_motion({
+                "time_s":self.scorer.physics_samples/240,
+                "bodies": {n:{"pose":p} for n,p in zip(chain.body_names,transforms)},
+                "connector":{"pose":poses["connector:Body"]},
+                "keeper":{"pose":poses["keeper:Body"]},
+                "wheel_angles":wheel_states,
+            })
         except Exception as exc:
             self._audit_error = exc
 
@@ -296,6 +322,12 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
         q = q.torch if hasattr(q, "torch") else q
         zeros = self._torch.zeros(q.shape, dtype=q.dtype, device=q.device)
         chain.write_joint_state_to_sim_index(position=zeros, velocity=zeros)
+        for n in range(2):
+            wheel = self._base.scene[f"wheel{n}"]
+            q = wheel.data.joint_pos
+            q = q.torch if hasattr(q,"torch") else q
+            zero = self._torch.zeros(q.shape,dtype=q.dtype,device=q.device)
+            wheel.write_joint_state_to_sim_index(position=zero,velocity=zero)
         self._instruction = scene.instruction
         for _ in range(10):
             self._env.step(self._ready)
@@ -370,6 +402,17 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 "pose": numpy(obj.data.root_link_pose_w)[0].tolist(),
                 "velocity": numpy(obj.data.root_com_vel_w)[0].tolist(),
             }
+        result["wheel_angles"] = {}
+        result["wheels"] = {}
+        for n in range(2):
+            wheel = self._base.scene[f"wheel{n}"]
+            wp = numpy(wheel.data.body_link_pose_w)[0]
+            wv = numpy(wheel.data.body_com_vel_w)[0]
+            result["wheel_angles"][f"wheel{n}"] = float(numpy(wheel.root_view.get_dof_positions())[0,0])
+            result["wheels"][f"wheel{n}"] = {
+                name:{"pose":p.tolist(),"velocity":v.tolist()}
+                for name,p,v in zip(wheel.body_names,wp,wv)
+            }
         for n in ARMS:
             robot = self._base.scene[n]
             q = numpy(robot.data.joint_pos)[0]
@@ -385,6 +428,7 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
             {
                 **{"chain:" + n: v["pose"] for n, v in result["bodies"].items()},
                 **{n + ":Body": result[n]["pose"] for n in ("connector", "keeper")},
+                **{wheel+":"+n:v["pose"] for wheel,parts in result["wheels"].items() for n,v in parts.items()},
             },
         )
         result["bounds"] = {

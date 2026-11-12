@@ -102,280 +102,141 @@
     "top_z_m": 0.7475,
     "material": "nominal wood top"
   },
+  "status": "Unfinished functional-drive revision; no full-score feasibility claim",
   "chain": {
-    "type": "open eleven-link articulated training chain, with a missing twelfth connecting link",
+    "type": "eleven-link open rigid training chain, missing twelfth link",
+    "pitch_m": 0.1,
     "node_positions_world_m": [
       [
         0.21339745962155612,
         -0.05,
-        0.858
+        0.9
       ],
       [
         0.3,
         -0.1,
-        0.858
+        0.9
       ],
       [
         0.4,
         -0.1,
-        0.858
+        0.9
       ],
       [
         0.5,
         -0.1,
-        0.858
+        0.9
       ],
       [
         0.6,
         -0.1,
-        0.858
+        0.9
       ],
       [
         0.6866025403784438,
         -0.05,
-        0.858
+        0.9
       ],
       [
         0.6866025403784438,
         0.05,
-        0.858
+        0.9
       ],
       [
         0.6,
         0.1,
-        0.858
+        0.9
       ],
       [
         0.5,
         0.1,
-        0.858
+        0.9
       ],
       [
         0.4,
         0.1,
-        0.858
+        0.9
       ],
       [
         0.3,
         0.1,
-        0.858
+        0.9
       ],
       [
         0.21339745962155612,
         0.05,
-        0.858
+        0.9
       ]
     ],
-    "root_body": "Link00",
-    "root_position_m": [
-      0.25669872981077807,
-      -0.07500000000000001,
-      0.858
-    ],
-    "root_quaternion_xyzw": [
-      0.0,
-      0.0,
-      -0.2588190451025208,
-      0.9659258262890683
-    ],
-    "pitch_m": 0.1,
-    "hinges": 10,
-    "hinge_limits_deg": [
-      -150,
-      150
-    ],
-    "joint_reset_positions_rad": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "inner_plate_centres_z_m": [
-      -0.01,
-      0.01
-    ],
-    "outer_plate_centres_z_m": [
-      -0.015,
-      0.015
-    ],
-    "plate_height_m": 0.004,
-    "hinge_pin_diameter_m": 0.02,
-    "hinge_pin_height_m": 0.034,
-    "pin_cap_diameter_m": 0.036,
-    "pin_cap_height_m": 0.004,
     "inner_link_mass_kg": 0.05,
     "outer_link_mass_kg": 0.08,
-    "material": "nominal printed polymer links, rollers and caps; ideal native revolute bearings"
+    "plates": "paired 4mm plates at +/-10mm on inner links, +/-15mm on outer links",
+    "hinges": 10,
+    "material": "nominal polymer links with lubricated bearings"
   },
   "sprockets": {
-    "type": "two fixed six-tooth sprockets, shafts locked for service",
-    "centres_xy_m": [
+    "centres_world_m": [
       [
         0.3,
-        0.0
+        0.0,
+        0.9
       ],
       [
         0.6,
-        0.0
+        0.0,
+        0.9
       ]
     ],
-    "pitch_radius_m": 0.1,
-    "plane_z_m": 0.858,
+    "nominal_pitch_radius_m": 0.1,
+    "teeth_per_wheel": 6,
+    "rounded_tooth_radius_m": 0.038,
+    "tooth_centre_radius_m": 0.0866025403784,
+    "tooth_height_m": 0.012,
     "hub_radius_m": 0.065,
-    "tooth_size_m": [
-      0.05,
-      0.032,
-      0.012
-    ],
-    "tooth_radial_centre_m": 0.09,
-    "upper_guide_radius_centre_m": 0.124,
-    "upper_guide_radial_width_m": 0.016,
-    "upper_guide_height_m": 0.006,
-    "upper_guide_centre_z_m": 0.883,
-    "left_service_window_deg": [
-      120,
-      240
-    ],
-    "material": "nominal rigid metal/polymer service rig",
-    "scored_seat_positions_xy_m": [
-      [
-        [
-          0.3,
-          0.1
-        ],
-        [
-          0.2133974596215561,
-          0.049999999999999996
-        ],
-        [
-          0.21339745962155612,
-          -0.05000000000000002
-        ],
-        [
-          0.3,
-          -0.1
-        ]
-      ],
-      [
-        [
-          0.6,
-          -0.1
-        ],
-        [
-          0.6866025403784438,
-          -0.049999999999999996
-        ],
-        [
-          0.6866025403784438,
-          0.049999999999999996
-        ],
-        [
-          0.6,
-          0.1
-        ]
-      ]
-    ]
+    "rotor_mass_kg": 0.3,
+    "native_axles": "passive Z revolute, +/-3600 degrees",
+    "crank_radius_m": 0.035,
+    "crank_knob_z_m": 0.966,
+    "material": "nominal metal, lubricated"
   },
   "connector": {
-    "type": "free missing connecting link with two downward headed pins",
-    "initial_position_m": [
-      0.175,
-      -0.32,
-      0.873
+    "position_m": [
+      0.3,
+      -0.26,
+      0.95
     ],
-    "target_position_m": [
-      0.21339745962155612,
-      0.0,
-      0.873
-    ],
-    "quaternion_xyzw": [
+    "rotation_xyzw": [
       0,
       0,
       0,
       1
     ],
     "mass_kg": 0.2,
+    "installed_position_m": [
+      0.21339745962155612,
+      0.0,
+      0.885
+    ],
     "backing_size_m": [
       0.045,
       0.14,
       0.006
     ],
-    "pin_diameter_m": 0.01,
-    "pin_height_m": 0.04,
-    "pin_centres_local_m": [
-      [
-        0,
-        -0.05,
-        -0.023
-      ],
-      [
-        0,
-        0.05,
-        -0.023
-      ]
-    ],
-    "head_diameter_m": 0.024,
-    "head_height_m": 0.006,
-    "head_centres_local_m": [
-      [
-        0,
-        -0.05,
-        -0.046
-      ],
-      [
-        0,
-        0.05,
-        -0.046
-      ]
-    ],
-    "lead_in_cones": {
-      "radius_m": 0.012,
-      "height_m": 0.008,
-      "centres_local_m": [
-        [
-          0,
-          -0.05,
-          -0.053
-        ],
-        [
-          0,
-          0.05,
-          -0.053
-        ]
-      ],
-      "direction_z": -1
-    },
-    "grip_size_m": [
-      0.024,
-      0.03,
-      0.04
-    ],
-    "grip_center_m": [
-      0,
-      0,
-      0.024
-    ],
-    "reference_grasp_offset_m": [
-      0.0,
-      0.0,
-      0.018
-    ],
-    "material": "nominal polymer backing and handle, metal connector pins"
+    "upward_stem_radius_m": 0.01,
+    "upward_stem_length_m": 0.032,
+    "head_radius_m": 0.014,
+    "head_height_m": 0.004,
+    "lead_height_m": 0.002,
+    "material": "nominal metal, orange backing",
+    "handle": "none"
   },
   "keeper": {
-    "type": "free underside fork keeper with extended handle",
-    "initial_position_m": [
+    "position_m": [
       0.18,
-      0.16,
-      0.843
+      0.2,
+      0.917
     ],
-    "quaternion_xyzw": [
+    "rotation_xyzw": [
       0,
       0,
       0,
@@ -383,97 +244,49 @@
     ],
     "mass_kg": 0.075,
     "plate_size_m": [
-      0.08,
-      0.128,
-      0.012
+      0.044,
+      0.136,
+      0.006
     ],
-    "slot_x_bounds_m": [
-      -0.026,
-      0.04
-    ],
-    "slot_centres_y_m": [
-      -0.05,
-      0.05
-    ],
-    "slot_width_m": 0.02,
-    "open_side": "+x",
-    "handle_bridge_size_m": [
+    "slot_width_m": 0.024,
+    "closed_end_local_x_m": -0.02,
+    "grip_tab_size_m": [
+      0.028,
       0.024,
-      0.1,
-      0.008
+      0.006
     ],
-    "handle_bridge_center_m": [
+    "grip_tab_centre_m": [
+      -0.036,
       0,
-      0.11,
       0
     ],
-    "handle_size_m": [
-      0.024,
-      0.03,
-      0.07
-    ],
-    "handle_center_m": [
-      0,
-      0.14,
-      0.035
-    ],
-    "reference_grasp_offset_m": [
+    "installed_offset_from_connector_m": [
+      0.01,
       0.0,
-      0.14,
-      0.055
+      0.032
     ],
-    "reference_insertion_offset_from_connector_m": [
-      0.014,
-      0.0,
-      -0.032
-    ],
-    "material": "nominal printed polymer"
+    "material": "nominal metal, blue"
   },
   "fixture": {
-    "type": "fixed raised deck with front service opening, guide rims and component supports",
-    "deck_top_z_m": 0.837,
-    "service_opening_xy_m": {
-      "x": [
-        0.09,
-        0.27
-      ],
-      "y": [
-        -0.13,
-        0.18
-      ]
-    },
-    "material": "nominal aluminium service stand",
-    "end_holders": {
-      "type": "physical guide channels on cantilevered supports",
-      "rail_size_m": [
-        0.1,
-        0.004,
-        0.015
-      ],
-      "rail_cross_offset_m": 0.026,
-      "rail_z_limits_m": [
-        0.847,
-        0.862
-      ],
-      "support_post_size_m": [
-        0.012,
-        0.012,
-        0.025000000000000022
-      ],
-      "support_locations": "inner chain-end pivots offset +/-34 mm along the local normal"
-    }
+    "deck_top_z_m": 0.879,
+    "service_opening": "x<0.27 m, -0.13<y<0.18 m",
+    "guides": "fixed upper rims with front service window, externally supported; continuous side guides",
+    "stands": "two backing supports for orange link and two keeper supports; see primitive inventory",
+    "material": "nominal metal frame and low-friction liner"
   },
   "contact": {
-    "static_friction": 0.65,
-    "dynamic_friction": 0.5,
+    "chain_wheels_fixtures": {
+      "static_friction": 0.03,
+      "dynamic_friction": 0.02,
+      "combine": "min"
+    },
+    "connector_keeper": {
+      "static_friction": 0.65,
+      "dynamic_friction": 0.5
+    },
     "restitution": 0,
-    "custom_contact_offset_m": 0.0002,
-    "custom_rest_offset_m": 0,
-    "robot_contact_offset_m": 0.001
+    "contact_offset_m": 0.0002
   },
-  "inventory": "scene-inventory.json; authored primitive and support dimensions in build_scene.py",
-  "reset": {
-    "settle_seconds": 0.5,
-    "scoring_starts_after_settle": true
-  }
+  "inventory": "scene-inventory.json: complete original primitive geometry, masses and hinges",
+  "reset": "Restore all listed poses and passive joints, open grippers at ready, then settle 0.5 seconds before scoring."
 }

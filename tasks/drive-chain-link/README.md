@@ -1,78 +1,59 @@
-# Reconnect a drive chain on two sprockets
+# Repair and hand-test a chain drive — unfinished revision
 
-This revision repairs an open chain drive. Eleven links are already routed on two locked, toothed sprockets, with their connecting link missing. The right arm inserts the orange two-pin link through the two free ends and withdraws. The left arm then fits the blue underside keeper. The final chain must form a closed, retained loop correctly seated on both wheels, with both hands clear.
+**Not ready for submission or a paid model run. No full-score demonstration exists for this functional-drive revision.** Native development checks show that the compact joint closes, but the closed chain binds during rotation. The isolated driver and the open chain move. A complete circuit of the repaired chain has not been achieved. The planned reference also needs an IK correction during crank approach.
 
-**Revised rendered demo and registered evaluation: 1.0 in 773 actions / 38.65 simulated seconds.** The old joint-only Dream video and media ID do not validate this goal. `task.draft.json` deliberately has no media ID or claimed model score. A fresh hosted evaluation is required before submission; no additional paid model call has been made for this revision.
+The intended task is to insert an orange two-pin connecting link upward through the chain ends, fit the compact blue retaining plate above them, and hand-crank the repaired link once around both sprockets. The final assembly must stay connected and routed, with both hands released. The drive has no motor or active shaft controller.
 
-## Install and run
+The previous static version's score of 1.0 applied to assembly on locked sprockets. Its media and receipts do not validate this revision. `task.draft.json` has no media ID or model score. Prior successful submissions are separate tasks.
 
-Use the current [Robocurve walkthrough](https://tasks.robocurve.org/walkthrough) to install Isaac Lab-Arena release/0.3.1, Isaac Sim 6.1 and Python 3.12. `SOURCE.json` records the validated adapter and Arena versions and official asset-root fix. NVIDIA license acceptance is required by the upstream runtime. In that environment, from this task folder:
+## Implemented changes
+
+- Compact 45 × 140 × 6 mm orange backing with upward pins; its tall grasp handle is removed.
+- Compact 44 × 136 × 6 mm blue keeper with a short in-plane grip tab; its extended handle is removed.
+- Two native passive sprocket axles, with a hand crank and a passive knob bearing. Axle and knob travel limits are ±3,600 degrees.
+- Upper guide supports outside the moving shaft path, continuous side guides and a low-friction service bed. Primitive dimensions and all fixed starting poses are recorded in `scene-inventory.json` and `setup-layout.json`.
+- A scorer that requires a complete physical circuit and matching motion of both sprockets before full credit. A stationary assembled joint is capped at 0.7.
+
+Robot actuation remains the standard fourteen joint/gripper controls. The task environment adds no task-body pose writes after reset, grasp attachments, software latches, direct shaft forces or runtime collision changes. Development-only shaft-load probes are separate and cannot count as a robot demonstration.
+
+## Development commands
+
+Use the Robocurve walkthrough environment: Python 3.12, Isaac Sim 6.1, Isaac Lab-Arena and the adapter versions in `SOURCE.json`. NVIDIA license acceptance is required. From this task folder:
 
 ```bash
 uv pip install --python "$(command -v python)" -e .
 python -m unittest discover -s tests -v
-python check_assets.py --output /tmp/chain-repair-assets
+python check_assets.py --output /tmp/chain-functional-assets
 python check_plan.py
 ```
 
-Use the registered `chain_link` embodiment; the articulated scene is generated from the primitive builder and does not depend on another submitted task folder.
+The unit tests cover failure gates and fork geometry. USD checks cover asset structure. Neither establishes physical feasibility. `check_plan.py` currently fails at the right hand's crank approach; do not interpret a partial plan as a demonstration.
 
-Native reference with actual cameras:
+An unpaid native assembly diagnostic can be run with a fresh output directory:
 
 ```bash
-python run.py --policy demo --device cuda:0 --physics-device cpu \
+python run.py --policy assembly --device cuda:0 --physics-device cpu \
   --width 640 --height 360 --max-steps 2400 --seed 0 \
-  --output /tmp/chain-repair-demo
+  --output /tmp/chain-functional-assembly
 ```
 
-Registered evaluation:
+The full planned policy is `--policy demo`; it is unfinished. CPU-only development uses `--device cpu --physics-device cpu --no-cameras --no-record` and provides no video evidence. The layout is fixed, with seed 0, 20 Hz controls, 240 Hz physics and a limit of 2,400 actions / 120 simulated seconds. The proposed complete reference is approximately 80 simulated seconds, but its runtime and success have not been validated.
 
-```bash
-instruction=$(python -c 'from chain_link.config import INSTRUCTION; print(INSTRUCTION)')
-inspect-robots run --embodiment chain_link --policy chain_link_scripted \
-  -E device=cuda:0 -E physics_device=cpu -E object_jitter=0 -E control_hz=20 \
-  -E cam_width=320 -E cam_height=176 --instruction "$instruction" \
-  --scorer task_score --max-steps 2400 --epochs 1 --seed 0 \
-  --store-frames --no-prompt --grader none --no-rerun --no-rerun-save \
-  --log-dir /tmp/chain-repair-inspect
-```
+The standard PhysX actuator path is selected with `cfg.sim.use_newton_actuators=False`; passive task joints have no actuator groups. Only the scripted reference reads object poses. Model observations remain the standard joint/gripper state and three calibrated RGB cameras.
 
-Use a fresh output directory. CPU-only development adds `--device cpu --no-cameras --no-record` to the native command, or `-E device=cpu -E render_images=false` to Inspect Robots. It does not provide submission media. The reference plan is approximately 42 simulated seconds. A trial permits at most 2,400 actions / 120 simulated seconds at 20 Hz, with 240 Hz physics. Native development takes about two minutes wall time; rendering, warm-up and hosted inference add time.
+## Proposed score
 
-The layout has no randomized parameters. Use native reset seed 0 and Inspect evaluation seed 0; Inspect derives its per-trial seed from that seed and scene ID. Model observations are the standard 14 joint/gripper values and the three calibrated RGB views. Only the scripted reference uses measured native part poses, converted to normal robot commands. There are no task-body state writes after reset, grasp attachments, runtime collision changes or software latches.
+All nonzero credit requires a simple, correctly routed loop around both sprocket centres, the appropriate rotating pitch seats within 10 mm of chain joints, chain-joint heights within 6 mm of their working plane and level chain links. These conditions are measured from the current native state.
 
-For the final hosted evaluation, use the same registered command with `--policy dream -P model=dreamlabs/dream-1-beta -P rows_per_request=48 -P record=false`. This opens a paid model session. Run it once only after the revised rendered reference passes visual review and the additional credit use is authorized. Every task requires a model video under the current guide; lack of budget does not permit replacing it with an earlier task's recording.
+- **0:** disconnected chain, incorrect routing, nonfinite state or permanent workspace escape.
+- **0.4:** both end holes installed on their respective connector stems.
+- **0.7:** the keeper additionally covers both stems above the chain. Full retention requires the stems at the closed slot ends.
+- **1.0:** a retained, routed connection survives a full circuit: both axles travel at least approximately two revolutions, their accumulated phase difference stays within 0.15 rad and the repaired link travels one full revolution around the drive centre. Then all moving parts settle and both hands remain open and clear for one second.
 
-## Primary score
+`scoring.py` is authoritative for the exact numerical predicates. Motion is audited every native physics step. Breaking or derailing the connection clears movement history. Spinning axles without chain travel cannot complete the task.
 
-Scoring uses the current state and does not keep a past maximum. **All nonzero credit requires correct routing**, so assembling the joint on the bench or lifting the loop above the wheels scores zero.
+## Fidelity and remaining work
 
-Routing requires all of the following:
+These are enlarged rigid training parts, with ideal passive hinges, lubricated chain/sprocket contact and a custom friction-retained keeper. There is no elasticity, wear, fracture, rated-load or powered-operation claim. `SOURCE.json` records software provenance; `build_scene.py` generates all original primitive assets.
 
-- The ordered chain-joint polygon, including the missing/installed closing edge, is simple: no crossings, overlapping nonadjacent segments or reversals along the same segment.
-- Its winding magnitude is 1 around each sprocket centre (numerical winding tolerance 0.01).
-- Each of four specified pitch seats on each wheel is within 5 mm of an actual chain-joint centre in XY. The left seats are at 90, 150, 210 and 270 degrees; the right at −90, −30, 30 and 90 degrees, on the 100 mm pitch circles.
-- All chain-joint heights are within 4 mm of z=0.858 m, and every link normal has world-z dot product greater than 0.995.
-
-With routing correct:
-
-- **0:** both chain ends are not installed on the connector, or a permanent work-area/invalid-state violation occurred.
-- **0.4:** each end-hole centre lies within 10 mm radially of its own connector stem, at connector-local z strictly between −22 and −10 mm, with relative normal dot product greater than 0.99.
-- **0.7:** both ends are installed and the keeper centre is at connector-local z strictly between −40 and −30 mm, relative orientation at most 0.10 rad, and both stem projections lie inside its slots: keeper-local x strictly between −21.5 and 35 mm, y strictly within 5 mm of the corresponding ±50 mm slot centre.
-- **1:** both stems additionally have keeper-local x strictly between −21.5 and −8 mm; the connector is within strictly 8 mm and at most 0.10 rad of its installed pose; all moving body centres move below 20 mm/s and spin below 0.3 rad/s; both grippers open at least 70 mm; conservative whole-robot clearance from all moving parts is at least 25 mm. These conditions hold continuously for at least one second.
-
-The closed slot ends are at x=−26 mm. A 10 mm stem bottomed there has centre x=−21 mm, accepted with a 0.5 mm contact margin. The 24 mm heads cannot pass vertically through the 20 mm slots.
-
-At every native physics step, every moving solid is checked against x=[−0.19,0.91] m, y=[−0.65,0.65] m and z≥0.7415 m. Any escape or nonfinite physical state permanently forces zero. The runtime requires exactly 12 audited physics samples per action. Settling includes all eleven links, connector and keeper. `scoring.py` and trace metrics expose every numerical predicate.
-
-These conditions can be checked using ruler measurements and overhead/side photographs, plus a one-second release/settling video. The task does not score powered operation or rated load capacity.
-
-## Setup, fidelity and reset
-
-`setup-layout.json` gives fixed coordinates, sizes, masses, nominal materials and camera calibration. `scene-inventory.json` lists every authored custom body, solid and hinge; `build_scene.py` is authoritative. The standard adapter supplies the YAM robots, table, cameras, stand, floor and lighting.
-
-The custom service rig has two locked six-tooth sprockets and physical guide rims, with a front access window. Dual chain plates provide real clearance around the teeth. Physical service-holder channels align the free ends during pin insertion while leaving room for the underside keeper. The deck opening permits its extended handle to pass beneath the joint. The orange connecting link starts on a pickup stand to the right and the blue keeper on a supported area to the left.
-
-The training links, rollers, caps, keeper and handles approximate printed polymer parts; connector pins and the fixed service rig are nominal metal. Native rigid contact, Coulomb friction and ideal passive revolute bearings govern motion. The retained connecting link uses friction against lateral withdrawal. There is no elasticity, wear, fracture, powered torque-transmission, rated-strength or vibration-locking test. Shaft locking and the service holders represent an unpowered maintenance setup.
-
-Reset restores all free parts and ten hinge positions, opens both grippers at ready and settles for 0.5 seconds with auditing disabled. Scoring begins after settling. Nothing is consumed. A task is feasible only when the full repair, including correct routing and release, is demonstrated within the action budget.
+Remaining work is mechanical: resolve binding of the closed joint, validate keeper retention throughout circulation, fix the reference approach and demonstrate the complete task with real robot controls. Registered evaluation, current-source rendered evidence, a matching hosted-model recording and final submission metadata must follow successful physical validation. Existing diagnostic images are not final submission media.
