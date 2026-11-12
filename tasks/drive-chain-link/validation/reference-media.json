@@ -1,49 +1,32 @@
 {
-  "source_sha256": "894ec5142f012f92e09e5f29fef5e0b1dfc626311adbc9ddea4b0554d08dfdff",
+  "source_sha256": "0b872e639e78c6fcc3b1a6594ee3515b57b0ed443b1c9f81d70696a15be0e60b",
   "score": 1.0,
   "steps": 790,
   "simulated_seconds": 39.5,
-  "visually_reviewed": true,
   "three_cameras_valid": true,
-  "reviewed_stages": [
-    "reset",
-    "two chain-end grasps",
-    "both holes lowered onto connector pins",
-    "released chain ends",
-    "keeper pickup and route",
-    "sideways insertion beneath both heads",
-    "keeper release and both hands clear"
-  ],
-  "composition": "Native top stream above both native wrist streams, resize/stack only, all initial/action frames in order, no overlays or generated frames.",
-  "native_receipt_sha256": "0122469e1a3488721e53f602a72c08cb9a1d673cc18e0255eb776d526c696f0c",
-  "registered_report_sha256": "708f5b03d76b67c11c23a06c5c27d27e246f6876a560a03cb36cf69dd015abcc",
-  "registered_camera_quality": {
+  "camera_quality": {
     "top_cam": {
       "frames": 791,
-      "shape": [
-        176,
-        320,
-        3
-      ],
-      "minimum_frame_std": 59.56859149702055
+      "minimum_frame_std": 60.712841021498235
     },
     "left_cam": {
       "frames": 791,
-      "shape": [
-        176,
-        320,
-        3
-      ],
-      "minimum_frame_std": 53.715117949764505
+      "minimum_frame_std": 61.06989572502075
     },
     "right_cam": {
       "frames": 791,
-      "shape": [
-        176,
-        320,
-        3
-      ],
-      "minimum_frame_std": 50.659803810415184
+      "minimum_frame_std": 50.03445282750319
+    }
+  },
+  "late_chain_motion": {
+    "18-29s": {
+      "maximum_frame_displacement_m": 8.072111824996632e-06
+    },
+    "30-39.5s": {
+      "maximum_frame_displacement_m": 5.894181010198822e-05
+    },
+    "37-39.5s": {
+      "maximum_frame_displacement_m": 2.286734476671871e-06
     }
   },
   "ffprobe": {
@@ -61,17 +44,29 @@
     ],
     "format": {
       "duration": "39.550000",
-      "size": "2383515"
+      "size": "2129280"
     }
   },
   "files": {
     "demo.mp4": {
-      "bytes": 2383515,
-      "sha256": "b9dbd3c86ed573182f60028b0a99bff5b7dd72412d010d6e525a227c2d22e116"
+      "bytes": 2129280,
+      "sha256": "f9f75c9009fa69869ee96b159c4648b13a71f15836a49fcc55e39335f3986dec"
     },
     "setup.png": {
-      "bytes": 202114,
-      "sha256": "d9135eafad45c1b74ea0a9cdb3a2b07b6f3d78cfd3ed4e7e6b36b715cdd65c0f"
+      "bytes": 199737,
+      "sha256": "a6fe82df5cd321648777d21ea53d6f2185211c90e2fccb9939b856c9a5b65069"
     }
-  }
+  },
+  "composition": "Every native initial/action frame in order; top view above both wrists; resize/stack and H.264 encoding only; no overlays or generated frames.",
+  "visually_reviewed": true,
+  "reviewed_stages": [
+    "reset",
+    "grasp and lift both end links",
+    "swing ends onto pins",
+    "release and clear both hands",
+    "keeper pickup and insertion",
+    "released retained joint with loop seated on guide"
+  ],
+  "matching_model_recording": "pending; original recording belongs to archived scene",
+  "dream_api_used": false
 }

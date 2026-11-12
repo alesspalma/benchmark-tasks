@@ -1,0 +1,7 @@
+{
+  "source_sha256": "0b872e639e78c6fcc3b1a6594ee3515b57b0ed443b1c9f81d70696a15be0e60b",
+  "status": "pending",
+  "matching_recording_exists": false,
+  "episodes_run_for_revision": 0,
+  "note": "Current rules require a model video matching this setup. Archived original-scene video and media are not used. Hosted evaluation is left until the final authorized submission step."
+}

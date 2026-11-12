@@ -2,7 +2,7 @@
 
 import numpy as np
 from yam_arena.urdf import quat_xyzw_to_matrix
-from .config import CONNECTOR_POSITION, PITCH, TABLE_TOP
+from .config import CONNECTOR_POSITION, PITCH, TABLE_TOP, CHAIN_POSITION, NODES
 
 
 def rotation(pose):
@@ -116,7 +116,20 @@ class Scorer:
             s["robot_clearance_m"] >= 0.025
             and all(h["opening_m"] >= 0.070 for h in s["hands"].values())
         )
-        full = bool(retained and parked and settled and clear and not self.violations)
+        guide_errors={}
+        for i in range(1,10):
+            pose=np.array(s["bodies"][f"Link{i:02}"]["pose"])
+            tooth=CHAIN_POSITION+(NODES[i]+NODES[i+1])/2
+            guide_local=rotation(pose).T@(tooth-pose[:3])
+            guide_errors[f"Link{i:02}"]=guide_local.tolist()
+        # A 6mm-radius tooth must remain inside the real link window:
+        # +/-27mm along the link and +/-17mm between the side rails.
+        guide_seated=bool(all(abs(v[0]) < .021 and abs(v[1]) < .0115
+                             for v in guide_errors.values()) and all(
+            abs(s["bodies"][f"Link{i:02}"]["pose"][2]-CHAIN_POSITION[2]) < .006
+            and rotation(s["bodies"][f"Link{i:02}"]["pose"])[2,2] > .995
+            for i in range(1,10)))
+        full = bool(retained and parked and settled and clear and guide_seated and not self.violations)
         if full:
             if self.hold_start is None:
                 self.hold_start = s["time_s"]
@@ -138,6 +151,8 @@ class Scorer:
             parked=parked,
             settled=bool(settled),
             hands_clear=clear,
+            guide_seated=guide_seated,
+            guide_link_errors_m=guide_errors,
             robot_clearance_m=s["robot_clearance_m"],
             end_points_local=ends,
             keeper_local=local.tolist(),

@@ -231,272 +231,265 @@
       "material": "nominal metal"
     }
   ],
-  "custom_objects": {
-    "chain": {
-      "type": "free 11-link open training chain",
-      "root_body": "Link00",
-      "root_position_m": [
-        0.3033974596215561,
-        -0.09330127018922194,
-        0.845
+  "chain": {
+    "type": "eleven-link open articulated training chain; two free ends splayed",
+    "pitch_m": 0.1,
+    "node_positions_world_m": [
+      [
+        0.16622737138496518,
+        -0.075,
+        0.847
       ],
-      "root_quaternion_xyzw": [
-        0.0,
-        0.0,
-        -0.49999999999999994,
-        0.8660254037844387
+      [
+        0.24499999999999997,
+        -0.13660254037844385,
+        0.847
       ],
-      "polygon_center_m": [
-        0.465,
-        0.0,
-        0.845
+      [
+        0.3316025403784439,
+        -0.1866025403784439,
+        0.847
       ],
-      "nodes_local_m": [
-        [
-          -0.1866025403784439,
-          -0.05000000000000001,
-          0.0
-        ],
-        [
-          -0.1366025403784439,
-          -0.13660254037844385,
-          0.0
-        ],
-        [
-          -0.04999999999999998,
-          -0.1866025403784439,
-          0.0
-        ],
-        [
-          0.04999999999999991,
-          -0.1866025403784439,
-          0.0
-        ],
-        [
-          0.13660254037844385,
-          -0.1366025403784439,
-          0.0
-        ],
-        [
-          0.1866025403784439,
-          -0.04999999999999999,
-          0.0
-        ],
-        [
-          0.1866025403784439,
-          0.049999999999999906,
-          0.0
-        ],
-        [
-          0.1366025403784439,
-          0.13660254037844385,
-          0.0
-        ],
-        [
-          0.05,
-          0.1866025403784439,
-          0.0
-        ],
-        [
-          -0.04999999999999989,
-          0.1866025403784439,
-          0.0
-        ],
-        [
-          -0.13660254037844397,
-          0.1366025403784438,
-          0.0
-        ],
-        [
-          -0.1866025403784439,
-          0.05000000000000001,
-          0.0
-        ]
+      [
+        0.4316025403784438,
+        -0.1866025403784439,
+        0.847
       ],
-      "pitch_m": 0.1,
-      "mass_kg": 0.385,
-      "hinges": 10,
-      "hinge_limits_deg": [
-        -150,
-        150
+      [
+        0.5182050807568878,
+        -0.1366025403784439,
+        0.847
       ],
-      "hinge_reset_positions_rad": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+      [
+        0.5682050807568878,
+        -0.04999999999999999,
+        0.847
       ],
-      "material": "nominal lightweight printed polymer links with metal hinge pins",
-      "bore_diameter_m": 0.032,
-      "ring_outer_diameter_m": 0.046,
-      "inner_link_height_m": 0.008,
-      "outer_link_layers_m": [
-        [
-          -0.006,
-          0.004
-        ],
-        [
-          0.006,
-          0.004
-        ]
+      [
+        0.5682050807568878,
+        0.049999999999999906,
+        0.847
       ],
-      "rail_size_m": [
-        0.1,
-        0.006
+      [
+        0.5182050807568878,
+        0.13660254037844385,
+        0.847
       ],
-      "end_grip_radius_m": 0.01,
-      "end_grip_height_m": 0.04,
-      "solver_position_iterations": 32,
-      "solver_velocity_iterations": 8
-    },
-    "connector": {
-      "type": "free two-pin connecting link",
-      "position_m": [
-        0.195,
-        0.0,
-        0.84
+      [
+        0.43160254037844387,
+        0.1866025403784439,
+        0.847
       ],
-      "quaternion_xyzw": [
-        0,
-        0,
-        0,
-        1
+      [
+        0.331602540378444,
+        0.1866025403784439,
+        0.847
       ],
-      "mass_kg": 0.12,
-      "backing_size_m": [
-        0.045,
-        0.14,
-        0.006
+      [
+        0.2449999999999999,
+        0.1366025403784438,
+        0.847
       ],
-      "stem_diameter_m": 0.008,
-      "stem_height_m": 0.026,
-      "stem_centres_local_m": [
-        [
-          0,
-          -0.05,
-          0.016
-        ],
-        [
-          0,
-          0.05,
-          0.016
-        ]
-      ],
-      "head_type": "cone",
-      "head_diameter_m": 0.024,
-      "head_height_m": 0.01,
-      "head_centres_local_m": [
-        [
-          0,
-          -0.05,
-          0.034
-        ],
-        [
-          0,
-          0.05,
-          0.034
-        ]
-      ],
-      "material": "nominal polymer backing and metal pins"
-    },
-    "keeper": {
-      "type": "free two-fork side-entry retaining plate",
-      "position_m": [
-        0.18,
-        -0.35,
-        0.7515000000000001
-      ],
-      "quaternion_xyzw": [
-        0,
-        0,
-        0,
-        1
-      ],
-      "mass_kg": 0.075,
-      "size_m": [
-        0.08,
-        0.128,
-        0.008
-      ],
-      "grip_size_m": [
-        0.024,
-        0.03,
-        0.06
-      ],
-      "grip_center_local_m": [
-        0,
-        0,
-        0.03
-      ],
-      "material": "nominal printed polymer",
-      "slot_bounds_x_m": [
-        -0.026,
-        0.04
-      ],
-      "slot_centres_y_m": [
-        -0.05,
-        0.05
-      ],
-      "slot_width_y_m": 0.018,
-      "open_side": "+x",
-      "target_insertion_center_relative_connector_m": [
-        0.014,
-        0,
-        0.024
+      [
+        0.16622737138496507,
+        0.075,
+        0.847
       ]
+    ],
+    "link_mass_kg": 0.035,
+    "layers": "8mm inner plates; paired 4mm outer plates at +/-6mm; metal 8mm-diameter hinge pins",
+    "passive_hinges": 10,
+    "free_end_bore_diameter_m": 0.032,
+    "free_end_grip_diameter_m": 0.02,
+    "free_end_grip_height_m": 0.04,
+    "keeper_support_shoulders": {
+      "height_m": 0.005,
+      "centre_local_z_m": 0.0065,
+      "ring_centre_radius_m": 0.0195
     },
-    "fixtures": {
-      "type": "static raised service fixture",
-      "deck_size_m": [
-        0.6,
-        0.48,
-        0.012
-      ],
-      "deck_center_m": [
-        0.42,
-        0,
-        0.831
-      ],
-      "post_size_m": [
-        0.025,
-        0.025,
-        0.0774999999999999
-      ],
-      "mandrel_centres_m": [
-        [
-          0.405,
-          -0.073,
-          0.844
+    "material": "nominal printed polymer links and metal pins"
+  },
+  "former": {
+    "type": "fixed toothed chain-assembly former with open front service sector",
+    "centre_world_xy_m": [
+      0.3816025403784439,
+      0.0
+    ],
+    "hub_radius_m": 0.145,
+    "hub_height_m": 0.008,
+    "guide_teeth": [
+      {
+        "link": "Link01",
+        "centre_world_xy_m": [
+          0.2883012701892219,
+          -0.16160254037844388
         ],
-        [
-          0.405,
-          0.073,
-          0.844
-        ]
-      ],
-      "mandrel_radius_m": 0.065,
-      "mandrel_height_m": 0.014,
-      "cradle_edge_height_m": 0.004,
-      "material": "nominal rigid aluminium deck/posts with polymer routing mandrels"
-    }
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      },
+      {
+        "link": "Link02",
+        "centre_world_xy_m": [
+          0.3816025403784438,
+          -0.1866025403784439
+        ],
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      },
+      {
+        "link": "Link03",
+        "centre_world_xy_m": [
+          0.47490381056766573,
+          -0.1616025403784439
+        ],
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      },
+      {
+        "link": "Link04",
+        "centre_world_xy_m": [
+          0.5432050807568878,
+          -0.09330127018922195
+        ],
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      },
+      {
+        "link": "Link05",
+        "centre_world_xy_m": [
+          0.5682050807568878,
+          -4.163336342344337e-17
+        ],
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      },
+      {
+        "link": "Link06",
+        "centre_world_xy_m": [
+          0.5432050807568878,
+          0.09330127018922188
+        ],
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      },
+      {
+        "link": "Link07",
+        "centre_world_xy_m": [
+          0.47490381056766584,
+          0.16160254037844388
+        ],
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      },
+      {
+        "link": "Link08",
+        "centre_world_xy_m": [
+          0.38160254037844393,
+          0.1866025403784439
+        ],
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      },
+      {
+        "link": "Link09",
+        "centre_world_xy_m": [
+          0.2883012701892219,
+          0.16160254037844385
+        ],
+        "radius_m": 0.006,
+        "height_m": 0.024,
+        "lead_height_m": 0.003
+      }
+    ],
+    "spokes": "22mm wide, 4mm thick, partially recessed into bed; complete geometry in inventory",
+    "boss_radius_m": 0.025,
+    "boss_height_m": 0.014,
+    "material": "nominal metal, rigidly fixed to service deck",
+    "role": "positive location of chain windows during assembly; no powered drive"
+  },
+  "connector": {
+    "position_m": [
+      0.195,
+      0.0,
+      0.84
+    ],
+    "rotation_xyzw": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "mass_kg": 0.12,
+    "backing_size_m": [
+      0.045,
+      0.14,
+      0.006
+    ],
+    "pin_spacing_m": 0.1,
+    "stem_diameter_m": 0.008,
+    "stem_length_m": 0.026,
+    "head_base_diameter_m": 0.024,
+    "head_height_m": 0.01,
+    "material": "nominal polymer backing and metal pins"
+  },
+  "keeper": {
+    "position_m": [
+      0.18,
+      -0.35,
+      0.7515000000000001
+    ],
+    "rotation_xyzw": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "mass_kg": 0.075,
+    "size_m": [
+      0.08,
+      0.128,
+      0.008
+    ],
+    "grip_size_m": [
+      0.024,
+      0.03,
+      0.06
+    ],
+    "slot_width_m": 0.018,
+    "closed_slot_x_m": -0.026,
+    "material": "nominal printed polymer"
+  },
+  "fixture": {
+    "deck_size_m": [
+      0.6,
+      0.48,
+      0.012
+    ],
+    "deck_centre_m": [
+      0.42,
+      0,
+      0.831
+    ],
+    "deck_top_z_m": 0.837,
+    "support_posts": "four 25mm square metal posts at x=.18/.60,y=+/- .19",
+    "cradle": "4mm-high locating edges around the free connector; complete geometry in inventory",
+    "material": "nominal metal service fixture"
   },
   "contact": {
-    "custom_static_friction": 0.65,
-    "custom_dynamic_friction": 0.5,
+    "static_friction": 0.65,
+    "dynamic_friction": 0.5,
     "restitution": 0,
-    "custom_contact_offset_m": 0.0002,
-    "custom_rest_offset_m": 0,
-    "robot_contact_offset_m": 0.001
+    "contact_offset_m": 0.0002,
+    "controls": "standard PhysX robot actuators; passive chain joints have no actuator groups"
   },
-  "reset": {
-    "settle_seconds": 0.5,
-    "audit_starts_after_settle": true
-  },
-  "detailed_custom_geometry": "scene-inventory.json; build_scene.py is authoritative"
+  "inventory": "scene-inventory.json; complete primitive dimensions, masses, frames and joints",
+  "reset": "Restore fixed poses and zero passive hinge coordinates, open both grippers at ready, settle 0.5s, then start scoring."
 }

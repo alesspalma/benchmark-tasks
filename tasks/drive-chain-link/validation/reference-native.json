@@ -1,10 +1,11 @@
 {
   "scope": "actual native PhysX robot execution",
-  "source_sha256": "894ec5142f012f92e09e5f29fef5e0b1dfc626311adbc9ddea4b0554d08dfdff",
-  "instruction": "Join the two ends of the open chain on the connecting link. Slide the blue forked retaining plate sideways under both pin heads toward the chain, until both pin stems reach the closed ends of its slots. Leave the retained joint in its service cradle and release both hands. This is an unpowered training assembly.",
+  "status": "completed",
+  "source_sha256": "0b872e639e78c6fcc3b1a6594ee3515b57b0ed443b1c9f81d70696a15be0e60b",
   "policy": "demo",
   "seed": 0,
-  "max_steps": 2400,
+  "steps": 790,
+  "simulated_s": 39.5,
   "control_hz": 20,
   "physics_hz": 240,
   "versions": {
@@ -13,48 +14,6 @@
     "isaaclab-arena": "0.3.0",
     "yam-arena": "0.1.0",
     "inspect-robots": "1.0.0"
-  },
-  "initial_metrics": {
-    "score": 0.0,
-    "success": false,
-    "violations": [],
-    "ends_joined": false,
-    "plate_seated": false,
-    "retained": false,
-    "parked": true,
-    "settled": true,
-    "hands_clear": true,
-    "robot_clearance_m": 0.09146616749069417,
-    "end_points_local": {
-      "right": [
-        0.08339617103391803,
-        -0.050000852871382645,
-        0.00700102805873805
-      ],
-      "left": [
-        0.08339583067653568,
-        0.050000983392630816,
-        0.007001036304771355
-      ]
-    },
-    "keeper_local": [
-      -0.01499948773560298,
-      -0.3500000108818175,
-      -0.08850004311444913
-    ],
-    "pins_in_keeper": [
-      [
-        0.015000158937308043,
-        0.30000002949983956,
-        0.11249990397384763
-      ],
-      [
-        0.015000164643655566,
-        0.40000002949983793,
-        0.11249988666362983
-      ]
-    ],
-    "physics_samples": 0
   },
   "final_metrics": {
     "score": 1.0,
@@ -66,74 +25,86 @@
     "parked": true,
     "settled": true,
     "hands_clear": true,
-    "robot_clearance_m": 0.09228859803459506,
+    "guide_seated": true,
+    "guide_link_errors_m": {
+      "Link01": [
+        -0.0036776272037418517,
+        -0.009773905813338866,
+        -4.873786695615762e-07
+      ],
+      "Link02": [
+        -0.008579591513668999,
+        -0.010851744592455942,
+        -6.070534080498094e-07
+      ],
+      "Link03": [
+        -0.00935022262482237,
+        0.0038935543856600543,
+        -5.947862035640214e-07
+      ],
+      "Link04": [
+        -0.005376692909122418,
+        0.008850337344429353,
+        -5.338845042135783e-07
+      ],
+      "Link05": [
+        -0.00029213095207471153,
+        0.00939469730727255,
+        -4.154272181809491e-07
+      ],
+      "Link06": [
+        0.004063272597530302,
+        0.007056829994360746,
+        -2.3685227452235275e-07
+      ],
+      "Link07": [
+        0.006797894633013675,
+        0.0010561221090393843,
+        -1.1519734223561082e-07
+      ],
+      "Link08": [
+        0.00457259390672235,
+        -0.010584320448171746,
+        -4.457224862331273e-08
+      ],
+      "Link09": [
+        -0.00026057163214813643,
+        -0.007222602934374063,
+        -5.127232708362091e-08
+      ]
+    },
+    "robot_clearance_m": 0.09802234797757767,
     "end_points_local": {
       "right": [
-        -0.01089679566491411,
-        -0.0455612032582207,
-        0.008475683284687072
+        0.002214315024041644,
+        -0.05101780881833991,
+        0.00700053409680406
       ],
       "left": [
-        0.003738130388410454,
-        0.04997293548242579,
-        0.008378166678865078
+        0.0014898072867982714,
+        0.05004821139432996,
+        0.007000481175362151
       ]
     },
     "keeper_local": [
-      0.013832965932676706,
-      -0.0015211928713005569,
-      0.01854499841123306
+      0.012542606985473546,
+      -0.0024163803944964425,
+      0.019999728722675233
     ],
     "pins_in_keeper": [
       [
-        -0.013808919810189415,
-        -0.04853622732543994,
-        0.004985087776424702
+        -0.013428083406399578,
+        -0.047341340532751165,
+        0.004000508422484483
       ],
       [
-        -0.013148405497166539,
-        0.051427136784413546,
-        0.007609884279612563
+        -0.011562532203966457,
+        0.052641256546178745,
+        0.004000256518827568
       ]
     ],
     "physics_samples": 9480
   },
-  "steps": 790,
-  "simulated_s": 39.5,
-  "elapsed_wall_s": 119.78394896094687,
-  "worst_ik_position_m": 9.919036552092595e-05,
-  "worst_ik_rotation_rad": 0.00021350663287756166,
   "source_unchanged": true,
-  "physics_device": "cpu",
-  "reset_image_stats": {
-    "top_cam": {
-      "std": 60.61473524738461,
-      "min": 0,
-      "max": 246
-    },
-    "left_cam": {
-      "std": 65.07355894744597,
-      "min": 1,
-      "max": 225
-    },
-    "right_cam": {
-      "std": 51.790549972113,
-      "min": 2,
-      "max": 238
-    }
-  },
-  "video_errors": {},
-  "status": "completed",
-  "render_device": "cuda:0",
-  "camera_views": [
-    "top_cam",
-    "left_cam",
-    "right_cam"
-  ],
-  "native_camera_size": [
-    640,
-    360
-  ],
-  "native_receipt_sha256": "0122469e1a3488721e53f602a72c08cb9a1d673cc18e0255eb776d526c696f0c",
-  "dream_api_used": false
+  "physics_device": "cpu"
 }

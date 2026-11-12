@@ -1,79 +1,73 @@
 # Join a drive-chain service joint
 
-Two standard YAM arms join the ends of an open articulated training chain on a free two-pin connecting link, then slide a forked keeper under both pin heads. This isolates the joining operation in unpowered machinery maintenance. All task parts are deliberately enlarged, reusable training hardware.
+Two standard YAM arms join an open training chain on a two-pin connector, then slide a forked keeper under its heads. A fixed toothed service former locates the resting links; the free end links swing into the cradle. This is an unpowered maintenance assembly exercise.
 
-The rendered native reference and the registered Inspect Robots reference both reach **1.0 in 790 actions / 39.5 simulated seconds**. `task.json` records the actual submitted model and demo scores. Validation receipts, source fingerprints and media hashes are in `validation/`.
+The updated rendered native reference and registered scripted evaluation both reach **1.0 in 790 actions / 39.5 simulated seconds**. The omitted-keeper control scores 0.4, and all 29 tests pass. `task.draft.json` has no media ID or claimed model score: the old Dream-1 recording shows a different setup and cannot validate this revision. No additional paid episode has been run.
 
-## Runtime and installation
+## Install and run
 
-Use the current [Robocurve simulation walkthrough](https://tasks.robocurve.org/walkthrough) to install Isaac Lab-Arena release/0.3.1 with Isaac Sim 6.1 and Python 3.12. The tested Arena commit and its official November 5 production-asset-root fix are recorded in `SOURCE.json`. NVIDIA license acceptance is required by the upstream runtime. In the resulting environment, from this task folder:
+Use the [Robocurve walkthrough](https://tasks.robocurve.org/walkthrough) environment: Python 3.12, Isaac Sim 6.1 and Isaac Lab-Arena. `SOURCE.json` records validated versions and the official asset-root fix. NVIDIA license acceptance is required. From this task folder:
 
 ```bash
 uv pip install --python "$(command -v python)" -e .
 python -m unittest discover -s tests -v
-python check_assets.py --output /tmp/chain-assets-check
+python check_assets.py --output /tmp/chain-guide-assets
+python check_plan.py
 ```
 
-`pyproject.toml` pins the adapter, Inspect Robots 1.0 and the YAM interface. The task assets are generated from boxes, cylinders and cones by `build_scene.py`. Use the registered `chain_link` embodiment; `task.py` is an import convenience, rather than a generic YAM task-file definition. The task does not depend on another submitted task folder.
+Native scripted reference with actual cameras:
 
-## Run and score
+```bash
+python run.py --policy demo --device cuda:0 --physics-device cpu \
+  --width 640 --height 360 --max-steps 2400 --seed 0 \
+  --output /tmp/chain-guide-native
+```
 
-The exact instruction is in `chain_link/config.py` and `task.json`. Use evaluation seed 0, object jitter 0, 20 Hz control, 240 Hz physics and a maximum of 2,400 actions (120 simulated seconds). Inspect Robots derives a per-trial seed from the evaluation seed and scene ID; the validated `scene-0` trial used 1415158438. There are no randomized layout parameters. Direct native runs use reset seed 0. World coordinates are metres, z up.
-
-Model observations are the standard 14 joint/gripper values and the calibrated `top_cam`, `left_cam` and `right_cam` RGB views. The reference alone uses measured native object poses to calculate ordinary joint/gripper commands. No object poses, reference waypoints or scorer hints are added to model observations. There are no task-body pose writes after reset, grasp attachments, software latches or runtime collision disabling.
-
-Registered rendered reference:
+Registered rendered evaluation:
 
 ```bash
 instruction=$(python -c 'from chain_link.config import INSTRUCTION; print(INSTRUCTION)')
 inspect-robots run --embodiment chain_link --policy chain_link_scripted \
   -E device=cuda:0 -E physics_device=cpu -E object_jitter=0 -E control_hz=20 \
   -E cam_width=320 -E cam_height=176 --instruction "$instruction" \
-  --scorer task_score --max-steps 2400 --epochs 1 --seed 0 \
-  --store-frames --no-prompt --grader none --no-rerun --no-rerun-save \
-  --log-dir /tmp/chain-reference
+  --scorer task_score --max-steps 2400 --epochs 1 --seed 0 --store-frames \
+  --no-prompt --grader none --no-rerun --no-rerun-save \
+  --log-dir /tmp/chain-guide-inspect
 ```
 
-Hosted model evaluation, using a privately configured `DREAM_API_KEY`. This command consumes Dream credits; the submitted evaluation consists of one episode:
+For the final matching hosted run, use the same registered command with `--policy dream -P model=dreamlabs/dream-1-beta -P rows_per_request=48 -P record=false`, with a privately configured `DREAM_API_KEY`. This consumes credits. The current revision has no hosted-model result yet.
 
-```bash
-instruction=$(python -c 'from chain_link.config import INSTRUCTION; print(INSTRUCTION)')
-inspect-robots run --embodiment chain_link --policy dream \
-  -E device=cuda:0 -E physics_device=cpu -E object_jitter=0 -E control_hz=20 \
-  -E cam_width=320 -E cam_height=176 \
-  -P model=dreamlabs/dream-1-beta -P rows_per_request=48 -P record=false \
-  --instruction "$instruction" --scorer task_score --max-steps 2400 \
-  --epochs 1 --seed 0 --store-frames --no-prompt --grader none \
-  --no-rerun --no-rerun-save --log-dir /tmp/chain-dream
-```
+Each command needs a fresh output directory. The fixed layout uses seed 0 and object jitter 0; Inspect derives its per-trial seed from evaluation seed 0. The plan lasts 42.2 simulated seconds, usually ending earlier when success holds. Native development takes about 1–3 minutes wall time; renderer warm-up and hosted inference add time. Limit: 2,400 actions / 120 simulated seconds at 20 Hz, with 240 Hz physics.
 
-Use a fresh output directory for each run. The reference plan lasts 42.2 simulated seconds, usually ending earlier when success holds. The validated full reference takes approximately 1–3 minutes wall time after renderer warm-up. First-time renderer initialization can add several minutes; hosted evaluation also depends on service latency.
+CPU-only development adds `--device cpu --no-cameras --no-record` to the native command, or `-E device=cpu -E render_images=false` to Inspect. It produces no submission video. `--policy unlocked` omits the keeper slide; `--policy ends` stops after joining the two ends; `--policy retention` applies a bounded upward robot goal while holding the keeper and cannot receive full released-hand credit.
 
-For a higher-resolution native recording, `python run.py --policy demo --device cuda:0 --physics-device cpu --width 640 --height 360 --max-steps 2400 --seed 0 --output /tmp/chain-native` writes three H.264 streams, reset images, every action/native state in `trace.jsonl` and a versioned `receipt.json`. CPU-only development adds `--device cpu --no-cameras --no-record`; this explicitly has no images and cannot replace submission media. An error or final score below 1 is not a successful reference, regardless of process exit code.
+Model observations are the standard fourteen joint/gripper values and calibrated `top_cam`, `left_cam` and `right_cam` RGB views. Only the scripted reference reads native part poses. All post-reset actuation is through the ordinary fourteen robot controls. No task-body pose writes, grasp attachments, software latches or collision changes are used. The reference holds its actual grasp position while opening, then withdraws from that position to avoid sideways dragging.
 
-`--policy unlocked` omits the keeper slide and provides a negative control. `--policy retention` makes a bounded 8 mm upward robot goal while holding the inserted keeper; the closed hand correctly prevents full task credit. The reference sequence is: both arms seat and release the chain ends; the right arm picks, routes and slides the keeper; both hands finish open and clear.
+Passive hinges use the standard PhysX actuator path, `sim.use_newton_actuators=False`; task joints have no actuator groups. This prevents the optional native actuator wrapper from acting on uncovered passive joints. Standard robot PD gains and physical contact remain in use.
 
 ## Primary score
 
-Scoring uses the current state rather than a historical maximum. Positions below are in connector or keeper local coordinates, as specified. Exact predicates are in `chain_link/scoring.py`; native traces record them and their measured coordinates.
+Scoring uses the current state. Exact predicates are in `chain_link/scoring.py`; numerical diagnostics are recorded in each native trace. Coordinates below are connector- or keeper-local unless stated otherwise.
 
-- **0:** both end holes are not seated, or a permanent work-area/invalid-state violation occurred.
-- **0.4:** both hole centres are within 12 mm radially of their respective stem axes, at connector-local z strictly between 3 and 14 mm, with link-normal dot product greater than 0.98 against the connector normal.
-- **0.7:** both ends are seated; the keeper centre is at connector-local z strictly between 16 and 25 mm and relative orientation at most 0.10 rad; both stem projections lie inside its slots. Each projection has x strictly between −22.5 and 36 mm and y within strictly 5 mm of its own slot centre (−50 or +50 mm).
-- **1:** both projections additionally have keeper-local x strictly between −22.5 and −8 mm, toward the closed slot ends; the connector is within strictly 15 mm and at most 10 degrees of its cradle reset pose; every moving body's centre speed is below 20 mm/s and angular speed below 0.3 rad/s; both grippers open at least 70 mm; all robot collision bodies are at least 25 mm from all moving task bodies. These conditions must hold continuously for at least one second.
+- **0:** both end holes are not seated, or a permanent workspace/invalid-state violation occurred.
+- **0.4:** both hole centres are within 12 mm radially of their respective stems, at z strictly between 3 and 14 mm, with link-normal dot product greater than 0.98 against the connector normal.
+- **0.7:** both ends are seated; keeper centre z is strictly between 16 and 25 mm, relative orientation is at most 0.10 rad, and both stem projections lie in its slots: x strictly between −22.5 and 36 mm, y within strictly 5 mm of its own ±50 mm slot centre.
+- **1:** both projections additionally have x strictly between −22.5 and −8 mm; connector stays within strictly 15 mm and at most 10 degrees of its cradle pose; all moving bodies stay below 20 mm/s and 0.3 rad/s; both grippers open at least 70 mm; all robot collision bodies clear all moving task bodies by at least 25 mm; and all nine resting links remain seated on the guide. These conditions hold continuously for one second.
 
-The slot ends are at x=−26 mm. An 8 mm stem bottomed there has centre x=−22 mm, included with a 0.5 mm contact margin. The 24 mm heads cannot pass vertically through the 18 mm slots. A keeper left near the slot mouths earns at most 0.7.
+Guide seating uses the actual link windows. For each link from `Link01` through `Link09`, its fixed tooth axis, evaluated at the nominal chain plane and projected into the link frame must have absolute x below 21 mm and absolute y below 11.5 mm. The 6 mm-radius tooth fits inside the nominal ±27 mm central opening and ±17 mm space between side rails; the lateral bound includes a 0.5 mm contact margin. Link centres must remain within strictly 6 mm of world z=0.847 m, with world-z normal dot product greater than 0.995. A folded or lifted loop cannot earn full credit.
 
-At every native physics step, every moving solid is audited against x=[−0.19,0.91] m, y=[−0.65,0.65] m and z≥0.7415 m. Any escape or nonfinite physical state permanently forces zero. The audit must count exactly 12 physics samples per action. Whole-robot clearance uses conservative collision-body bounding boxes. Settling includes all eleven links, the connector and the keeper.
+Keeper slots end at x=−26 mm. An 8 mm stem bottomed there has centre x=−22 mm, accepted with a 0.5 mm contact margin. The 24 mm heads cannot pass vertically through the 18 mm slots. Raised 5 mm shoulders on the free end holes support the keeper at the proper height when the chain lies flat.
 
-Ruler measurements and overhead/side photographs establish insertion, slot displacement, cradle position and clearance. A one-second video establishes release and settling. The scorer does not evaluate rated load capacity.
+Every native physics step audits every moving solid against x=[−0.19,0.91] m, y=[−0.65,0.65] m and z≥0.7415 m. Any escape or nonfinite state permanently forces zero. There must be exactly twelve audited physics samples per action. Whole-robot clearance uses conservative collision-body bounding boxes; settling includes every link, connector and keeper.
+
+Ruler measurements and overhead/side photos establish insertion, slot displacement, cradle location, guide engagement and clearance. A one-second release video establishes settling. Rated load capacity is not scored.
 
 ## Setup, fidelity and reset
 
-`setup-layout.json` lists the fixed poses, dimensions, masses, nominal materials and rig calibration; `scene-inventory.json` lists every authored custom rigid body, fixture solid and hinge. The adapter supplies the standard table, two YAM arms, three cameras, stand, lighting and floor. The task adds a raised deck, two stationary routing mandrels, eleven revolute-jointed links, a free orange connector in a shallow cradle and a free blue keeper on the right side of the table. The setup screenshot shows this reset layout.
+`setup-layout.json` lists all fixed poses, dimensions, masses, nominal materials and calibrated cameras. `scene-inventory.json` contains every original body, primitive solid and hinge; `build_scene.py` generates them. The adapter supplies the standard YAM station, table, cameras, stand, floor and lights.
 
-The links and keeper approximate lightweight printed polymer parts, with metal hinge/connector pins and a rigid service fixture. Native rigid contact, passive hinges and Coulomb friction govern the assembly. The chain may form slack folds during joining. The mandrels route the initial loop and are not powered sprockets. Friction retains the keeper laterally; reversing its slide releases it. There is no elasticity, spring clip, fracture, wear, torque-transmission, vibration-locking or injury model. This is an unpowered training assembly, rather than an OEM master-link or powered-drive certification task.
+The former has one machined-looking hub and nine positive guide teeth entering the resting link windows, with an open front service sector. The two earlier spacer disks are removed. The eleven 100 mm-pitch links share the same working plane; only the two free end links start splayed. Their connector is aligned with the final loop so joining does not pull the entire chain forward. The free blue keeper starts on the right side of the table.
 
-Reset restores every free body and all ten passive hinges, opens the grippers in the standard ready pose and settles for 0.5 seconds with auditing disabled. Scoring starts at t=0 after settling. No object is consumed. Real-world reproduction uses the specified large training parts and an unpowered fixture.
+These are deliberately enlarged reusable printed-polymer training parts with metal pins and a nominal metal service fixture. Native rigid contact, ten passive hinges and Coulomb friction govern the assembly. The toothed former is fixed to the bench and serves as an assembly fixture. There is no motor, powered torque transfer, elasticity, spring clip, fracture, wear, rated-load or vibration-locking claim. The keeper is friction-retained laterally and can be removed by reversing its slide.
 
-The submitted videos contain every actual recorded frame in order, with the top view above the wrist views. Processing is limited to resize/stack and H.264 encoding; there are no generated frames or identity overlays. The high-resolution setup screenshot and the model recording show the same fixed physical starting layout.
+Reset restores all free bodies and ten passive hinges, opens the grippers at ready and settles for 0.5 seconds with auditing disabled. Scoring begins at t=0 after settling. Nothing is consumed. Final media must show the current setup and exact instruction; archived original-scene media are not used for this revision.

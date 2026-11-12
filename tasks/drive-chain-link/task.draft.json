@@ -1,0 +1,18 @@
+{
+  "title": "Join a drive-chain service joint",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "maintenance",
+    "chain assembly",
+    "connecting link"
+  ],
+  "instruction": "Join the two ends of the open chain on the connecting link. Slide the blue forked retaining plate sideways under both pin heads toward the chain, until both pin stems reach the closed ends of its slots. Leave the retained joint in its service cradle with the chain seated on the toothed guide, and release both hands. This is an unpowered training assembly.",
+  "context": "Join and retain an articulated chain using a fixed toothed service former. The fixture locates the resting links while the two free ends swing onto their connector, as in an unpowered maintenance assembly station.",
+  "setup": "Two standard calibrated YAM arms with parallel grippers face a 1.10 x 1.30 x 0.06m wood-top table, top z=0.7475m, with standard top/wrist cameras, stand, floor and lights. A 0.60 x 0.48 x 0.012m service deck has top z=0.837m and four 25mm square support posts. A fixed metal assembly former centred (0.381603,0)m has a 145mm-radius, 8mm-thick hub, recessed radial spokes and nine 12mm-diameter, 24mm-high guide teeth with 3mm tapered leads, positioned inside the resting link windows. Eleven 35g polymer training links with metal pins form an open 100mm-pitch loop in plane z=0.847m; only the two free end links are splayed, with initial holes 150mm apart. End links have 32mm bores, 20mm-diameter x 40mm orange grip posts and 5mm raised keeper-support shoulders. An orange 120g connector rests at (0.195,0,0.840)m in a shallow cradle: backing 45 x 140 x 6mm, two 8mm-diameter x 26mm stems 100mm apart and tapered 24mm-diameter x 10mm heads. A blue 75g polymer keeper, 80 x 128 x 8mm with a 24 x 30 x 60mm grip, starts at (0.180,-0.350,0.7515)m. Two 18mm slots open on its +x edge. Full primitive dimensions, poses, masses and calibration are in setup-layout.json and scene-inventory.json.",
+  "scoring": "Current-state primary score: 0 otherwise or after any permanent workspace/invalid-state violation; 0.4 for both end holes on their stems; 0.7 additionally for the keeper covering both stems. Full 1 additionally requires stems toward the closed slot ends, connector in its cradle, all parts settled, both hands open/clear for 1s, and all nine resting links seated on the physical guide teeth. In each link frame its guide tooth must lie within 21mm along the link and 11.5mm across it; link height must be within 6mm of z=0.847m and its normal z dot >0.995. Exact unchanged joint-retention, velocity, hand-clearance and workspace thresholds are in README.md and scoring.py.",
+  "run_limit": "2400 control steps (120 seconds at 20 Hz)",
+  "reset_notes": "Reset all free parts and ten passive hinges to the fixed layout; open grippers in the standard ready pose, settle 0.5 s, then start scoring. Nothing is consumed.",
+  "fidelity": "Native rigid-contact articulated chain with ten passive revolute hinges. The fixed nine-tooth service former locates the resting links through their open windows; the free end links swing onto their connector. Raised end-link shoulders support the keeper at the correct height. Custom enlarged printed-polymer training parts and simplified metal pins. All post-reset actuation uses normal robot joint/gripper commands; no attachments, software latches, task-body pose writes or runtime collision changes. The former is a locked assembly fixture, not a powered drive; no elasticity, spring clip, fracture, wear, rated load or vibration-locking claim.",
+  "scores": "Updated scripted demo: 1.0 (790 actions / 39.5s); matching updated Dream-1 recording: pending. Original-scene model media are not reused."
+}

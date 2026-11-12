@@ -91,7 +91,7 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 (
                     JOINT_GUIDE,
                     ROOM_DOCS["station"],
-                    "An open jointed training chain rests around two fixed service mandrels. Orange tabs "
+                    "An open training chain is located by a fixed toothed assembly former. Orange tabs "
                     "provide chain-end grips. A free orange two-pin connecting link rests in its cradle. "
                     "A blue forked retaining plate lies on the right. All hardware is unpowered.",
                 )
@@ -224,6 +224,9 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
             from isaaclab_physx.physics.physx_manager_cfg import PhysxCfg
 
             cfg = env_cfg_callback(CONTROL_HZ)(cfg)
+            # Empty passive actuator groups use the standard PhysX path.
+            # The optional Newton actuator wrapper must not drive free hinges.
+            cfg.sim.use_newton_actuators = False
             if self.physics_device == "cpu":
                 cfg.sim.use_fabric = False
             # Capacity settings only: avoid reserving multi-environment buffers

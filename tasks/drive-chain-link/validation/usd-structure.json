@@ -1,9 +1,10 @@
 {
   "scope": "Offline USD/schema structure only; no physics or feasibility claim",
+  "hostname": "tengu",
   "assets": [
     {
       "file": "chain.usda",
-      "sha256": "85a0e81c5d4dffbb60f8e78a4756d63ef7c658e4f31b6890bbe9e3d9a3954969",
+      "sha256": "53700eb867441ca30bfb5e73b51ff6453ce19bbd2c14c5787534dcc5793db31f",
       "errors": [],
       "failed_checks": [],
       "joints": [
@@ -98,7 +99,7 @@
     },
     {
       "file": "fixtures.usda",
-      "sha256": "68681c70f68072ed4435a19cbc34f3ce6e8169b8ceed2eefc1667627b0154e37",
+      "sha256": "cfb3cb7e597c96d33443251da60c0b026e2d94577e8138520db136a6cd48d8d4",
       "errors": [],
       "failed_checks": [],
       "joints": [],

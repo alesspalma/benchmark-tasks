@@ -1,13 +1,12 @@
-# Submission review
+# Revision checklist
 
-All creation and media requirements are complete. The final primary results are **scripted demo 1.0; Dream-1 0.0**.
-
-- **Importance:** the objective is joining two articulated chain ends and retaining their connecting joint during unpowered machinery maintenance. The November 11 board screen covered 1,582 tasks (1,472 pending, 20 accepted, 90 pilot); no direct chain-joint duplicate was found. Existing belt-routing, tensioning, gear and carabiner-chain tasks have distinct objectives. Refresh again before opening the PR if submission is delayed.
-- **Construct validity:** eleven real links, ten passive hinges, a free connector and a free keeper use native contact dynamics. The reference emits ordinary robot controls. The fork slots are physically narrower than the pin heads. Custom training geometry and its fidelity limits are disclosed; no powered-drive, rated-strength or vibration-locking claim.
-- **Scoring:** documented current-state primary score in [0,1], partial credit, numeric fit/clearance/settling/hold conditions and permanent work-area audit. All 24 scorer/geometry tests pass. The omitted-keeper control does not receive full credit, and a stem at the real closed slot end remains eligible for success.
-- **Reproducibility:** pinned adapter/runtime, complete primitive builder and inventory, calibrated rig, dimensions, nominal materials, fixed coordinates, seed behavior, runtime and exact run/scoring commands. The setup screenshot shows the actual reset. The registered reference and model have pixel-identical initial frames in all three cameras.
-- **Feasibility:** rendered native and registered references both reach full score within the 2,400-action budget. The matching single Dream-1 episode completes without runtime errors and its actual unsuccessful score is retained. The sequence and final joint were visually reviewed.
-- **Media:** real H.264/yuv420p MP4s at 20 fps; all initial/action frames preserved; no generated frames, team identity overlays or edited outcomes. Each video is below 50 MB and the PNG below 10 MB. Official uploader supplied the explicit media ID in `task.json`.
-- **Packaging:** one independent task folder, required `task.json` fields, reproducible README, MIT license and asset provenance. No dependency on the team's unmerged task folders. Review-facing task text and media contain no team identity. The registered GitHub account has been verified.
-
-No additional hosted-model trial is part of this submission. The saved task is ready for a single PR from the registered account; do not create duplicate or placeholder submissions.
+- [x] Original unpowered joint-assembly objective retained; physical toothed guide replaces spacers.
+- [x] Setup, primitive inventory, prompt, scorer and fidelity describe the current scene.
+- [x] Normal robot controls only; no post-reset part writes, software latches or contact changes.
+- [x] Full-score native rendered demo and registered evaluation; no source change during execution.
+- [x] Keeper-omission control, guide-escape tests and all 29 unit tests pass.
+- [x] All three camera streams valid; 791 ordered frames; H.264/yuv420p video below 50 MB.
+- [x] Native setup and final frames visually reviewed; no team overlays or generated imagery.
+- [ ] Matching current-scene Dream-1 video, run once after authorization.
+- [ ] Final live-board/rules recheck, current media upload and final `task.json`.
+- [ ] Submission PR and bot receipt.
