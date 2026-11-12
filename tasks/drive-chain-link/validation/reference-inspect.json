@@ -1,17 +1,22 @@
 {
-  "scope": "Registered Inspect Robots evaluation without images; native rendered media validated separately",
-  "source_sha256": "0b872e639e78c6fcc3b1a6594ee3515b57b0ed443b1c9f81d70696a15be0e60b",
-  "report_sha256": "c84d18035f4df7a0ec579aad322eeebf29810b5b6f1b5fcb065fad1a60c5c2c7",
+  "scope": "Actual registered Inspect Robots CPU physics scripted evaluation; no camera media claim",
+  "source_sha256": "c71568e77f6205c443bb7deb8cb57ade82483f5fdb15323cb4e4d499770b01e6",
+  "environment_id": "chain-link-c71568e77f6205c4-physics-only",
+  "environment_revision": "c71568e77f62",
+  "policy": "chain_link_scripted",
+  "evaluation_seed": 0,
+  "trial_seed": 1415158438,
   "status": "success",
-  "error": null,
-  "results": {
-    "abstentions": {},
-    "errored_trials": 0,
-    "metrics": {
-      "task_score": 1.0
-    },
-    "total_scenes": 1,
-    "total_trials": 1
+  "score": 1.0,
+  "trials": 1,
+  "steps": 1181,
+  "termination": {
+    "reason": "success",
+    "detail": null,
+    "terminated": true,
+    "truncated": false
   },
-  "steps": 790
+  "evaluation_sha256": "119117a9b1f20aa001a6e9c1a18f157b11416f7b4713a90ea783b2c908f5c693",
+  "record_sha256": "b7af3593891087613474ffbd9b5e2106e3e171e3d0dbee04001989137c139730",
+  "dream_api_used": false
 }

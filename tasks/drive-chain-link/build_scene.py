@@ -8,7 +8,14 @@ import numpy as np
 
 def create_assets(directory):
     from pxr import Gf, PhysxSchema, Usd, UsdGeom, UsdPhysics, UsdShade
-    from chain_link.config import DECK_TOP, NODES, PITCH, ROOT_CENTER, ROOT_YAW, CHAIN_POSITION
+    from chain_link.config import (
+        DECK_TOP,
+        NODES,
+        PITCH,
+        ROOT_CENTER,
+        ROOT_YAW,
+        CHAIN_POSITION,
+    )
 
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
@@ -167,23 +174,32 @@ def create_assets(directory):
                     stage, mat, path + f"/HingePin{j}", 0.004, 0.020, (x0, 0, 0), dark
                 )
         if n in (0, 10):
-            box(
-                stage,
-                mat,
-                path + "/GripBase",
-                (0.030, 0.048, 0.004),
-                (0, 0, 0.004),
-                orange,
-            )
-            cylinder(stage, mat, path + "/Grip", 0.010, 0.040, (0, 0, 0.022), orange)
-        if n in (0,10):
+            # Taller central sections of the existing side rails provide enough
+            # pad contact for a bare-link pinch, without separate grasp posts.
+            # Keep the hinge and open end-hole geometry unchanged.
+            for side in (-1, 1):
+                box(
+                    stage,
+                    mat,
+                    path + f"/RailThickening{side + 1}",
+                    (0.030, 0.006, 0.012),
+                    (0, side * 0.020, 0.010),
+                    grey,
+                )
             # Raised shoulders support the keeper above a flat end link.
             # Their bore is identical to the original end hole.
-            x0 = -PITCH/2 if n == 0 else PITCH/2
+            x0 = -PITCH / 2 if n == 0 else PITCH / 2
             for j in range(20):
-                theta=j*math.tau/20
-                box(stage,mat,path+f"/KeeperShoulder{j}",(.007,.0075,.005),
-                    (x0+.0195*math.cos(theta),.0195*math.sin(theta),.0065),grey,theta)
+                theta = j * math.tau / 20
+                box(
+                    stage,
+                    mat,
+                    path + f"/KeeperShoulder{j}",
+                    (0.007, 0.0075, 0.005),
+                    (x0 + 0.0195 * math.cos(theta), 0.0195 * math.sin(theta), 0.0065),
+                    grey,
+                    theta,
+                )
         if n:
             prev = f"/Chain/Link{n - 1:02}"
             j = UsdPhysics.RevoluteJoint.Define(stage, f"/Chain/Hinge{n:02}")
@@ -220,13 +236,18 @@ def create_assets(directory):
 
     stage, mat = stage_at("connector")
     body(stage, "/Connector/Body", 0.12)
-    box(stage, mat, "/Connector/Body/Backing", (0.045, 0.140, 0.006), (0, 0, 0), orange)
+    box(stage, mat, "/Connector/Body/Backing", (0.045, 0.140, 0.004), (0, 0, 0), orange)
     for n, y in enumerate((-PITCH / 2, PITCH / 2)):
         cylinder(
-            stage, mat, f"/Connector/Body/Stem{n}", 0.004, 0.026, (0, y, 0.016), grey
+            stage, mat, f"/Connector/Body/Stem{n}", 0.004, 0.027, (0, y, 0.0155), grey
+        )
+        # Flat cylindrical shoulders permit a natural pin-head pinch grasp;
+        # the short tapered lead retains the original insertion envelope.
+        cylinder(
+            stage, mat, f"/Connector/Body/Head{n}", 0.012, 0.006, (0, y, 0.032), orange
         )
         cone(
-            stage, mat, f"/Connector/Body/Head{n}", 0.012, 0.010, (0, y, 0.034), orange
+            stage, mat, f"/Connector/Body/Lead{n}", 0.012, 0.004, (0, y, 0.037), orange
         )
     stage.GetRootLayer().Save()
 
@@ -286,7 +307,8 @@ def create_assets(directory):
             (0.195, y, DECK_TOP + 0.002),
             dark,
         )
-    for n, x in enumerate((0.1675, 0.2225)):
+    # The front stays open for sliding the loose backing under the end plates.
+    for n, x in enumerate((0.2225,)):
         box(
             stage,
             mat,
@@ -299,27 +321,79 @@ def create_assets(directory):
     # are recessed into the bed; positive teeth enter the open link windows.
     # The front service sector remains open for the two end links and keeper.
     cx, cy = CHAIN_POSITION[:2]
-    cylinder(stage,mat,"/Fixtures/FormerHub",0.145,0.008,
-             (cx,cy,DECK_TOP+0.004),(0.52,0.55,0.59))
-    cylinder(stage,mat,"/Fixtures/FormerBoss",0.025,0.014,
-             (cx,cy,DECK_TOP+0.007),dark)
-    cylinder(stage,mat,"/Fixtures/FormerCap",0.012,0.003,
-             (cx,cy,DECK_TOP+0.0155),grey)
-    for n in range(1,10):
-        point=(NODES[n]+NODES[n+1])/2+CHAIN_POSITION
-        delta=point[:2]-CHAIN_POSITION[:2]
-        angle=math.atan2(delta[1],delta[0])
-        radius=float(np.linalg.norm(delta))
-        box(stage,mat,f"/Fixtures/FormerSpoke{n}",
-            (radius+0.012,0.022,0.004),
-            (cx+delta[0]/2,cy+delta[1]/2,DECK_TOP),grey,angle)
-        cylinder(stage,mat,f"/Fixtures/FormerTooth{n}",0.006,0.024,
-                 (point[0],point[1],DECK_TOP+0.012),(0.66,0.68,0.71))
-        cone(stage,mat,f"/Fixtures/FormerToothLead{n}",0.006,0.003,
-             (point[0],point[1],DECK_TOP+0.0255),(0.66,0.68,0.71))
-    for n,angle in enumerate(np.deg2rad([45,90,135,225,270,315])):
-        cylinder(stage,mat,f"/Fixtures/FormerBolt{n}",0.0045,0.003,
-                 (cx+.116*math.cos(angle),cy+.116*math.sin(angle),DECK_TOP+.0095),dark)
+    cylinder(
+        stage,
+        mat,
+        "/Fixtures/FormerHub",
+        0.145,
+        0.008,
+        (cx, cy, DECK_TOP + 0.004),
+        (0.52, 0.55, 0.59),
+    )
+    cylinder(
+        stage,
+        mat,
+        "/Fixtures/FormerBoss",
+        0.025,
+        0.014,
+        (cx, cy, DECK_TOP + 0.007),
+        dark,
+    )
+    cylinder(
+        stage,
+        mat,
+        "/Fixtures/FormerCap",
+        0.012,
+        0.003,
+        (cx, cy, DECK_TOP + 0.0155),
+        grey,
+    )
+    for n in range(1, 10):
+        point = (NODES[n] + NODES[n + 1]) / 2 + CHAIN_POSITION
+        delta = point[:2] - CHAIN_POSITION[:2]
+        angle = math.atan2(delta[1], delta[0])
+        radius = float(np.linalg.norm(delta))
+        box(
+            stage,
+            mat,
+            f"/Fixtures/FormerSpoke{n}",
+            (radius + 0.012, 0.022, 0.004),
+            (cx + delta[0] / 2, cy + delta[1] / 2, DECK_TOP),
+            grey,
+            angle,
+        )
+        cylinder(
+            stage,
+            mat,
+            f"/Fixtures/FormerTooth{n}",
+            0.006,
+            0.050,
+            (point[0], point[1], DECK_TOP + 0.025),
+            (0.66, 0.68, 0.71),
+        )
+        cone(
+            stage,
+            mat,
+            f"/Fixtures/FormerToothLead{n}",
+            0.006,
+            0.003,
+            (point[0], point[1], DECK_TOP + 0.0515),
+            (0.66, 0.68, 0.71),
+        )
+    for n, angle in enumerate(np.deg2rad([45, 90, 135, 225, 270, 315])):
+        cylinder(
+            stage,
+            mat,
+            f"/Fixtures/FormerBolt{n}",
+            0.0045,
+            0.003,
+            (
+                cx + 0.116 * math.cos(angle),
+                cy + 0.116 * math.sin(angle),
+                DECK_TOP + 0.0095,
+            ),
+            dark,
+        )
     stage.GetRootLayer().Save()
     (directory / "geometry-inventory.json").write_text(
         json.dumps(inventory, indent=2) + "\n"

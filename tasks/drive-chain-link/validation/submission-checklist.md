@@ -1,12 +1,12 @@
-# Revision checklist
+# Development checklist
 
-- [x] Original unpowered joint-assembly objective retained; physical toothed guide replaces spacers.
-- [x] Setup, primitive inventory, prompt, scorer and fidelity describe the current scene.
-- [x] Normal robot controls only; no post-reset part writes, software latches or contact changes.
-- [x] Full-score native rendered demo and registered evaluation; no source change during execution.
-- [x] Keeper-omission control, guide-escape tests and all 29 unit tests pass.
-- [x] All three camera streams valid; 791 ordered frames; H.264/yuv420p video below 50 MB.
-- [x] Native setup and final frames visually reviewed; no team overlays or generated imagery.
-- [ ] Matching current-scene Dream-1 video, run once after authorization.
-- [ ] Final live-board/rules recheck, current media upload and final `task.json`.
-- [ ] Submission PR and bot receipt.
+- [x] One task folder; native scene/scorer, fixed seed/layout and exact instruction documented.
+- [x] Loose yellow connector placed first; no pre-attached yellow chain-end handles. Only central grey side rails are thicker for grasping.
+- [x] Fixed former keeps all nine resting links physically located during lifting; full score rejects a lifted or folded loop.
+- [x] All post-reset actuation uses ordinary fourteen robot joint/gripper controls; passive task hinges, native contact, no part-state writes, snaps, latches or runtime collision changes.
+- [x] Numeric current-state partial/full/failure score with permanent workspace auditing. Scorer unchanged by controller tuning.
+- [x] Native recording and registered scripted evaluation reach 1.0 within 2,400 actions. Omitted-lock control scores 0.4. Source/controller equivalence recorded explicitly.
+- [x] 32 tests, USD structure, all camera frames, final release and blind-review media visually checked.
+- [x] All dimensions, materials, masses, fixed poses, cameras, simplifications, reset and runtime documented.
+- [ ] Final matching hosted Dream-1 run, reserved for the last paid step.
+- [ ] Matching media upload and task.json, final task-board check and pull request. No submission claimed by this draft.

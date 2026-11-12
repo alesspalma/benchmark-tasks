@@ -684,30 +684,33 @@
   },
   {
     "asset": "chain",
-    "solid": "/Chain/Link00/GripBase",
+    "solid": "/Chain/Link00/RailThickening0",
     "kind": "box",
     "size_m": [
       0.03,
-      0.048,
-      0.004
+      0.006,
+      0.012
     ],
     "center_m": [
       0.0,
-      0.0,
-      0.004
+      -0.02,
+      0.01
     ],
     "yaw_rad": 0
   },
   {
     "asset": "chain",
-    "solid": "/Chain/Link00/Grip",
-    "kind": "cylinder",
-    "radius_m": 0.01,
-    "height_m": 0.04,
+    "solid": "/Chain/Link00/RailThickening2",
+    "kind": "box",
+    "size_m": [
+      0.03,
+      0.006,
+      0.012
+    ],
     "center_m": [
       0.0,
-      0.0,
-      0.022
+      0.02,
+      0.01
     ],
     "yaw_rad": 0
   },
@@ -1036,11 +1039,11 @@
     "body": "/Chain/Link01",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      0.0995101838463596,
-      0.006981525298935816,
+      0.09984767389697521,
+      0.0038999239814159273,
       0.0
     ],
-    "yaw_rad": 0.14008825536890823
+    "yaw_rad": 0.07807778430774392
   },
   {
     "asset": "chain",
@@ -2429,11 +2432,11 @@
     "body": "/Chain/Link02",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      0.18840668200023653,
-      0.044764320787093526,
+      0.19091473771758533,
+      0.036101118152053774,
       0.0
     ],
-    "yaw_rad": 0.6636870309672072
+    "yaw_rad": 0.6016765599060429
   },
   {
     "asset": "chain",
@@ -3124,11 +3127,11 @@
     "body": "/Chain/Link03",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      0.2465019099648915,
-      0.12193343058276868,
+      0.2536805313489735,
+      0.10952170224632657,
       0.0
     ],
-    "yaw_rad": 1.1872858065655056
+    "yaw_rad": 1.1252753355043412
   },
   {
     "asset": "chain",
@@ -4517,11 +4520,11 @@
     "body": "/Chain/Link04",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      0.25822929832309327,
-      0.21781145403558141,
+      0.2713270110753107,
+      0.20448869004835263,
       0.0
     ],
-    "yaw_rad": 1.7108845821638048
+    "yaw_rad": 1.6488741111026406
   },
   {
     "asset": "chain",
@@ -5212,11 +5215,11 @@
     "body": "/Chain/Link05",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      0.22044650283493555,
-      0.3067079521894583,
+      0.23912581690467294,
+      0.2955557538689627,
       0.0
     ],
-    "yaw_rad": 2.2344833577621035
+    "yaw_rad": 2.1724728867009393
   },
   {
     "asset": "chain",
@@ -6605,11 +6608,11 @@
     "body": "/Chain/Link06",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      0.14327739303926046,
-      0.3648031801541133,
+      0.16570523281040014,
+      0.3583215475003509,
       0.0
     ],
-    "yaw_rad": 2.7580821333604018
+    "yaw_rad": 2.6960716622992376
   },
   {
     "asset": "chain",
@@ -7300,11 +7303,11 @@
     "body": "/Chain/Link07",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      0.047399369586447665,
-      0.37653056851231514,
+      0.07073824500837408,
+      0.3759680272266882,
       0.0
     ],
-    "yaw_rad": 3.281680908958702
+    "yaw_rad": 3.219670437897537
   },
   {
     "asset": "chain",
@@ -8693,11 +8696,11 @@
     "body": "/Chain/Link08",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      -0.04149712856742924,
-      0.3387477730241575,
+      -0.020328818812236,
+      0.3437668330560504,
       0.0
     ],
-    "yaw_rad": 3.805279684557
+    "yaw_rad": 3.743269213495836
   },
   {
     "asset": "chain",
@@ -9388,11 +9391,11 @@
     "body": "/Chain/Link09",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      -0.09959235653208422,
-      0.2615786632284822,
+      -0.0830946124436242,
+      0.2703462489617775,
       0.0
     ],
-    "yaw_rad": -1.9543068470242873
+    "yaw_rad": -2.0163173180854517
   },
   {
     "asset": "chain",
@@ -10781,11 +10784,11 @@
     "body": "/Chain/Link10",
     "mass_kg": 0.035,
     "initial_local_position_m": [
-      -0.13035254037844385,
-      0.16668488327229053,
+      -0.12260254037844383,
+      0.17856449140617917,
       0.0
     ],
-    "yaw_rad": -1.8142185916553795
+    "yaw_rad": -1.9382395337777085
   },
   {
     "asset": "chain",
@@ -11461,30 +11464,33 @@
   },
   {
     "asset": "chain",
-    "solid": "/Chain/Link10/GripBase",
+    "solid": "/Chain/Link10/RailThickening0",
     "kind": "box",
     "size_m": [
       0.03,
-      0.048,
-      0.004
+      0.006,
+      0.012
     ],
     "center_m": [
       0.0,
-      0.0,
-      0.004
+      -0.02,
+      0.01
     ],
     "yaw_rad": 0
   },
   {
     "asset": "chain",
-    "solid": "/Chain/Link10/Grip",
-    "kind": "cylinder",
-    "radius_m": 0.01,
-    "height_m": 0.04,
+    "solid": "/Chain/Link10/RailThickening2",
+    "kind": "box",
+    "size_m": [
+      0.03,
+      0.006,
+      0.012
+    ],
     "center_m": [
       0.0,
-      0.0,
-      0.022
+      0.02,
+      0.01
     ],
     "yaw_rad": 0
   },
@@ -11838,7 +11844,7 @@
     "size_m": [
       0.045,
       0.14,
-      0.006
+      0.004
     ],
     "center_m": [
       0.0,
@@ -11852,24 +11858,37 @@
     "solid": "/Connector/Body/Stem0",
     "kind": "cylinder",
     "radius_m": 0.004,
-    "height_m": 0.026,
+    "height_m": 0.027,
     "center_m": [
       0.0,
       -0.05,
-      0.016
+      0.0155
     ],
     "yaw_rad": 0
   },
   {
     "asset": "connector",
     "solid": "/Connector/Body/Head0",
-    "kind": "cone",
+    "kind": "cylinder",
     "radius_m": 0.012,
-    "height_m": 0.01,
+    "height_m": 0.006,
     "center_m": [
       0.0,
       -0.05,
-      0.034
+      0.032
+    ],
+    "yaw_rad": 0
+  },
+  {
+    "asset": "connector",
+    "solid": "/Connector/Body/Lead0",
+    "kind": "cone",
+    "radius_m": 0.012,
+    "height_m": 0.004,
+    "center_m": [
+      0.0,
+      -0.05,
+      0.037
     ],
     "yaw_rad": 0
   },
@@ -11878,24 +11897,37 @@
     "solid": "/Connector/Body/Stem1",
     "kind": "cylinder",
     "radius_m": 0.004,
-    "height_m": 0.026,
+    "height_m": 0.027,
     "center_m": [
       0.0,
       0.05,
-      0.016
+      0.0155
     ],
     "yaw_rad": 0
   },
   {
     "asset": "connector",
     "solid": "/Connector/Body/Head1",
-    "kind": "cone",
+    "kind": "cylinder",
     "radius_m": 0.012,
-    "height_m": 0.01,
+    "height_m": 0.006,
     "center_m": [
       0.0,
       0.05,
-      0.034
+      0.032
+    ],
+    "yaw_rad": 0
+  },
+  {
+    "asset": "connector",
+    "solid": "/Connector/Body/Lead1",
+    "kind": "cone",
+    "radius_m": 0.012,
+    "height_m": 0.004,
+    "center_m": [
+      0.0,
+      0.05,
+      0.037
     ],
     "yaw_rad": 0
   },
@@ -12176,22 +12208,6 @@
       0.004
     ],
     "center_m": [
-      0.1675,
-      0.0,
-      0.839
-    ],
-    "yaw_rad": 0
-  },
-  {
-    "asset": "fixtures",
-    "solid": "/Fixtures/ConnectorSide1",
-    "kind": "box",
-    "size_m": [
-      0.005,
-      0.14,
-      0.004
-    ],
-    "center_m": [
       0.2225,
       0.0,
       0.839
@@ -12258,11 +12274,11 @@
     "solid": "/Fixtures/FormerTooth1",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.2883012701892219,
       -0.16160254037844388,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12275,7 +12291,7 @@
     "center_m": [
       0.2883012701892219,
       -0.16160254037844388,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },
@@ -12300,11 +12316,11 @@
     "solid": "/Fixtures/FormerTooth2",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.3816025403784438,
       -0.1866025403784439,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12317,7 +12333,7 @@
     "center_m": [
       0.3816025403784438,
       -0.1866025403784439,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },
@@ -12342,11 +12358,11 @@
     "solid": "/Fixtures/FormerTooth3",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.47490381056766573,
       -0.1616025403784439,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12359,7 +12375,7 @@
     "center_m": [
       0.47490381056766573,
       -0.1616025403784439,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },
@@ -12384,11 +12400,11 @@
     "solid": "/Fixtures/FormerTooth4",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.5432050807568878,
       -0.09330127018922195,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12401,7 +12417,7 @@
     "center_m": [
       0.5432050807568878,
       -0.09330127018922195,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },
@@ -12426,11 +12442,11 @@
     "solid": "/Fixtures/FormerTooth5",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.5682050807568878,
       -4.163336342344337e-17,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12443,7 +12459,7 @@
     "center_m": [
       0.5682050807568878,
       -4.163336342344337e-17,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },
@@ -12468,11 +12484,11 @@
     "solid": "/Fixtures/FormerTooth6",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.5432050807568878,
       0.09330127018922188,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12485,7 +12501,7 @@
     "center_m": [
       0.5432050807568878,
       0.09330127018922188,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },
@@ -12510,11 +12526,11 @@
     "solid": "/Fixtures/FormerTooth7",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.47490381056766584,
       0.16160254037844388,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12527,7 +12543,7 @@
     "center_m": [
       0.47490381056766584,
       0.16160254037844388,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },
@@ -12552,11 +12568,11 @@
     "solid": "/Fixtures/FormerTooth8",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.38160254037844393,
       0.1866025403784439,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12569,7 +12585,7 @@
     "center_m": [
       0.38160254037844393,
       0.1866025403784439,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },
@@ -12594,11 +12610,11 @@
     "solid": "/Fixtures/FormerTooth9",
     "kind": "cylinder",
     "radius_m": 0.006,
-    "height_m": 0.024,
+    "height_m": 0.05,
     "center_m": [
       0.2883012701892219,
       0.16160254037844385,
-      0.849
+      0.862
     ],
     "yaw_rad": 0
   },
@@ -12611,7 +12627,7 @@
     "center_m": [
       0.2883012701892219,
       0.16160254037844385,
-      0.8624999999999999
+      0.8885
     ],
     "yaw_rad": 0
   },

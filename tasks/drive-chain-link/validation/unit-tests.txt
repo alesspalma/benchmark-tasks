@@ -10,11 +10,13 @@ test_interruption_restarts_hold (test_scoring.AssemblyScoreTests.test_interrupti
 test_keeper_measurement_is_not_overwritten_by_guide_diagnostics (test_scoring.AssemblyScoreTests.test_keeper_measurement_is_not_overwritten_by_guide_diagnostics) ... ok
 test_lifted_end_rejected (test_scoring.AssemblyScoreTests.test_lifted_end_rejected) ... ok
 test_link_lifted_off_former_cannot_receive_full_credit (test_scoring.AssemblyScoreTests.test_link_lifted_off_former_cannot_receive_full_credit) ... ok
+test_loose_connector_start_has_no_assembly_credit (test_scoring.AssemblyScoreTests.test_loose_connector_start_has_no_assembly_credit) ... ok
 test_nearby_valid_hole_offset (test_scoring.AssemblyScoreTests.test_nearby_valid_hole_offset) ... ok
 test_no_peak_score_survives_disassembly (test_scoring.AssemblyScoreTests.test_no_peak_score_survives_disassembly) ... ok
 test_nonfinite_physics_coordinate_is_invalid (test_scoring.AssemblyScoreTests.test_nonfinite_physics_coordinate_is_invalid) ... ok
 test_nonfinite_state_or_velocity_forces_zero (test_scoring.AssemblyScoreTests.test_nonfinite_state_or_velocity_forces_zero) ... ok
 test_one_stem_outside_slot (test_scoring.AssemblyScoreTests.test_one_stem_outside_slot) ... ok
+test_placing_connector_alone_does_not_join_chain (test_scoring.AssemblyScoreTests.test_placing_connector_alone_does_not_join_chain) ... ok
 test_plate_above_heads_is_not_seated (test_scoring.AssemblyScoreTests.test_plate_above_heads_is_not_seated) ... ok
 test_plate_below_chain_is_not_seated (test_scoring.AssemblyScoreTests.test_plate_below_chain_is_not_seated) ... ok
 test_radial_clearance_not_axis_aligned_square (test_scoring.AssemblyScoreTests.test_radial_clearance_not_axis_aligned_square) ... ok
@@ -23,12 +25,13 @@ test_slot_mouths_never_count_as_retained (test_scoring.AssemblyScoreTests.test_s
 test_success_requires_one_second (test_scoring.AssemblyScoreTests.test_success_requires_one_second) ... ok
 test_tooth_outside_side_rails_is_not_seated (test_scoring.AssemblyScoreTests.test_tooth_outside_side_rails_is_not_seated) ... ok
 test_trace_inputs_are_not_mutated (test_scoring.AssemblyScoreTests.test_trace_inputs_are_not_mutated) ... ok
+test_raised_rails_clear_the_retaining_plate (test_scoring.BareRailClearanceTests.test_raised_rails_clear_the_retaining_plate) ... ok
 test_closed_slot_ends_open_mouths_and_connected_bridge (test_scoring.PhysicalApertureTests.test_closed_slot_ends_open_mouths_and_connected_bridge) ... ok
 test_heads_cannot_pass_vertically_through_slots (test_scoring.PhysicalApertureTests.test_heads_cannot_pass_vertically_through_slots) ... ok
 test_stems_can_enter_from_the_open_edge (test_scoring.PhysicalApertureTests.test_stems_can_enter_from_the_open_edge) ... ok
 test_stems_fit_but_heads_are_blocked_by_necks (test_scoring.PhysicalApertureTests.test_stems_fit_but_heads_are_blocked_by_necks) ... ok
 
 ----------------------------------------------------------------------
-Ran 29 tests in 0.404s
+Ran 32 tests in 0.416s
 
 OK

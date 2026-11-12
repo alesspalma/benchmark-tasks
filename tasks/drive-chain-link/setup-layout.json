@@ -236,8 +236,8 @@
     "pitch_m": 0.1,
     "node_positions_world_m": [
       [
-        0.16622737138496518,
-        -0.075,
+        0.16256122015273006,
+        -0.08,
         0.847
       ],
       [
@@ -291,8 +291,8 @@
         0.847
       ],
       [
-        0.16622737138496507,
-        0.075,
+        0.16256122015272995,
+        0.08,
         0.847
       ]
     ],
@@ -300,14 +300,20 @@
     "layers": "8mm inner plates; paired 4mm outer plates at +/-6mm; metal 8mm-diameter hinge pins",
     "passive_hinges": 10,
     "free_end_bore_diameter_m": 0.032,
-    "free_end_grip_diameter_m": 0.02,
-    "free_end_grip_height_m": 0.04,
     "keeper_support_shoulders": {
       "height_m": 0.005,
       "centre_local_z_m": 0.0065,
       "ring_centre_radius_m": 0.0195
     },
-    "material": "nominal printed polymer links and metal pins"
+    "material": "nominal printed polymer links and metal pins",
+    "bare_end_rails": {
+      "width_m": 0.006,
+      "central_length_m": 0.03,
+      "central_total_height_m": 0.02,
+      "central_bottom_local_z_m": -0.004,
+      "central_top_local_z_m": 0.016,
+      "material": "same grey polymer as the link; no added grasp posts"
+    }
   },
   "former": {
     "type": "fixed toothed chain-assembly former with open front service sector",
@@ -325,7 +331,7 @@
           -0.16160254037844388
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       },
       {
@@ -335,7 +341,7 @@
           -0.1866025403784439
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       },
       {
@@ -345,7 +351,7 @@
           -0.1616025403784439
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       },
       {
@@ -355,7 +361,7 @@
           -0.09330127018922195
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       },
       {
@@ -365,7 +371,7 @@
           -4.163336342344337e-17
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       },
       {
@@ -375,7 +381,7 @@
           0.09330127018922188
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       },
       {
@@ -385,7 +391,7 @@
           0.16160254037844388
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       },
       {
@@ -395,7 +401,7 @@
           0.1866025403784439
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       },
       {
@@ -405,7 +411,7 @@
           0.16160254037844385
         ],
         "radius_m": 0.006,
-        "height_m": 0.024,
+        "height_m": 0.05,
         "lead_height_m": 0.003
       }
     ],
@@ -413,13 +419,13 @@
     "boss_radius_m": 0.025,
     "boss_height_m": 0.014,
     "material": "nominal metal, rigidly fixed to service deck",
-    "role": "positive location of chain windows during assembly; no powered drive"
+    "role": "positive location of chain windows throughout the 40mm end lift and subsequent assembly; no powered drive"
   },
   "connector": {
     "position_m": [
-      0.195,
-      0.0,
-      0.84
+      0.35,
+      -0.35,
+      0.7495
     ],
     "rotation_xyzw": [
       0,
@@ -431,14 +437,21 @@
     "backing_size_m": [
       0.045,
       0.14,
-      0.006
+      0.004
     ],
     "pin_spacing_m": 0.1,
     "stem_diameter_m": 0.008,
-    "stem_length_m": 0.026,
+    "stem_length_m": 0.027,
     "head_base_diameter_m": 0.024,
     "head_height_m": 0.01,
-    "material": "nominal polymer backing and metal pins"
+    "material": "nominal polymer backing and metal pins",
+    "target_cradle_position_m": [
+      0.195,
+      0.0,
+      0.839
+    ],
+    "head_shape": "6mm cylindrical shoulder with 4mm tapered lead, same 24mm diameter and 10mm total head height",
+    "initial_condition": "loose on the table; the service cradle is initially empty"
   },
   "keeper": {
     "position_m": [
@@ -480,7 +493,7 @@
     ],
     "deck_top_z_m": 0.837,
     "support_posts": "four 25mm square metal posts at x=.18/.60,y=+/- .19",
-    "cradle": "4mm-high locating edges around the free connector; complete geometry in inventory",
+    "cradle": "Three 4mm-high locating edges with the front open for sliding the free connector under the end plates; complete geometry in inventory",
     "material": "nominal metal service fixture"
   },
   "contact": {

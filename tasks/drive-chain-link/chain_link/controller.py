@@ -13,24 +13,34 @@ from .config import (
     GRIPS,
     CONNECTOR_POSITION,
     KEEPER_POSITION,
-    NODES, CLOSED_NODES,
+    NODES,
+    CLOSED_NODES,
+    CONNECTOR_PICKUP_POSITION,
+    CONNECTOR_GRASP,
+    CHAIN_GRASP_HEIGHT,
 )
 
 
 def demo_plan(mode="demo", initial_state=None):
     if mode == "hold":
         return [dict(phase="hold reset", seconds=5.0)]
-    if mode not in ("demo", "ends", "unlocked", "retention"):
+    if mode not in ("demo", "connector", "ends", "unlocked", "retention"):
         raise ValueError("Unknown policy mode")
     down = grip_rotation()
     plan = []
     rotations = {"left": down, "right": down}
-    seated_rotations={}
-    for arm,i in (("right",0),("left",10)):
-        before=NODES[i+1]-NODES[i]
-        after=CLOSED_NODES[i+1]-CLOSED_NODES[i]
-        delta=np.arctan2(after[1],after[0])-np.arctan2(before[1],before[0])
-        seated_rotations[arm]=grip_rotation(delta)
+    seated_rotations = {}
+    chain_pick_rotations = {}
+    for arm, i in (("right", 0), ("left", 10)):
+        before = NODES[i + 1] - NODES[i]
+        after = CLOSED_NODES[i + 1] - CLOSED_NODES[i]
+        initial_yaw = np.arctan2(before[1], before[0])
+        final_yaw = np.arctan2(after[1], after[0])
+        if arm == "left":
+            initial_yaw += np.pi
+            final_yaw += np.pi
+        chain_pick_rotations[arm] = grip_rotation(initial_yaw)
+        seated_rotations[arm] = grip_rotation(final_yaw)
 
     def add(phase, seconds, **targets):
         stage = dict(phase=phase, seconds=seconds)
@@ -42,35 +52,62 @@ def demo_plan(mode="demo", initial_state=None):
             )
         plan.append(stage)
 
-    grips = {a: CHAIN_POSITION + g + [0, 0, 0.030] for a, g in GRIPS.items()}
+    start = CONNECTOR_PICKUP_POSITION.copy()
+    if initial_state is not None:
+        start = np.array(initial_state["connector"]["pose"][:3])
+    pick = start + CONNECTOR_GRASP
+    placed = CONNECTOR_POSITION + CONNECTOR_GRASP
+    add("approach separate connecting link", 2.0, right=(pick + [0, 0, 0.045], 0.85))
+    add("lower to connector pin head", 1.5, right=(pick, 0.85))
+    add("grasp connecting link", 0.8, right=(pick, 0.10))
+    add("lift connecting link from table", 1.8, right=(pick + [0, 0, 0.120], 0.10))
+    add(
+        "carry connector above empty cradle",
+        2.5,
+        right=(placed + [-0.090, 0, 0.050], 0.10),
+    )
+    add(
+        "lower connector at cradle entrance", 2.0, right=(placed + [-0.090, 0, 0], 0.10)
+    )
+    add("slide connector into empty cradle", 2.0, right=(placed, 0.10))
+    add("settle placed connector", 0.8)
+    add("release placed connector", 0.8, right=(placed, 0.85))
+    add("withdraw from placed connector", 1.0, right=(placed + [0, 0, 0.055], 0.85))
+    add("park after connector placement", 1.5, right=([0.15, -0.30, 0.95], 1.0))
+    add("settle connector in cradle", 0.8)
+    if mode == "connector":
+        return plan + [dict(phase="hold placed connector", seconds=3.0)]
+    grips = {
+        a: CHAIN_POSITION + g + [0, 0, CHAIN_GRASP_HEIGHT] for a, g in GRIPS.items()
+    }
     from .config import END_NODES
+
     seats = {
-        a: g + CONNECTOR_POSITION + [0, sign * .050, .007]
+        a: g
+        + CONNECTOR_POSITION
+        + [0, sign * 0.050, 0.007]
         - (CHAIN_POSITION + END_NODES[a])
-        for a,g,sign in (("right",grips["right"],-1),("left",grips["left"],1))
+        for a, g, sign in (("right", grips["right"], -1), ("left", grips["left"], 1))
     }
     if initial_state is not None:
         from yam_arena.urdf import quat_xyzw_to_matrix
 
-        c = initial_state["connector"]["pose"]
-        cr = quat_xyzw_to_matrix(np.array(c[3:]))
-        for arm, body, sign in [("right", "Link00", -1), ("left", "Link10", 1)]:
+        for arm, body, sign in (("right", "Link00", -1), ("left", "Link10", 1)):
             pose = initial_state["bodies"][body]["pose"]
             r = quat_xyzw_to_matrix(np.array(pose[3:]))
-            grips[arm] = np.array(pose[:3]) + r @ np.array([0, 0, 0.030])
+            grips[arm] = np.array(pose[:3]) + r @ np.array([0, 0, CHAIN_GRASP_HEIGHT])
             seats[arm] = (
-                np.array(c[:3])
-                + cr @ np.array([0, sign * 0.050, 0.007])
-                - r @ np.array([sign * 0.050, 0, -0.030])
+                CONNECTOR_POSITION
+                + [0, sign * 0.050, 0.007]
+                - r @ np.array([sign * 0.050, 0, -CHAIN_GRASP_HEIGHT])
             )
-            # Round grip posts permit the reachable straight-down wrist orientation.
-            rotations[arm] = down
+    rotations.update(chain_pick_rotations)
     add(
-        "approach both chain-end tabs",
+        "approach both bare chain ends",
         2.0,
         **{a: (g + [0, 0, 0.055], 0.85) for a, g in grips.items()},
     )
-    add("lower to chain tabs", 1.5, **{a: (g, 0.85) for a, g in grips.items()})
+    add("lower onto link rails", 1.5, **{a: (g, 0.85) for a, g in grips.items()})
     add("grasp both chain ends", 1.0, **{a: (g, 0.10) for a, g in grips.items()})
     add(
         "lift chain ends above pin heads",
@@ -83,19 +120,20 @@ def demo_plan(mode="demo", initial_state=None):
         2.0,
         **{a: (g + [0, 0, 0.040], 0.10) for a, g in seats.items()},
     )
+    add("settle hole alignment", 2.0)
     add(
         "lower both chain ends onto pins",
         2.5,
         **{a: (g, 0.10) for a, g in seats.items()},
     )
     add("settle chain-end seating", 1.0)
-    add("release both chain tabs", 0.8, **{a: (g, 0.85) for a, g in seats.items()})
+    add("release both bare chain ends", 0.8, **{a: (g, 0.85) for a, g in seats.items()})
     add(
         "lift both hands clear",
         1.0,
         **{a: (g + [0, 0, 0.065], 0.85) for a, g in seats.items()},
     )
-    rotations["left"]=down
+    rotations["left"] = down
     add("park left hand", 1.5, left=([0.15, 0.30, 0.95], 1.0))
     add("let chain settle onto backing", 1.0)
     if mode == "ends":
@@ -156,12 +194,25 @@ class ScriptedPolicy(PolicyBase):
         self.worst_position_error = self.worst_rotation_error = 0.0
         self.keeper_integral = np.zeros(3)
         self.release_position = None
+        self.connector_release_position = None
         self.chain_release_positions = None
-        seating = next((s for s in self.plan if s["phase"] == "lower both chain ends onto pins"),None)
-        self.chain_seats = ({a:np.array(seating[a]["position"]) for a in ("left","right")}
-                            if seating is not None else {})
-        self.keeper_end = next((np.array(s["right"]["position"]) for s in self.plan
-                               if s["phase"] == "release retaining plate"),None)
+        seating = next(
+            (s for s in self.plan if s["phase"] == "lower both chain ends onto pins"),
+            None,
+        )
+        self.chain_seats = (
+            {a: np.array(seating[a]["position"]) for a in ("left", "right")}
+            if seating is not None
+            else {}
+        )
+        self.keeper_end = next(
+            (
+                np.array(s["right"]["position"])
+                for s in self.plan
+                if s["phase"] == "release retaining plate"
+            ),
+            None,
+        )
         initial = {}
         for arm, offset in (("left", 0), ("right", 7)):
             pos, rot = ik.tcp_pose(self.q[offset : offset + 6], station.BASES[arm])
@@ -209,46 +260,111 @@ class ScriptedPolicy(PolicyBase):
             from yam_arena.urdf import quat_xyzw_to_matrix
 
             if self.phase in {
+                "lift connecting link from table",
+                "carry connector above empty cradle",
+                "lower connector at cradle entrance",
+                "slide connector into empty cradle",
+                "settle placed connector",
+            }:
+                pos, rot, grip = targets["right"]
+                desired_body = pos - CONNECTOR_GRASP
+                hand = state["hands"]["right_robot"]
+                tcp = np.array(hand["tcp"][:3])
+                cp = np.array(state["connector"]["pose"])
+                body_r = quat_xyzw_to_matrix(cp[3:])
+                hp = hand["poses"][hand["names"].index("gripper")]
+                hand_r = quat_xyzw_to_matrix(np.array(hp[3:]))
+                targets["right"] = (
+                    desired_body + body_r.T @ (tcp - cp[:3]),
+                    body_r.T @ hand_r,
+                    grip,
+                )
+            if self.phase == "release placed connector":
+                if self.connector_release_position is None:
+                    self.connector_release_position = np.array(
+                        state["hands"]["right_robot"]["tcp"][:3]
+                    )
+                _, rot, grip = targets["right"]
+                targets["right"] = (self.connector_release_position, rot, grip)
+            if self.connector_release_position is not None:
+                pos, rot, grip = targets["right"]
+                if self.phase == "withdraw from placed connector":
+                    targets["right"] = (
+                        self.connector_release_position
+                        + [0, 0, 0.055 * self.stage_progress],
+                        rot,
+                        grip,
+                    )
+                elif self.phase == "park after connector placement":
+                    targets["right"] = (
+                        pos
+                        + (1 - self.stage_progress)
+                        * (
+                            self.connector_release_position
+                            - (CONNECTOR_POSITION + CONNECTOR_GRASP)
+                        ),
+                        rot,
+                        grip,
+                    )
+            if self.phase in {
                 "lift chain ends above pin heads",
                 "align both chain holes over pins",
                 "lower both chain ends onto pins",
+                "settle hole alignment",
                 "settle chain-end seating",
             }:
-                for arm, body, sign in [("right", "Link00", -1), ("left", "Link10", 1)]:
+                for arm, body, sign in (("right", "Link00", -1), ("left", "Link10", 1)):
                     before = quat_xyzw_to_matrix(
                         np.array(self.initial_state["bodies"][body]["pose"][3:])
                     )
-                    now = quat_xyzw_to_matrix(
-                        np.array(state["bodies"][body]["pose"][3:])
-                    )
+                    pose = np.array(state["bodies"][body]["pose"])
+                    now = quat_xyzw_to_matrix(pose[3:])
                     pos, rot, grip = targets[arm]
-                    desired_hole = pos + before @ np.array([sign * 0.050, 0, -0.030])
-                    current_hole = np.array(
-                        state["bodies"][body]["pose"][:3]
-                    ) + now @ np.array([sign * 0.050, 0, 0])
+                    desired_hole = pos + before @ np.array(
+                        [sign * 0.050, 0, -CHAIN_GRASP_HEIGHT]
+                    )
+                    if self.phase != "lift chain ends above pin heads":
+                        cp = np.array(state["connector"]["pose"])
+                        cr = quat_xyzw_to_matrix(cp[3:])
+                        desired_hole = cp[:3] + cr @ (desired_hole - CONNECTOR_POSITION)
+                    current_hole = pose[:3] + now @ np.array([sign * 0.050, 0, 0])
                     tcp = np.array(state["hands"][arm + "_robot"]["tcp"][:3])
-                    targets[arm] = (tcp + desired_hole - current_hole, rot, grip)
+                    correction = desired_hole - current_hole
+                    correction[:2] *= 3.0
+                    targets[arm] = (tcp + correction, rot, grip)
             if self.phase in {
-                "lift retaining plate","route keeper outside chain grips",
-                "carry plate beside connecting link","lower keeper beside pin heads",
-                "settle keeper approach","slide keeper under both heads","settle retained keeper",
+                "lift retaining plate",
+                "route keeper outside chain grips",
+                "carry plate beside connecting link",
+                "lower keeper beside pin heads",
+                "settle keeper approach",
+                "slide keeper under both heads",
+                "settle retained keeper",
             }:
-                pos,rot,grip=targets["right"]
-                desired_body=pos-np.array([0,0,.050])
-                desired_r=np.eye(3)
-                if self.phase not in {"lift retaining plate","route keeper outside chain grips"}:
-                    c=np.array(state["connector"]["pose"])
-                    desired_r=quat_xyzw_to_matrix(c[3:])
-                    desired_body=c[:3]+desired_r@(desired_body-np.array(self.initial_state["connector"]["pose"][:3]))
-                hand=state["hands"]["right_robot"]
-                tcp=np.array(hand["tcp"][:3])
-                body=np.array(state["keeper"]["pose"][:3])
-                body_r=quat_xyzw_to_matrix(np.array(state["keeper"]["pose"][3:]))
-                hp=hand["poses"][hand["names"].index("gripper")]
-                hand_r=quat_xyzw_to_matrix(np.array(hp[3:]))
-                relative_tcp=body_r.T@(tcp-body)
-                targets["right"]=(desired_body+desired_r@relative_tcp,
-                                  desired_r@body_r.T@hand_r,grip)
+                pos, rot, grip = targets["right"]
+                desired_body = pos - np.array([0, 0, 0.050])
+                desired_r = np.eye(3)
+                if self.phase not in {
+                    "lift retaining plate",
+                    "route keeper outside chain grips",
+                }:
+                    c = np.array(state["connector"]["pose"])
+                    desired_r = quat_xyzw_to_matrix(c[3:])
+                    desired_body = c[:3] + desired_r @ (
+                        desired_body - CONNECTOR_POSITION
+                    )
+                hand = state["hands"]["right_robot"]
+                tcp = np.array(hand["tcp"][:3])
+                body = np.array(state["keeper"]["pose"][:3])
+                body_r = quat_xyzw_to_matrix(np.array(state["keeper"]["pose"][3:]))
+                hp = hand["poses"][hand["names"].index("gripper")]
+                hand_r = quat_xyzw_to_matrix(np.array(hp[3:]))
+                relative_tcp = body_r.T @ (tcp - body)
+                targets["right"] = (
+                    desired_body + desired_r @ relative_tcp,
+                    desired_r @ body_r.T @ hand_r,
+                    grip,
+                )
             if self.phase == "release retaining plate":
                 if self.release_position is None:
                     self.release_position = np.array(
@@ -256,36 +372,76 @@ class ScriptedPolicy(PolicyBase):
                     )
                 _, rot, grip = targets["right"]
                 targets["right"] = (self.release_position, rot, grip)
-            if self.phase == "release both chain tabs":
+            if self.phase == "release both bare chain ends":
                 if self.chain_release_positions is None:
                     self.chain_release_positions = {
-                        a:np.array(state["hands"][a+"_robot"]["tcp"][:3])
-                        for a in ("left","right")
+                        a: np.array(state["hands"][a + "_robot"]["tcp"][:3])
+                        for a in ("left", "right")
                     }
-                for a in ("left","right"):
-                    _,r,g=targets[a]
-                    targets[a]=(self.chain_release_positions[a],r,g)
+                for a in ("left", "right"):
+                    _, r, g = targets[a]
+                    targets[a] = (self.chain_release_positions[a], r, g)
             if self.chain_release_positions is not None:
-                f=self.stage_progress
+                f = self.stage_progress
                 if self.phase == "lift both hands clear":
-                    for a in ("left","right"):
-                        _,r,g=targets[a]
-                        targets[a]=(self.chain_release_positions[a]+[0,0,.065*f],r,g)
-                elif self.phase in {"park left hand","let chain settle onto backing","hold joined ends"}:
-                    _,r,g=targets["right"]
-                    targets["right"]=(self.chain_release_positions["right"]+[0,0,.065],r,g)
+                    for a in ("left", "right"):
+                        _, r, g = targets[a]
+                        targets[a] = (
+                            self.chain_release_positions[a] + [0, 0, 0.065 * f],
+                            r,
+                            g,
+                        )
+                elif self.phase in {
+                    "park left hand",
+                    "let chain settle onto backing",
+                    "hold joined ends",
+                }:
+                    _, r, g = targets["right"]
+                    targets["right"] = (
+                        self.chain_release_positions["right"] + [0, 0, 0.065],
+                        r,
+                        g,
+                    )
                     if self.phase == "park left hand":
-                        p,r,g=targets["left"]
-                        targets["left"]=(p+(1-f)*(self.chain_release_positions["left"]-self.chain_seats["left"]),r,g)
+                        p, r, g = targets["left"]
+                        targets["left"] = (
+                            p
+                            + (1 - f)
+                            * (
+                                self.chain_release_positions["left"]
+                                - self.chain_seats["left"]
+                            ),
+                            r,
+                            g,
+                        )
                 elif self.phase == "approach retaining plate":
-                    p,r,g=targets["right"]
-                    targets["right"]=(p+(1-f)*(self.chain_release_positions["right"]-self.chain_seats["right"]),r,g)
+                    p, r, g = targets["right"]
+                    targets["right"] = (
+                        p
+                        + (1 - f)
+                        * (
+                            self.chain_release_positions["right"]
+                            - self.chain_seats["right"]
+                        ),
+                        r,
+                        g,
+                    )
             if self.release_position is not None:
-                p,r,g=targets["right"]
+                p, r, g = targets["right"]
                 if self.phase == "lift right hand from plate":
-                    targets["right"]=(self.release_position+[0,0,.030*self.stage_progress],r,g)
+                    targets["right"] = (
+                        self.release_position + [0, 0, 0.030 * self.stage_progress],
+                        r,
+                        g,
+                    )
                 elif self.phase == "park right hand":
-                    targets["right"]=(p+(1-self.stage_progress)*(self.release_position-self.keeper_end),r,g)
+                    targets["right"] = (
+                        p
+                        + (1 - self.stage_progress)
+                        * (self.release_position - self.keeper_end),
+                        r,
+                        g,
+                    )
         for arm, offset in (("left", 0), ("right", 7)):
             pos, rot, grip = targets[arm]
             q, pe, re = ik.solve(
@@ -297,7 +453,9 @@ class ScriptedPolicy(PolicyBase):
             )
             self.worst_position_error = max(self.worst_position_error, pe)
             self.worst_rotation_error = max(self.worst_rotation_error, re)
-            if pe > 0.003 or re > 0.04:
+            # Allow a small approximate IK solution during measured-pose
+            # corrections; the physical scorer still checks actual part poses.
+            if pe > 0.005 or re > 0.04:
                 raise RuntimeError(
                     f"Unreachable {arm} target during {self.phase}: {pe:.5f} m, {re:.5f} rad"
                 )

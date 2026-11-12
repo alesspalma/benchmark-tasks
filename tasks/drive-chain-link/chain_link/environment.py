@@ -25,7 +25,7 @@ from .config import (
     CONTROL_HZ,
     ROOT_POSITION,
     ROOT_QUATERNION,
-    CONNECTOR_POSITION,
+    CONNECTOR_PICKUP_POSITION,
     KEEPER_POSITION,
 )
 from .geometry import local_solids, world_points, robot_clearance
@@ -91,8 +91,8 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 (
                     JOINT_GUIDE,
                     ROOM_DOCS["station"],
-                    "An open training chain is located by a fixed toothed assembly former. Orange tabs "
-                    "provide chain-end grips. A free orange two-pin connecting link rests in its cradle. "
+                    "An open training chain with bare end links is located by a fixed toothed assembly former. "
+                    "A separate yellow two-pin connecting link lies on the table; its service cradle is empty. "
                     "A blue forked retaining plate lies on the right. All hardware is unpowered.",
                 )
             ),
@@ -190,7 +190,9 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 name="connector",
                 object_type=ObjectType.RIGID,
                 usd_path=str(assets["connector"]),
-                initial_pose=Pose(position_xyz=tuple(map(float, CONNECTOR_POSITION))),
+                initial_pose=Pose(
+                    position_xyz=tuple(map(float, CONNECTOR_PICKUP_POSITION))
+                ),
             ),
             Object(
                 name="keeper",
@@ -314,7 +316,7 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
             raise RuntimeError(f"Invalid reset: {self.metrics}")
         state = self.state()
         for name, expected in [
-            ("connector", CONNECTOR_POSITION),
+            ("connector", CONNECTOR_PICKUP_POSITION),
             ("keeper", KEEPER_POSITION),
         ]:
             if np.linalg.norm(np.array(state[name]["pose"][:3]) - expected) > 0.012:

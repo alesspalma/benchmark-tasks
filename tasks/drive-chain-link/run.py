@@ -211,7 +211,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
         "--policy",
-        choices=["demo", "hold", "ends", "unlocked", "retention"],
+        choices=["demo", "connector", "hold", "ends", "unlocked", "retention"],
         default="demo",
     )
     parser.add_argument("--seed", type=int, default=0)

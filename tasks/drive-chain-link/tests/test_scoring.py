@@ -5,7 +5,13 @@ import json
 from pathlib import Path
 import unittest
 import numpy as np
-from chain_link.config import CONNECTOR_POSITION, CHAIN_POSITION, NODES
+from chain_link.config import (
+    CONNECTOR_POSITION,
+    CONNECTOR_PICKUP_POSITION,
+    KEEPER_POSITION,
+    CHAIN_POSITION,
+    NODES,
+)
 from chain_link.scoring import Scorer
 
 
@@ -16,11 +22,11 @@ def assembly():
         return {"pose": [*p, 0.0, 0.0, 0.0, 1.0], "velocity": [0.0] * 6}
 
     bodies = {f"Link{i:02}": part(c + [0.2, 0, 0.007]) for i in range(11)}
-    for i in range(1,10):
-        a,b=NODES[i],NODES[i+1]
-        yaw=np.arctan2(b[1]-a[1],b[0]-a[0])
-        bodies[f"Link{i:02}"]=part(CHAIN_POSITION+(a+b)/2)
-        bodies[f"Link{i:02}"]["pose"][3:]=[0,0,np.sin(yaw/2),np.cos(yaw/2)]
+    for i in range(1, 10):
+        a, b = NODES[i], NODES[i + 1]
+        yaw = np.arctan2(b[1] - a[1], b[0] - a[0])
+        bodies[f"Link{i:02}"] = part(CHAIN_POSITION + (a + b) / 2)
+        bodies[f"Link{i:02}"]["pose"][3:] = [0, 0, np.sin(yaw / 2), np.cos(yaw / 2)]
     bodies["Link00"] = part(c + [0.05, -0.05, 0.007])
     bodies["Link10"] = part(c + [-0.05, 0.05, 0.007])
     return dict(
@@ -39,6 +45,32 @@ class AssemblyScoreTests(unittest.TestCase):
         scorer.evaluate(s)
         s["time_s"] += 1.01
         return scorer.evaluate(s)
+
+    def resting_layout(self):
+        state = assembly()
+        state["connector"]["pose"][:3] = CONNECTOR_PICKUP_POSITION.tolist()
+        state["keeper"]["pose"][:3] = KEEPER_POSITION.tolist()
+        for i in (0, 10):
+            a, b = NODES[i], NODES[i + 1]
+            yaw = np.arctan2(b[1] - a[1], b[0] - a[0])
+            state["bodies"][f"Link{i:02}"]["pose"] = list(
+                CHAIN_POSITION + (a + b) / 2
+            ) + [0, 0, np.sin(yaw / 2), np.cos(yaw / 2)]
+        return state
+
+    def test_loose_connector_start_has_no_assembly_credit(self):
+        m = self.final(self.resting_layout())
+        self.assertEqual(m["score"], 0)
+        self.assertFalse(m["parked"])
+        self.assertTrue(m["guide_seated"])
+
+    def test_placing_connector_alone_does_not_join_chain(self):
+        state = self.resting_layout()
+        state["connector"]["pose"][:3] = CONNECTOR_POSITION.tolist()
+        m = self.final(state)
+        self.assertTrue(m["parked"])
+        self.assertFalse(m["ends_joined"])
+        self.assertEqual(m["score"], 0)
 
     def test_success_requires_one_second(self):
         s = assembly()
@@ -178,34 +210,40 @@ class AssemblyScoreTests(unittest.TestCase):
             self.assertEqual(self.final(assembly(), score)["score"], 0.0)
 
     def test_folded_middle_link_cannot_receive_full_credit(self):
-        s=assembly();s["bodies"]["Link05"]["pose"][0]-=.050
-        m=self.final(s)
+        s = assembly()
+        s["bodies"]["Link05"]["pose"][0] -= 0.050
+        m = self.final(s)
         self.assertTrue(m["retained"])
         self.assertFalse(m["guide_seated"])
-        self.assertEqual(m["score"],.7)
+        self.assertEqual(m["score"], 0.7)
 
     def test_link_lifted_off_former_cannot_receive_full_credit(self):
-        s=assembly();s["bodies"]["Link04"]["pose"][2]+=.010
+        s = assembly()
+        s["bodies"]["Link04"]["pose"][2] += 0.010
         self.assertFalse(self.final(s)["guide_seated"])
-        self.assertEqual(self.final(s)["score"],.7)
+        self.assertEqual(self.final(s)["score"], 0.7)
 
     def test_guide_uses_window_shape_instead_of_a_circular_distance(self):
         from chain_link.scoring import rotation
-        s=assembly();p=s["bodies"]["Link05"]["pose"]
-        p[:3]=(np.array(p[:3])+rotation(p)@np.array([.020,0,0])).tolist()
+
+        s = assembly()
+        p = s["bodies"]["Link05"]["pose"]
+        p[:3] = (np.array(p[:3]) + rotation(p) @ np.array([0.020, 0, 0])).tolist()
         self.assertTrue(self.final(s)["guide_seated"])
-        self.assertEqual(self.final(s)["score"],1)
+        self.assertEqual(self.final(s)["score"], 1)
 
     def test_tooth_outside_side_rails_is_not_seated(self):
         from chain_link.scoring import rotation
-        s=assembly();p=s["bodies"]["Link05"]["pose"]
-        p[:3]=(np.array(p[:3])+rotation(p)@np.array([0,.012,0])).tolist()
+
+        s = assembly()
+        p = s["bodies"]["Link05"]["pose"]
+        p[:3] = (np.array(p[:3]) + rotation(p) @ np.array([0, 0.012, 0])).tolist()
         self.assertFalse(self.final(s)["guide_seated"])
-        self.assertEqual(self.final(s)["score"],.7)
+        self.assertEqual(self.final(s)["score"], 0.7)
 
     def test_keeper_measurement_is_not_overwritten_by_guide_diagnostics(self):
-        m=Scorer().evaluate(assembly())
-        np.testing.assert_allclose(m["keeper_local"],[.014,0,.020],atol=1e-12)
+        m = Scorer().evaluate(assembly())
+        np.testing.assert_allclose(m["keeper_local"], [0.014, 0, 0.020], atol=1e-12)
 
     def test_trace_inputs_are_not_mutated(self):
         s = assembly()
@@ -257,6 +295,34 @@ class PhysicalApertureTests(unittest.TestCase):
             self.assertTrue(self.occupied([-0.035, y, 0]))
             self.assertFalse(self.occupied([0.039, y, 0]))
         self.assertTrue(self.occupied([0, 0, 0]))
+
+
+class BareRailClearanceTests(unittest.TestCase):
+    def test_raised_rails_clear_the_retaining_plate(self):
+        from chain_link.config import CLOSED_NODES
+
+        records = json.loads(
+            (Path(__file__).resolve().parents[1] / "scene-inventory.json").read_text()
+        )
+        rails = [r for r in records if "RailThickening" in r.get("solid", "")]
+        self.assertEqual(len(rails), 4)
+        for record in rails:
+            i = 0 if "/Link00/" in record["solid"] else 10
+            a, b = CLOSED_NODES[i], CLOSED_NODES[i + 1]
+            centre = CHAIN_POSITION + (a + b) / 2
+            yaw = np.arctan2(b[1] - a[1], b[0] - a[0])
+            rotation = np.array(
+                [
+                    [np.cos(yaw), -np.sin(yaw), 0],
+                    [np.sin(yaw), np.cos(yaw), 0],
+                    [0, 0, 1],
+                ]
+            )
+            world = centre + rotation @ np.array(record["center_m"])
+            extent = np.abs(rotation) @ (np.array(record["size_m"]) / 2)
+            # The whole raised rail must stay outside the keeper's +/-64mm
+            # plate envelope. Pin holes and 5mm support shoulders stay unchanged.
+            self.assertGreater(abs(world[1]) - extent[1], 0.064)
 
 
 if __name__ == "__main__":

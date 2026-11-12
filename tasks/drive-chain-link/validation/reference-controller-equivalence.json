@@ -1,0 +1,12 @@
+{
+  "scope": "Recorded native scene, scorer and actions match current task; only inactive reference-controller stop guard changed",
+  "recorded_source_sha256": "658b7a84754d8bfadc6ee663ad66fd0c3e3657929dc75c26abd06cc5421b6bf4",
+  "current_source_sha256": "c71568e77f6205c443bb7deb8cb57ade82483f5fdb15323cb4e4d499770b01e6",
+  "difference": "Reference controller maximum IK position residual before abort: 3mm -> 5mm. Rotation guard, targets, actions, scene, physics and scoring unchanged.",
+  "recorded_worst_ik_position_m": 9.616456837824727e-05,
+  "recorded_guard_never_reached": true,
+  "reconstructed_recorded_source_matches": true,
+  "all_other_source_bytes_identical": true,
+  "replayed_actions": 1180,
+  "max_action_absolute_difference": 4.409805853811122e-12
+}

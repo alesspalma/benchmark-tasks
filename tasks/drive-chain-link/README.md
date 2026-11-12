@@ -1,8 +1,8 @@
 # Join a drive-chain service joint
 
-Two standard YAM arms join an open training chain on a two-pin connector, then slide a forked keeper under its heads. A fixed toothed service former locates the resting links; the free end links swing into the cradle. This is an unpowered maintenance assembly exercise.
+The right YAM arm picks up a loose yellow two-pin connecting link and slides it into an empty service cradle. Both arms pinch the bare grey end links, lift and align their holes, then lower them over the pins. The right arm slides a blue forked keeper under both heads, releases it and withdraws. A fixed toothed service former guides the loop throughout assembly. This is an unpowered maintenance assembly exercise.
 
-The updated rendered native reference and registered scripted evaluation both reach **1.0 in 790 actions / 39.5 simulated seconds**. The omitted-keeper control scores 0.4, and all 29 tests pass. `task.draft.json` has no media ID or claimed model score: the old Dream-1 recording shows a different setup and cannot validate this revision. No additional paid episode has been run.
+The actual three-camera native reference reaches **1.0 in 1,180 actions / 59.0 simulated seconds**; the registered Inspect scripted evaluation also reaches **1.0**. Omitting the keeper-locking slide scores **0.4**, and all **32** scorer, aperture and clearance tests pass. `validation/` records the results and controller provenance. `task.draft.json` has no media ID or claimed hosted-model score; a matching Dream-1 run is reserved for the final paid step.
 
 ## Install and run
 
@@ -11,7 +11,7 @@ Use the [Robocurve walkthrough](https://tasks.robocurve.org/walkthrough) environ
 ```bash
 uv pip install --python "$(command -v python)" -e .
 python -m unittest discover -s tests -v
-python check_assets.py --output /tmp/chain-guide-assets
+python check_assets.py --output /tmp/chain-bare-assets
 python check_plan.py
 ```
 
@@ -20,7 +20,7 @@ Native scripted reference with actual cameras:
 ```bash
 python run.py --policy demo --device cuda:0 --physics-device cpu \
   --width 640 --height 360 --max-steps 2400 --seed 0 \
-  --output /tmp/chain-guide-native
+  --output /tmp/chain-bare-native
 ```
 
 Registered rendered evaluation:
@@ -32,14 +32,14 @@ inspect-robots run --embodiment chain_link --policy chain_link_scripted \
   -E cam_width=320 -E cam_height=176 --instruction "$instruction" \
   --scorer task_score --max-steps 2400 --epochs 1 --seed 0 --store-frames \
   --no-prompt --grader none --no-rerun --no-rerun-save \
-  --log-dir /tmp/chain-guide-inspect
+  --log-dir /tmp/chain-bare-inspect
 ```
 
 For the final matching hosted run, use the same registered command with `--policy dream -P model=dreamlabs/dream-1-beta -P rows_per_request=48 -P record=false`, with a privately configured `DREAM_API_KEY`. This consumes credits. The current revision has no hosted-model result yet.
 
-Each command needs a fresh output directory. The fixed layout uses seed 0 and object jitter 0; Inspect derives its per-trial seed from evaluation seed 0. The plan lasts 42.2 simulated seconds, usually ending earlier when success holds. Native development takes about 1–3 minutes wall time; renderer warm-up and hosted inference add time. Limit: 2,400 actions / 120 simulated seconds at 20 Hz, with 240 Hz physics.
+Each command needs a fresh output directory. The fixed layout uses seed 0 and object jitter 0; Inspect derives its per-trial seed from evaluation seed 0. The plan lasts 61.7 simulated seconds, usually ending earlier when success holds. CPU development takes about 1–5 minutes wall time. The recorded three-camera run took 505 seconds on a shared A6000, including renderer warm-up; hosted inference adds time. Limit: 2,400 actions / 120 simulated seconds at 20 Hz, with 240 Hz physics.
 
-CPU-only development adds `--device cpu --no-cameras --no-record` to the native command, or `-E device=cpu -E render_images=false` to Inspect. It produces no submission video. `--policy unlocked` omits the keeper slide; `--policy ends` stops after joining the two ends; `--policy retention` applies a bounded upward robot goal while holding the keeper and cannot receive full released-hand credit.
+CPU-only development adds `--device cpu --no-cameras --no-record` to the native command, or `-E device=cpu -E render_images=false` to Inspect. It produces no submission video. `--policy connector` stops after placing the loose connector; `--policy unlocked` omits the keeper slide; `--policy ends` stops after joining the two ends; `--policy retention` applies a bounded upward robot goal while holding the keeper and cannot receive full released-hand credit.
 
 Model observations are the standard fourteen joint/gripper values and calibrated `top_cam`, `left_cam` and `right_cam` RGB views. Only the scripted reference reads native part poses. All post-reset actuation is through the ordinary fourteen robot controls. No task-body pose writes, grasp attachments, software latches or collision changes are used. The reference holds its actual grasp position while opening, then withdraws from that position to avoid sideways dragging.
 
@@ -66,8 +66,8 @@ Ruler measurements and overhead/side photos establish insertion, slot displaceme
 
 `setup-layout.json` lists all fixed poses, dimensions, masses, nominal materials and calibrated cameras. `scene-inventory.json` contains every original body, primitive solid and hinge; `build_scene.py` generates them. The adapter supplies the standard YAM station, table, cameras, stand, floor and lights.
 
-The former has one machined-looking hub and nine positive guide teeth entering the resting link windows, with an open front service sector. The two earlier spacer disks are removed. The eleven 100 mm-pitch links share the same working plane; only the two free end links start splayed. Their connector is aligned with the final loop so joining does not pull the entire chain forward. The free blue keeper starts on the right side of the table.
+The former has one machined-looking hub and nine physical guide pins entering the resting link windows, with an open front service sector. Each pin has a 6mm radius, 50mm straight height and 3mm tapered lead, preserving engagement during the 40mm lifting phase. The guide is an assembly fixture rather than a powered sprocket. The eleven 100 mm-pitch links share the same working plane; only the two free end links start splayed. The yellow connector starts on the right side of the table at (0.35, -0.35, 0.7495) m. Its 4mm backing slides beneath the flat chain end plates into the open front of a three-sided cradle at (0.195, 0, 0.839) m. The 160mm initial end-hole gap leaves space for the stems. The two end links have no grasp posts: the central 30mm of their existing grey side rails is thickened to 20mm total height for finger contact. The open holes and hinges retain their original plate geometry. The free blue keeper starts at (0.18, -0.35, 0.7515) m.
 
 These are deliberately enlarged reusable printed-polymer training parts with metal pins and a nominal metal service fixture. Native rigid contact, ten passive hinges and Coulomb friction govern the assembly. The toothed former is fixed to the bench and serves as an assembly fixture. There is no motor, powered torque transfer, elasticity, spring clip, fracture, wear, rated-load or vibration-locking claim. The keeper is friction-retained laterally and can be removed by reversing its slide.
 
-Reset restores all free bodies and ten passive hinges, opens the grippers at ready and settles for 0.5 seconds with auditing disabled. Scoring begins at t=0 after settling. Nothing is consumed. Final media must show the current setup and exact instruction; archived original-scene media are not used for this revision.
+Reset restores all free bodies and ten passive hinges, opens the grippers at ready and settles for 0.5 seconds with auditing disabled. Scoring begins at t=0 after settling. Nothing is consumed. Final media must show the current loose-part starting layout and exact instruction. The matching hosted run and media upload remain pending.

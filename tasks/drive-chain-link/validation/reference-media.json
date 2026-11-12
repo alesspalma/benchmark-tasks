@@ -1,35 +1,91 @@
 {
-  "source_sha256": "0b872e639e78c6fcc3b1a6594ee3515b57b0ed443b1c9f81d70696a15be0e60b",
-  "score": 1.0,
-  "steps": 790,
-  "simulated_seconds": 39.5,
-  "three_cameras_valid": true,
-  "camera_quality": {
+  "scope": "Actual native camera frames, every initial/action frame preserved; spatial composition only",
+  "recorded_source_sha256": "658b7a84754d8bfadc6ee663ad66fd0c3e3657929dc75c26abd06cc5421b6bf4",
+  "current_source_sha256": "c71568e77f6205c443bb7deb8cb57ade82483f5fdb15323cb4e4d499770b01e6",
+  "source_equivalence": "validation/reference-controller-equivalence.json; all 1180 actions replay identically within 4.5e-12",
+  "native_trace_sha256": "f1f724b4aa2308f1e44c8bfc670f96f6c15cc31254010133c3933e813dc7f884",
+  "native_receipt_sha256": "38acf698b1dc551f27af0374fbc090be61b2507b05d16633bdcaec8311091c0b",
+  "native_score": 1.0,
+  "steps": 1180,
+  "physics_audits": 14160,
+  "no_paid_model_calls": true,
+  "tracks": {
     "top_cam": {
-      "frames": 791,
-      "minimum_frame_std": 60.712841021498235
+      "sha256": "9fcfcc1cd367eed662a2f2c3f26172b13710bd302efa6adf6edc377547a635cb",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "duration": "59.050000",
+            "nb_read_frames": "1181"
+          }
+        ],
+        "format": {
+          "size": "1136448"
+        }
+      },
+      "all_frames_decoded": 1181,
+      "minimum_frame_mean": 161.84375,
+      "minimum_frame_std": 54.38227342657011
     },
     "left_cam": {
-      "frames": 791,
-      "minimum_frame_std": 61.06989572502075
+      "sha256": "8d9b6368156133c900d0bca5312a9aa1760132fa6f4e52fed84ba3c45e757746",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "duration": "59.050000",
+            "nb_read_frames": "1181"
+          }
+        ],
+        "format": {
+          "size": "1046713"
+        }
+      },
+      "all_frames_decoded": 1181,
+      "minimum_frame_mean": 79.00361689814815,
+      "minimum_frame_std": 58.1726934627686
     },
     "right_cam": {
-      "frames": 791,
-      "minimum_frame_std": 50.03445282750319
+      "sha256": "b2ed982279b6f0ee4c02186e35bf6b799d59ec9407b8a08f4a6a094e078011d6",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "duration": "59.050000",
+            "nb_read_frames": "1181"
+          }
+        ],
+        "format": {
+          "size": "2195086"
+        }
+      },
+      "all_frames_decoded": 1181,
+      "minimum_frame_mean": 112.20934606481481,
+      "minimum_frame_std": 50.32029811368349
     }
   },
-  "late_chain_motion": {
-    "18-29s": {
-      "maximum_frame_displacement_m": 8.072111824996632e-06
-    },
-    "30-39.5s": {
-      "maximum_frame_displacement_m": 5.894181010198822e-05
-    },
-    "37-39.5s": {
-      "maximum_frame_displacement_m": 2.286734476671871e-06
-    }
-  },
-  "ffprobe": {
+  "composition": "top 640x360 above left/right 320x180; 20fps; no overlays, generated frames, temporal edits or speed changes",
+  "demo_sha256": "34ff02d108329bd5a20ad205adaba084010d8f52e21c4fe4b09bedeb57965afc",
+  "demo_probe": {
     "programs": [],
     "stream_groups": [],
     "streams": [
@@ -39,34 +95,14 @@
         "height": 540,
         "pix_fmt": "yuv420p",
         "r_frame_rate": "20/1",
-        "nb_frames": "791"
+        "duration": "59.050000",
+        "nb_read_frames": "1181"
       }
     ],
     "format": {
-      "duration": "39.550000",
-      "size": "2129280"
+      "size": "2920059"
     }
   },
-  "files": {
-    "demo.mp4": {
-      "bytes": 2129280,
-      "sha256": "f9f75c9009fa69869ee96b159c4648b13a71f15836a49fcc55e39335f3986dec"
-    },
-    "setup.png": {
-      "bytes": 199737,
-      "sha256": "a6fe82df5cd321648777d21ea53d6f2185211c90e2fccb9939b856c9a5b65069"
-    }
-  },
-  "composition": "Every native initial/action frame in order; top view above both wrists; resize/stack and H.264 encoding only; no overlays or generated frames.",
-  "visually_reviewed": true,
-  "reviewed_stages": [
-    "reset",
-    "grasp and lift both end links",
-    "swing ends onto pins",
-    "release and clear both hands",
-    "keeper pickup and insertion",
-    "released retained joint with loop seated on guide"
-  ],
-  "matching_model_recording": "pending; original recording belongs to archived scene",
-  "dream_api_used": false
+  "setup_sha256": "7b78a39de7108dbce194dce32324be8ce0600aad1f43514fcfc11036d14bcd99",
+  "final_top_sha256": "f5bec69eadfaf5f9fab41664d5e975457f1da9a7daf7beb3dc276dca6b2a3d62"
 }
