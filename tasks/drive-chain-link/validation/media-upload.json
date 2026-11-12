@@ -1,0 +1,23 @@
+{
+  "media_id": "M-96PM3V",
+  "source_sha256": "894ec5142f012f92e09e5f29fef5e0b1dfc626311adbc9ddea4b0554d08dfdff",
+  "official_uploader": true,
+  "files": {
+    "demo.mp4": {
+      "bytes": 2383515,
+      "sha256": "b9dbd3c86ed573182f60028b0a99bff5b7dd72412d010d6e525a227c2d22e116"
+    },
+    "dream-1.mp4": {
+      "bytes": 7123872,
+      "sha256": "d935783fc7e4fffc030b476e01bc7366f2f82482fb310d56656079bd7102921a"
+    },
+    "setup.png": {
+      "bytes": 202114,
+      "sha256": "d9135eafad45c1b74ea0a9cdb3a2b07b6f3d78cfd3ed4e7e6b36b715cdd65c0f"
+    }
+  },
+  "model_score": 0.0,
+  "demo_score": 1.0,
+  "model_episodes": 1,
+  "model_max_steps": 2400
+}

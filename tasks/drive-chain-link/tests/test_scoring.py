@@ -1,208 +1,185 @@
-"""Adversarial geometric repair states, independent of the reference motion."""
+"""Adversarial state tests, independent of the reference controller and Isaac Sim."""
 
-import copy, json, unittest
+import copy
+import json
 from pathlib import Path
+import unittest
 import numpy as np
-from chain_link.config import (
-    CHAIN_POSITION,
-    NODES,
-    CONNECTOR_TARGET,
-    CONNECTOR_POSITION,
-    KEEPER_POSITION,
-)
-from chain_link.scoring import Scorer, routing, simple_loop
-
-
-def chain_bodies(nodes=NODES):
-    bodies = {}
-    for i, (a, b) in enumerate(zip(nodes[:-1], nodes[1:])):
-        yaw = np.arctan2(*(b - a)[1::-1])
-        p = CHAIN_POSITION + (a + b) / 2
-        bodies[f"Link{i:02}"] = {
-            "pose": [*p, 0.0, 0.0, np.sin(yaw / 2), np.cos(yaw / 2)],
-            "velocity": [0.0] * 6,
-        }
-    return bodies
+from chain_link.config import CONNECTOR_POSITION
+from chain_link.scoring import Scorer
 
 
 def assembly():
+    c = CONNECTOR_POSITION.copy()
+
     def part(p):
         return {"pose": [*p, 0.0, 0.0, 0.0, 1.0], "velocity": [0.0] * 6}
 
+    bodies = {f"Link{i:02}": part(c + [0.2, 0, 0.007]) for i in range(11)}
+    bodies["Link00"] = part(c + [0.05, -0.05, 0.007])
+    bodies["Link10"] = part(c + [-0.05, 0.05, 0.007])
     return dict(
         time_s=0.0,
-        bodies=chain_bodies(),
-        connector=part(CONNECTOR_TARGET),
-        keeper=part(CONNECTOR_TARGET + [0.014, 0, -0.037]),
+        connector=part(c),
+        keeper=part(c + [0.014, 0, 0.020]),
+        bodies=bodies,
         hands={n: {"opening_m": 0.09} for n in ("left_robot", "right_robot")},
         robot_clearance_m=0.04,
     )
 
 
-class RepairTests(unittest.TestCase):
-    def final(self, s, score=None):
-        score = score or Scorer()
-        score.evaluate(s)
+class AssemblyScoreTests(unittest.TestCase):
+    def final(self, s, scorer=None):
+        scorer = Scorer() if scorer is None else scorer
+        scorer.evaluate(s)
         s["time_s"] += 1.01
-        return score.evaluate(s)
+        return scorer.evaluate(s)
 
-    def test_real_closed_routed_loop_passes_after_hold(self):
+    def test_success_requires_one_second(self):
         s = assembly()
-        sc = Scorer()
-        self.assertEqual(sc.evaluate(s)["score"], 0.7)
+        score = Scorer()
+        self.assertEqual(score.evaluate(s)["score"], 0.7)
+        s["time_s"] = 0.99
+        self.assertFalse(score.evaluate(s)["success"])
         s["time_s"] = 1.01
-        m = sc.evaluate(s)
-        self.assertEqual(m["score"], 1)
-        self.assertTrue(m["closed_loop"])
-        self.assertTrue(m["chain_routed"])
+        self.assertEqual(score.evaluate(s)["score"], 1.0)
 
-    def test_routed_but_disconnected_reset_is_zero(self):
-        s = assembly()
-        s["connector"]["pose"][:3] = CONNECTOR_POSITION.tolist()
-        s["keeper"]["pose"][:3] = KEEPER_POSITION.tolist()
-        m = self.final(s)
-        self.assertTrue(m["chain_routed"])
-        self.assertFalse(m["ends_joined"])
-        self.assertEqual(m["score"], 0)
+    def test_either_missing_end_forces_zero(self):
+        for name in ("Link00", "Link10"):
+            with self.subTest(name=name):
+                s = assembly()
+                s["bodies"][name]["pose"][0] += 0.03
+                self.assertEqual(self.final(s)["score"], 0.0)
 
     def test_both_ends_without_keeper_only_partial(self):
         s = assembly()
-        s["keeper"]["pose"][1] += 0.3
+        s["keeper"]["pose"][1] -= 0.3
         self.assertEqual(self.final(s)["score"], 0.4)
 
-    def test_keeper_at_slot_mouth_not_full(self):
+    def test_slot_mouths_never_count_as_retained(self):
         s = assembly()
-        s["keeper"]["pose"][0] = CONNECTOR_TARGET[0] - 0.018
+        s["keeper"]["pose"][0] = CONNECTOR_POSITION[0] - 0.018
         m = self.final(s)
         self.assertTrue(m["plate_seated"])
         self.assertFalse(m["retained"])
         self.assertEqual(m["score"], 0.7)
 
-    def test_stems_at_closed_slot_ends_are_valid(self):
+    def test_one_stem_outside_slot(self):
         s = assembly()
-        s["keeper"]["pose"][0] = CONNECTOR_TARGET[0] + 0.021
-        self.assertEqual(self.final(s)["score"], 1)
+        s["keeper"]["pose"][1] += 0.013
+        self.assertEqual(self.final(s)["score"], 0.4)
 
-    def test_joint_assembled_off_the_sprockets_gets_zero(self):
-        s = assembly()
-        for p in [s["connector"], s["keeper"], *s["bodies"].values()]:
-            p["pose"][1] += 0.25
-        m = self.final(s)
-        self.assertTrue(m["retained"])
-        self.assertFalse(m["chain_routed"])
-        self.assertEqual(m["score"], 0)
-
-    def test_closed_loop_lifted_above_sprockets_gets_zero(self):
-        s = assembly()
-        for p in [s["connector"], s["keeper"], *s["bodies"].values()]:
-            p["pose"][2] += 0.04
-        m = self.final(s)
-        self.assertTrue(m["retained"])
-        self.assertFalse(m["chain_routed"])
-        self.assertEqual(m["score"], 0)
-
-    def test_chain_derailed_from_one_wheel_is_zero(self):
-        s = assembly()
-        for i in (4, 5, 6):
-            s["bodies"][f"Link{i:02}"]["pose"][0] -= 0.04
-        m = self.final(s)
-        self.assertTrue(m["ends_joined"])
-        self.assertFalse(m["chain_routed"])
-        self.assertEqual(m["score"], 0)
-
-    def test_chain_not_on_pitch_seats_fails(self):
-        s = assembly()
-        for p in s["bodies"].values():
-            p["pose"][1] += 0.006
-        self.assertFalse(routing(s)["chain_routed"])
-
-    def test_small_irrelevant_routing_offset_is_allowed(self):
-        s = assembly()
-        for p in [s["connector"], s["keeper"], *s["bodies"].values()]:
-            p["pose"][0] += 0.002
-        self.assertEqual(self.final(s)["score"], 1)
-
-    def test_self_crossing_and_folded_loops_rejected(self):
-        self.assertFalse(simple_loop(np.array([[0, 0], [1, 1], [0, 1], [1, 0.0]])))
-        self.assertFalse(simple_loop(np.array([[0, 0], [1, 0], [0.5, 0], [0.5, 1.0]])))
-
-    def test_either_end_missing_is_zero(self):
-        for name in ("Link00", "Link10"):
-            s = assembly()
-            s["bodies"][name]["pose"][0] += 0.03
-            self.assertEqual(self.final(s)["score"], 0)
-
-    def test_inverted_keeper_rejected(self):
+    def test_reversed_keeper_rejected(self):
         s = assembly()
         s["keeper"]["pose"][3:] = [0, 0, 1, 0]
         self.assertEqual(self.final(s)["score"], 0.4)
 
-    def test_keeper_under_heads_or_above_chain_rejected(self):
-        for z in (-0.055, 0.02):
-            s = assembly()
-            s["keeper"]["pose"][2] = CONNECTOR_TARGET[2] + z
-            self.assertEqual(self.final(s)["score"], 0.4)
+    def test_plate_above_heads_is_not_seated(self):
+        s = assembly()
+        s["keeper"]["pose"][2] = CONNECTOR_POSITION[2] + 0.04
+        self.assertEqual(self.final(s)["score"], 0.4)
 
-    def test_each_hand_must_open(self):
-        for name in ("left_robot", "right_robot"):
+    def test_plate_below_chain_is_not_seated(self):
+        s = assembly()
+        s["keeper"]["pose"][2] = CONNECTOR_POSITION[2] + 0.002
+        self.assertEqual(self.final(s)["score"], 0.4)
+
+    def test_radial_clearance_not_axis_aligned_square(self):
+        s = assembly()
+        s["bodies"]["Link00"]["pose"][0] += 0.009
+        s["bodies"]["Link00"]["pose"][1] += 0.009
+        self.assertEqual(self.final(s)["score"], 0.0)
+
+    def test_nearby_valid_hole_offset(self):
+        s = assembly()
+        s["bodies"]["Link00"]["pose"][0] += 0.010
+        self.assertEqual(self.final(s)["score"], 1.0)
+
+    def test_lifted_end_rejected(self):
+        s = assembly()
+        s["bodies"]["Link10"]["pose"][2] += 0.03
+        self.assertEqual(self.final(s)["score"], 0.0)
+
+    def test_hands_must_open_and_clear(self):
+        for field in ("opening", "clearance"):
             s = assembly()
-            s["hands"][name]["opening_m"] = 0.02
+            if field == "opening":
+                s["hands"]["right_robot"]["opening_m"] = 0.02
+            else:
+                s["robot_clearance_m"] = 0.001
             self.assertEqual(self.final(s)["score"], 0.7)
 
-    def test_whole_robot_must_clear(self):
+    def test_every_chain_link_must_settle(self):
+        for name in ("Link00", "Link05", "Link10"):
+            s = assembly()
+            s["bodies"][name]["velocity"][0] = 0.03
+            self.assertEqual(self.final(s)["score"], 0.7)
         s = assembly()
-        s["robot_clearance_m"] = 0.01
+        s["keeper"]["velocity"][5] = 0.4
         self.assertEqual(self.final(s)["score"], 0.7)
 
-    def test_all_links_must_settle(self):
-        for i in range(11):
-            s = assembly()
-            s["bodies"][f"Link{i:02}"]["velocity"][0] = 0.03
-            self.assertEqual(self.final(s)["score"], 0.7)
-
-    def test_hold_restarts_after_contact(self):
+    def test_interruption_restarts_hold(self):
         s = assembly()
-        sc = Scorer()
-        sc.evaluate(s)
-        s["time_s"] = 0.9
+        score = Scorer()
+        score.evaluate(s)
+        s["time_s"] = 0.8
         s["robot_clearance_m"] = 0
-        sc.evaluate(s)
-        s["time_s"] = 1.0
+        score.evaluate(s)
+        s["time_s"] = 0.9
         s["robot_clearance_m"] = 0.04
-        sc.evaluate(s)
-        s["time_s"] = 1.2
-        self.assertFalse(sc.evaluate(s)["success"])
-        s["time_s"] = 2.01
-        self.assertTrue(sc.evaluate(s)["success"])
+        score.evaluate(s)
+        s["time_s"] = 1.1
+        self.assertEqual(score.evaluate(s)["score"], 0.7)
+        s["time_s"] = 1.91
+        self.assertEqual(score.evaluate(s)["score"], 1.0)
 
-    def test_score_does_not_keep_past_success(self):
+    def test_no_peak_score_survives_disassembly(self):
         s = assembly()
-        sc = Scorer()
-        self.assertEqual(self.final(s, sc)["score"], 1)
-        s["keeper"]["pose"][1] += 0.3
-        self.assertEqual(sc.evaluate(s)["score"], 0.4)
+        score = Scorer()
+        self.assertEqual(self.final(s, score)["score"], 1.0)
+        s["bodies"]["Link00"]["pose"][0] += 0.03
+        self.assertEqual(score.evaluate(s)["score"], 0.0)
 
-    def test_escape_violation_permanent(self):
-        sc = Scorer()
-        sc.observe_physics({"part": np.array([[0.2, 0.66, 0.8]])})
-        sc.observe_physics({"part": np.array([[0.2, 0, 0.8]])})
-        self.assertEqual(self.final(assembly(), sc)["score"], 0)
-
-    def test_invalid_state_fails_closed(self):
+    def test_connector_must_remain_in_cradle(self):
         s = assembly()
-        s["bodies"]["Link05"]["pose"][0] = np.nan
-        sc = Scorer()
-        self.assertEqual(sc.evaluate(s)["score"], 0)
-        self.assertEqual(self.final(assembly(), sc)["score"], 0)
+        for p in [s["connector"], s["keeper"], *s["bodies"].values()]:
+            p["pose"][0] += 0.1
+        m = self.final(s)
+        self.assertTrue(m["retained"])
+        self.assertFalse(m["parked"])
+        self.assertEqual(m["score"], 0.7)
 
-    def test_state_not_mutated(self):
+    def test_escape_violation_is_permanent(self):
+        for p in ([0, 0, 0.73], [-0.2, 0, 0.85], [0.92, 0, 0.85], [0.2, 0.66, 0.85]):
+            score = Scorer()
+            score.observe_physics({"part": np.array([p])})
+            score.observe_physics({"part": np.array([[0.2, 0, 0.85]])})
+            self.assertEqual(self.final(assembly(), score)["score"], 0.0)
+            self.assertEqual(score.physics_samples, 2)
+
+    def test_nonfinite_physics_coordinate_is_invalid(self):
+        score = Scorer()
+        score.observe_physics({"part": np.array([[np.nan, 0, 0.85]])})
+        m = self.final(assembly(), score)
+        self.assertEqual(m["score"], 0.0)
+        self.assertIn("invalid_state", m["violations"])
+
+    def test_nonfinite_state_or_velocity_forces_zero(self):
+        for field in ("pose", "velocity"):
+            s = assembly()
+            s["bodies"]["Link05"][field][0] = np.nan
+            score = Scorer()
+            self.assertEqual(score.evaluate(s)["score"], 0.0)
+            self.assertEqual(self.final(assembly(), score)["score"], 0.0)
+
+    def test_trace_inputs_are_not_mutated(self):
         s = assembly()
-        a = copy.deepcopy(s)
+        before = copy.deepcopy(s)
         Scorer().evaluate(s)
-        self.assertEqual(s, a)
+        self.assertEqual(s, before)
 
 
-class PhysicalForkTests(unittest.TestCase):
+class PhysicalApertureTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         records = json.loads(
@@ -213,26 +190,38 @@ class PhysicalForkTests(unittest.TestCase):
         ]
 
     def occupied(self, p):
+        p = np.array(p)
         return any(
-            np.all(abs(np.array(p) - r["center_m"]) < np.array(r["size_m"]) / 2 - 1e-9)
+            np.all(abs(p - r["center_m"]) < np.array(r["size_m"]) / 2 - 1e-9)
             for r in self.cells
         )
 
-    def circle_hits(self, x, y, r):
+    def circle_hits_solid(self, x, y, r):
         return any(
-            self.occupied([x + r * np.cos(t), y + r * np.sin(t), 0])
-            for t in np.linspace(0, 2 * np.pi, 180)
+            self.occupied([x + r * np.cos(a), y + r * np.sin(a), 0])
+            for a in np.linspace(0, 2 * np.pi, 180)
         )
 
-    def test_heads_blocked_but_stems_fit(self):
+    def test_heads_cannot_pass_vertically_through_slots(self):
         for y in (-0.05, 0.05):
-            self.assertTrue(self.circle_hits(-0.014, y, 0.012))
-            self.assertFalse(self.circle_hits(-0.014, y, 0.005))
+            self.assertTrue(self.circle_hits_solid(0.018, y, 0.012))
+            self.assertFalse(self.occupied([0.018, y, 0]))
 
-    def test_two_stems_can_slide_from_open_edges(self):
+    def test_stems_can_enter_from_the_open_edge(self):
         for y in (-0.05, 0.05):
             for x in np.linspace(0.05, -0.014, 50):
-                self.assertFalse(self.circle_hits(x, y, 0.005))
+                self.assertFalse(self.circle_hits_solid(x, y, 0.004))
+
+    def test_stems_fit_but_heads_are_blocked_by_necks(self):
+        for y in (-0.05, 0.05):
+            self.assertFalse(self.circle_hits_solid(-0.014, y, 0.004))
+            self.assertTrue(self.circle_hits_solid(-0.014, y, 0.012))
+
+    def test_closed_slot_ends_open_mouths_and_connected_bridge(self):
+        for y in (-0.05, 0.05):
+            self.assertTrue(self.occupied([-0.035, y, 0]))
+            self.assertFalse(self.occupied([0.039, y, 0]))
+        self.assertTrue(self.occupied([0, 0, 0]))
 
 
 if __name__ == "__main__":

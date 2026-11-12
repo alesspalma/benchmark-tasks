@@ -30,7 +30,6 @@ def local_solids(records):
                 ]
                 + [(0, 0, item["height_m"] / 2)]
             )
-            p[:, 2] *= item.get("direction_z", 1)
         else:
             angles = np.linspace(0, 2 * np.pi, 64, endpoint=False)
             p = np.array(

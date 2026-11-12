@@ -1,101 +1,12 @@
-"""Assembly and real chain routing, measured from the current native state."""
+"""Primary current-state 0--1 score, based on the actually measured native assembly."""
 
 import numpy as np
 from yam_arena.urdf import quat_xyzw_to_matrix
-from .config import (
-    PITCH,
-    TABLE_TOP,
-    CHAIN_Z,
-    CONNECTOR_TARGET,
-    SEAT_POINTS,
-    SPROCKET_CENTERS,
-)
+from .config import CONNECTOR_POSITION, PITCH, TABLE_TOP
 
 
 def rotation(pose):
-    return quat_xyzw_to_matrix(np.asarray(pose[3:]))
-
-
-def chain_nodes(s):
-    nodes = []
-    for i in range(11):
-        p = s["bodies"][f"Link{i:02}"]["pose"]
-        r = rotation(p)
-        if i == 0:
-            nodes.append(np.asarray(p[:3]) + r @ np.array([-PITCH / 2, 0, 0]))
-        nodes.append(np.asarray(p[:3]) + r @ np.array([PITCH / 2, 0, 0]))
-    return np.array(nodes)
-
-
-def cross(a, b):
-    return float(a[0] * b[1] - a[1] * b[0])
-
-
-def simple_loop(p):
-    for i in range(len(p)):
-        incoming = p[i] - p[i - 1]
-        outgoing = p[(i + 1) % len(p)] - p[i]
-        if abs(cross(incoming, outgoing)) < 1e-8 and np.dot(incoming, outgoing) < 0:
-            return False
-    for i in range(len(p)):
-        a, b = p[i], p[(i + 1) % len(p)]
-        if np.linalg.norm(a - b) < 0.001:
-            return False
-        for j in range(i + 1, len(p)):
-            if j == i + 1 or (i == 0 and j == len(p) - 1):
-                continue
-            c, d = p[j], p[(j + 1) % len(p)]
-            u, v, w, z = (
-                cross(b - a, c - a),
-                cross(b - a, d - a),
-                cross(d - c, a - c),
-                cross(d - c, b - c),
-            )
-            if u * v < -1e-12 and w * z < -1e-12:
-                return False
-            if max(abs(u), abs(v), abs(w), abs(z)) < 1e-8:
-                axis = int(np.argmax(abs(b - a)))
-                overlap = min(max(a[axis], b[axis]), max(c[axis], d[axis])) - max(
-                    min(a[axis], b[axis]), min(c[axis], d[axis])
-                )
-                if overlap > 1e-5:
-                    return False
-    return True
-
-
-def routing(s):
-    nodes = chain_nodes(s)
-    p = nodes[:, :2]
-    simple = simple_loop(p)
-    windings = []
-    for center in SPROCKET_CENTERS:
-        v = p - center
-        w = np.roll(v, -1, axis=0)
-        windings.append(
-            float(
-                np.arctan2(v[:, 0] * w[:, 1] - v[:, 1] * w[:, 0], (v * w).sum(1)).sum()
-                / (2 * np.pi)
-            )
-        )
-    seats = np.linalg.norm(
-        SEAT_POINTS[:, :, None, :] - p[None, None, :, :], axis=-1
-    ).min(-1)
-    height = float(abs(nodes[:, 2] - CHAIN_Z).max())
-    normals = all(rotation(v["pose"])[2, 2] > 0.995 for v in s["bodies"].values())
-    ok = bool(
-        simple
-        and all(abs(abs(w) - 1) < 0.01 for w in windings)
-        and (seats <= 0.005).all()
-        and height <= 0.004
-        and normals
-    )
-    return dict(
-        chain_routed=ok,
-        loop_simple=bool(simple),
-        wheel_windings=windings,
-        sprocket_seat_errors_m=seats.tolist(),
-        chain_height_error_m=height,
-    )
+    return quat_xyzw_to_matrix(np.array(pose[3:]))
 
 
 class Scorer:
@@ -141,8 +52,13 @@ class Scorer:
                 ends_joined=False,
                 plate_seated=False,
                 retained=False,
-                chain_routed=False,
-                closed_loop=False,
+                parked=False,
+                settled=False,
+                hands_clear=False,
+                robot_clearance_m=s["robot_clearance_m"],
+                end_points_local={},
+                keeper_local=[],
+                pins_in_keeper=[],
                 physics_samples=self.physics_samples,
             )
         c = s["connector"]["pose"]
@@ -152,56 +68,55 @@ class Scorer:
         ends = {}
         passed = []
         for arm, body, sign in [("right", "Link00", -1), ("left", "Link10", 1)]:
-            p = s["bodies"][body]["pose"]
-            point = np.asarray(p[:3]) + rotation(p) @ np.array([sign * PITCH / 2, 0, 0])
+            item = s["bodies"][body]
+            pose = item["pose"]
+            point = np.array(pose[:3]) + rotation(pose) @ np.array(
+                [sign * PITCH / 2, 0, 0]
+            )
             local = r.T @ (point - c[:3])
+            target = np.array([0, sign * PITCH / 2, 0.007])
             ends[arm] = local.tolist()
+            # 32 mm bore around an 8 mm stem: 12 mm radial clearance.
             passed.append(
                 bool(
-                    np.linalg.norm(local[:2] - [0, sign * PITCH / 2]) <= 0.010
-                    and -0.022 < local[2] < -0.010
-                    and np.dot(rotation(p)[:, 2], r[:, 2]) > 0.99
+                    np.linalg.norm(local[:2] - target[:2]) <= 0.012
+                    and 0.003 < local[2] < 0.014
+                    and np.dot(rotation(pose)[:, 2], r[:, 2]) > 0.98
                 )
             )
         joined = all(passed)
-        local = r.T @ (np.asarray(k[:3]) - c[:3])
-        axis = np.trace(r.T @ kr) >= 1 + 2 * np.cos(0.10)
+        local = r.T @ (np.array(k[:3]) - c[:3])
+        axis_ok = np.trace(r.T @ kr) >= 1 + 2 * np.cos(0.10)
+        plate_depth = 0.016 < local[2] < 0.025
         pins = [
-            kr.T @ (np.asarray(c[:3]) + r @ np.array([0, y, -0.035]) - k[:3])
+            kr.T @ (np.array(c[:3]) + r @ np.array([0, y, 0.024]) - k[:3])
             for y in (-PITCH / 2, PITCH / 2)
         ]
-        in_slots = [
-            -0.0215 < p[0] < 0.035 and abs(p[1] - y) < 0.005
-            for p, y in zip(pins, (-PITCH / 2, PITCH / 2))
-        ]
-        in_ends = [
-            -0.0215 < p[0] < -0.008 and abs(p[1] - y) < 0.005
-            for p, y in zip(pins, (-PITCH / 2, PITCH / 2))
-        ]
-        covered = bool(joined and -0.040 < local[2] < -0.030 and axis and all(in_slots))
-        retained = bool(covered and all(in_ends))
-        route = routing(s)
+        in_apertures = []
+        in_necks = []
+        for p, y in zip(pins, (-PITCH / 2, PITCH / 2)):
+            in_apertures.append(bool(-0.0225 < p[0] < 0.036 and abs(p[1] - y) < 0.005))
+            # Include a stem bottomed against the physical closed end at -26 mm:
+            # its 4 mm radius puts its centre at -22 mm (0.5 mm contact margin).
+            in_necks.append(bool(-0.0225 < p[0] < -0.008 and abs(p[1] - y) < 0.005))
+        covered = bool(joined and plate_depth and axis_ok and all(in_apertures))
+        retained = bool(covered and all(in_necks))
         parked = bool(
-            np.linalg.norm(np.asarray(c[:3]) - CONNECTOR_TARGET) < 0.008
-            and np.trace(r) >= 1 + 2 * np.cos(0.10)
+            np.linalg.norm(np.array(c[:3]) - CONNECTOR_POSITION) < 0.015
+            and np.trace(r) >= 1 + 2 * np.cos(np.deg2rad(10))
         )
+        velocities = [v["velocity"] for v in s["bodies"].values()] + [
+            s[n]["velocity"] for n in ("connector", "keeper")
+        ]
         settled = all(
-            np.linalg.norm(p["velocity"][:3]) < 0.02
-            and np.linalg.norm(p["velocity"][3:]) < 0.3
-            for p in parts
+            np.linalg.norm(v[:3]) < 0.02 and np.linalg.norm(v[3:]) < 0.3
+            for v in velocities
         )
         clear = bool(
             s["robot_clearance_m"] >= 0.025
             and all(h["opening_m"] >= 0.070 for h in s["hands"].values())
         )
-        full = bool(
-            retained
-            and route["chain_routed"]
-            and parked
-            and settled
-            and clear
-            and not self.violations
-        )
+        full = bool(retained and parked and settled and clear and not self.violations)
         if full:
             if self.hold_start is None:
                 self.hold_start = s["time_s"]
@@ -210,7 +125,7 @@ class Scorer:
         success = bool(full and s["time_s"] - self.hold_start >= 1.0)
         score = (
             (1.0 if success else 0.7 if covered else 0.4 if joined else 0.0)
-            if route["chain_routed"] and not self.violations
+            if not self.violations
             else 0.0
         )
         return dict(
@@ -220,7 +135,6 @@ class Scorer:
             ends_joined=joined,
             plate_seated=covered,
             retained=retained,
-            closed_loop=bool(joined and retained and route["chain_routed"]),
             parked=parked,
             settled=bool(settled),
             hands_clear=clear,
@@ -229,5 +143,4 @@ class Scorer:
             keeper_local=local.tolist(),
             pins_in_keeper=[p.tolist() for p in pins],
             physics_samples=self.physics_samples,
-            **route,
         )

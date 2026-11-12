@@ -9,74 +9,111 @@ from yam_arena import ik, station
 from yam_arena.constants import READY
 from yam_arena.demo import grip_rotation
 from .config import (
+    CHAIN_POSITION,
+    GRIPS,
+    CHAIN_SHIFT,
     CONNECTOR_POSITION,
-    CONNECTOR_TARGET,
     KEEPER_POSITION,
-    CONNECTOR_GRASP,
-    KEEPER_GRASP,
-    KEEPER_INSERTION,
 )
 
 
 def demo_plan(mode="demo", initial_state=None):
     if mode == "hold":
         return [dict(phase="hold reset", seconds=5.0)]
-    if mode not in ("demo", "ends", "unlocked"):
-        raise ValueError("Unknown mode")
+    if mode not in ("demo", "ends", "unlocked", "retention"):
+        raise ValueError("Unknown policy mode")
     down = grip_rotation()
     plan = []
+    rotations = {"left": down, "right": down}
 
     def add(phase, seconds, **targets):
         stage = dict(phase=phase, seconds=seconds)
-        for arm, (p, g) in targets.items():
+        for arm, (position, grip) in targets.items():
             stage[arm] = dict(
-                position=np.asarray(p).tolist(),
-                rotation_xyzw=ik.matrix_to_quat_xyzw(down).tolist(),
-                grip=g,
+                position=np.asarray(position).tolist(),
+                rotation_xyzw=ik.matrix_to_quat_xyzw(rotations[arm]).tolist(),
+                grip=grip,
             )
         plan.append(stage)
 
-    start = CONNECTOR_POSITION.copy()
-    blue = KEEPER_POSITION.copy()
+    grips = {a: CHAIN_POSITION + g + [0, 0, 0.030] for a, g in GRIPS.items()}
+    seats = {a: g + [CHAIN_SHIFT, 0, 0.002] for a, g in grips.items()}
     if initial_state is not None:
-        start = np.array(initial_state["connector"]["pose"][:3])
-        blue = np.array(initial_state["keeper"]["pose"][:3])
-    pick = start + CONNECTOR_GRASP
-    seat = CONNECTOR_TARGET + CONNECTOR_GRASP
-    add("approach connecting link", 2.0, right=(pick + [0, 0, 0.045], 0.85))
-    add("lower to orange handle", 1.5, right=(pick, 0.85))
-    add("grasp connecting link", 0.8, right=(pick, 0.20))
-    add("lift connecting link", 1.8, right=(pick + [0, 0, 0.057], 0.20))
-    add("carry connector above chain ends", 3.0, right=(seat + [0, 0, 0.057], 0.20))
-    add("lower connector through both holes", 2.5, right=(seat, 0.20))
-    add("hold connecting link", 1.0)
-    add("release connecting link", 0.8, right=(seat, 0.85))
-    add("withdraw right hand", 1.0, right=(seat + [0, 0, 0.045], 0.85))
-    add("park right hand", 1.5, right=([0.15, -0.30, 0.95], 1.0))
-    if mode == "ends":
-        return plan + [dict(phase="hold connector check", seconds=3.0)]
-    new = blue + KEEPER_GRASP
-    add("approach retaining plate", 2.5, left=(new + [0, 0, 0.030], 0.85))
-    add("lower to blue handle", 1.5, left=(new, 0.85))
-    add("grasp retaining plate", 0.8, left=(new, 0.20))
-    add("lift retaining plate", 1.8, left=(new + [0, 0, 0.030], 0.20))
-    outside = new.copy()
-    outside[0] = CONNECTOR_TARGET[0] - 0.075
-    outside[2] += 0.030
-    add("route keeper outside sprocket", 1.5, left=(outside, 0.20))
-    entry = CONNECTOR_TARGET + [-0.075, 0, KEEPER_INSERTION[2]] + KEEPER_GRASP
-    add("carry keeper beside joint", 3.0, left=(entry + [0, 0, 0.040], 0.20))
-    add("lower keeper beside pins", 2.5, left=(entry, 0.20))
-    add("settle keeper approach", 0.7)
-    locked = CONNECTOR_TARGET + KEEPER_INSERTION + KEEPER_GRASP
-    if mode != "unlocked":
-        add("slide keeper into joint", 4.0, left=(locked, 0.20))
-        add("settle retained keeper", 1.0)
-    end = entry if mode == "unlocked" else locked
-    add("release retaining plate", 0.8, left=(end, 0.85))
-    add("withdraw left hand", 1.0, left=(end + [0, 0, 0.040], 0.85))
+        from yam_arena.urdf import quat_xyzw_to_matrix
+
+        c = initial_state["connector"]["pose"]
+        cr = quat_xyzw_to_matrix(np.array(c[3:]))
+        for arm, body, sign in [("right", "Link00", -1), ("left", "Link10", 1)]:
+            pose = initial_state["bodies"][body]["pose"]
+            r = quat_xyzw_to_matrix(np.array(pose[3:]))
+            grips[arm] = np.array(pose[:3]) + r @ np.array([0, 0, 0.030])
+            seats[arm] = (
+                np.array(c[:3])
+                + cr @ np.array([0, sign * 0.050, 0.007])
+                - r @ np.array([sign * 0.050, 0, -0.030])
+            )
+            # Round grip posts permit the reachable straight-down wrist orientation.
+            rotations[arm] = down
+    add(
+        "approach both chain-end tabs",
+        2.0,
+        **{a: (g + [0, 0, 0.055], 0.85) for a, g in grips.items()},
+    )
+    add("lower to chain tabs", 1.5, **{a: (g, 0.85) for a, g in grips.items()})
+    add("grasp both chain ends", 1.0, **{a: (g, 0.10) for a, g in grips.items()})
+    add(
+        "lift chain ends above pin heads",
+        2.0,
+        **{a: (g + [0, 0, 0.050], 0.10) for a, g in grips.items()},
+    )
+    add(
+        "align both chain holes over pins",
+        2.0,
+        **{a: (g + [0, 0, 0.048], 0.10) for a, g in seats.items()},
+    )
+    add(
+        "lower both chain ends onto pins",
+        2.5,
+        **{a: (g, 0.10) for a, g in seats.items()},
+    )
+    add("settle chain-end seating", 1.0)
+    add("release both chain tabs", 0.8, **{a: (g, 0.85) for a, g in seats.items()})
+    add(
+        "lift both hands clear",
+        1.0,
+        **{a: (g + [0, 0, 0.065], 0.85) for a, g in seats.items()},
+    )
     add("park left hand", 1.5, left=([0.15, 0.30, 0.95], 1.0))
-    add("hold closed routed loop", 3.0)
+    add("let chain settle onto backing", 1.0)
+    if mode == "ends":
+        return plan + [dict(phase="hold joined ends", seconds=3.0)]
+    rotations["right"] = down
+    new = KEEPER_POSITION + [0, 0, 0.050]
+    add("approach retaining plate", 2.0, right=(new + [0, 0, 0.12], 0.8))
+    add("lower to blue grip", 1.5, right=(new, 0.8))
+    add("grasp retaining plate", 0.8, right=(new, 0.20))
+    add("lift retaining plate", 1.5, right=(new + [0, 0, 0.13], 0.20))
+    outside = new.copy()
+    outside[0] = CONNECTOR_POSITION[0] - 0.070
+    outside[2] += 0.13
+    add("route keeper outside chain grips", 1.5, right=(outside, 0.20))
+    entry = CONNECTOR_POSITION + [-0.070, 0, 0.074]
+    add("carry plate beside connecting link", 3.0, right=(entry + [0, 0, 0.026], 0.20))
+    add("lower keeper beside pin heads", 3.0, right=(entry, 0.20))
+    add("settle keeper approach", 0.8)
+    locked = entry + [0.084, 0, 0]
+    if mode != "unlocked":
+        add("slide keeper under both heads", 4.0, right=(locked, 0.20))
+        add("settle retained keeper", 1.5)
+    end = entry if mode == "unlocked" else locked
+    if mode == "retention":
+        add("bounded upward retention probe", 2.0, right=(end + [0, 0, 0.008], 0.20))
+        add("hold retention probe", 2.0)
+        return plan
+    add("release retaining plate", 0.8, right=(end, 0.85))
+    add("lift right hand from plate", 1.0, right=(end + [0, 0, 0.030], 0.85))
+    add("park right hand", 1.5, right=([0.15, -0.30, 0.95], 1.0))
+    add("hold released retained joint", 3.0)
     return plan
 
 
@@ -105,7 +142,7 @@ class ScriptedPolicy(PolicyBase):
         self.q = np.r_[READY, 1.0, READY, 1.0].astype(float)
         self.worst_position_error = self.worst_rotation_error = 0.0
         self.keeper_integral = np.zeros(3)
-        self.release_positions = {}
+        self.release_position = None
         initial = {}
         for arm, offset in (("left", 0), ("right", 7)):
             pos, rot = ik.tcp_pose(self.q[offset : offset + 6], station.BASES[arm])
@@ -151,70 +188,61 @@ class ScriptedPolicy(PolicyBase):
         if state is not None and self.initial_state is not None:
             from yam_arena.urdf import quat_xyzw_to_matrix
 
-            connector_phases = {
-                "lift connecting link",
-                "carry connector above chain ends",
-                "lower connector through both holes",
-                "hold connecting link",
-            }
-            keeper_phases = {
-                "lift retaining plate",
-                "route keeper outside sprocket",
-                "carry keeper beside joint",
-                "lower keeper beside pins",
-                "settle keeper approach",
-                "slide keeper into joint",
-                "settle retained keeper",
-            }
-            for arm, name, grasp, active in [
-                ("right", "connector", CONNECTOR_GRASP, self.phase in connector_phases),
-                ("left", "keeper", KEEPER_GRASP, self.phase in keeper_phases),
-            ]:
-                if not active:
-                    continue
-                pos, rot, grip = targets[arm]
-                hand = state["hands"][arm + "_robot"]
-                tcp = np.array(hand["tcp"][:3])
-                pose = state[name]["pose"]
-                body = np.array(pose[:3])
-                body_r = quat_xyzw_to_matrix(np.array(pose[3:]))
-                gripper = hand["poses"][hand["names"].index("gripper")]
-                hand_r = quat_xyzw_to_matrix(np.array(gripper[3:]))
-                desired = pos - grasp
-                desired_r = np.eye(3)
-                align_keeper = {
-                    "carry keeper beside joint",
-                    "lower keeper beside pins",
-                    "settle keeper approach",
-                    "slide keeper into joint",
-                    "settle retained keeper",
-                    "release connecting link",
-                    "withdraw right hand",
-                    "park right hand",
-                }
-                if name == "keeper" and self.phase in align_keeper:
-                    cp = state["connector"]["pose"]
-                    desired_r = quat_xyzw_to_matrix(np.array(cp[3:]))
-                    desired = np.array(cp[:3]) + desired_r @ (
-                        desired - CONNECTOR_TARGET
+            if self.phase in {
+                "lift chain ends above pin heads",
+                "align both chain holes over pins",
+                "lower both chain ends onto pins",
+                "settle chain-end seating",
+            }:
+                for arm, body, sign in [("right", "Link00", -1), ("left", "Link10", 1)]:
+                    before = quat_xyzw_to_matrix(
+                        np.array(self.initial_state["bodies"][body]["pose"][3:])
                     )
-                relative_tcp = body_r.T @ (tcp - body)
-                targets[arm] = (
-                    desired + desired_r @ relative_tcp,
-                    desired_r @ body_r.T @ hand_r,
-                    grip,
+                    now = quat_xyzw_to_matrix(
+                        np.array(state["bodies"][body]["pose"][3:])
+                    )
+                    pos, rot, grip = targets[arm]
+                    desired_hole = pos + before @ np.array([sign * 0.050, 0, -0.030])
+                    current_hole = np.array(
+                        state["bodies"][body]["pose"][:3]
+                    ) + now @ np.array([sign * 0.050, 0, 0])
+                    tcp = np.array(state["hands"][arm + "_robot"]["tcp"][:3])
+                    targets[arm] = (tcp + desired_hole - current_hole, rot, grip)
+            if self.phase in {
+                "carry plate beside connecting link",
+                "lower keeper beside pin heads",
+                "settle keeper approach",
+                "slide keeper under both heads",
+                "settle retained keeper",
+            }:
+                delta = (
+                    np.array(state["connector"]["pose"][:3])
+                    - self.initial_state["connector"]["pose"][:3]
                 )
-            for phase, arm in [
-                ("release connecting link", "right"),
-                ("release retaining plate", "left"),
-            ]:
-                if self.phase == phase:
-                    if arm not in self.release_positions:
-                        self.release_positions[arm] = np.array(
-                            state["hands"][arm + "_robot"]["tcp"][:3]
-                        )
-                    _, rot, grip = targets[arm]
-                    targets[arm] = (self.release_positions[arm], rot, grip)
+                pos, rot, grip = targets["right"]
+                desired_body = pos + delta - np.array([0, 0, 0.050])
+                hand = state["hands"]["right_robot"]
+                tcp = np.array(hand["tcp"][:3])
+                keeper = state["keeper"]["pose"]
+                # Keep the reachable downward wrist orientation. Correcting
+                # every contact-induced plate tilt can chase slip into a wrist
+                # limit; the enlarged physical entries provide insertion lead-in.
+                error = desired_body - keeper[:3]
+                if self.phase in {
+                    "slide keeper under both heads",
+                    "settle retained keeper",
+                }:
+                    self.keeper_integral = np.clip(
+                        self.keeper_integral + 0.4 * self.dt * error, -0.008, 0.008
+                    )
+                targets["right"] = (tcp + error + self.keeper_integral, rot, grip)
+            if self.phase == "release retaining plate":
+                if self.release_position is None:
+                    self.release_position = np.array(
+                        state["hands"]["right_robot"]["tcp"][:3]
+                    )
+                _, rot, grip = targets["right"]
+                targets["right"] = (self.release_position, rot, grip)
         for arm, offset in (("left", 0), ("right", 7)):
             pos, rot, grip = targets[arm]
             q, pe, re = ik.solve(

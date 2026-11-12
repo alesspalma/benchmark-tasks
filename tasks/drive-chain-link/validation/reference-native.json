@@ -1,8 +1,7 @@
 {
-  "status": "completed",
   "scope": "actual native PhysX robot execution",
-  "source_sha256": "c9b7d047e4ed0db05966fe4dcffdc7069d507a5309a2add7fa6da035b93675e1",
-  "instruction": "Reconnect the open drive chain around the two sprockets. Insert the orange connecting link through both chain-end holes and secure its pins with the blue retaining plate. Leave a closed, retained loop correctly seated on both sprockets, and release both hands. The drive is unpowered.",
+  "source_sha256": "894ec5142f012f92e09e5f29fef5e0b1dfc626311adbc9ddea4b0554d08dfdff",
+  "instruction": "Join the two ends of the open chain on the connecting link. Slide the blue forked retaining plate sideways under both pin heads toward the chain, until both pin stems reach the closed ends of its slots. Leave the retained joint in its service cradle and release both hands. This is an unpowered training assembly.",
   "policy": "demo",
   "seed": 0,
   "max_steps": 2400,
@@ -22,62 +21,40 @@
     "ends_joined": false,
     "plate_seated": false,
     "retained": false,
-    "closed_loop": false,
-    "parked": false,
+    "parked": true,
     "settled": true,
     "hands_clear": true,
-    "robot_clearance_m": 0.08901899325465212,
+    "robot_clearance_m": 0.09146616749069417,
     "end_points_local": {
       "right": [
-        0.03900450831639684,
-        0.26852428103526144,
-        -0.014999462407026142
+        0.08339617103391803,
+        -0.050000852871382645,
+        0.00700102805873805
       ],
       "left": [
-        0.04003874301206319,
-        0.36987286216910714,
-        -0.01499923241534556
+        0.08339583067653568,
+        0.050000983392630816,
+        0.007001036304771355
       ]
     },
     "keeper_local": [
-      0.004999946380408619,
-      0.4800000493651145,
-      -0.029998724945228653
+      -0.01499948773560298,
+      -0.3500000108818175,
+      -0.08850004311444913
     ],
     "pins_in_keeper": [
       [
-        -0.004999793364229836,
-        -0.5300000660162675,
-        -0.004999663195780096
+        0.015000158937308043,
+        0.30000002949983956,
+        0.11249990397384763
       ],
       [
-        -0.004999818859862346,
-        -0.43000006601674357,
-        -0.0049999706945175835
+        0.015000164643655566,
+        0.40000002949983793,
+        0.11249988666362983
       ]
     ],
-    "physics_samples": 0,
-    "chain_routed": true,
-    "loop_simple": true,
-    "wheel_windings": [
-      1.0,
-      1.0000000000000002
-    ],
-    "sprocket_seat_errors_m": [
-      [
-        0.001659434067123324,
-        0.0016462196104072657,
-        0.0015957335332316511,
-        0.0014378515928117255
-      ],
-      [
-        0.0006908806681940707,
-        0.0004555269243461431,
-        0.0003150241185884458,
-        0.0006585008895216377
-      ]
-    ],
-    "chain_height_error_m": 2.3662339476704375e-07
+    "physics_samples": 0
   },
   "final_metrics": {
     "score": 1.0,
@@ -86,91 +63,77 @@
     "ends_joined": true,
     "plate_seated": true,
     "retained": true,
-    "closed_loop": true,
     "parked": true,
     "settled": true,
     "hands_clear": true,
-    "robot_clearance_m": 0.09269248179300028,
+    "robot_clearance_m": 0.09228859803459506,
     "end_points_local": {
       "right": [
-        0.002542391548693627,
-        -0.04839971954631746,
-        -0.014998997838265488
+        -0.01089679566491411,
+        -0.0455612032582207,
+        0.008475683284687072
       ],
       "left": [
-        0.004179950807191477,
-        0.05299385366413663,
-        -0.014998204017685935
+        0.003738130388410454,
+        0.04997293548242579,
+        0.008378166678865078
       ]
     },
     "keeper_local": [
-      0.010853086461723551,
-      0.0034303009731229384,
-      -0.03546273976239036
+      0.013832965932676706,
+      -0.0015211928713005569,
+      0.01854499841123306
     ],
     "pins_in_keeper": [
       [
-        -0.010710677839933453,
-        -0.05343713663420097,
-        -0.0015982754639741804
+        -0.013808919810189415,
+        -0.04853622732543994,
+        0.004985087776424702
       ],
       [
-        -0.01097713397841807,
-        0.0464881854556213,
-        0.002256462707619753
+        -0.013148405497166539,
+        0.051427136784413546,
+        0.007609884279612563
       ]
     ],
-    "physics_samples": 9276,
-    "chain_routed": true,
-    "loop_simple": true,
-    "wheel_windings": [
-      1.0,
-      1.0000000000000002
-    ],
-    "sprocket_seat_errors_m": [
-      [
-        0.0019739616266088336,
-        0.0018685416759679665,
-        0.0011782457806539966,
-        0.0012061529187362106
-      ],
-      [
-        0.00042321458625139367,
-        0.0003702689535280329,
-        0.00048146387634614605,
-        0.0010270783461381458
-      ]
-    ],
-    "chain_height_error_m": 3.004366054826235e-07
+    "physics_samples": 9480
   },
-  "steps": 773,
-  "simulated_s": 38.65,
-  "elapsed_wall_s": 121.23531392402947,
+  "steps": 790,
+  "simulated_s": 39.5,
+  "elapsed_wall_s": 119.78394896094687,
+  "worst_ik_position_m": 9.919036552092595e-05,
+  "worst_ik_rotation_rad": 0.00021350663287756166,
   "source_unchanged": true,
   "physics_device": "cpu",
   "reset_image_stats": {
     "top_cam": {
-      "std": 62.4594599618205,
+      "std": 60.61473524738461,
       "min": 0,
       "max": 246
     },
     "left_cam": {
-      "std": 68.72492480714278,
-      "min": 0,
-      "max": 237
+      "std": 65.07355894744597,
+      "min": 1,
+      "max": 225
     },
     "right_cam": {
-      "std": 55.849247973637546,
-      "min": 1,
+      "std": 51.790549972113,
+      "min": 2,
       "max": 238
     }
   },
   "video_errors": {},
+  "status": "completed",
   "render_device": "cuda:0",
-  "camera_size": [
+  "camera_views": [
+    "top_cam",
+    "left_cam",
+    "right_cam"
+  ],
+  "native_camera_size": [
     640,
     360
   ],
-  "dream_api_used": false,
-  "original_receipt_sha256": "5a7b8419db157887462c7da554955017d458eae42918cb01216c91bfec32b5e3"
+  "native_receipt_sha256": "0122469e1a3488721e53f602a72c08cb9a1d673cc18e0255eb776d526c696f0c",
+  "dream_api_used": false
 }
