@@ -4,7 +4,7 @@ The right YAM arm picks up a loose yellow two-pin connecting link and slides it 
 
 The fresh native three-camera reference and independent registered Inspect camera evaluation both reach **1.0 at 1,180 actions / 59 seconds**. Omitting the retaining slide scores **0.4**. All **37 tests** and **four USD structure checks** pass.
 
-The reference uses a fixed 20 Hz program of fourteen robot joint/gripper commands for this calibrated fixture. A fresh native execution, rather than prerecorded object motion, is required to demonstrate success. Validation for the revised controller is recorded in `validation/`. A matching Dream-1 episode remains the last paid step; the draft does not claim a hosted-model score.
+The reference uses a fixed 20 Hz program of fourteen robot joint/gripper commands for this calibrated fixture. A fresh native execution, rather than prerecorded object motion, is required to demonstrate success. Validation for the revised controller is recorded in `validation/`. The matching Dream-1 episode completed all 2,400 actions / 120 simulated seconds and scored **0.0**, with no execution error. Its complete three-camera recording accompanies the full-score scripted demo.
 
 ## Real-world operation and approximation
 
@@ -45,7 +45,7 @@ inspect-robots run --embodiment chain_link --policy chain_link_scripted \
   --log-dir /tmp/chain-inspect
 ```
 
-For the final matching hosted run, use the same registered command with `--policy dream -P model=dreamlabs/dream-1-beta -P rows_per_request=48 -P record=false`, with a privately configured `DREAM_API_KEY`. This consumes credits. The current revision has no hosted-model result yet.
+The recorded hosted run uses the same registered command with `--policy dream -P model=dreamlabs/dream-1-beta -P rows_per_request=48 -P record=false`, with a privately configured `DREAM_API_KEY`. Hosted evaluation consumes credits; the supplied result is the one completed episode. `validation/model-native.json` records its measured score, termination and source identity.
 
 Each command needs a fresh output directory. The fixed layout has object jitter 0. Inspect evaluation seed 0 derives trial seed 1415158438; the direct native recipe uses that same trial seed. The calibrated program contains 1,180 commands, followed by a three-second hold (62 simulated seconds total), and normally stops earlier once success holds. CPU development takes about 1–5 minutes wall time. Three-camera evaluation takes several minutes on an A6000, including renderer warm-up; hosted inference adds time. Limit: 2,400 actions / 120 simulated seconds at 20 Hz, with 240 Hz physics.
 
@@ -82,4 +82,4 @@ The dark grey former has one machined-looking hub and nine physical guide pins e
 
 The reusable printed-polymer links, metal pins and bench fixture use native rigid contact, ten passive hinges and Coulomb friction. The keeper blocks upward removal beneath the pin heads; reversing its lateral slide releases it. The scored outcome is a stationary retained joint.
 
-Reset restores all free bodies and ten passive hinges, opens the grippers at ready and settles for 0.5 seconds with auditing disabled. Scoring begins at t=0 after settling. Nothing is consumed. Final media must show the current loose-part starting layout and exact instruction. The matching hosted run and media upload remain pending.
+Reset restores all free bodies and ten passive hinges, opens the grippers at ready and settles for 0.5 seconds with auditing disabled. Scoring begins at t=0 after settling. Nothing is consumed. Final media must show the current loose-part starting layout and exact instruction. The matching hosted run is complete. Media upload, final task.json and the submission PR remain pending.

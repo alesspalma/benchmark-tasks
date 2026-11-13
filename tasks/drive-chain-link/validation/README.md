@@ -1,4 +1,4 @@
-# Final pre-Dream validation
+# Current task validation
 
 All current executable code and both robot-motion files are covered by source fingerprint `e416a5f7a88d638b0ce04c317eba00e26f4e66616e67f434f28df5ee2dd18de7`.
 
@@ -10,8 +10,9 @@ The reference policy reads elapsed time only. Its 1,180-command robot program wa
 - `reference-controller.json` and `reference-roles.json`: policy-input audit and measured arm roles. The left hand travels over one metre while fitting the keeper and the right hand remains parked; arm roles are not scoring conditions.
 - `negative-control.json`: omitting the retaining slide scores 0.4, with no violations, under the final source.
 - `unit-tests.txt`, `lint.txt`, `usd-structure.json`: 37 tests, static checks and four asset structure checks pass.
-- `preflight.json`: final metadata, source, media and evidence checks. `files.sha256.json` records the task files, excluding itself.
+- `model-native.json` and `model-media.json`: one matching Dream-1 episode, 0.0 at the 2,400-action limit, without execution errors. All 2,401 frames per camera and the composite video are validated.
+- `preflight.json`: the completed post-model metadata, source, media and evidence checks. `files.sha256.json` records the task files, excluding itself.
 
 The geometry, contact parameters, scoring and fixed setup are unchanged from the preceding scene. Superseded controller/receipts are archived outside the submission folder. The latest instruction and all final evidence use the same source fingerprint; no prompt-equivalence exception is needed.
 
-The matching Dream-1 episode is intentionally pending. No earlier model episode or media ID is reused. After that episode, its actual score/video must be added, the media uploaded and task.json completed before opening the submission PR.
+The matching Dream-1 episode is complete and uses the exact frozen source and instruction above. No earlier model episode or media ID is reused. The real model score and video are ready alongside the 1.0 demonstration. Media upload, final task.json and the submission PR remain pending.

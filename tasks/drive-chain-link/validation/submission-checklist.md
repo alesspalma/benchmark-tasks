@@ -19,5 +19,5 @@ The authoritative source is the [live Robocurve guide](https://tasks.robocurve.o
 - [x] Registered Inspect reference with actual cameras reaches 1.0.
 - [x] Fresh native footage visually reviewed; setup screenshot, all-camera decode, blind review, codecs and size limits verified.
 - [x] Final local preflight passes; branch is prepared for fork synchronization.
-- [ ] One matching Dream-1 episode, held until requested by the user. No old model video is reused.
-- [ ] After that episode: actual model score/video, final task.json, media upload/ID and one submission PR.
+- [x] One matching Dream-1 episode: 0.0 at 2,400 actions, no execution errors, all three cameras recorded and validated. No old model video is reused.
+- [ ] Upload matching model/demo media and setup screenshot, complete task.json with the media ID, and open one submission PR.

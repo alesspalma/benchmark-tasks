@@ -61,5 +61,8 @@
   "original_assets": "MIT primitive geometry; external references and installed dependencies documented in SOURCE.json.",
   "account_verified": "registered GitHub account, alesspalma",
   "existing_submission_PR_for_branch": false,
-  "remaining": "One matching Dream-1 episode, then actual score/media ID/task.json/upload/PR."
+  "remaining": "Matching media upload, final task.json media ID and one submission PR.",
+  "latest_board_before_model_at_utc": "2026-11-13T01:03:50+00:00",
+  "latest_board_before_model_records": 1980,
+  "new_chain_neighbour_found_before_model": false
 }

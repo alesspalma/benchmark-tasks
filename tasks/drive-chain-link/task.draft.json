@@ -14,5 +14,5 @@
   "run_limit": "2400 control steps (120 seconds at 20 Hz)",
   "reset_notes": "Reset all free parts and ten passive hinges to the fixed layout; open grippers in the standard ready pose, settle 0.5 s, then start scoring. Nothing is consumed.",
   "fidelity": "Rigid articulated chain with ten passive hinges in a fixed assembly fixture. Enlarged printed parts approximate a connecting-link operation; the custom forked keeper replaces commercial spring clips/cotters. Native contact and ordinary robot joint/gripper actuation only. No powered operation, chain tension, fatigue or load-capacity testing.",
-  "scores": "Scripted native demo: 1.0; registered scripted reference: 1.0. Matching Dream-1 run pending; no hosted-model score claimed."
+  "scores": "Dream-1 run: 0.0; scripted full-score demo: 1.0."
 }
