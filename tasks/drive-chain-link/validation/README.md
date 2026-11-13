@@ -15,4 +15,4 @@ The reference policy reads elapsed time only. Its 1,180-command robot program wa
 
 The geometry, contact parameters, scoring and fixed setup are unchanged from the preceding scene. Superseded controller/receipts are archived outside the submission folder. The latest instruction and all final evidence use the same source fingerprint; no prompt-equivalence exception is needed.
 
-The matching Dream-1 episode is complete and uses the exact frozen source and instruction above. No earlier model episode or media ID is reused. The real model score and video are ready alongside the 1.0 demonstration. Media upload, final task.json and the submission PR remain pending.
+The matching Dream-1 episode is complete and uses the exact frozen source and instruction above. No earlier model episode or media ID is reused. The real model score and video are ready alongside the 1.0 demonstration. Matching media are uploaded as `M-4UKEJ5` and bound explicitly in canonical `task.json`. `media-upload.json` records the exact uploaded file hashes.

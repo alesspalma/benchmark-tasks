@@ -61,7 +61,7 @@ Passive hinges use the standard PhysX actuator path, `sim.use_newton_actuators=F
 
 Scoring uses the current state. Exact predicates are in `chain_link/scoring.py`; numerical diagnostics are recorded in each native trace. Coordinates below are connector- or keeper-local unless stated otherwise.
 
-- **0:** both end holes are not seated, or a permanent workspace/invalid-state violation occurred.
+- **0:** either end hole is unseated, or a permanent workspace/invalid-state violation occurred.
 - **0.4:** both hole centres are within 12 mm radially of their respective stems, at z strictly between 3 and 14 mm, with link-normal dot product greater than 0.98 against the connector normal.
 - **0.7:** both ends are seated; keeper centre z is strictly between 16 and 25 mm, relative orientation is at most 0.10 rad, and both stem projections lie in its slots: x strictly between −22.5 and 36 mm, y within strictly 5 mm of its own ±50 mm slot centre.
 - **1:** both projections additionally have x strictly between −22.5 and −8 mm; connector stays within strictly 15 mm and at most 10 degrees of its cradle pose; all moving bodies stay below 20 mm/s and 0.3 rad/s; both grippers open at least 70 mm; all robot collision bodies clear all moving task bodies by at least 25 mm; and all nine resting links remain seated on the guide. These conditions hold continuously for one second.
@@ -82,4 +82,4 @@ The dark grey former has one machined-looking hub and nine physical guide pins e
 
 The reusable printed-polymer links, metal pins and bench fixture use native rigid contact, ten passive hinges and Coulomb friction. The keeper blocks upward removal beneath the pin heads; reversing its lateral slide releases it. The scored outcome is a stationary retained joint.
 
-Reset restores all free bodies and ten passive hinges, opens the grippers at ready and settles for 0.5 seconds with auditing disabled. Scoring begins at t=0 after settling. Nothing is consumed. Final media must show the current loose-part starting layout and exact instruction. The matching hosted run is complete. Media upload, final task.json and the submission PR remain pending.
+Reset restores all free bodies and ten passive hinges, opens the grippers at ready and settles for 0.5 seconds with auditing disabled. Scoring begins at t=0 after settling. Nothing is consumed. Final media must show the current loose-part starting layout and exact instruction. The matching hosted run is complete. Canonical metadata is in `task.json`; the matching model/demo videos and initial screenshot are uploaded as media `M-4UKEJ5`.
