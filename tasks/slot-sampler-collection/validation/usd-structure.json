@@ -1,0 +1,30 @@
+{
+  "scope": "Offline USD/schema structure only; no physics or feasibility claim",
+  "hostname": "tengu",
+  "assets": [
+    {
+      "file": "probe.usda",
+      "sha256": "a5584d6c8b010f5cab216f14c3dc2aa3e7bf1041cda33036f8129d2c30902eca",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [
+        {
+          "path": "/Asset/Sleeve",
+          "bodies": [
+            "/Asset/Outer",
+            "/Asset/Inner"
+          ]
+        }
+      ],
+      "structure_passed": true
+    },
+    {
+      "file": "fixtures.usda",
+      "sha256": "3ec8ad04f662f6fe3175687eb0215a74719c19f029358c52f3ba347be45a569f",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    }
+  ]
+}

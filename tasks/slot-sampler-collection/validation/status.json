@@ -1,0 +1,39 @@
+{
+  "status": "prototype_not_submission_ready",
+  "native_full_score": false,
+  "last_native_score": 0.0,
+  "local_source_sha256": "aa100dec9d85e7769d912d0331a2c8d4002d62e6bb54d18f2ecbf28b1d2a4f4d",
+  "matches_last_native_attempt": true,
+  "dream_runs": 0,
+  "media_uploads": 0,
+  "prs_opened": 0,
+  "unit_tests": 10,
+  "combined_test_count": 20,
+  "registered_entry_points_installed": true,
+  "registered_full_episode_validated": false,
+  "remaining": [
+    "Successful full-score native demonstration",
+    "Native failure controls",
+    "Final rendered three-camera reference",
+    "Registered Inspect full-episode validation",
+    "Final checklist and novelty refresh",
+    "One paid Dream-1 episode after native validation",
+    "Media upload and task.json publication"
+  ],
+  "known_failures": [
+    "Latest scorer recorded 10 retained granules (1.8 g), below the 5 g requirement.",
+    "No eligible sample was delivered into the jar.",
+    "Material spills during inversion/discharge and the probe fails to park.",
+    "Capture-provenance boundaries need another construct-validity review before publication."
+  ],
+  "development_trial_audit": {
+    "completed": 24,
+    "error": 4,
+    "full_score_runs": 0,
+    "unfinished_receipts": 0,
+    "running_processes": 0
+  },
+  "lint_notes": [
+    "The runtime Ruff version recommends datetime.UTC in run.py (UP017); exact failed-trial source is preserved."
+  ]
+}

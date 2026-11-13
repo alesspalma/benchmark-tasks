@@ -1,0 +1,12 @@
+{
+  "title": "Collect a granule sample with a closing slot probe",
+  "category": "Impact on jobs",
+  "instruction": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
+  "context": "Manual sampling of granular incoming materials supports industrial quality checks. The robot must admit material through a buried side window, close the sleeve to retain it, and deliver a weighable sample.",
+  "setup": "Fixed calibrated bimanual YAM station. See setup-layout.json and README.md for every object, dimension, material and reset coordinate. The final screenshot must match the validated native reset.",
+  "scoring": "0.4: at least 2 g delivered at rest. 0.7: at least 5 g. Only grains admitted through the buried window and retained after closing count. 1: additionally probe parked within 12 mm, upright cosine >0.98, sleeve within 0.08 rad closed; speed <15 mm/s and 0.15 rad/s; both grippers open >40 mm and all robot bodies >3 mm clear for 1 s. Off-table material/probe or invalid state: 0.",
+  "run_limit": "2,400 control steps; 120 seconds at 20 Hz.",
+  "reset_notes": "Restore all bodies and passive joints to the fixed reset and settle before scoring. No consumables in simulation.",
+  "fidelity": "Original 300 mm, 32 mm OD single-port double sleeve sampler; native rigid 6.8 mm polymer calibration granules (0.18 g each), rigid contacts and nominal Coulomb friction. Material entry, retention and discharge are physical. Grains are reusable calibration material.",
+  "scores": "Native scripted attempt: 0.0; no full-score demo; Dream-1 not run."
+}
