@@ -1,6 +1,5 @@
 {
   "scope": "Offline USD/schema structure only; no physics or feasibility claim",
-  "hostname": "tengu",
   "assets": [
     {
       "file": "chain.usda",

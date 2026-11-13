@@ -30,8 +30,7 @@ ROOT_POSITION = CHAIN_POSITION + ROOT_CENTER
 ROOT_QUATERNION = np.array([0.0, 0.0, np.sin(ROOT_YAW / 2), np.cos(ROOT_YAW / 2)])
 CHAIN_SHIFT = CONNECTOR_POSITION[0] - (CHAIN_POSITION + NODES[0])[0]
 INSTRUCTION = (
-    "Pick up the yellow connecting link and place it in the empty service cradle. "
-    "Join the two bare ends of the open chain on its pins. Pick up the blue forked retaining plate from the left side of the table and slide it "
-    "sideways under both pin heads toward the chain, until both pin stems reach the closed ends of its slots. "
-    "Leave the retained joint in its service cradle with the chain seated on the toothed guide, and release both hands."
+    "Join and retain the two loose ends of the chain using the yellow connecting "
+    "link and blue retaining plate. Leave the assembled joint in its service "
+    "cradle, the chain seated on its guide, and both hands released."
 )

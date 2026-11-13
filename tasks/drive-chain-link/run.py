@@ -74,11 +74,15 @@ def execute(args):
         )
         scene = Scene(id="drive-chain-link", instruction=INSTRUCTION)
         observation = environment.reset(scene, seed=args.seed)
-        policy = ScriptedPolicy(
-            mode=args.policy, initial_state=environment.diagnostics()
-        )
+        policy = ScriptedPolicy(mode=args.policy)
         policy.bind(environment.info)
         policy.reset(scene)
+        receipt["controller"] = {
+            "kind": "precalibrated fourteen-joint/gripper program",
+            "inputs": ["elapsed time"],
+            "program_sha256": policy.program_sha256,
+            "runtime_object_state_feedback": False,
+        }
         initial = environment.metrics.copy()
         receipt["initial_metrics"] = initial
         if args.record:
@@ -124,9 +128,7 @@ def execute(args):
                 writers[name].stdin.write(np.ascontiguousarray(frame).tobytes())
         with (output / "trace.jsonl").open("w") as trace:
             for step in range(args.max_steps):
-                action = policy.action_at(
-                    (step + 1) / 20, state=environment.diagnostics()
-                )
+                action = policy.action_at((step + 1) / 20)
                 result = environment.step(Action(data=action))
                 steps, last = step + 1, environment.metrics.copy()
                 row = dict(
@@ -164,8 +166,6 @@ def execute(args):
             final_metrics=last,
             steps=steps,
             simulated_s=steps / 20,
-            worst_ik_position_m=policy.worst_position_error,
-            worst_ik_rotation_rad=policy.worst_rotation_error,
         )
     except Exception:
         receipt.update(
@@ -211,7 +211,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
         "--policy",
-        choices=["demo", "connector", "hold", "ends", "unlocked", "retention"],
+        choices=["demo", "connector", "hold", "ends", "unlocked"],
         default="demo",
     )
     parser.add_argument("--seed", type=int, default=0)
@@ -223,7 +223,7 @@ if __name__ == "__main__":
         help="Native physics development only; does not produce submission media",
     )
     parser.add_argument("--max-steps", type=int, default=MAX_STEPS)
-    parser.add_argument("--width", type=int, default=640)
-    parser.add_argument("--height", type=int, default=360)
+    parser.add_argument("--width", type=int, default=320)
+    parser.add_argument("--height", type=int, default=176)
     parser.add_argument("--no-record", dest="record", action="store_false")
     execute(parser.parse_args())

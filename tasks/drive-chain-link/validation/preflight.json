@@ -1,0 +1,32 @@
+{
+  "checked_at_utc": "2026-11-13T00:06:58.098430+00:00",
+  "source_sha256": "e416a5f7a88d638b0ce04c317eba00e26f4e66616e67f434f28df5ee2dd18de7",
+  "ready_for_single_dream_episode": true,
+  "native_score": 1.0,
+  "native_steps": 1180,
+  "native_seconds": 59.0,
+  "registered_rendered_score": 1.0,
+  "registered_steps": 1180,
+  "omitted_retention_score": 0.4,
+  "unit_tests": 37,
+  "controller_inputs": [
+    "elapsed time"
+  ],
+  "runtime_object_state_feedback": false,
+  "fidelity_characters": 342,
+  "custom_geometry_and_scorer_unchanged": true,
+  "three_actual_camera_streams": true,
+  "visually_reviewed": true,
+  "secret_scan": "passed",
+  "task_bytes": 942353,
+  "category": "Impact on jobs",
+  "dream_calls_for_final_revision": 0,
+  "pending": [
+    "One matching Dream-1 episode and its actual score/video",
+    "Then final task.json media ID, upload and submission PR"
+  ],
+  "rules_url": "https://tasks.robocurve.org/",
+  "rules_snapshot": "research/challenge-update-2026-11-12T232949Z",
+  "novelty_snapshot": "research/chain-preflight-novelty-neighbours.json",
+  "novelty_note": "No obvious direct duplicate found in complete board and named benchmark catalog screens; review acceptance is a reviewer judgment."
+}

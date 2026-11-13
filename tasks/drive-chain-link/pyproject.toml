@@ -18,5 +18,8 @@ chain_link_scripted = "chain_link.controller:scripted_policy"
 [tool.setuptools.packages.find]
 include = ["chain_link*"]
 
+[tool.setuptools.package-data]
+chain_link = ["motions/*.json"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

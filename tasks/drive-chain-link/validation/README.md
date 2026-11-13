@@ -1,15 +1,17 @@
-# Current task validation
+# Final pre-Dream validation
 
-The chain and fixed toothed former are dark grey against the light back plate. The yellow connector starts separately on the right; the blue keeper starts on the left at (0.18, 0.35, 0.7515)m. The right arm places the yellow connector, both arms join the bare chain ends, and the left arm picks up and fits the keeper while the right arm is parked.
+All current executable code and both robot-motion files are covered by source fingerprint `e416a5f7a88d638b0ce04c317eba00e26f4e66616e67f434f28df5ee2dd18de7`.
 
-- Actual three-camera native reference: 1.0 at 1,180 actions / 59.0 simulated seconds, with 14,160 audited physics steps and 1,181 initial/action frames per view.
-- Native CPU reference: 1.0 at 1,181 actions / 59.05 simulated seconds.
-- Registered Inspect Robots CPU scripted evaluation: 1.0; evaluation seed, derived trial seed, step count and log hashes are in `reference-inspect.json`.
-- Native control omitting the left arm's keeper-locking slide: 0.4.
-- 32 scorer, aperture and bare-rail/keeper-clearance tests pass; all four generated USD assets pass structure checks.
+The reference policy reads elapsed time only. Its 1,180-command robot program was calibrated once during development with the standard Inspect guards. The calibration run itself is not the demonstration: the final native and registered runs independently re-execute those commands under native physics without object-state feedback. All executed commands in both final runs exactly match the frozen program. The environment has no controller-access registry.
 
-The recorded evidence uses the same frozen executable-source fingerprint. A later prompt-only edit removes the final explanatory training sentence; `instruction-update.json` and its patch record the original/current text and source hashes. All other executable source is byte-identical, and the scripted reference does not use instruction text to choose actions. The existing physical demonstration remains applicable; the final hosted-model episode must use the shorter prompt. Geometry, contact parameters and scoring are unchanged from the previous task revision; only colours, keeper starting side, instruction and reference arm control changed. Every primitive colour is included in the scene inventory. `reference-roles.json` records actual left/right TCP motion during keeper handling.
+- `reference-native.json`: actual three-camera native execution, 1.0 at 1,180 actions / 59 seconds; 14,160 per-physics-step workspace audits.
+- `reference-inspect.json`: independent registered Inspect Robots execution with actual cameras and standard guards, 1.0 at 1,180 actions. Evaluation seed 0 derives trial seed 1415158438, also used by the native recipe.
+- `reference-media.json`: all 1,181 initial/action frames per camera decoded and checked; 20fps H.264/yuv420p composite, every frame preserved. Initial, joining, keeper and final views were visually reviewed. No overlays, generated frames or temporal edits.
+- `reference-controller.json` and `reference-roles.json`: policy-input audit and measured arm roles. The left hand travels over one metre while fitting the keeper and the right hand remains parked; arm roles are not scoring conditions.
+- `negative-control.json`: omitting the retaining slide scores 0.4, with no violations, under the final source.
+- `unit-tests.txt`, `lint.txt`, `usd-structure.json`: 37 tests, static checks and four asset structure checks pass.
+- `preflight.json`: final metadata, source, media and evidence checks. `files.sha256.json` records the task files, excluding itself.
 
-Final media spatially combine every actual camera frame: 640x360 overhead above two 320x180 wrist views, 20fps H.264/yuv420p, with no temporal edits, overlays or generated frames. The screenshot is the actual initial overhead view. Frame counts, full decode checks and file hashes are in `reference-media.json`.
+The geometry, contact parameters, scoring and fixed setup are unchanged from the preceding scene. Superseded controller/receipts are archived outside the submission folder. The latest instruction and all final evidence use the same source fingerprint; no prompt-equivalence exception is needed.
 
-A matching hosted Dream-1 episode, media upload and submission remain pending. No previous model episode or media ID is reused; no credits were spent for this revision.
+The matching Dream-1 episode is intentionally pending. No earlier model episode or media ID is reused. After that episode, its actual score/video must be added, the media uploaded and task.json completed before opening the submission PR.

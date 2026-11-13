@@ -1,23 +1,23 @@
-"""Offline IK only, never a substitute for actual native feasibility."""
+"""Check the calibrated robot program; native execution still proves feasibility."""
 
-import argparse, json
+import argparse
+import json
+import numpy as np
 from chain_link.controller import ScriptedPolicy
 
-p = argparse.ArgumentParser()
-p.add_argument("--mode", default="demo")
-a = p.parse_args()
-s = ScriptedPolicy(mode=a.mode)
-s.reset(None)
-for i in range(1, int(s.duration * 20) + 1):
-    s.action_at(i / 20)
-print(
-    json.dumps(
-        dict(
-            scope="offline IK only",
-            mode=a.mode,
-            duration_s=s.duration,
-            worst_position_m=s.worst_position_error,
-            worst_rotation_rad=s.worst_rotation_error,
-        )
-    )
+parser = argparse.ArgumentParser()
+parser.add_argument("--mode", default="demo")
+args = parser.parse_args()
+policy = ScriptedPolicy(mode=args.mode)
+commands = np.array(
+    [policy.action_at(i / 20) for i in range(1, len(policy.actions) + 1)]
 )
+print(json.dumps(dict(
+    scope="offline robot command validation only",
+    mode=args.mode,
+    actions=len(commands),
+    duration_s=policy.duration,
+    maximum_step_change=np.abs(np.diff(commands, axis=0)).max(axis=0).tolist(),
+    program_sha256=policy.program_sha256,
+    runtime_inputs=["elapsed time"],
+)))

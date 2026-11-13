@@ -8,7 +8,6 @@ import importlib.util
 import json
 import os
 import tempfile
-import weakref
 import numpy as np
 from inspect_robots.embodiment import PRIVILEGED_SUCCESS
 from inspect_robots.types import StepResult, Observation
@@ -32,7 +31,6 @@ from .geometry import local_solids, world_points, robot_clearance
 from .scoring import Scorer
 
 _APP = None
-LIVE_ENVIRONMENTS = weakref.WeakValueDictionary()
 
 
 def numpy(value):
@@ -56,7 +54,11 @@ def source_fingerprint():
             or ".egg-info" in str(p)
         ):
             continue
-        if p.suffix == ".py" or p.name == "pyproject.toml":
+        if (
+            p.suffix == ".py"
+            or p.name == "pyproject.toml"
+            or (p.parent.name == "motions" and p.suffix == ".json")
+        ):
             d.update(p.relative_to(TASK_ROOT).as_posix().encode() + b"\0")
             d.update(hashlib.sha256(p.read_bytes()).digest())
     return d.hexdigest()
@@ -108,7 +110,6 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 ),
                 environment_id=self.info.environment_id + "-physics-only",
             )
-        LIVE_ENVIRONMENTS[self.info.environment_id] = self
         self.physics_device = self.device if physics_device is None else physics_device
         self.task = self
         self.scorer = Scorer()
