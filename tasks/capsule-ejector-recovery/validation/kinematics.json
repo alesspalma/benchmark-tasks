@@ -1,0 +1,8 @@
+{
+  "scope": "Kinematics and command guards only; native feasibility is separate",
+  "steps": 2198,
+  "duration_s": 109.85,
+  "worst_ik_m": 9.573235427549568e-05,
+  "worst_ik_rad": 0.0003223950377539234,
+  "max_joint_step": 0.040000000000000036
+}

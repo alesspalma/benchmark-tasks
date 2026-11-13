@@ -1,0 +1,20 @@
+{
+  "python": "3.12",
+  "packages": {
+    "inspect-robots": "1.0.0",
+    "inspect-robots-yam": "0.38.0",
+    "isaacsim": "6.1.0.0",
+    "isaaclab": "17.0.2",
+    "isaaclab-arena": "0.3.0",
+    "numpy": "2.3.1",
+    "torch": "2.11.0+cu128"
+  },
+  "adapter": {
+    "url": "https://github.com/kairosiann/yam-isaac-lab-arena",
+    "commit": "0059d02a1a91bc6834c1d0846022891df0c78730"
+  },
+  "custom_assets": "Original native primitive geometry under MIT; no manufacturer meshes.",
+  "control_hz": 20,
+  "physics_hz": 240,
+  "seed": 1415158438
+}
