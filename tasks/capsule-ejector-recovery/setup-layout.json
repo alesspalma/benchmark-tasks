@@ -16,15 +16,15 @@
     0.957
   ],
   "BIN": [
-    0.465,
+    0.485,
     0.0,
     0.7575
   ],
   "BIN_INNER": [
-    0.16,
-    0.11
+    0.12,
+    0.082
   ],
-  "BIN_H": 0.145,
+  "BIN_H": 0.065,
   "WASTE": [
     0.37,
     0.27,
@@ -158,32 +158,32 @@
     },
     {
       "name": "bin",
-      "type": "removable polymer collector with unobstructed front pull bar",
+      "type": "removable shallow polymer capsule cassette",
       "inner_size_m": [
-        0.16,
-        0.11,
-        0.145
+        0.12,
+        0.082,
+        0.065
       ],
-      "wall_m": 0.003,
-      "mass_kg": 0.12,
+      "wall_m": 0.002,
+      "mass_kg": 0.065,
       "position_m": [
-        0.465,
+        0.485,
         0.0,
         0.7575
       ],
       "front_bar_size_m": [
-        0.04,
-        0.1,
-        0.026
+        0.03,
+        0.055,
+        0.024
       ],
       "front_bar_center_local_m": [
-        -0.125,
+        -0.095,
         0.0,
-        0.085
+        0.06
       ],
       "guide_clearance_each_side_m": 0.006,
-      "guide_lip_height_m": 0.035,
-      "guide_inner_half_width_at_lip_m": 0.084
+      "guide_lip_height_m": 0.025,
+      "guide_inner_half_width_at_lip_m": 0.065
     },
     {
       "name": "used capsules",
@@ -197,7 +197,8 @@
       "flange_diameter_m": 0.037,
       "flange_thickness_m": 0.0018,
       "mass_each_kg": 0.012,
-      "nominal_material": "rigid capsule cup envelope"
+      "nominal_material": "rigid capsule cup envelope",
+      "collector_layout": "Six cups in a 3-by-2 layer, x pitch 39 mm and y pitch 40 mm; seventh cup initially in loading carrier."
     },
     {
       "name": "fresh capsule",
@@ -234,19 +235,99 @@
     },
     {
       "name": "collector guides and rear stop",
-      "type": "fixed polymer guides",
+      "type": "fixed polymer locating guides, part of machine base",
       "source": "builder.py"
     }
   ],
   "BIN_GRIP": [
-    -0.125,
+    -0.095,
     0.0,
-    0.085
+    0.06
   ],
   "HEAD_RISE": 0.04,
   "HEAD_HANDLE": [
     0.38,
     -0.12,
     1.0274999999999999
-  ]
+  ],
+  "BIN_WALL": 0.002,
+  "BIN_MASS": 0.065,
+  "BIN_GRIP_SIZE": [
+    0.03,
+    0.055,
+    0.024
+  ],
+  "machine_internal_fixed_parts": [
+    {
+      "name": "rear service module",
+      "nominal_material": "polymer housing",
+      "size_m": [
+        0.05,
+        0.125,
+        0.13
+      ],
+      "center_m": [
+        0.59,
+        0,
+        0.8204999999999999
+      ]
+    },
+    {
+      "name": "lower side module -1",
+      "nominal_material": "polymer housing",
+      "size_m": [
+        0.125,
+        0.03,
+        0.105
+      ],
+      "center_m": [
+        0.485,
+        -0.08,
+        0.8074999999999999
+      ]
+    },
+    {
+      "name": "carrier pillar -1",
+      "nominal_material": "polymer housing",
+      "size_m": [
+        0.02,
+        0.03,
+        0.115
+      ],
+      "center_m": [
+        0.54,
+        -0.08,
+        0.9169999999999999
+      ]
+    },
+    {
+      "name": "lower side module 1",
+      "nominal_material": "polymer housing",
+      "size_m": [
+        0.125,
+        0.03,
+        0.105
+      ],
+      "center_m": [
+        0.485,
+        0.08,
+        0.8074999999999999
+      ]
+    },
+    {
+      "name": "carrier pillar 1",
+      "nominal_material": "polymer housing",
+      "size_m": [
+        0.02,
+        0.03,
+        0.115
+      ],
+      "center_m": [
+        0.54,
+        0.08,
+        0.9169999999999999
+      ]
+    }
+  ],
+  "CAPSULE_SLEEP_THRESHOLD": 0.0002
 }

@@ -42,7 +42,7 @@ def fixture():
 
 def finish(s, scorer=None):
     scorer = scorer or Scorer()
-    for k in range(23):
+    for k in range(43):
         s["time_s"] = k / 20
         scorer.observe(s)
         m = scorer.evaluate(s)
@@ -112,4 +112,75 @@ def test_no_credit_from_time_jump_or_repeated_evaluation():
     s["time_s"] = 100.0
     for _ in range(100):
         m = sc.evaluate(s)
+    assert m["score"] == 0.0
+
+
+def test_stationary_pose_is_not_failed_by_angular_velocity_chatter():
+    s = fixture()
+    s["objects"]["fresh"]["velocity"][3] = 0.3
+    assert finish(s)["score"] == 1.0
+
+
+def test_slow_real_translation_is_not_rest():
+    s = fixture()
+    sc = Scorer()
+    s["objects"]["used0"]["velocity"][0] = 0.004
+    for k in range(43):
+        s["time_s"] = k / 20
+        s["objects"]["used0"]["pose"][0] += 0.0002
+        s["bounds"]["used0:Body"][0][0] += 0.0002
+        s["bounds"]["used0:Body"][1][0] += 0.0002
+        sc.observe(s)
+        m = sc.evaluate(s)
+    assert m["score"] == 0.0
+
+
+def test_slow_real_rotation_is_not_rest():
+    s = fixture()
+    sc = Scorer()
+    s["objects"]["fresh"]["velocity"][5] = 0.04
+    for k in range(43):
+        s["time_s"] = k / 20
+        angle = 0.04 * k / 20
+        s["objects"]["fresh"]["pose"][3:] = [
+            0,
+            0,
+            math.sin(angle / 2),
+            math.cos(angle / 2),
+        ]
+        sc.observe(s)
+        m = sc.evaluate(s)
     assert m["score"] == 0.65
+
+
+def test_reset_requires_new_observed_rest_history():
+    s = fixture()
+    sc = Scorer()
+    assert finish(s, sc)["score"] == 1.0
+    sc.reset()
+    assert sc.evaluate(s)["score"] == 0.0
+
+
+def test_oscillation_returning_to_start_is_not_rest():
+    s = fixture()
+    sc = Scorer()
+    for k in range(43):
+        s["time_s"] = k / 20
+        angle = math.radians(5) * math.sin(2 * math.pi * k / 4)
+        s["objects"]["fresh"]["pose"][3:] = [
+            0,
+            0,
+            math.sin(angle / 2),
+            math.cos(angle / 2),
+        ]
+        sc.observe(s)
+        m = sc.evaluate(s)
+    assert m["score"] == 0.65
+
+
+def test_completion_is_revoked_when_outcome_changes_without_time_advance():
+    s = fixture()
+    sc = Scorer()
+    assert finish(s, sc)["score"] == 1.0
+    s["objects"]["fresh"]["pose"][2] += 0.01
+    assert sc.evaluate(s)["score"] == 0.65

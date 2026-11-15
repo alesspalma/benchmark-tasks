@@ -165,6 +165,10 @@ class Environment(YamArenaEmbodiment):
                         ),
                     ),
                     asset_cfg_addon={"init_state": cls.InitialStateCfg()},
+                    # Contact reporting forces sleep thresholds to zero. Task
+                    # bodies use normal collision response without telemetry;
+                    # neither the policy nor scorer consumes contact reports.
+                    spawn_cfg_addon={"activate_contact_sensors": False},
                 )
             )
         all_objects = [*task_room("station", self.rig.top_cam), *objects]
@@ -234,6 +238,44 @@ class Environment(YamArenaEmbodiment):
             ),
         ).make_registered()
         self._base = self._env.unwrapped
+        # Read back the spawned native setting: authored USD alone is not
+        # sufficient, since a spawner can overwrite it during initialization.
+        import omni.usd
+        from pxr import PhysxSchema, UsdPhysics
+
+        self._capsule_physics = {}
+        self._task_body_physics = {}
+        stage = omni.usd.get_context().get_stage()
+        capsule_names = {"fresh", *(f"used{k}" for k in range(config.USED_COUNT))}
+        task_names = {s["name"] for s in self.spec["assets"]}
+        for prim in stage.Traverse():
+            if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
+                continue
+            path = str(prim.GetPath())
+            if any(f"/{n}/" in path for n in task_names):
+                threshold = float(
+                    prim.GetAttribute("physxRigidBody:sleepThreshold").Get()
+                )
+                reporting = prim.HasAPI(PhysxSchema.PhysxContactReportAPI)
+                if threshold <= 0 or reporting:
+                    raise RuntimeError(
+                        f"Unexpected native sleep/contact reporting setting: {path}"
+                    )
+                self._task_body_physics[path] = {
+                    "sleep_threshold_m2_s2": threshold,
+                    "contact_reporting": reporting,
+                }
+            name = next((n for n in capsule_names if f"/{n}/" in path), None)
+            if name is None:
+                continue
+            threshold = float(prim.GetAttribute("physxRigidBody:sleepThreshold").Get())
+            if abs(threshold - config.CAPSULE_SLEEP_THRESHOLD) > 1e-9:
+                raise RuntimeError(
+                    f"Native sleep setting overwritten for {name}: {threshold}"
+                )
+            self._capsule_physics[name] = {"sleep_threshold_m2_s2": threshold}
+        if len(self._capsule_physics) != len(capsule_names):
+            raise RuntimeError("Native capsule-physics audit did not find every cup")
         self._torch = torch
         self._ready = torch.tensor(
             [[*READY, 1.0, *READY, 1.0]], dtype=torch.float32, device=self._base.device
@@ -358,7 +400,11 @@ class Environment(YamArenaEmbodiment):
         )
 
     def diagnostics(self):
-        return self.state()
+        return {
+            **self.state(),
+            "capsule_physics": self._capsule_physics,
+            "task_body_physics": self._task_body_physics,
+        }
 
     def _observation(self):
         if self.render_images:

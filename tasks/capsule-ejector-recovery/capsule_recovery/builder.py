@@ -13,6 +13,11 @@ def capsule(w, s, path, color):
     # Original convex tapered cup, OD 33 mm, 27 mm high; 37 mm flange.
     from pxr import Gf, UsdGeom, UsdPhysics
 
+    # Let native PhysX settle residual contact chatter in these light cups.
+    # Moving contacts still wake them normally; the scorer is unchanged.
+    w.Px.PhysxRigidBodyAPI.Apply(s.GetPrimAtPath(path)).CreateSleepThresholdAttr(
+        C.CAPSULE_SLEEP_THRESHOLD
+    )
     n = 32
     points = []
     for z, r in ((0.0, 0.012), (0.026, 0.0165)):
@@ -54,14 +59,21 @@ def collector_guide(w, s, path, side, color):
     """Passive lead-in chamfer: wide at the lip, 6 mm side clearance below."""
     from pxr import Gf, UsdGeom, UsdPhysics
 
+    half_y = C.BIN_INNER[1] / 2 + C.BIN_WALL
+    inner, outer = half_y + 0.006, half_y + 0.028
     section = [
-        (0.064, 0.009),
-        (0.090, 0.009),
-        (0.090, 0.035),
-        (0.084, 0.035),
-        (0.064, 0.015),
+        (inner, 0.009),
+        (outer, 0.009),
+        (outer, 0.025),
+        (inner + 0.016, 0.025),
+        (inner, 0.012),
     ]
-    vertices = [(x, side * y, C.TOP + z) for x in (0.3825, 0.5475) for y, z in section]
+    half_x = C.BIN_INNER[0] / 2 + C.BIN_WALL
+    vertices = [
+        (x, side * y, C.TOP + z)
+        for x in (C.BIN[0] - half_x, C.BIN[0] + half_x)
+        for y, z in section
+    ]
     faces = [list(range(4, -1, -1)), list(range(5, 10))]
     faces += [[i, (i + 1) % 5, (i + 1) % 5 + 5, i + 5] for i in range(5)]
     if side < 0:
@@ -111,6 +123,31 @@ def create_assets(directory):
             case,
         )
     w.box(s, base + "/Foot", (0.28, 0.17, 0.008), (0.50, 0, C.TOP + 0.004), dark)
+    # Fixed service modules occupy the lower shell. Only the shallow central
+    # capsule cassette is removable; the housing does not travel with it.
+    w.box(
+        s, base + "/ServiceCore", (0.050, 0.125, 0.130), (0.590, 0, C.TOP + 0.073), case
+    )
+    for side in (-1, 1):
+        w.box(
+            s,
+            base + f"/LowerModule{side + 1}",
+            (0.125, 0.030, 0.105),
+            (C.BIN[0], side * 0.080, C.TOP + 0.060),
+            case,
+        )
+        w.box(
+            s,
+            base + f"/CarrierPillar{side + 1}",
+            (0.020, 0.030, 0.115),
+            (0.540, side * 0.080, C.TOP + 0.1695),
+            case,
+        )
+    # The locating rails and stop are parts of the fixed machine body.
+    for side in (-1, 1):
+        collector_guide(w, s, base + "/Guide" + str(side + 1), side, dark)
+    stop_x = C.BIN[0] + C.BIN_INNER[0] / 2 + C.BIN_WALL + 0.009
+    w.box(s, base + "/BinStop", (0.006, 0.10, 0.015), (stop_x, 0, C.TOP + 0.015), dark)
     # Side-supported annular lower carrier; its opening remains physical.
     for n in range(32):
         a = (n + 0.5) * math.tau / 32
@@ -202,17 +239,17 @@ def create_assets(directory):
         }
     )
     s = w.stage("bin")
-    body = w.body(s, "/Asset/Body", 0.12)
-    w.tray(s, body, C.BIN_INNER, C.BIN_H, 0.0, (0.30, 0.34, 0.36), wall=0.003)
-    # A front pull bar with an unobstructed 26 mm vertical pinch. Side stems
+    body = w.body(s, "/Asset/Body", C.BIN_MASS)
+    w.tray(s, body, C.BIN_INNER, C.BIN_H, 0.0, (0.30, 0.34, 0.36), wall=C.BIN_WALL)
+    # A front pull bar with an unobstructed 24 mm vertical pinch. Side stems
     # leave the finger pads clear; no lip blocks their approach or release.
-    w.box(s, body + "/Handle", (0.040, 0.100, 0.026), C.BIN_GRIP, dark)
+    w.box(s, body + "/Handle", C.BIN_GRIP_SIZE, C.BIN_GRIP, dark)
     for side in (-1, 1):
         w.box(
             s,
             body + f"/HandleStem{side + 1}",
-            (0.040, 0.012, 0.012),
-            (-0.098, side * 0.044, C.BIN_GRIP[2]),
+            (0.026, 0.008, 0.010),
+            (-0.071, side * 0.024, C.BIN_GRIP[2]),
             dark,
         )
     assets.append(
@@ -236,7 +273,11 @@ def create_assets(directory):
         body = w.body(s, "/Asset/Body", 0.012)
         capsule(w, s, body, (0.42, 0.44, 0.45))
         if k < C.USED_COUNT - 1:
-            pos = C.BIN + np.array([0, 0, 0.003 + 0.0285 * k])
+            # Six real-size cups in a 3-by-2 layer; no implausible tall stack
+            # is needed to fill the compact collector. The seventh is ejected.
+            pos = C.BIN + np.array(
+                [(k % 3 - 1) * 0.039, (k // 3 * 2 - 1) * 0.020, 0.0025]
+            )
             q = (0, 0, 0, 1)
         else:
             r = axis_angle_matrix(np.array([0, 1, 0]), C.OPEN_ANGLE)
@@ -257,10 +298,6 @@ def create_assets(directory):
     x = UsdGeom.Xform.Define(s, p)
     x.AddTranslateOp().Set(Gf.Vec3d(*map(float, C.WASTE)))
     w.tray(s, p, C.WASTE_INNER, C.WASTE_H, 0.002, (0.18, 0.44, 0.28), wall=0.004)
-    # Bin side rails and rear stop establish a reproducible removable fit.
-    for side in (-1, 1):
-        collector_guide(w, s, "/Asset/Guide" + str(side + 1), side, dark)
-    w.box(s, "/Asset/BinStop", (0.006, 0.13, 0.015), (0.557, 0, C.TOP + 0.015), dark)
     # Stand for the single unused capsule, preventing it rolling before pickup.
     w.cylinder(
         s,

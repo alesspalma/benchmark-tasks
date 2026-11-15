@@ -16,5 +16,22 @@
   "custom_assets": "Original native primitive geometry under MIT; no manufacturer meshes.",
   "control_hz": 20,
   "physics_hz": 240,
-  "seed": 1415158438
+  "seed": 1415158438,
+  "capsule_physics": {
+    "native_sleep_threshold_m2_s2": 0.0002,
+    "contact_reporting": false,
+    "collision_response": true,
+    "runtime_audit": "Read back each capsule sleep threshold after spawning; fail initialization if overwritten."
+  },
+  "task_contact_reporting": false,
+  "arena_source_commit": "c7edf3a9d5d8276565208f72422f8f8a0806d6cf",
+  "rest_measurement": {
+    "window_s": 1.0,
+    "control_hz": 20,
+    "minimum_samples": 21,
+    "maximum_sample_gap_s": 0.075,
+    "maximum_pairwise_translation_m": 0.002,
+    "maximum_pairwise_rotation_degrees": 2.0,
+    "maximum_instantaneous_linear_speed_m_s": 0.015
+  }
 }

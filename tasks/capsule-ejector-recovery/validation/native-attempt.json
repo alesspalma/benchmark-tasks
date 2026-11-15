@@ -2,11 +2,11 @@
   "status": "completed",
   "hostname": "shiva",
   "task": "capsule_recovery",
-  "source_sha256": "85cf6f54a96b3f2312f4c337e8d3b4d87572ed565b7072058652059e6f7b52ab",
+  "source_sha256": "42fea875fc7539963b997780672d97c76cfe3b5d4048d2409b90d4ba7e24e437",
   "seed": 1415158438,
   "policy": "demo",
   "dream_api_used": false,
-  "started_at_utc": "2026-11-15T05:27:55.518015+00:00",
+  "started_at_utc": "2026-11-15T07:31:32.803798+00:00",
   "control_hz": 20,
   "physics_hz": 240,
   "instruction": "Clear the used capsules into the recycling tub and restore the capsule machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
@@ -16,45 +16,47 @@
   ],
   "cameras_enabled": true,
   "final_metrics": {
-    "score": 0.35,
-    "success": false,
+    "score": 1.0,
+    "success": true,
     "used_in_recycling": 7,
-    "bin_fitted": false,
+    "bin_fitted": true,
     "fresh_seated": true,
-    "head_angle_deg": 3.5,
-    "physics_samples": 28704,
+    "head_angle_deg": 3.52,
+    "parts_at_rest": true,
+    "hands_released": true,
+    "physics_samples": 27888,
     "violations": []
   },
-  "steps": 2392,
-  "worst_ik_m": 0.0005983080115197181,
-  "worst_ik_rad": 0.0053698768409548596,
-  "elapsed_wall_s": 530.9576474110363,
+  "steps": 2324,
+  "worst_ik_m": 0.0017899585491480074,
+  "worst_ik_rad": 0.01882959572874761,
+  "elapsed_wall_s": 497.3682485759491,
   "source_unchanged": true,
   "video_errors": {},
   "media": {
     "left_cam.mp4": {
-      "bytes": 796624,
-      "sha256": "6a227424e3f9b1f52f25ef1cf66ccf6a235132ad274734bee6622a53707d1c19"
+      "bytes": 994810,
+      "sha256": "37f991c707a495f1fef866058e7e5b6139a958153f2f32aa222142c65ecf7c11"
     },
     "setup-top_cam.png": {
-      "bytes": 63308,
-      "sha256": "07b67bd0be99a25649e1d75cc51afc435fe3fa5309ae404f4c9407b4213f9a61"
+      "bytes": 63545,
+      "sha256": "7d7a4dec7709f8205da4a6289126269abd7ca7fac001500498ab3e042734616b"
     },
     "right_cam.mp4": {
-      "bytes": 365877,
-      "sha256": "7b8efacb6f590e0e6f47aef08c58ccb91945408fbcef4685ec4d5f04eed87e3a"
+      "bytes": 323307,
+      "sha256": "f28c44a1557756291f382c270aec61424539fa368257fb7f5d41d139966b7c7f"
     },
     "top_cam.mp4": {
-      "bytes": 709809,
-      "sha256": "5439fb9924b9c9fe9e1203b5c52b1e8bdeb0364ef75fbfbb3a84f4ef80ab927e"
+      "bytes": 654778,
+      "sha256": "cb5dbf6ad7703895ec0f1984f6bd34021c2c4e6455db38961f9bb1cde6f5e623"
     },
     "setup-left_cam.png": {
-      "bytes": 50370,
-      "sha256": "35681f920cf05447dc38821899dbcc99f0dd70ec8c82a94eb4d70cf8b462e84c"
+      "bytes": 53355,
+      "sha256": "81a0b5aa036828e62e9373b31257fcf1dca89cb9ca654986a828aa0316fd271f"
     },
     "setup-right_cam.png": {
-      "bytes": 38368,
-      "sha256": "3811e932876e98eb92cb4cd8dd897f62c6445cf3b8ad53d30ac547fdcec012a7"
+      "bytes": 34660,
+      "sha256": "c6cec0868fdfcb37c71db2851a553bb1b9316173a13ab25e136b742d71044808"
     }
   }
 }

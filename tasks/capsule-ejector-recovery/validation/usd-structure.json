@@ -4,7 +4,7 @@
   "assets": [
     {
       "file": "machine.usda",
-      "sha256": "aa48436b07e76754a316b9e8e23cd263a8224300599ff0bb8f949e3b6afa8064",
+      "sha256": "690b132324cd92a1f1220ca7efa88d62d64987176861c6e8a54a95812fe076b8",
       "errors": [],
       "failed_checks": [],
       "joints": [
@@ -26,7 +26,7 @@
     },
     {
       "file": "bin.usda",
-      "sha256": "122c15ece6d46ada41b51069055548b17a8881235c6a13a88f4d834ce51f7b31",
+      "sha256": "1094fc2ab2c32f5138228e9e96e2f3d3f4bb396ba505b16c34474cd65aa2b726",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -34,7 +34,7 @@
     },
     {
       "file": "fresh.usda",
-      "sha256": "482e9f652d86ad9aff95d4122fe8cccd7a161d7b42265ad0668183acfb213710",
+      "sha256": "ae6d6fedbe7e02dfcd34015550b12c35b0ad93b47893262fc6e9b9336a6d982e",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -42,7 +42,7 @@
     },
     {
       "file": "used0.usda",
-      "sha256": "7d7a2f30e1edba04acf6e4b036ebab6f1c7c7bf243022f8af07357edb12e3796",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -50,7 +50,7 @@
     },
     {
       "file": "used1.usda",
-      "sha256": "7d7a2f30e1edba04acf6e4b036ebab6f1c7c7bf243022f8af07357edb12e3796",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -58,7 +58,7 @@
     },
     {
       "file": "used2.usda",
-      "sha256": "7d7a2f30e1edba04acf6e4b036ebab6f1c7c7bf243022f8af07357edb12e3796",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -66,7 +66,7 @@
     },
     {
       "file": "used3.usda",
-      "sha256": "7d7a2f30e1edba04acf6e4b036ebab6f1c7c7bf243022f8af07357edb12e3796",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -74,7 +74,7 @@
     },
     {
       "file": "used4.usda",
-      "sha256": "7d7a2f30e1edba04acf6e4b036ebab6f1c7c7bf243022f8af07357edb12e3796",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -82,7 +82,7 @@
     },
     {
       "file": "used5.usda",
-      "sha256": "7d7a2f30e1edba04acf6e4b036ebab6f1c7c7bf243022f8af07357edb12e3796",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -90,7 +90,7 @@
     },
     {
       "file": "used6.usda",
-      "sha256": "7d7a2f30e1edba04acf6e4b036ebab6f1c7c7bf243022f8af07357edb12e3796",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -98,7 +98,7 @@
     },
     {
       "file": "fixtures.usda",
-      "sha256": "78d0bf9fc376fec36c645788ffb04acc84e9c13733f246ae08b01321692d0200",
+      "sha256": "c9e7c2fcea016051696800ffeb1efb3552725fc9a55c0871553fcaa66157b0e6",
       "errors": [],
       "failed_checks": [],
       "joints": [],

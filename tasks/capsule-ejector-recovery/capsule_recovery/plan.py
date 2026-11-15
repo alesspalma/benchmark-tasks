@@ -20,7 +20,7 @@ def waypoints(mode="demo"):
     p.add(2.0, "reach head handle", right=(h, head_r, 1.0))
     p.add(2.0, "grasp head handle", right=(h, head_r, 0.06))
     for a in np.linspace(0, math.radians(82), 21)[1:]:
-        p.add(0.40, "open ejecting head", right=(handle(a), head_r, 0.06))
+        p.add(0.30, "open ejecting head", right=(handle(a), head_r, 0.06))
     p.add(
         2.0,
         "release head beyond its balance point",
@@ -56,12 +56,14 @@ def waypoints(mode="demo"):
     tray(2.0, "grasp collector front bar", C.BIN)
     slide = C.BIN + [0, 0, 0.002]
     tray(1.0, "unweight collector on guides", slide)
-    front = slide + [-0.170, 0, 0]
-    tray(4.0, "withdraw collector straight from machine", front)
-    elevated = np.array([front[0], 0.0, C.TOP + 0.255])
+    front = slide + [-0.165, 0, 0]
+    tray(3.0, "withdraw collector straight from machine", front)
+    elevated = np.array([front[0], 0.0, C.TOP + 0.240])
     tray(3.0, "lift clear collector", elevated)
-    carry = np.array([C.WASTE[0], C.WASTE[1] - 0.130, C.TOP + 0.255])
-    tray(3.0, "collector over recycling tub", carry)
+    carry = np.array([C.WASTE[0], C.WASTE[1] - 0.100, C.TOP + 0.240])
+    alongside = np.array([front[0], carry[1], elevated[2]])
+    tray(3.0, "move collector clear of housing side", alongside)
+    tray(1.5, "collector over recycling tub", carry)
     for a in np.linspace(0, math.radians(-130), 21)[1:]:
         tray(0.3, "tip collector into recycling tub", carry, a)
     p.add(3.0, "let spent capsules fall")
@@ -69,12 +71,13 @@ def waypoints(mode="demo"):
         tray(0.6, "clear collector", carry, a)
     for a in np.linspace(math.radians(-130), 0, 16)[1:]:
         tray(0.25, "restore collector level", carry, a)
+    tray(1.5, "withdraw collector clear of housing side", alongside)
     tray(3.0, "return collector to clear front", elevated)
-    tray(3.0, "lower collector above guide lips", front + [0, 0, 0.048])
+    tray(3.0, "lower collector above guide lips", front + [0, 0, 0.038])
     # Allow for the pad's contact centre, a few mm beyond its nominal TCP.
-    fitted = C.BIN + [-0.007, 0, 0]
-    tray(4.0, "slide collector back into machine", fitted + [0, 0, 0.050])
-    tray(1.0, "support collector on foot", fitted)
+    fitted = C.BIN + [-0.003, 0, 0]
+    tray(3.0, "slide collector back into machine", fitted + [0, 0, 0.040])
+    tray(2.0, "support collector on foot", fitted)
     tray(2.0, "release fitted collector", fitted, opening=1.0)
     tray(
         2.0,
