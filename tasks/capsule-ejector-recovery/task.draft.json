@@ -1,12 +1,12 @@
 {
-  "title": "Clear a backed-up capsule machine and reload its carrier",
+  "title": "Empty a capsule machine's collector and load a fresh capsule",
   "category": "Societal relatability",
   "instruction": "Clear the used capsules into the recycling tub and restore the capsule machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
-  "context": "Recovering a capsule machine whose used-capsule collector has backed up is a common maintenance problem. Clearing spent capsules and restoring the loading mechanism permits the next capsule to be fitted.",
+  "context": "Emptying the used-pod collector and reloading after ejection are routine capsule-machine maintenance. The task requires handling a loose container, disposing of its contents and restoring it before loading and closing the head.",
   "setup": "Fixed calibrated bimanual YAM station. See setup-layout.json and README.md for every object, dimension, material and reset coordinate. The final screenshot must match the validated native reset.",
   "scoring": "0.35: all seven spent capsules contained at rest in recycling tub. 0.65: additionally collector fitted within 9 mm, upright cosine >0.99. 1: fresh capsule seated within 3.5 mm horizontally/3 mm vertically, upright cosine >0.99; head within 4 degrees closed; parts below 15 mm/s and 0.15 rad/s; grippers open >40 mm and all robot bodies >3 mm clear for 1 s. Drop/invalid state: 0.",
   "run_limit": "2,400 control steps; 120 seconds at 20 Hz.",
   "reset_notes": "Restore all bodies and passive joints to the fixed reset and settle before scoring. No consumables in simulation.",
   "fidelity": "Original cold, unpowered cutaway mechanism at household scale. Native rigid cups, passive over-centre head, lifting fork and removable collector use contact physics. Capsule deformation and the water circuit are outside this mechanical clearing/reloading task.",
-  "scores": "Native scripted attempt: 0.0; no full-score demo; Dream-1 not run."
+  "scores": "Native scripted run: 0.35; no full-score demo; Dream-1 not run."
 }

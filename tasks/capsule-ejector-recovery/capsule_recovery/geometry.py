@@ -1,4 +1,4 @@
-"""Read-only bounds of native collision geometry, used exclusively by scoring."""
+"""Read-only conservative collider bounds, used exclusively by scoring."""
 
 from functools import lru_cache
 from itertools import product
@@ -20,6 +20,7 @@ def collision_points(spec):
         cache = UsdGeom.BBoxCache(
             Usd.TimeCode.Default(), ["default", "render", "proxy"]
         )
+        transforms = UsdGeom.XformCache()
         for prim in stage.Traverse():
             if not prim.HasAPI(UsdPhysics.CollisionAPI):
                 continue
@@ -28,9 +29,37 @@ def collision_points(spec):
                 body = body.GetParent()
             if not body:
                 raise RuntimeError("Collider without a native rigid body")
-            box = cache.ComputeRelativeBound(prim, body).ComputeAlignedRange()
-            lo, hi = np.asarray(box.GetMin()), np.asarray(box.GetMax())
-            pts = (lo + hi) / 2 + SIGNS * (hi - lo) / 2
+            # Transform actual support vertices, rather than rotating a local
+            # axis-aligned box. A tapered cup resting on its side otherwise
+            # acquires imaginary corners below the physical support plane.
+            if prim.IsA(UsdGeom.Mesh):
+                vertices = np.asarray(UsdGeom.Mesh(prim).GetPointsAttr().Get())
+            elif prim.IsA(UsdGeom.Cube):
+                vertices = SIGNS * float(UsdGeom.Cube(prim).GetSizeAttr().Get()) / 2
+            elif prim.IsA(UsdGeom.Cylinder):
+                cylinder = UsdGeom.Cylinder(prim)
+                radius = float(cylinder.GetRadiusAttr().Get())
+                half_height = float(cylinder.GetHeightAttr().Get()) / 2
+                axis = "XYZ".index(cylinder.GetAxisAttr().Get())
+                radial = [i for i in range(3) if i != axis]
+                # Circumscribed 128-gon contains the entire native cylinder;
+                # excess radius is <6 micrometres for an 18.5 mm flange.
+                angles = np.arange(128) * (2 * np.pi / 128)
+                circle = (
+                    radius / np.cos(np.pi / 128) * np.c_[np.cos(angles), np.sin(angles)]
+                )
+                vertices = np.zeros((256, 3))
+                vertices[:, radial] = np.tile(circle, (2, 1))
+                vertices[:, axis] = np.repeat([-half_height, half_height], 128)
+            else:
+                box = cache.ComputeRelativeBound(prim, body).ComputeAlignedRange()
+                lo, hi = np.asarray(box.GetMin()), np.asarray(box.GetMax())
+                pts = (lo + hi) / 2 + SIGNS * (hi - lo) / 2
+                groups.setdefault(asset["name"] + ":" + body.GetName(), []).append(pts)
+                continue
+            transform, _ = transforms.ComputeRelativeTransform(prim, body)
+            matrix = np.asarray(transform)
+            pts = vertices @ matrix[:3, :3] + matrix[3, :3]
             groups.setdefault(asset["name"] + ":" + body.GetName(), []).append(pts)
     return {k: np.concatenate(v) for k, v in groups.items()}
 

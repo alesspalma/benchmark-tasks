@@ -13,7 +13,7 @@ def waypoints(mode="demo"):
         return {}
     p = Program()
     head_r = SIDE_X
-    closed = np.array([0.38, -0.12, C.TOP + 0.240])
+    closed = C.HEAD_HANDLE
     handle = lambda a: C.HINGE + rotation("Y", a) @ (closed - C.HINGE)
     h = handle(0)
     p.add(3.0, "approach head", right=(h + [-0.08, 0, 0], head_r, 1.0))
@@ -34,71 +34,102 @@ def waypoints(mode="demo"):
     p.add(1.0, "let head rest on open stop")
     if mode == "open":
         return p.moves
-    grips = {
-        "left": np.array([0.0, 0.100, 0.090]),
-        "right": np.array([0.0, -0.100, 0.090]),
-    }
 
+    # The left arm keeps one front-bar grasp throughout the collection cycle.
+    # The collector slides straight out before any lift or lateral transfer.
     def tray(duration, label, origin, angle=0.0, opening=0.0):
         R = rotation("X", angle)
         return p.add(
             duration,
             label,
-            **{
-                n: (origin + R @ offset, R @ SIDE_X, opening)
-                for n, offset in grips.items()
-            },
+            left=(origin + R @ C.BIN_GRIP, R @ SIDE_X, opening),
         )
 
-    tray(4.0, "approach both collector grips", C.BIN + [-0.08, 0, 0], opening=1.0)
-    tray(2.0, "reach collector side grips", C.BIN, opening=1.0)
-    tray(3.0, "grasp collector with both hands", C.BIN)
-    tray(1.5, "lift collector off foot", C.BIN + [0, 0, 0.009])
-    midway = C.BIN + [-0.105, 0, 0.009]
-    tray(2.0, "draw collector clear of carrier", midway)
-    tray(1.0, "raise clear collector", midway + [0, 0, 0.011])
-    front = C.BIN + [-0.145, 0, 0.020]
-    tray(1.5, "withdraw level collector", front)
-    elevated = np.array([front[0], 0.0, C.TOP + 0.260])
-    tray(3.0, "lift supported collector", elevated)
-    carry = np.array([C.WASTE[0], C.WASTE[1] - 0.120, C.TOP + 0.260])
+    grip = C.BIN + C.BIN_GRIP
+    p.add(
+        3.0,
+        "collector approach above front",
+        left=(grip + [-0.075, 0, 0.08], SIDE_X, 1.0),
+    )
+    p.add(2.0, "lower in front of collector", left=(grip + [-0.075, 0, 0], SIDE_X, 1.0))
+    tray(2.0, "reach collector front bar", C.BIN, opening=1.0)
+    tray(2.0, "grasp collector front bar", C.BIN)
+    slide = C.BIN + [0, 0, 0.002]
+    tray(1.0, "unweight collector on guides", slide)
+    front = slide + [-0.170, 0, 0]
+    tray(4.0, "withdraw collector straight from machine", front)
+    elevated = np.array([front[0], 0.0, C.TOP + 0.255])
+    tray(3.0, "lift clear collector", elevated)
+    carry = np.array([C.WASTE[0], C.WASTE[1] - 0.130, C.TOP + 0.255])
     tray(3.0, "collector over recycling tub", carry)
-    for a in np.linspace(0, math.radians(-140), 16)[1:]:
-        tray(0.35, "tip collector into recycling tub", carry, a)
-    p.add(3.0, "let all spent capsules fall")
-    for a in (math.radians(-135), math.radians(-145), math.radians(-140)):
-        tray(0.7, "clear collector", carry, a)
-    for a in np.linspace(math.radians(-140), 0, 13)[1:]:
+    for a in np.linspace(0, math.radians(-130), 21)[1:]:
+        tray(0.3, "tip collector into recycling tub", carry, a)
+    p.add(3.0, "let spent capsules fall")
+    for a in (math.radians(-125), math.radians(-132), math.radians(-130)):
+        tray(0.6, "clear collector", carry, a)
+    for a in np.linspace(math.radians(-130), 0, 16)[1:]:
         tray(0.25, "restore collector level", carry, a)
-    tray(3.0, "return collector to front", elevated)
-    tray(3.0, "lower collector", front)
-    tray(3.0, "fit collector on guides", C.BIN + [0, 0, 0.020])
-    tray(1.5, "support collector on foot", C.BIN)
-    tray(2.0, "release collector", C.BIN, opening=1.0)
-    tray(2.0, "clear collector grips", C.BIN + [-0.10, 0, 0.04], opening=1.0)
+    tray(3.0, "return collector to clear front", elevated)
+    tray(3.0, "lower collector above guide lips", front + [0, 0, 0.048])
+    # Allow for the pad's contact centre, a few mm beyond its nominal TCP.
+    fitted = C.BIN + [-0.007, 0, 0]
+    tray(4.0, "slide collector back into machine", fitted + [0, 0, 0.050])
+    tray(1.0, "support collector on foot", fitted)
+    tray(2.0, "release fitted collector", fitted, opening=1.0)
+    tray(
+        2.0,
+        "withdraw fingers straight from front bar",
+        C.BIN + [-0.080, 0, 0],
+        opening=1.0,
+    )
+    tray(
+        2.0, "lift clear of refitted collector", C.BIN + [-0.080, 0, 0.140], opening=1.0
+    )
     if mode == "empty":
         return p.moves
     pick = C.FRESH + [0, 0, 0.019]
     capsule_r = rotation("X", -math.pi / 2) @ SIDE_X
     p.add(
+        2.0,
+        "clear machine toward fresh pedestal",
+        left=(np.array([0.32, C.FRESH[1], C.TOP + 0.27]), capsule_r, 1.0),
+    )
+    p.add(
         3.0, "approach fresh capsule", left=(pick + [-0.07, 0, 0.025], capsule_r, 1.0)
     )
     p.add(2.0, "reach fresh capsule", left=(pick, capsule_r, 1.0))
     p.add(2.0, "grasp fresh capsule", left=(pick, capsule_r, 0.15))
-    high = np.array([C.FRESH[0], C.FRESH[1], C.TOP + 0.24])
+    high = np.array([C.FRESH[0], C.FRESH[1], C.TOP + 0.37])
     p.add(2.0, "lift fresh capsule", left=(high, capsule_r, 0.15))
-    target = C.SLOT + [0, 0, 0.019]
+    # Align above the carrier before lowering. The measured nominal grasp is
+    # under the flange; allow a few millimetres of release clearance above it.
+    target = C.SLOT + [0.003, 0, 0.027]
     p.add(
         3.0,
         "fresh capsule over carrier",
-        left=(target + [-0.03, 0, 0.05], capsule_r, 0.15),
+        left=(np.array([target[0], 0.0, high[2]]), capsule_r, 0.15),
+    )
+    p.add(
+        2.0,
+        "lower above open carrier",
+        left=(target + [0, 0, 0.045], capsule_r, 0.15),
     )
     p.add(3.0, "seat fresh capsule", left=(target, capsule_r, 0.15))
     p.add(2.0, "release fresh capsule", left=(target, capsule_r, 1.0))
     p.add(
         2.0,
         "clear loading carrier",
-        left=(target + [-0.10, 0.09, 0.07], capsule_r, 1.0),
+        left=(target + [0, 0, 0.060], capsule_r, 1.0),
+    )
+    p.add(
+        2.0,
+        "raise left arm clear of machine",
+        left=(np.array([0.32, 0.0, high[2]]), capsule_r, 1.0),
+    )
+    p.add(
+        2.0,
+        "park left arm on its side",
+        left=(np.array([0.30, 0.32, high[2]]), capsule_r, 1.0),
     )
     if mode == "reload":
         return p.moves
@@ -112,5 +143,5 @@ def waypoints(mode="demo"):
         p.add(0.35, "close head on fresh capsule", right=(handle(a), head_r, 0.06))
     p.add(2.0, "release head", right=(handle(0), head_r, 1.0))
     p.add(2.0, "clear head", right=(handle(0) + [-0.1, -0.06, 0.05], head_r, 1.0))
-    p.add(2.0, "settle final assembly")
+    p.add(1.0, "settle final assembly")
     return p.moves

@@ -1,14 +1,13 @@
 {
-  "status": "prototype_not_submission_ready",
+  "status": "prototype_incomplete_calibration_stopped",
   "native_full_score": false,
-  "last_native_score": 0.0,
-  "local_source_sha256": "61baa12817c85bd8a93c4869c53d7fce2bdb1c7938a687da084462c13f41c467",
+  "last_native_score": 0.35,
+  "local_source_sha256": "85cf6f54a96b3f2312f4c337e8d3b4d87572ed565b7072058652059e6f7b52ab",
   "matches_last_native_attempt": true,
   "dream_runs": 0,
   "media_uploads": 0,
   "prs_opened": 0,
-  "unit_tests": 10,
-  "combined_test_count": 20,
+  "unit_tests": 12,
   "registered_entry_points_installed": true,
   "registered_full_episode_validated": false,
   "remaining": [
@@ -21,18 +20,165 @@
     "Media upload and task.json publication"
   ],
   "known_failures": [
-    "Collector is lost during handling/emptying.",
-    "Collector and fresh capsule are not restored.",
-    "Latest trial recorded a permanent part-off-table violation."
+    "Collector slips axially/laterally during tipping; reinsertion is unreliable.",
+    "Retained trial misses the fitted-collector pose despite correct capsule disposal, fresh seating and head closure."
   ],
   "development_trial_audit": {
-    "completed": 24,
-    "error": 4,
+    "scope": "Nine native development trials during this correction pass, not the earlier project history.",
+    "counts": {
+      "error": 1,
+      "cancelled": 1,
+      "completed": 7
+    },
     "full_score_runs": 0,
     "unfinished_receipts": 0,
-    "running_processes": 0
+    "running_processes": 0,
+    "dream_episodes": 0,
+    "retained_trial": "artifacts/capsule-repair-018",
+    "records": [
+      {
+        "trial": "artifacts/capsule-repair-011",
+        "status": "error",
+        "source_sha256": "8442b1da17fbfd94ff08934597738dd9f91d15836120f49cd03ee7228e714492",
+        "source_unchanged": true,
+        "metrics": null,
+        "dream_api_used": false
+      },
+      {
+        "trial": "artifacts/capsule-repair-012",
+        "status": "cancelled",
+        "source_sha256": "e3551bd333d624ab1214d3f248aea67ed206352a3936da9a0d83bb537100da8d",
+        "source_unchanged": true,
+        "metrics": null,
+        "dream_api_used": false
+      },
+      {
+        "trial": "artifacts/capsule-repair-013",
+        "status": "completed",
+        "source_sha256": "9d16852c6442f02c23211a89cf9b48a24595fe631d5c75e607835a3a7d4d4566",
+        "source_unchanged": true,
+        "metrics": {
+          "score": 0.0,
+          "success": false,
+          "used_in_recycling": 0,
+          "bin_fitted": false,
+          "fresh_seated": false,
+          "head_angle_deg": -0.0,
+          "physics_samples": 27504,
+          "violations": []
+        },
+        "dream_api_used": false
+      },
+      {
+        "trial": "artifacts/capsule-repair-014",
+        "status": "completed",
+        "source_sha256": "976f2ea95941afb5684b117264ab89ea8fb3a51608f21472357f6cbb39a837b0",
+        "source_unchanged": true,
+        "metrics": {
+          "score": 0.0,
+          "success": false,
+          "used_in_recycling": 2,
+          "bin_fitted": false,
+          "fresh_seated": false,
+          "head_angle_deg": 2.71,
+          "physics_samples": 28704,
+          "violations": []
+        },
+        "dream_api_used": false
+      },
+      {
+        "trial": "artifacts/capsule-repair-015",
+        "status": "completed",
+        "source_sha256": "514f3961f6de3a0709bfb12563da7a741d15525330f752c505a73316eb89d1dc",
+        "source_unchanged": true,
+        "metrics": {
+          "score": 0.0,
+          "success": false,
+          "used_in_recycling": 6,
+          "bin_fitted": false,
+          "fresh_seated": false,
+          "head_angle_deg": -0.0,
+          "physics_samples": 28704,
+          "violations": []
+        },
+        "dream_api_used": false
+      },
+      {
+        "trial": "artifacts/capsule-repair-016",
+        "status": "completed",
+        "source_sha256": "ba3ccff2e59d63553fd9fa9c81b9f66ac14cbefaa424b48949426556d54a6fb2",
+        "source_unchanged": true,
+        "metrics": {
+          "score": 0.35,
+          "success": false,
+          "used_in_recycling": 7,
+          "bin_fitted": false,
+          "fresh_seated": false,
+          "head_angle_deg": -0.0,
+          "physics_samples": 28704,
+          "violations": []
+        },
+        "dream_api_used": false
+      },
+      {
+        "trial": "artifacts/capsule-repair-017",
+        "status": "completed",
+        "source_sha256": "90753b80649c8c65c0bfdf703ff3e38201a37e7e93d8a319f242f88810dadbe7",
+        "source_unchanged": true,
+        "metrics": {
+          "score": 0.0,
+          "success": false,
+          "used_in_recycling": 6,
+          "bin_fitted": true,
+          "fresh_seated": false,
+          "head_angle_deg": 5.36,
+          "physics_samples": 28704,
+          "violations": []
+        },
+        "dream_api_used": false
+      },
+      {
+        "trial": "artifacts/capsule-repair-018",
+        "status": "completed",
+        "source_sha256": "85cf6f54a96b3f2312f4c337e8d3b4d87572ed565b7072058652059e6f7b52ab",
+        "source_unchanged": true,
+        "metrics": {
+          "score": 0.35,
+          "success": false,
+          "used_in_recycling": 7,
+          "bin_fitted": false,
+          "fresh_seated": true,
+          "head_angle_deg": 3.5,
+          "physics_samples": 28704,
+          "violations": []
+        },
+        "dream_api_used": false
+      },
+      {
+        "trial": "artifacts/capsule-repair-019",
+        "status": "completed",
+        "source_sha256": "1d0822344d7721b6b869871c0d764f3b3fa7e1f6f4067ee22e443751eb24139d",
+        "source_unchanged": true,
+        "metrics": {
+          "score": 0.35,
+          "success": false,
+          "used_in_recycling": 7,
+          "bin_fitted": false,
+          "fresh_seated": true,
+          "head_angle_deg": 3.53,
+          "physics_samples": 28704,
+          "violations": []
+        },
+        "dream_api_used": false
+      }
+    ]
   },
   "lint_notes": [
-    "The runtime Ruff version recommends datetime.UTC in run.py (UP017); exact failed-trial source is preserved."
-  ]
+    "The runtime Ruff version recommends datetime.UTC in unchanged run.py (UP017)."
+  ],
+  "current_trial": null,
+  "last_completed_trial": "artifacts/capsule-repair-018",
+  "latest_diagnostic_trial": "artifacts/capsule-repair-019",
+  "retained_trial": "artifacts/capsule-repair-018",
+  "running_processes": 0
 }

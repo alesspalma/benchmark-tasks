@@ -50,6 +50,33 @@ def capsule(w, s, path, color):
     )
 
 
+def collector_guide(w, s, path, side, color):
+    """Passive lead-in chamfer: wide at the lip, 6 mm side clearance below."""
+    from pxr import Gf, UsdGeom, UsdPhysics
+
+    section = [
+        (0.064, 0.009),
+        (0.090, 0.009),
+        (0.090, 0.035),
+        (0.084, 0.035),
+        (0.064, 0.015),
+    ]
+    vertices = [(x, side * y, C.TOP + z) for x in (0.3825, 0.5475) for y, z in section]
+    faces = [list(range(4, -1, -1)), list(range(5, 10))]
+    faces += [[i, (i + 1) % 5, (i + 1) % 5 + 5, i + 5] for i in range(5)]
+    if side < 0:
+        faces = [face[::-1] for face in faces]
+    mesh = UsdGeom.Mesh.Define(s, path)
+    mesh.CreatePointsAttr([Gf.Vec3f(*v) for v in vertices])
+    mesh.CreateFaceVertexCountsAttr([len(face) for face in faces])
+    mesh.CreateFaceVertexIndicesAttr([i for face in faces for i in face])
+    mesh.CreateSubdivisionSchemeAttr("none")
+    w._finish(s, mesh, color, True)
+    UsdPhysics.MeshCollisionAPI.Apply(mesh.GetPrim()).CreateApproximationAttr(
+        "convexHull"
+    )
+
+
 def create_assets(directory):
     from pxr import Gf, UsdGeom
 
@@ -61,20 +88,26 @@ def create_assets(directory):
     s = w.stage("machine")
     base = w.body(s, "/Asset/Base", 2.8, fixed=True, articulation=True)
     # Cutaway shell and a genuine open ejection path below the loading carrier.
-    w.box(s, base + "/Rear", (0.025, 0.19, 0.25), (0.625, 0, C.TOP + 0.125), case)
+    w.box(
+        s,
+        base + "/Rear",
+        (0.025, 0.19, 0.25 + C.HEAD_RISE),
+        (0.625, 0, C.TOP + (0.25 + C.HEAD_RISE) / 2),
+        case,
+    )
     for y in (-0.096, 0.096):
         w.box(
             s,
             base + f"/SideUpper{y}",
             (0.22, 0.008, 0.060),
-            (0.510, y, C.TOP + 0.215),
+            (0.510, y, C.TOP + 0.215 + C.HEAD_RISE),
             case,
         )
         w.box(
             s,
             base + f"/SideRear{y}",
-            (0.025, 0.008, 0.175),
-            (0.6025, y, C.TOP + 0.0975),
+            (0.025, 0.008, 0.175 + C.HEAD_RISE),
+            (0.6025, y, C.TOP + 0.0975 + C.HEAD_RISE / 2),
             case,
         )
     w.box(s, base + "/Foot", (0.28, 0.17, 0.008), (0.50, 0, C.TOP + 0.004), dark)
@@ -89,16 +122,20 @@ def create_assets(directory):
             s,
             base + f"/Seat{n}",
             (0.0032, 0.0040, 0.005),
-            (C.SLOT[0] + r * math.cos(a), r * math.sin(a), C.TOP + 0.1925),
+            (
+                C.SLOT[0] + r * math.cos(a),
+                r * math.sin(a),
+                C.TOP + 0.1925 + C.HEAD_RISE,
+            ),
             silver,
             rotation=rot,
         )
-    for y in (-0.060, 0.060):
+    for y in (-0.085, 0.085):
         w.box(
             s,
             base + f"/Bridge{y}",
             (0.11, 0.008, 0.008),
-            (0.445, y, C.TOP + 0.188),
+            (0.445, y, C.TOP + 0.188 + C.HEAD_RISE),
             dark,
         )
     head = w.body(s, "/Asset/Head", 0.22)
@@ -106,7 +143,7 @@ def create_assets(directory):
         s,
         head + "/Cover",
         (0.22, 0.17, 0.018),
-        (0.48, 0, C.TOP + 0.225),
+        (0.48, 0, C.TOP + 0.225 + C.HEAD_RISE),
         (0.21, 0.25, 0.27),
     )
     # Rim-support fork is open toward the rear. Gravity discharges the old
@@ -116,22 +153,32 @@ def create_assets(directory):
             s,
             head + f"/Fork{y}",
             (0.075, 0.005, 0.003),
-            (0.445, y, C.TOP + 0.192),
+            (0.445, y, C.TOP + 0.192 + C.HEAD_RISE),
             silver,
         )
     w.box(
-        s, head + "/ForkFront", (0.006, 0.041, 0.006), (0.405, 0, C.TOP + 0.194), silver
+        s,
+        head + "/ForkFront",
+        (0.006, 0.041, 0.006),
+        (0.405, 0, C.TOP + 0.194 + C.HEAD_RISE),
+        silver,
     )
     # Ordinary bar handle; the right end is clear of the machine's sidewall.
     w.cylinder(
-        s, head + "/Handle", 0.009, 0.24, (0.38, 0, C.TOP + 0.240), dark, axis="Y"
+        s,
+        head + "/Handle",
+        0.009,
+        0.24,
+        (C.HEAD_HANDLE[0], 0, C.HEAD_HANDLE[2]),
+        dark,
+        axis="Y",
     )
     for y in (-0.07, 0.07):
         w.box(
             s,
             head + f"/HandleLeg{y}",
             (0.012, 0.012, 0.035),
-            (0.38, y, C.TOP + 0.222),
+            (0.38, y, C.TOP + 0.222 + C.HEAD_RISE),
             dark,
         )
     w.hinge(
@@ -155,24 +202,17 @@ def create_assets(directory):
         }
     )
     s = w.stage("bin")
-    body = w.body(s, "/Asset/Body", 0.18)
+    body = w.body(s, "/Asset/Body", 0.12)
     w.tray(s, body, C.BIN_INNER, C.BIN_H, 0.0, (0.30, 0.34, 0.36), wall=0.003)
-    w.box(s, body + "/HandleNeck", (0.038, 0.020, 0.012), (-0.100, 0, 0.090), dark)
-    w.box(s, body + "/Handle", (0.040, 0.065, 0.018), (-0.126, 0, 0.090), dark)
-    w.box(s, body + "/HandleLip", (0.008, 0.065, 0.040), (-0.154, 0, 0.090), dark)
+    # A front pull bar with an unobstructed 26 mm vertical pinch. Side stems
+    # leave the finger pads clear; no lip blocks their approach or release.
+    w.box(s, body + "/Handle", (0.040, 0.100, 0.026), C.BIN_GRIP, dark)
     for side in (-1, 1):
         w.box(
             s,
-            body + f"/SideNeck{side + 1}",
-            (0.020, 0.045, 0.012),
-            (0, side * 0.075, 0.090),
-            dark,
-        )
-        w.box(
-            s,
-            body + f"/SideGrip{side + 1}",
-            (0.060, 0.018, 0.018),
-            (0, side * 0.100, 0.090),
+            body + f"/HandleStem{side + 1}",
+            (0.040, 0.012, 0.012),
+            (-0.098, side * 0.044, C.BIN_GRIP[2]),
             dark,
         )
     assets.append(
@@ -218,15 +258,9 @@ def create_assets(directory):
     x.AddTranslateOp().Set(Gf.Vec3d(*map(float, C.WASTE)))
     w.tray(s, p, C.WASTE_INNER, C.WASTE_H, 0.002, (0.18, 0.44, 0.28), wall=0.004)
     # Bin side rails and rear stop establish a reproducible removable fit.
-    for y in (-0.065, 0.065):
-        w.box(
-            s,
-            "/Asset/Rail" + str(y),
-            (0.165, 0.008, 0.012),
-            (0.465, y, C.TOP + 0.014),
-            dark,
-        )
-    w.box(s, "/Asset/BinStop", (0.006, 0.13, 0.015), (0.551, 0, C.TOP + 0.015), dark)
+    for side in (-1, 1):
+        collector_guide(w, s, "/Asset/Guide" + str(side + 1), side, dark)
+    w.box(s, "/Asset/BinStop", (0.006, 0.13, 0.015), (0.557, 0, C.TOP + 0.015), dark)
     # Stand for the single unused capsule, preventing it rolling before pickup.
     w.cylinder(
         s,

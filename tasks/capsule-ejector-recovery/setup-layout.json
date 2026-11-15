@@ -1,19 +1,19 @@
 {
   "KEY": "capsule_recovery",
-  "TITLE": "Clear a backed-up capsule machine and reload its carrier",
+  "TITLE": "Empty a capsule machine's collector and load a fresh capsule",
   "INSTRUCTION": "Clear the used capsules into the recycling tub and restore the capsule machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
-  "DESCRIPTION": "A capsule machine has a backed-up used-capsule bin. A fresh gold capsule rests on a narrow pedestal on the left. An empty recycling tub is on the left. The apparatus is cold and unpowered.",
+  "DESCRIPTION": "A capsule machine has a used capsule in its loading carrier and six spent capsules in its removable collector. A fresh gold capsule rests on a narrow pedestal on the left. An empty recycling tub is on the left. The apparatus is cold and unpowered.",
   "MAX_STEPS": 2400,
   "TOP": 0.7474999999999999,
   "HINGE": [
     0.55,
     0.0,
-    0.9424999999999999
+    0.9824999999999999
   ],
   "SLOT": [
     0.44,
     0.0,
-    0.9169999999999999
+    0.957
   ],
   "BIN": [
     0.465,
@@ -26,18 +26,18 @@
   ],
   "BIN_H": 0.145,
   "WASTE": [
-    0.3,
-    0.2,
+    0.37,
+    0.27,
     0.7474999999999999
   ],
   "WASTE_INNER": [
-    0.22,
-    0.22
+    0.3,
+    0.3
   ],
   "WASTE_H": 0.055,
   "FRESH": [
-    0.45,
-    0.15,
+    0.56,
+    0.25,
     0.8174999999999999
   ],
   "OPEN_ANGLE": 0.0,
@@ -151,26 +151,39 @@
       "size_m": [
         0.28,
         0.21,
-        0.25
+        0.29
       ],
       "base_mass_kg": 2.8,
       "head_mass_kg": 0.22
     },
     {
       "name": "bin",
-      "type": "removable polymer collector with pull and side handles",
+      "type": "removable polymer collector with unobstructed front pull bar",
       "inner_size_m": [
         0.16,
         0.11,
         0.145
       ],
       "wall_m": 0.003,
-      "mass_kg": 0.18,
+      "mass_kg": 0.12,
       "position_m": [
         0.465,
         0.0,
         0.7575
-      ]
+      ],
+      "front_bar_size_m": [
+        0.04,
+        0.1,
+        0.026
+      ],
+      "front_bar_center_local_m": [
+        -0.125,
+        0.0,
+        0.085
+      ],
+      "guide_clearance_each_side_m": 0.006,
+      "guide_lip_height_m": 0.035,
+      "guide_inner_half_width_at_lip_m": 0.084
     },
     {
       "name": "used capsules",
@@ -192,8 +205,8 @@
       "quantity": 1,
       "mass_kg": 0.008,
       "position_m": [
-        0.45,
-        0.15,
+        0.56,
+        0.25,
         0.8174999999999999
       ]
     },
@@ -208,14 +221,14 @@
       "name": "recycling tub",
       "type": "fixed polymer tray",
       "inner_size_m": [
-        0.22,
-        0.22,
+        0.3,
+        0.3,
         0.055
       ],
       "wall_m": 0.004,
       "position_m": [
-        0.3,
-        0.2,
+        0.37,
+        0.27,
         0.7474999999999999
       ]
     },
@@ -224,5 +237,16 @@
       "type": "fixed polymer guides",
       "source": "builder.py"
     }
+  ],
+  "BIN_GRIP": [
+    -0.125,
+    0.0,
+    0.085
+  ],
+  "HEAD_RISE": 0.04,
+  "HEAD_HANDLE": [
+    0.38,
+    -0.12,
+    1.0274999999999999
   ]
 }

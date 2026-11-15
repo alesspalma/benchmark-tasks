@@ -45,7 +45,10 @@ class Writer:
         p = x.GetPrim()
         self.Phy.RigidBodyAPI.Apply(p)
         self.Phy.MassAPI.Apply(p).CreateMassAttr(mass)
-        self.Px.PhysxRigidBodyAPI.Apply(p).CreateMaxDepenetrationVelocityAttr(0.5)
+        rigid = self.Px.PhysxRigidBodyAPI.Apply(p)
+        rigid.CreateMaxDepenetrationVelocityAttr(0.5)
+        rigid.CreateSolverPositionIterationCountAttr(32)
+        rigid.CreateSolverVelocityIterationCountAttr(8)
         if articulation:
             self.Phy.ArticulationRootAPI.Apply(p)
             a = self.Px.PhysxArticulationAPI.Apply(p)
