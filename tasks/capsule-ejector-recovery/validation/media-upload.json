@@ -1,0 +1,20 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-11-15T16:28:15.355765+00:00",
+  "completed_at_utc": "2026-11-15T16:28:20.381923+00:00",
+  "media_id": "M-8TH8AS",
+  "files": {
+    "dream-1.mp4": {
+      "bytes": 6146077,
+      "sha256": "d058d5c76d402169b0dbbcf411cc96ce67009dc2ba06c37e7314b726d9f9bc7e"
+    },
+    "demo.mp4": {
+      "bytes": 4110922,
+      "sha256": "3b49820c8aa1410c0b6301ca6350fac44e8e4cc7b1b305dd2a35a901ff2bde0b"
+    },
+    "setup.png": {
+      "bytes": 63545,
+      "sha256": "7d7a4dec7709f8205da4a6289126269abd7ca7fac001500498ab3e042734616b"
+    }
+  }
+}

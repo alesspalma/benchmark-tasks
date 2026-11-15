@@ -1,0 +1,28 @@
+{
+  "scope": "Completed registered Inspect Robots scripted demonstration with three native cameras",
+  "source_sha256": "42fea875fc7539963b997780672d97c76cfe3b5d4048d2409b90d4ba7e24e437",
+  "original_log_sha256": "a8b8d25156a4cfef0ad304f171fc9a459872e7afe7b87231f89450e200c14ed3",
+  "embodiment": "capsule_recovery",
+  "policy": "capsule_recovery_scripted",
+  "environment_id": "capsule_recovery-42fea875fc753996",
+  "environment_revision": "42fea875fc75",
+  "seed": 0,
+  "max_steps": 2400,
+  "results": {
+    "abstentions": {},
+    "errored_trials": 0,
+    "metrics": {
+      "task_score": 1.0
+    },
+    "total_scenes": 1,
+    "total_trials": 1
+  },
+  "steps": 2324,
+  "elapsed_wall_s": 434.1824161739787,
+  "started_at_utc": "2026-11-15T16:07:21.481544+00:00",
+  "completed_at_utc": "2026-11-15T16:14:35.663948+00:00",
+  "error": null,
+  "termination_reasons": [
+    "success"
+  ]
+}

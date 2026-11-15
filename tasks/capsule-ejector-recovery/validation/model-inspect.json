@@ -1,0 +1,36 @@
+{
+  "scope": "Single hosted Dream-1 episode through registered Inspect Robots; no automatic episode reruns",
+  "source_sha256": "42fea875fc7539963b997780672d97c76cfe3b5d4048d2409b90d4ba7e24e437",
+  "source_unchanged": true,
+  "original_log_sha256": "f2a070a6a9ebb7a7d29612735f812c7113a69b0f4afa4bc97827538877a6d68b",
+  "model": "dreamlabs/dream-1-beta",
+  "embodiment": "capsule_recovery",
+  "environment_id": "capsule_recovery-42fea875fc753996",
+  "seed": 0,
+  "epochs": 1,
+  "max_steps": 2400,
+  "control_hz": 20,
+  "camera_size": [
+    320,
+    176
+  ],
+  "results": {
+    "abstentions": {},
+    "errored_trials": 0,
+    "metrics": {
+      "task_score": 0.0
+    },
+    "total_scenes": 1,
+    "total_trials": 1
+  },
+  "steps": 2400,
+  "elapsed_wall_s": 465.4754638179438,
+  "started_at_utc": "2026-11-15T16:18:04.070222+00:00",
+  "completed_at_utc": "2026-11-15T16:25:49.545673+00:00",
+  "error": null,
+  "termination_reasons": [
+    "max_steps"
+  ],
+  "remote_dataset_recording": false,
+  "automatic_episode_reruns": false
+}

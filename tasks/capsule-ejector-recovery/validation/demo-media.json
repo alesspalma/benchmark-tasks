@@ -1,0 +1,57 @@
+{
+  "kind": "demo",
+  "original_log": "adhoc_8233fed8.json",
+  "original_log_sha256": "a8b8d25156a4cfef0ad304f171fc9a459872e7afe7b87231f89450e200c14ed3",
+  "environment_id": "capsule_recovery-42fea875fc753996",
+  "score": 1.0,
+  "steps": 2324,
+  "camera_validation": {
+    "top_cam": {
+      "frames": 2325,
+      "minimum_mean": 155.8980587121212,
+      "minimum_std": 60.23785883894561
+    },
+    "left_cam": {
+      "frames": 2325,
+      "minimum_mean": 64.65221946022727,
+      "minimum_std": 39.63116760418847
+    },
+    "right_cam": {
+      "frames": 2325,
+      "minimum_mean": 118.67582859848486,
+      "minimum_std": 33.38867106762244
+    }
+  },
+  "composition": "Every native initial/action frame in order at 20 fps; overview above left/right wrists. Resize/stack only; no overlays, temporal edits or generated frames.",
+  "encoding_requires_inference": false,
+  "ffprobe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 528,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "20/1",
+        "nb_frames": "2325"
+      }
+    ],
+    "format": {
+      "duration": "116.250000",
+      "size": "4110922"
+    }
+  },
+  "full_decode_passed": true,
+  "files": {
+    "demo.mp4": {
+      "bytes": 4110922,
+      "sha256": "3b49820c8aa1410c0b6301ca6350fac44e8e4cc7b1b305dd2a35a901ff2bde0b"
+    },
+    "setup-demo.png": {
+      "bytes": 63545,
+      "sha256": "7d7a4dec7709f8205da4a6289126269abd7ca7fac001500498ab3e042734616b"
+    }
+  },
+  "visually_reviewed": true,
+  "visual_review": "Initial, collector removal/emptying/refit, capsule loading and final released/closed states inspected in overview and both wrist views. No team identity or overlays."
+}

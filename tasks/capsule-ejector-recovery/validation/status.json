@@ -1,162 +1,38 @@
 {
-  "status": "native_full_score_validated_model_run_pending",
+  "status": "validation_complete",
+  "checked_at_utc": "2026-11-15T16:29:30.394129+00:00",
+  "source_sha256": "42fea875fc7539963b997780672d97c76cfe3b5d4048d2409b90d4ba7e24e437",
+  "source_unchanged_across_demo_and_model": true,
   "native_full_score": true,
-  "last_native_score": 1.0,
-  "local_source_sha256": "42fea875fc7539963b997780672d97c76cfe3b5d4048d2409b90d4ba7e24e437",
-  "matches_last_native_attempt": true,
-  "dream_runs": 0,
-  "media_uploads": 0,
-  "prs_opened": 0,
+  "registered_full_episode_validated": true,
+  "native_score": 1.0,
+  "registered_score": 1.0,
+  "demo_steps": 2324,
+  "dream_score": 0.0,
+  "dream_steps": 2400,
+  "dream_runs": 1,
+  "automatic_episode_reruns": false,
+  "model_trial_errors": 0,
   "unit_tests": 18,
-  "registered_entry_points_installed": true,
-  "registered_full_episode_validated": false,
-  "remaining": [
-    "Registered Inspect episode/failure controls and final submission checklist",
-    "One Dream-1 episode after review of the frozen task",
-    "Media upload, task.json publication and PR submission"
-  ],
-  "known_failures": [],
-  "development_trial_audit": {
-    "scope": "Compact collector development trials 020\u2013026; diagnostic rest-window replay is not counted as a native demo.",
-    "counts": {
-      "completed": 7
-    },
-    "full_score_runs": 1,
-    "unfinished_receipts": 0,
-    "dream_episodes": 0,
-    "retained_trial": "artifacts/capsule-compact-026",
-    "records": [
-      {
-        "trial": "artifacts/capsule-compact-020",
-        "status": "completed",
-        "source_sha256": "06efa7bd0f5759f9590e934b3c3fd63f2f04563215295c586d7f6371960784f4",
-        "source_unchanged": true,
-        "metrics": {
-          "score": 0.35,
-          "success": false,
-          "used_in_recycling": 7,
-          "bin_fitted": false,
-          "fresh_seated": false,
-          "head_angle_deg": 4.49,
-          "physics_samples": 27984,
-          "violations": []
-        },
-        "dream_api_used": false
-      },
-      {
-        "trial": "artifacts/capsule-compact-021",
-        "status": "completed",
-        "source_sha256": "3c96f100f43accd51c77d39eca3fda69beddc218448f761affb75bf27db250b2",
-        "source_unchanged": true,
-        "metrics": {
-          "score": 0.0,
-          "success": false,
-          "used_in_recycling": 6,
-          "bin_fitted": true,
-          "fresh_seated": true,
-          "head_angle_deg": 3.52,
-          "physics_samples": 28704,
-          "violations": []
-        },
-        "dream_api_used": false
-      },
-      {
-        "trial": "artifacts/capsule-compact-022",
-        "status": "completed",
-        "source_sha256": "053676715d84b678cc79f50f41108f9bffa0badfe78d202cb6354e7899601473",
-        "source_unchanged": true,
-        "metrics": {
-          "score": 0.0,
-          "success": false,
-          "used_in_recycling": 6,
-          "bin_fitted": true,
-          "fresh_seated": true,
-          "head_angle_deg": 3.52,
-          "physics_samples": 28704,
-          "violations": []
-        },
-        "dream_api_used": false
-      },
-      {
-        "trial": "artifacts/capsule-compact-023",
-        "status": "completed",
-        "source_sha256": "909c7143935ff3eea1f08480c8bd9d9d8928a9372d20b7a25a023af65674a7c4",
-        "source_unchanged": true,
-        "metrics": {
-          "score": 0.65,
-          "success": false,
-          "used_in_recycling": 7,
-          "bin_fitted": true,
-          "fresh_seated": true,
-          "head_angle_deg": 3.52,
-          "physics_samples": 28704,
-          "violations": []
-        },
-        "dream_api_used": false
-      },
-      {
-        "trial": "artifacts/capsule-compact-024",
-        "status": "completed",
-        "source_sha256": "3558bff6846d800a3f5bad38db534d37b51f55de098273cecd0ecbc825f57581",
-        "source_unchanged": true,
-        "metrics": {
-          "score": 0.65,
-          "success": false,
-          "used_in_recycling": 7,
-          "bin_fitted": true,
-          "fresh_seated": true,
-          "head_angle_deg": 3.52,
-          "physics_samples": 28704,
-          "violations": []
-        },
-        "dream_api_used": false
-      },
-      {
-        "trial": "artifacts/capsule-compact-025",
-        "status": "completed",
-        "source_sha256": "4e81072006a34a757994c2bba10407fed9c08fbc12758b45251338b14e670295",
-        "source_unchanged": true,
-        "metrics": {
-          "score": 0.65,
-          "success": false,
-          "used_in_recycling": 7,
-          "bin_fitted": true,
-          "fresh_seated": true,
-          "head_angle_deg": 3.52,
-          "physics_samples": 28704,
-          "violations": []
-        },
-        "dream_api_used": false
-      },
-      {
-        "trial": "artifacts/capsule-compact-026",
-        "status": "completed",
-        "source_sha256": "42fea875fc7539963b997780672d97c76cfe3b5d4048d2409b90d4ba7e24e437",
-        "source_unchanged": true,
-        "metrics": {
-          "score": 1.0,
-          "success": true,
-          "used_in_recycling": 7,
-          "bin_fitted": true,
-          "fresh_seated": true,
-          "head_angle_deg": 3.52,
-          "parts_at_rest": true,
-          "hands_released": true,
-          "physics_samples": 27888,
-          "violations": []
-        },
-        "dream_api_used": false
-      }
-    ]
-  },
-  "lint_notes": [
-    "The runtime Ruff version recommends datetime.UTC in unchanged run.py (UP017)."
-  ],
-  "current_trial": null,
-  "last_completed_trial": "artifacts/capsule-compact-026",
-  "latest_diagnostic_trial": "artifacts/capsule-compact-025",
-  "retained_trial": "artifacts/capsule-compact-026",
-  "running_processes": 0,
   "scoring_tests": 16,
-  "geometry_tests": 2
+  "geometry_tests": 2,
+  "usd_assets_passed": 11,
+  "physical_controls": {
+    "hold": 0.0,
+    "empty_without_reload_or_closure": 0.65
+  },
+  "three_camera_media_verified": true,
+  "standard_layout": "overview above left/right wrists",
+  "media_size": [
+    640,
+    528
+  ],
+  "media_fps": 20,
+  "media_codec": "H.264 yuv420p",
+  "initial_demo_and_model_images_byte_identical": true,
+  "media_uploads": 1,
+  "media_id": "M-8TH8AS",
+  "instruction_matches_demo_and_model": true,
+  "secret_and_blind_metadata_scan_passed": true,
+  "pending_validation": []
 }

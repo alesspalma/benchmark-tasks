@@ -1,0 +1,57 @@
+{
+  "kind": "dream",
+  "original_log": "adhoc_5702491b.json",
+  "original_log_sha256": "f2a070a6a9ebb7a7d29612735f812c7113a69b0f4afa4bc97827538877a6d68b",
+  "environment_id": "capsule_recovery-42fea875fc753996",
+  "score": 0.0,
+  "steps": 2400,
+  "camera_validation": {
+    "top_cam": {
+      "frames": 2401,
+      "minimum_mean": 157.8750769412879,
+      "minimum_std": 57.305244477655634
+    },
+    "left_cam": {
+      "frames": 2401,
+      "minimum_mean": 103.67662168560607,
+      "minimum_std": 54.96856574247143
+    },
+    "right_cam": {
+      "frames": 2401,
+      "minimum_mean": 131.97476917613636,
+      "minimum_std": 44.73144889442825
+    }
+  },
+  "composition": "Every native initial/action frame in order at 20 fps; overview above left/right wrists. Resize/stack only; no overlays, temporal edits or generated frames.",
+  "encoding_requires_inference": false,
+  "ffprobe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 528,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "20/1",
+        "nb_frames": "2401"
+      }
+    ],
+    "format": {
+      "duration": "120.050000",
+      "size": "6146077"
+    }
+  },
+  "full_decode_passed": true,
+  "files": {
+    "dream-1.mp4": {
+      "bytes": 6146077,
+      "sha256": "d058d5c76d402169b0dbbcf411cc96ce67009dc2ba06c37e7314b726d9f9bc7e"
+    },
+    "setup.png": {
+      "bytes": 63545,
+      "sha256": "7d7a4dec7709f8205da4a6289126269abd7ca7fac001500498ab3e042734616b"
+    }
+  },
+  "visually_reviewed": true,
+  "visual_review": "Initial, intermediate and final overview/wrist frames inspected. The model does not complete collector clearing or reloading. All three views remain visible; no team identity, overlays or generated frames."
+}
