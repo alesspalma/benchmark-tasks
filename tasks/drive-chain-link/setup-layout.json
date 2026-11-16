@@ -1,9 +1,6 @@
 {
   "units": "metres, kilograms, seconds; quaternion XYZW; z up",
   "seed": 0,
-  "control_hz": 20,
-  "physics_hz": 240,
-  "max_steps": 2400,
   "rig": {
     "name": "station-calibrated",
     "bases": {
@@ -231,294 +228,312 @@
       "material": "nominal metal"
     }
   ],
+  "control_hz": 20,
+  "physics_hz": 1200,
+  "max_steps": 4200,
   "chain": {
-    "type": "eleven-link open articulated training chain; two free ends splayed",
+    "type": "nominal steel conveyor-chain loop immobilized in its service fixture",
     "pitch_m": 0.1,
+    "pin_diameter_m": 0.012,
+    "nominal_bore_diameter_m": 0.0122,
+    "plate_thickness_m": 0.005,
+    "inner_width_m": 0.028,
     "node_positions_world_m": [
       [
-        0.16256122015273006,
-        -0.08,
-        0.847
+        0.265,
+        -0.05000000000000001,
+        0.9512
       ],
       [
-        0.24499999999999997,
+        0.31499999999999995,
         -0.13660254037844385,
-        0.847
+        0.9512
       ],
       [
-        0.3316025403784439,
+        0.4016025403784439,
         -0.1866025403784439,
-        0.847
+        0.9512
       ],
       [
-        0.4316025403784438,
+        0.5016025403784438,
         -0.1866025403784439,
-        0.847
+        0.9512
       ],
       [
-        0.5182050807568878,
+        0.5882050807568877,
         -0.1366025403784439,
-        0.847
+        0.9512
       ],
       [
-        0.5682050807568878,
+        0.6382050807568878,
         -0.04999999999999999,
-        0.847
+        0.9512
       ],
       [
-        0.5682050807568878,
+        0.6382050807568878,
         0.049999999999999906,
-        0.847
+        0.9512
       ],
       [
-        0.5182050807568878,
+        0.5882050807568878,
         0.13660254037844385,
-        0.847
+        0.9512
       ],
       [
-        0.43160254037844387,
+        0.5016025403784439,
         0.1866025403784439,
-        0.847
+        0.9512
       ],
       [
-        0.331602540378444,
+        0.401602540378444,
         0.1866025403784439,
-        0.847
+        0.9512
       ],
       [
-        0.2449999999999999,
+        0.31499999999999995,
         0.1366025403784438,
-        0.847
+        0.9512
       ],
       [
-        0.16256122015272995,
-        0.08,
-        0.847
+        0.265,
+        0.05000000000000001,
+        0.9512
       ]
     ],
-    "link_mass_kg": 0.035,
-    "layers": "8mm inner plates; paired 4mm outer plates at +/-6mm; metal 8mm-diameter hinge pins",
-    "passive_hinges": 10,
-    "free_end_bore_diameter_m": 0.032,
-    "keeper_support_shoulders": {
-      "height_m": 0.005,
-      "centre_local_z_m": 0.0065,
-      "ring_centre_radius_m": 0.0195
+    "link_mass_kg": {
+      "even_inner": 0.56,
+      "odd_outer": 0.42
     },
-    "material": "nominal dark grey printed polymer links and metal pins",
-    "bare_end_rails": {
-      "width_m": 0.006,
-      "central_length_m": 0.03,
-      "central_total_height_m": 0.02,
-      "central_bottom_local_z_m": -0.004,
-      "central_top_local_z_m": 0.016,
-      "material": "same dark grey polymer as the link; no added grasp posts"
-    },
-    "display_color_rgb": [
-      0.075,
-      0.09,
-      0.105
-    ]
-  },
-  "former": {
-    "type": "fixed toothed chain-assembly former with open front service sector",
-    "centre_world_xy_m": [
-      0.3816025403784439,
-      0.0
-    ],
-    "hub_radius_m": 0.145,
-    "hub_height_m": 0.008,
-    "guide_teeth": [
-      {
-        "link": "Link01",
-        "centre_world_xy_m": [
-          0.2883012701892219,
-          -0.16160254037844388
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      },
-      {
-        "link": "Link02",
-        "centre_world_xy_m": [
-          0.3816025403784438,
-          -0.1866025403784439
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      },
-      {
-        "link": "Link03",
-        "centre_world_xy_m": [
-          0.47490381056766573,
-          -0.1616025403784439
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      },
-      {
-        "link": "Link04",
-        "centre_world_xy_m": [
-          0.5432050807568878,
-          -0.09330127018922195
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      },
-      {
-        "link": "Link05",
-        "centre_world_xy_m": [
-          0.5682050807568878,
-          -4.163336342344337e-17
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      },
-      {
-        "link": "Link06",
-        "centre_world_xy_m": [
-          0.5432050807568878,
-          0.09330127018922188
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      },
-      {
-        "link": "Link07",
-        "centre_world_xy_m": [
-          0.47490381056766584,
-          0.16160254037844388
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      },
-      {
-        "link": "Link08",
-        "centre_world_xy_m": [
-          0.38160254037844393,
-          0.1866025403784439
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      },
-      {
-        "link": "Link09",
-        "centre_world_xy_m": [
-          0.2883012701892219,
-          0.16160254037844385
-        ],
-        "radius_m": 0.006,
-        "height_m": 0.05,
-        "lead_height_m": 0.003
-      }
-    ],
-    "spokes": "22mm wide, 4mm thick, partially recessed into bed; complete geometry in inventory",
-    "boss_radius_m": 0.025,
-    "boss_height_m": 0.014,
-    "material": "nominal metal, rigidly fixed to service deck",
-    "role": "positive location of chain windows throughout the 40mm end lift and subsequent assembly; no powered drive",
-    "display_color_rgb": [
-      0.075,
-      0.09,
-      0.105
-    ],
-    "tooth_display_color_rgb": [
-      0.13,
-      0.15,
-      0.17
-    ]
+    "fixture_constraints": {
+      "root_anchor": "Link00",
+      "fixed_link_braces": 10,
+      "hold_down_straps_on_outer_links": [
+        1,
+        3,
+        5,
+        7,
+        9
+      ],
+      "end_nests": [
+        "Link00",
+        "Link10"
+      ],
+      "runtime_changes": false
+    }
   },
   "connector": {
+    "type": "permanently assembled yellow two-pin link",
     "position_m": [
-      0.35,
+      0.4,
       -0.35,
-      0.7495
+      0.8975000000000001
     ],
     "rotation_xyzw": [
-      0,
-      0,
-      0,
-      1
-    ],
-    "mass_kg": 0.12,
-    "backing_size_m": [
-      0.045,
-      0.14,
-      0.004
-    ],
-    "pin_spacing_m": 0.1,
-    "stem_diameter_m": 0.008,
-    "stem_length_m": 0.027,
-    "head_base_diameter_m": 0.024,
-    "head_height_m": 0.01,
-    "material": "nominal polymer backing and metal pins",
-    "target_cradle_position_m": [
-      0.195,
       0.0,
-      0.839
+      1.0,
+      0.0,
+      0.0
     ],
-    "head_shape": "6mm cylindrical shoulder with 4mm tapered lead, same 24mm diameter and 10mm total head height",
-    "initial_condition": "loose on the table; the service cradle is initially empty"
+    "mass_kg": 0.3,
+    "pin_diameter_m": 0.012,
+    "pin_pitch_m": 0.1,
+    "groove_diameter_m": 0.0106,
+    "groove_width_m": 0.0014,
+    "lead_chamfer": {
+      "axial_length_m": 0.002,
+      "angle_deg": 45,
+      "tip_diameter_m": 0.008
+    },
+    "groove_centre_from_backing_m": 0.0478
   },
-  "keeper": {
+  "cover": {
+    "type": "blue closed two-hole plate",
     "position_m": [
-      0.18,
+      0.5,
       0.35,
-      0.7515000000000001
+      0.8975000000000001
+    ],
+    "rotation_xyzw": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "mass_kg": 0.16,
+    "envelope_m": [
+      0.035,
+      0.135,
+      0.005
+    ],
+    "hole_entry_chamfer_m": 0.0005,
+    "nominal_scoring_axial_offset_m": 0.0443,
+    "fitting_program_axial_offset_m": 0.0439,
+    "permitted_axial_offset_error_m": 0.0008,
+    "axial_float": "Cover slides on the 12mm pins between the chain underside and its separate retaining clips; nominal scoring offset44.3mm includes the clip-supported seat."
+  },
+  "applicator": {
+    "type": "bench-mounted applicator on a passive XY guide",
+    "position_m": [
+      0.31,
+      0.03,
+      0.9249
     ],
     "rotation_xyzw": [
       0,
       0,
+      1,
+      0
+    ],
+    "mass_kg": 0.14,
+    "handle_size_m": [
+      0.06,
+      0.045,
+      0.024
+    ],
+    "handle_local_center_m": [
       0,
-      1
+      0.175,
+      -0.032
     ],
-    "mass_kg": 0.075,
-    "size_m": [
-      0.08,
-      0.128,
-      0.008
-    ],
-    "grip_size_m": [
-      0.024,
-      0.03,
-      0.06
-    ],
-    "slot_width_m": 0.018,
-    "closed_slot_x_m": -0.026,
-    "material": "nominal printed polymer",
-    "reference_arm": "left"
+    "frame_access": "Grip is32mm below the clip plane. The guide fixes height and orientation; robot contact translates it horizontally.",
+    "material": "Hollow polymer grip, aluminium frame and steel clip pockets; guide bearings represented by passive prismatic joints.",
+    "clip_channels": {
+      "floor_inner_lateral_m": 0.0064,
+      "floor_outer_lateral_m": 0.0105,
+      "guide_cap_thickness_m": 0.0002,
+      "guide_cap_underside_local_z_m": 0.0006,
+      "open_front": true,
+      "clip_attachment": "None; loose native contact only"
+    },
+    "guide": {
+      "mount_mass_kg": 0.1,
+      "x_carriage_mass_kg": 0.05,
+      "joints": {
+        "SlideX": {
+          "axis_local": "X",
+          "limits_m": [
+            0,
+            0.045
+          ]
+        },
+        "SlideY": {
+          "axis_local": "Y",
+          "limits_m": [
+            0,
+            0.0306
+          ]
+        }
+      },
+      "joint_friction": 0.02,
+      "actuators": "None; robot contact only",
+      "fixed_world_mount": true
+    }
+  },
+  "clips": {
+    "clip0": {
+      "type": "free three-body spring-steel retaining clip",
+      "position_m": [
+        0.31,
+        0.08,
+        0.9249
+      ],
+      "rotation_xyzw": [
+        0.0,
+        0.0,
+        -0.7071067811865476,
+        0.7071067811865476
+      ],
+      "mass_kg": 0.0004,
+      "thickness_m": 0.001,
+      "passive_leaf_spring_Nm_per_rad": 0.8,
+      "spring_limits_deg": [
+        -25,
+        25
+      ],
+      "leaf_radial_width_m": 0.0007,
+      "solver_position_iterations": 32,
+      "solver_velocity_iterations": 8
+    },
+    "clip1": {
+      "type": "free three-body spring-steel retaining clip",
+      "position_m": [
+        0.31,
+        -0.020000000000000004,
+        0.9249
+      ],
+      "rotation_xyzw": [
+        0.0,
+        0.0,
+        -0.7071067811865476,
+        0.7071067811865476
+      ],
+      "mass_kg": 0.0004,
+      "thickness_m": 0.001,
+      "passive_leaf_spring_Nm_per_rad": 0.8,
+      "spring_limits_deg": [
+        -25,
+        25
+      ],
+      "leaf_radial_width_m": 0.0007,
+      "solver_position_iterations": 32,
+      "solver_velocity_iterations": 8
+    }
   },
   "fixture": {
-    "deck_size_m": [
-      0.6,
-      0.48,
+    "connector_seated_position_m": [
+      0.265,
+      0.0,
+      0.9729000000000001
+    ],
+    "connector_seated_rotation_matrix": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    ],
+    "deck_top_m": 0.927,
+    "former_center_m": [
+      0.4516025403784439,
+      0.0,
+      0.9512
+    ],
+    "former_hub_radius_m": 0.17,
+    "former_teeth": 7,
+    "former_tooth_size_m": [
+      0.036,
+      0.018,
       0.012
     ],
-    "deck_centre_m": [
-      0.42,
-      0,
-      0.831
-    ],
-    "deck_top_z_m": 0.837,
-    "support_posts": "four 25mm square metal posts at x=.18/.60,y=+/- .19",
-    "cradle": "Three 4mm-high locating edges with the front open for sliding the free connector under the end plates; complete geometry in inventory",
-    "material": "nominal metal service fixture"
+    "all_solids": "scene-inventory.json"
   },
   "contact": {
     "static_friction": 0.65,
     "dynamic_friction": 0.5,
     "restitution": 0,
-    "contact_offset_m": 0.0002,
-    "controls": "standard PhysX robot actuators; passive chain joints have no actuator groups"
+    "task_contact_offset_m": 2e-05,
+    "task_rest_offset_m": 0,
+    "solver_position_iterations": 8,
+    "solver_velocity_iterations": 1,
+    "mesh_convex_min_thickness_m": 1e-05
   },
-  "inventory": "scene-inventory.json; complete primitive dimensions, masses, frames and joints",
-  "reset": "Restore fixed poses and zero passive hinge coordinates, open both grippers at ready, settle 0.5s, then start scoring."
+  "reset": "Fixed layout, jitter0. Restore free parts, clip spring joints and standard READY/open grippers; settle0.5s before scoring. End nests and five hold-down straps remain tightened; their native fixture constraints never switch.",
+  "service_access": {
+    "upper_guide": "None; the front service sector remains open.",
+    "end_clamp": "The front-facing right jaw is20 mm long and set10 mm farther along the chain than the other40 mm jaws.",
+    "hold_down": "Front clamps 1 and9 use angled straps and table-mounted posts/feet atx0.395 m,y+/-0.205 m; three rear clamps sit on the service bed.",
+    "former": "Seven spokes/teeth at links 2..8. Front spokes/teeth1 and9 omitted for applicator access.",
+    "nest_support": "The right6x6 mm pedestal sits15 mm toward the front edge of its nest floor, leaving the under-loop applicator route clear; exact transforms are in scene-inventory.json."
+  },
+  "assembly_target": "Yellow backing above the chain and blue cover below. Identical connector pins and cover bores may exchange their two sites."
 }

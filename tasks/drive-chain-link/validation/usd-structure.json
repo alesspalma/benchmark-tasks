@@ -3,78 +3,84 @@
   "assets": [
     {
       "file": "chain.usda",
-      "sha256": "46ed148cf3c271a82c71abd55f9f925d0e29e00e37bf6f89cafc2ca28a3578f8",
+      "sha256": "44e6decccc4a68771f2f019acdb9611fa2934435907d0d44269dbc17dcfdc50e",
       "errors": [],
       "failed_checks": [],
       "joints": [
         {
-          "path": "/Chain/Hinge01",
+          "path": "/Chain/FixtureBrace01",
           "bodies": [
             "/Chain/Link00",
             "/Chain/Link01"
           ]
         },
         {
-          "path": "/Chain/Hinge02",
+          "path": "/Chain/FixtureBrace02",
           "bodies": [
             "/Chain/Link01",
             "/Chain/Link02"
           ]
         },
         {
-          "path": "/Chain/Hinge03",
+          "path": "/Chain/FixtureBrace03",
           "bodies": [
             "/Chain/Link02",
             "/Chain/Link03"
           ]
         },
         {
-          "path": "/Chain/Hinge04",
+          "path": "/Chain/FixtureBrace04",
           "bodies": [
             "/Chain/Link03",
             "/Chain/Link04"
           ]
         },
         {
-          "path": "/Chain/Hinge05",
+          "path": "/Chain/FixtureBrace05",
           "bodies": [
             "/Chain/Link04",
             "/Chain/Link05"
           ]
         },
         {
-          "path": "/Chain/Hinge06",
+          "path": "/Chain/FixtureBrace06",
           "bodies": [
             "/Chain/Link05",
             "/Chain/Link06"
           ]
         },
         {
-          "path": "/Chain/Hinge07",
+          "path": "/Chain/FixtureBrace07",
           "bodies": [
             "/Chain/Link06",
             "/Chain/Link07"
           ]
         },
         {
-          "path": "/Chain/Hinge08",
+          "path": "/Chain/FixtureBrace08",
           "bodies": [
             "/Chain/Link07",
             "/Chain/Link08"
           ]
         },
         {
-          "path": "/Chain/Hinge09",
+          "path": "/Chain/FixtureBrace09",
           "bodies": [
             "/Chain/Link08",
             "/Chain/Link09"
           ]
         },
         {
-          "path": "/Chain/Hinge10",
+          "path": "/Chain/FixtureBrace10",
           "bodies": [
             "/Chain/Link09",
             "/Chain/Link10"
+          ]
+        },
+        {
+          "path": "/Chain/BenchClamp0",
+          "bodies": [
+            "/Chain/Link00"
           ]
         }
       ],
@@ -82,7 +88,7 @@
     },
     {
       "file": "connector.usda",
-      "sha256": "34760120b20e4fefb8decc09b58b1f25e7e21e7d9d95e556d324b85e0e249812",
+      "sha256": "9cd425aeb104f7026d37033adf06c7a1722dd709473d2957e673295556fb0e16",
       "errors": [],
       "failed_checks": [],
       "joints": [],
@@ -90,15 +96,90 @@
     },
     {
       "file": "keeper.usda",
-      "sha256": "02363dcf8dff93cd5b6bf7d279ae57c847dc5a2581819977f9d5a057282e4a03",
+      "sha256": "fa14aa55b36398a30ae8c258a34221d478f1a3ac923c784cb7a00391251a96c0",
       "errors": [],
       "failed_checks": [],
       "joints": [],
       "structure_passed": true
     },
     {
+      "file": "tool.usda",
+      "sha256": "fdac72822c5c2c609b375f6a6f34195403d9e8093b1c7e4a28d9a2c5bac1a799",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [
+        {
+          "path": "/Tool/BenchMount",
+          "bodies": [
+            "/Tool/Mount"
+          ]
+        },
+        {
+          "path": "/Tool/SlideX",
+          "bodies": [
+            "/Tool/Mount",
+            "/Tool/XSlide"
+          ]
+        },
+        {
+          "path": "/Tool/SlideY",
+          "bodies": [
+            "/Tool/XSlide",
+            "/Tool/Body"
+          ]
+        }
+      ],
+      "structure_passed": true
+    },
+    {
+      "file": "clip0.usda",
+      "sha256": "446309f9155df033a74582b0819d0e204ce08ad01dabd2ff858d373191b26b22",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [
+        {
+          "path": "/Clip0/Spring2",
+          "bodies": [
+            "/Clip0/Body",
+            "/Clip0/Jaw2"
+          ]
+        },
+        {
+          "path": "/Clip0/Spring0",
+          "bodies": [
+            "/Clip0/Body",
+            "/Clip0/Jaw0"
+          ]
+        }
+      ],
+      "structure_passed": true
+    },
+    {
+      "file": "clip1.usda",
+      "sha256": "23394328bb75ad7efc00c1181907c00925d0e1a14f615e8d0fa5e5530532e578",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [
+        {
+          "path": "/Clip1/Spring2",
+          "bodies": [
+            "/Clip1/Body",
+            "/Clip1/Jaw2"
+          ]
+        },
+        {
+          "path": "/Clip1/Spring0",
+          "bodies": [
+            "/Clip1/Body",
+            "/Clip1/Jaw0"
+          ]
+        }
+      ],
+      "structure_passed": true
+    },
+    {
       "file": "fixtures.usda",
-      "sha256": "8857ac57e264753b6434d0d9211f4588f7c7126914e5e34a889966e2625dcc25",
+      "sha256": "df1c9774869691dd3d33034cf68c0bbca8b3585bea29bf66b3be25ac83a90057",
       "errors": [],
       "failed_checks": [],
       "joints": [],

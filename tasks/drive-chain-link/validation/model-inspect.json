@@ -1,0 +1,28 @@
+{
+  "scope": "One complete registered Dream-1 episode, no automatic episode rerun",
+  "model": "dreamlabs/dream-1-beta",
+  "source_sha256": "5393a9a0996eae1db7f6af983df3c17533022f16c6bfdaea1e8562471da46e7e",
+  "source_unchanged": true,
+  "exit_code": 0,
+  "epochs": 1,
+  "inspect_seed": 0,
+  "native_trial_seed": 1415158438,
+  "instruction": "Join and retain the two chain ends using the yellow connecting link, blue cover plate and the two spring clips in the bench-mounted applicator. Leave the assembled joint in its service cradle, the chain seated on its guide, and both hands released.",
+  "max_steps": 4200,
+  "control_hz": 20,
+  "camera_size": [
+    320,
+    176
+  ],
+  "steps": 4200,
+  "score": 0.0,
+  "error": null,
+  "errored_trials": 0,
+  "total_trials": 1,
+  "duration_s": 678.4156336830929,
+  "mean_inference_latency_s": 0.6943993900163934,
+  "original_log_sha256": "dcbef82300ecadeda23493379474531a3dfc5a325f0f4ed9f93b8b3c37a28378",
+  "dream_api_used": true,
+  "remote_dataset_recording": false,
+  "video_frames_per_camera": 4201
+}

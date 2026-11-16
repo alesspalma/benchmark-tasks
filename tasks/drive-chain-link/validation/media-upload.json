@@ -1,27 +1,24 @@
 {
-  "media": "M-4UKEJ5",
-  "uploaded_at_utc": "2026-11-13T09:02:20.280906+00:00",
-  "task_folder": "tasks/drive-chain-link",
-  "source_sha256": "e416a5f7a88d638b0ce04c317eba00e26f4e66616e67f434f28df5ee2dd18de7",
-  "official_uploader": "tools/upload_media.py",
-  "model_score": 0.0,
-  "demo_score": 1.0,
+  "media_id": "M-MRC6ZC",
+  "task_folder": "drive-chain-link",
+  "uploader": "Current official portal uploader1.2",
+  "uploader_sha256": "2271cab9a5f81992998623827536327e185035d17c439fe5175012330d29d95c",
+  "uploader_exit_code": 0,
   "files": {
-    "video": {
-      "filename": "dream-1.mp4",
-      "bytes": 6994247,
-      "sha256": "80e0ad0461586b5cb40c527530ec3c97beb572a86a0e15ce94e40301bb66d9ac"
-    },
     "demo": {
       "filename": "demo.mp4",
-      "bytes": 2795427,
-      "sha256": "24bcfc5c7861ada786c70f89770a0ca8859adb7b069f620ddeff5ae477fb52b9"
+      "bytes": 5566911,
+      "sha256": "83a87435398d60b8e9443513f7b2206c35e0f69cf4901a297d108274276a6480"
+    },
+    "video": {
+      "filename": "dream-1.mp4",
+      "bytes": 10274158,
+      "sha256": "2a66544c415bf4a585a4b522fa3bd7812f12ac25fa42cdfae855bfb15e137685"
     },
     "screenshot": {
-      "filename": "setup-dream.png",
-      "bytes": 68714,
-      "sha256": "d5058e5f48875975565905d413fff17221da622ad408a6c3a68bcbbdb75fb4aa"
+      "filename": "setup.png",
+      "bytes": 69326,
+      "sha256": "223d5c619d6648c5810bf9f825dcdf6dab2873c1cd72444d087ca2c638a5a128"
     }
-  },
-  "encoding_or_upload_requires_model_inference": false
+  }
 }

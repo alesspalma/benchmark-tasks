@@ -1,7 +1,9 @@
 """Read-only collision-envelope measurements from authored native geometry."""
 
 from itertools import product
+
 import numpy as np
+from scipy.spatial import ConvexHull, QhullError
 from yam_arena.urdf import quat_xyzw_to_matrix
 
 
@@ -10,7 +12,10 @@ def local_solids(records):
     for item in records:
         if "solid" not in item or item["asset"] == "fixtures":
             continue
-        key = item["asset"] + ":" + item["solid"].split("/")[-2]
+        key = item["asset"] + ":" + item["solid"].split("/")[2]
+        if item["kind"] == "mesh":
+            groups.setdefault(key, []).append(np.array(item["vertices_m"]))
+            continue
         if item["kind"] == "box":
             p = (
                 np.array(list(product((-1.0, 1.0), repeat=3)))
@@ -43,7 +48,19 @@ def local_solids(records):
         c, s = np.cos(a), np.sin(a)
         r = np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
         groups.setdefault(key, []).append(p @ r.T + item["center_m"])
-    return {k: np.concatenate(v) for k, v in groups.items()}
+    envelopes = {}
+    for key, pieces in groups.items():
+        points = np.concatenate(pieces)
+        try:
+            points = points[ConvexHull(points).vertices]
+        except QhullError:
+            # Degenerate input still receives the complete original audit.
+            pass
+        # A rigid body's convex hull has exactly the same extrema as all of
+        # its authored vertices after every rigid transform. Only these bounds
+        # are measured; native contact geometry is untouched.
+        envelopes[key] = points
+    return envelopes
 
 
 def world_points(local, poses):
@@ -65,8 +82,8 @@ def robot_clearance(points, hands):
                 robot.append((p.min(0), p.max(0)))
     if not robot:
         raise RuntimeError("Whole-robot collision geometry is required")
-    return min(
-        float(np.linalg.norm(np.maximum(np.maximum(a[0] - b[1], b[0] - a[1]), 0)))
-        for a in objects
-        for b in robot
+    a, b = np.asarray(objects), np.asarray(robot)
+    gap = np.maximum(
+        np.maximum(a[:, None, 0] - b[None, :, 1], b[None, :, 0] - a[:, None, 1]), 0.0
     )
+    return float(np.sqrt(np.sum(gap * gap, axis=-1)).min())

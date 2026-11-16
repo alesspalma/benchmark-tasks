@@ -7,22 +7,21 @@ import argparse
 import hashlib
 import importlib.metadata
 import json
-from pathlib import Path
 import socket
 import subprocess
 import time
 import traceback
+from pathlib import Path
 
 import numpy as np
-
-from chain_link.config import INSTRUCTION, MAX_STEPS
+from chain_link.config import INSTRUCTION, MAX_STEPS, PHYSICS_HZ
 
 
 def execute(args):
-    from inspect_robots import Scene
-    from inspect_robots.types import Action
     from chain_link.controller import ScriptedPolicy
     from chain_link.environment import ChainLinkEnvironment, source_fingerprint
+    from inspect_robots import Scene
+    from inspect_robots.types import Action
 
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -30,7 +29,7 @@ def execute(args):
     receipt = {
         "scope": "actual native PhysX robot execution"
         if not args.no_cameras
-        else "actual native CPU PhysX development execution without cameras; no media feasibility claim",
+        else "actual native PhysX development execution without cameras; no media feasibility claim",
         "status": "starting",
         "hostname": socket.gethostname(),
         "source_sha256": fingerprint,
@@ -38,7 +37,8 @@ def execute(args):
         "seed": args.seed,
         "max_steps": args.max_steps,
         "control_hz": 20,
-        "physics_hz": 240,
+        "physics_hz": PHYSICS_HZ,
+        "workspace_audit_hz": 20,
         "instruction": INSTRUCTION,
         "versions": {
             name: importlib.metadata.version(name)
@@ -79,7 +79,7 @@ def execute(args):
         policy.reset(scene)
         receipt["controller"] = {
             "kind": "precalibrated fourteen-joint/gripper program",
-            "inputs": ["elapsed time"],
+            "inputs": ["elapsed time", "measured joint positions"],
             "program_sha256": policy.program_sha256,
             "runtime_object_state_feedback": False,
         }
@@ -128,30 +128,40 @@ def execute(args):
                 writers[name].stdin.write(np.ascontiguousarray(frame).tobytes())
         with (output / "trace.jsonl").open("w") as trace:
             for step in range(args.max_steps):
-                action = policy.action_at((step + 1) / 20)
-                result = environment.step(Action(data=action))
-                steps, last = step + 1, environment.metrics.copy()
-                row = dict(
-                    step=steps,
-                    time_s=steps / 20,
-                    phase=policy.phase,
-                    action=action.tolist(),
-                    metrics=last,
-                    native_state=environment.diagnostics(),
+                action = policy.action_at(
+                    (step + 1) / 20, observation.state["joint_pos"]
                 )
+                result = environment.step(Action(data=action))
+                observation = result.observation
+                steps, last = step + 1, environment.metrics.copy()
+                row = {
+                    "step": steps,
+                    "time_s": steps / 20,
+                    "phase": policy.phase,
+                    "program_time_s": policy.program_time,
+                    "action": action.tolist(),
+                    "controller_state": {
+                        "q": {name: value.tolist() for name, value in policy.q.items()},
+                        "integral": policy.integral.tolist(),
+                        "nominal": policy.nominal.tolist(),
+                        "previous": policy.previous.tolist(),
+                    },
+                    "metrics": last,
+                    "native_state": environment.diagnostics(),
+                }
                 trace.write(json.dumps(row) + "\n")
                 if step % 20 == 0:
                     trace.flush()
                     print(
                         json.dumps(
-                            dict(
-                                step=steps,
-                                phase=policy.phase,
-                                score=last["score"],
-                                ends_joined=last["ends_joined"],
-                                retained=last["retained"],
-                                violations=last["violations"],
-                            )
+                            {
+                                "step": steps,
+                                "phase": policy.phase,
+                                "score": last["score"],
+                                "ends_joined": last["ends_joined"],
+                                "retained": last["retained"],
+                                "violations": last["violations"],
+                            }
                         ),
                         flush=True,
                     )

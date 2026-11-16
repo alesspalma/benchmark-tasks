@@ -1,8 +1,11 @@
-"""Primary current-state 0--1 score, based on the actually measured native assembly."""
+"""Current physical insertion and positive spring-clip retention, never proximity latches."""
+
+import math
 
 import numpy as np
 from yam_arena.urdf import quat_xyzw_to_matrix
-from .config import CONNECTOR_POSITION, PITCH, TABLE_TOP, CHAIN_POSITION, NODES
+
+from . import config as C
 
 
 def rotation(pose):
@@ -15,16 +18,17 @@ class Scorer:
 
     def reset(self):
         self.violations = set()
-        self.physics_samples = 0
+        self.workspace_samples = 0
         self.hold_start = None
+        self.last_time = None
 
-    def observe_physics(self, points):
-        self.physics_samples += 1
+    def observe_workspace(self, points):
+        self.workspace_samples += 1
         for p in points.values():
             if not np.isfinite(p).all():
                 self.violations.add("invalid_state")
             elif (
-                p[:, 2].min() < TABLE_TOP - 0.006
+                p[:, 2].min() < C.TABLE_TOP - 0.006
                 or p[:, 0].min() < -0.19
                 or p[:, 0].max() > 0.91
                 or abs(p[:, 1]).max() > 0.65
@@ -32,130 +36,233 @@ class Scorer:
                 self.violations.add("part_left_work_area")
 
     def evaluate(self, s):
-        parts = [s["connector"], s["keeper"], *s["bodies"].values()]
-        finite = all(
-            np.isfinite(p["pose"]).all() and np.isfinite(p["velocity"]).all()
-            for p in parts
-        )
-        finite = (
-            finite
-            and np.isfinite(s["robot_clearance_m"])
-            and all(np.isfinite(h["opening_m"]) for h in s["hands"].values())
-        )
-        if not finite:
+        try:
+            parts = (
+                [s[n] for n in ("connector", "keeper", "tool")]
+                + list(s["bodies"].values())
+                + list(s["clips"].values())
+            )
+            valid = bool(
+                set(s["bodies"]) == {f"Link{i:02}" for i in range(11)}
+                and set(s["clips"]) == {"clip0", "clip1"}
+                and len(s["hands"]) == 2
+                and np.isfinite(s["time_s"])
+                and s["time_s"] >= 0
+                and np.isfinite(s["robot_clearance_m"])
+                and all(
+                    len(p["pose"]) == 7
+                    and len(p["velocity"]) == 6
+                    and np.isfinite(p["pose"]).all()
+                    and np.isfinite(p["velocity"]).all()
+                    and abs(np.linalg.norm(p["pose"][3:]) - 1) < 0.001
+                    for p in parts
+                )
+                and all(
+                    len(p["joints"]) == 2
+                    and np.isfinite(list(p["joints"].values())).all()
+                    for p in s["clips"].values()
+                )
+                and all(np.isfinite(h["opening_m"]) for h in s["hands"].values())
+            )
+        except (KeyError, TypeError, ValueError):
+            valid = False
+        if not valid:
             self.violations.add("invalid_state")
             self.hold_start = None
-            return dict(
-                score=0.0,
-                success=False,
-                violations=sorted(self.violations),
-                ends_joined=False,
-                plate_seated=False,
-                retained=False,
-                parked=False,
-                settled=False,
-                hands_clear=False,
-                robot_clearance_m=s["robot_clearance_m"],
-                end_points_local={},
-                keeper_local=[],
-                pins_in_keeper=[],
-                physics_samples=self.physics_samples,
-            )
-        c = s["connector"]["pose"]
-        k = s["keeper"]["pose"]
+            return {
+                "score": 0.0,
+                "success": False,
+                "violations": sorted(self.violations),
+                "ends_joined": False,
+                "plate_seated": False,
+                "retained": False,
+                "parked": False,
+                "settled": False,
+                "hands_clear": False,
+                "guide_seated": False,
+                "workspace_samples": self.workspace_samples,
+            }
+        time = float(s["time_s"])
+        if self.last_time is not None:
+            if time < self.last_time:
+                self.violations.add("invalid_state")
+            if time - self.last_time > 1.01 / C.CONTROL_HZ:
+                self.hold_start = None
+        self.last_time = time
+        c = np.array(s["connector"]["pose"])
         r = rotation(c)
-        kr = rotation(k)
         ends = {}
-        passed = []
+        checks = []
+        end_data = []
         for arm, body, sign in [("right", "Link00", -1), ("left", "Link10", 1)]:
-            item = s["bodies"][body]
-            pose = item["pose"]
-            point = np.array(pose[:3]) + rotation(pose) @ np.array(
-                [sign * PITCH / 2, 0, 0]
+            pose = np.array(s["bodies"][body]["pose"])
+            br = rotation(pose)
+            center = r.T @ (
+                pose[:3] + br @ np.array([sign * C.PITCH / 2, 0, 0]) - c[:3]
             )
-            local = r.T @ (point - c[:3])
-            target = np.array([0, sign * PITCH / 2, 0.007])
-            ends[arm] = local.tolist()
-            # 32 mm bore around an 8 mm stem: 12 mm radial clearance.
-            passed.append(
-                bool(
-                    np.linalg.norm(local[:2] - target[:2]) <= 0.012
-                    and 0.003 < local[2] < 0.014
-                    and np.dot(rotation(pose)[:, 2], r[:, 2]) > 0.98
+            axis = r.T @ br[:, 2]
+            end_data.append((arm, center, axis))
+        assignments = ((-C.PITCH / 2, C.PITCH / 2), (C.PITCH / 2, -C.PITCH / 2))
+        assigned = min(
+            assignments,
+            key=lambda ys: sum(
+                np.linalg.norm(center[:2] - [0, y])
+                for (_, center, _), y in zip(end_data, ys)
+            ),
+        )
+        for (arm, center, axis), pin_y in zip(end_data, assigned):
+            errors = [
+                float(np.linalg.norm((center + z * axis)[:2] - [0, pin_y]))
+                for z in (-0.019, 0.019)
+            ]
+            ends[arm] = {"center_m": center.tolist(), "face_radial_errors_m": errors}
+            checks.append(
+                max(errors) <= 0.00015
+                and abs(center[2] - C.CHAIN_Z) < 0.0008
+                and abs(axis[2]) > 0.9999
+            )
+        joined = bool(all(checks))
+        k = np.array(s["keeper"]["pose"])
+        kr = rotation(k)
+        center = r.T @ (k[:3] - c[:3])
+        cover_errors = []
+        cover_axial = []
+        hole_centers = [
+            r.T @ (k[:3] + kr @ np.array([0, y, 0]) - c[:3])
+            for y in (-C.PITCH / 2, C.PITCH / 2)
+        ]
+        assigned = min(
+            assignments,
+            key=lambda ys: sum(
+                np.linalg.norm(p[:2] - [0, y]) for p, y in zip(hole_centers, ys)
+            ),
+        )
+        for y, pin_y in zip((-C.PITCH / 2, C.PITCH / 2), assigned):
+            hole = r.T @ (k[:3] + kr @ np.array([0, y, 0]) - c[:3])
+            cover_axial.append(float(abs(hole[2] - C.COVER_Z)))
+            for z in (-0.0025, 0.0025):
+                p = r.T @ (k[:3] + kr @ np.array([0, y, z]) - c[:3])
+                cover_errors.append(float(np.linalg.norm(p[:2] - [0, pin_y])))
+        covered = bool(
+            joined and max(cover_errors) <= 0.00015 and max(cover_axial) < 0.0008
+        )
+        clips = {}
+        names = ("clip0", "clip1")
+        local_centers = [
+            r.T @ (np.array(s["clips"][n]["pose"][:3]) - c[:3]) for n in names
+        ]
+        assigned = min(
+            assignments,
+            key=lambda ys: sum(
+                np.linalg.norm(p[:2] - [0, y]) for p, y in zip(local_centers, ys)
+            ),
+        )
+        for n, y in zip(names, assigned):
+            clip = s["clips"][n]
+            p = np.array(clip["pose"])
+            local = r.T @ (p[:3] - c[:3])
+            angles = list(clip["joints"].values())
+            engaged = bool(
+                np.linalg.norm(local[:2] - [0, y]) < 0.0004
+                and abs(local[2] - C.GROOVE_Z) <= 0.0003
+                and abs((r.T @ rotation(p))[2, 2]) > 0.999
+                and max(abs(a) for a in angles) < math.radians(2)
+            )
+            clips[n] = {
+                "local_m": local.tolist(),
+                "pin_y_m": y,
+                "spring_angles_rad": angles,
+                "engaged": engaged,
+            }
+        retained = bool(covered and all(v["engaged"] for v in clips.values()))
+        parked = bool(
+            np.linalg.norm(c[:3] - C.CONNECTOR_POSITION) < 0.003
+            and max(
+                np.trace(target.T @ r)
+                for target in (
+                    C.CONNECTOR_ROTATION,
+                    C.CONNECTOR_ROTATION @ np.diag([-1.0, -1.0, 1.0]),
                 )
             )
-        joined = all(passed)
-        local = r.T @ (np.array(k[:3]) - c[:3])
-        axis_ok = np.trace(r.T @ kr) >= 1 + 2 * np.cos(0.10)
-        plate_depth = 0.016 < local[2] < 0.025
-        pins = [
-            kr.T @ (np.array(c[:3]) + r @ np.array([0, y, 0.024]) - k[:3])
-            for y in (-PITCH / 2, PITCH / 2)
-        ]
-        in_apertures = []
-        in_necks = []
-        for p, y in zip(pins, (-PITCH / 2, PITCH / 2)):
-            in_apertures.append(bool(-0.0225 < p[0] < 0.036 and abs(p[1] - y) < 0.005))
-            # Include a stem bottomed against the physical closed end at -26 mm:
-            # its 4 mm radius puts its centre at -22 mm (0.5 mm contact margin).
-            in_necks.append(bool(-0.0225 < p[0] < -0.008 and abs(p[1] - y) < 0.005))
-        covered = bool(joined and plate_depth and axis_ok and all(in_apertures))
-        retained = bool(covered and all(in_necks))
-        parked = bool(
-            np.linalg.norm(np.array(c[:3]) - CONNECTOR_POSITION) < 0.015
-            and np.trace(r) >= 1 + 2 * np.cos(np.deg2rad(10))
+            > 1 + 2 * math.cos(math.radians(1))
         )
-        velocities = [v["velocity"] for v in s["bodies"].values()] + [
-            s[n]["velocity"] for n in ("connector", "keeper")
-        ]
-        settled = all(
-            np.linalg.norm(v[:3]) < 0.02 and np.linalg.norm(v[3:]) < 0.3
-            for v in velocities
+        quiet = bool(
+            all(
+                np.linalg.norm(p["velocity"][:3]) < 0.02
+                and np.linalg.norm(p["velocity"][3:]) < 0.3
+                for p in [s[n] for n in ("connector", "keeper", "tool")]
+            )
+        )
+        # Retainers can rotate around circular grooves without losing capture.
+        # Their measured groove occupancy, normal and closed leaves must still
+        # persist for the full hold. Require the applicator to be withdrawn so
+        # its loading channels cannot substitute for independent retention.
+        applicator_clear = bool(
+            np.linalg.norm(np.asarray(s["tool"]["pose"][:2]) - c[:2]) >= 0.025
         )
         clear = bool(
-            s["robot_clearance_m"] >= 0.025
+            len(s["hands"]) == 2
+            and s["robot_clearance_m"] >= 0.025
             and all(h["opening_m"] >= 0.070 for h in s["hands"].values())
         )
-        guide_errors={}
-        for i in range(1,10):
-            pose=np.array(s["bodies"][f"Link{i:02}"]["pose"])
-            tooth=CHAIN_POSITION+(NODES[i]+NODES[i+1])/2
-            guide_local=rotation(pose).T@(tooth-pose[:3])
-            guide_errors[f"Link{i:02}"]=guide_local.tolist()
-        # A 6mm-radius tooth must remain inside the real link window:
-        # +/-27mm along the link and +/-17mm between the side rails.
-        guide_seated=bool(all(abs(v[0]) < .021 and abs(v[1]) < .0115
-                             for v in guide_errors.values()) and all(
-            abs(s["bodies"][f"Link{i:02}"]["pose"][2]-CHAIN_POSITION[2]) < .006
-            and rotation(s["bodies"][f"Link{i:02}"]["pose"])[2,2] > .995
-            for i in range(1,10)))
-        full = bool(retained and parked and settled and clear and guide_seated and not self.violations)
-        if full:
-            if self.hold_start is None:
-                self.hold_start = s["time_s"]
-        else:
+        guide = {}
+        for i in range(2, 9):
+            pose = np.array(s["bodies"][f"Link{i:02}"]["pose"])
+            target = C.CHAIN_POSITION + (C.NODES[i] + C.NODES[i + 1]) / 2
+            guide[f"Link{i:02}"] = float(np.linalg.norm(pose[:2] - target[:2]))
+        seated = bool(
+            all(v < 0.015 for v in guide.values())
+            and all(
+                abs(s["bodies"][f"Link{i:02}"]["pose"][2] - C.CHAIN_POSITION[2]) < 0.003
+                and rotation(s["bodies"][f"Link{i:02}"]["pose"])[2, 2] > 0.995
+                for i in range(2, 9)
+            )
+        )
+        full = bool(
+            retained
+            and parked
+            and quiet
+            and clear
+            and seated
+            and applicator_clear
+            and not self.violations
+        )
+        if full and self.hold_start is None:
+            self.hold_start = time
+        elif not full:
             self.hold_start = None
-        success = bool(full and s["time_s"] - self.hold_start >= 1.0)
+        success = bool(full and time - self.hold_start >= 1.0 - 1e-9)
         score = (
-            (1.0 if success else 0.7 if covered else 0.4 if joined else 0.0)
-            if not self.violations
+            0.0
+            if self.violations
+            else 1.0
+            if success
+            else 0.85
+            if retained
+            else 0.65
+            if covered
+            else 0.35
+            if joined
             else 0.0
         )
-        return dict(
-            score=score,
-            success=success,
-            violations=sorted(self.violations),
-            ends_joined=joined,
-            plate_seated=covered,
-            retained=retained,
-            parked=parked,
-            settled=bool(settled),
-            hands_clear=clear,
-            guide_seated=guide_seated,
-            guide_link_errors_m=guide_errors,
-            robot_clearance_m=s["robot_clearance_m"],
-            end_points_local=ends,
-            keeper_local=local.tolist(),
-            pins_in_keeper=[p.tolist() for p in pins],
-            physics_samples=self.physics_samples,
-        )
+        return {
+            "score": score,
+            "success": success,
+            "violations": sorted(self.violations),
+            "ends_joined": joined,
+            "plate_seated": covered,
+            "retained": retained,
+            "parked": parked,
+            "settled": quiet,
+            "hands_clear": clear,
+            "guide_seated": seated,
+            "applicator_clear": applicator_clear,
+            "guide_link_errors_m": guide,
+            "robot_clearance_m": s["robot_clearance_m"],
+            "end_points_local": ends,
+            "keeper_local": center.tolist(),
+            "cover_face_radial_errors_m": cover_errors,
+            "cover_hole_axial_errors_m": cover_axial,
+            "clips": clips,
+            "workspace_samples": self.workspace_samples,
+        }

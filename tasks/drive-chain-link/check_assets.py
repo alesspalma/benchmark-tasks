@@ -3,13 +3,13 @@
 
 import argparse
 import hashlib
-from importlib.metadata import distribution
 import json
 import os
-from pathlib import Path
 import runpy
 import socket
 import sys
+from importlib.metadata import distribution
+from pathlib import Path
 
 
 def bootstrap():
@@ -19,7 +19,7 @@ def bootstrap():
     env = os.environ.copy()
     additions = {
         "PYTHONPATH": [usd, physx],
-        "LD_LIBRARY_PATH": [usd / "bin", physx / "bin"],
+        "LD_LIBRARY_PATH": [Path(sys.base_prefix) / "lib", usd / "bin", physx / "bin"],
         "PXR_PLUGINPATH_NAME": [
             physx / "plugins" / name / "resources"
             for name in ("PhysxSchema", "PhysxSchemaAddition")
@@ -70,23 +70,23 @@ def execute(output):
                     if not stage.GetPrimAtPath(target)
                 ]
                 joints.append(
-                    dict(path=str(prim.GetPath()), bodies=list(map(str, targets)))
+                    {"path": str(prim.GetPath()), "bodies": list(map(str, targets))}
                 )
         records.append(
-            dict(
-                file=path.name,
-                sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
-                errors=errors,
-                failed_checks=failed,
-                joints=joints,
-                structure_passed=not errors and not failed,
-            )
+            {
+                "file": path.name,
+                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                "errors": errors,
+                "failed_checks": failed,
+                "joints": joints,
+                "structure_passed": not errors and not failed,
+            }
         )
-    receipt = dict(
-        scope="Offline USD/schema structure only; no physics or feasibility claim",
-        hostname=socket.gethostname(),
-        assets=records,
-    )
+    receipt = {
+        "scope": "Offline USD/schema structure only; no physics or feasibility claim",
+        "hostname": socket.gethostname(),
+        "assets": records,
+    }
     (output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
     print(json.dumps(receipt, indent=2))
     if not all(record["structure_passed"] for record in records):

@@ -1,16 +1,18 @@
-"""Native free chain, connecting link and keeper; only normal robot controls act."""
+"""Pre-clamped chain fixture and free joint hardware; standard robot controls."""
 
 from __future__ import annotations
+
 import atexit
-from dataclasses import replace
 import hashlib
 import importlib.util
 import json
 import os
 import tempfile
+from dataclasses import replace
+
 import numpy as np
 from inspect_robots.embodiment import PRIVILEGED_SUCCESS
-from inspect_robots.types import StepResult, Observation
+from inspect_robots.types import Observation, StepResult
 from inspect_robots_yam.config import observation_space
 from yam_arena.constants import ARM_JOINTS, FINGER_JOINTS, READY
 from yam_arena.inspect_embodiment import (
@@ -19,15 +21,23 @@ from yam_arena.inspect_embodiment import (
     ROOM_DOCS,
     YamArenaEmbodiment,
 )
+
 from . import TASK_ROOT
 from .config import (
+    CLIP_POSITIONS,
+    CLIP_QUATERNION,
+    CONNECTOR_PICKUP_POSITION,
+    CONNECTOR_QUATERNION,
     CONTROL_HZ,
+    KEEPER_POSITION,
+    KEEPER_QUATERNION,
+    PHYSICS_HZ,
     ROOT_POSITION,
     ROOT_QUATERNION,
-    CONNECTOR_PICKUP_POSITION,
-    KEEPER_POSITION,
+    TOOL_POSITION,
+    TOOL_QUATERNION,
 )
-from .geometry import local_solids, world_points, robot_clearance
+from .geometry import local_solids, robot_clearance, world_points
 from .scoring import Scorer
 
 _APP = None
@@ -93,9 +103,12 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 (
                     JOINT_GUIDE,
                     ROOM_DOCS["station"],
-                    "A dark grey open training chain with bare end links is located by a dark grey fixed toothed assembly former. "
-                    "A separate yellow two-pin connecting link lies on the table; its service cradle is empty. "
-                    "A blue forked retaining plate lies on the left. All hardware is unpowered.",
+                    (
+                        "The dark grey conveyor chain is held in a service fixture, with an open joint at the front. "
+                        "The yellow two-pin connecting link rests on the right loading stand. "
+                        "The blue closed-hole cover plate rests on the left stand. Two spring clips sit freely in the bench-mounted black applicator beside the joint. Its passive guide allows horizontal motion along two axes. "
+                        "The end nests and hold-down straps stay tightened."
+                    ),
                 )
             ),
             environment_id="chain-link-" + source_fingerprint()[:16],
@@ -114,10 +127,7 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
         self.task = self
         self.scorer = Scorer()
         self.metrics = {}
-        self._callback = None
         self._temp = None
-        self._audit_active = False
-        self._audit_error = None
 
     def _ensure_sim(self, goal=None):
         global _APP
@@ -144,7 +154,7 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
             ).app
             atexit.register(close_app)
         import torch
-        from isaaclab.assets import AssetBaseCfg, RigidObjectCfg, ArticulationCfg
+        from isaaclab.assets import ArticulationCfg, AssetBaseCfg, RigidObjectCfg
         from isaaclab_arena.assets.object import Object, ObjectType
         from isaaclab_arena.environments.arena_env_builder import ArenaEnvBuilder
         from isaaclab_arena.environments.arena_env_builder_cfg import ArenaEnvBuilderCfg
@@ -153,7 +163,6 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
         )
         from isaaclab_arena.scene.scene import Scene
         from isaaclab_arena.utils.pose import Pose
-        from isaaclab_physx.physics.physx_manager import IsaacEvents
         from yam_arena.embodiment import BimanualYamEmbodiment
         from yam_arena.scene import env_cfg_callback, task_room
 
@@ -192,14 +201,18 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 object_type=ObjectType.RIGID,
                 usd_path=str(assets["connector"]),
                 initial_pose=Pose(
-                    position_xyz=tuple(map(float, CONNECTOR_PICKUP_POSITION))
+                    position_xyz=tuple(map(float, CONNECTOR_PICKUP_POSITION)),
+                    rotation_xyzw=tuple(map(float, CONNECTOR_QUATERNION)),
                 ),
             ),
             Object(
                 name="keeper",
                 object_type=ObjectType.RIGID,
                 usd_path=str(assets["keeper"]),
-                initial_pose=Pose(position_xyz=tuple(map(float, KEEPER_POSITION))),
+                initial_pose=Pose(
+                    position_xyz=tuple(map(float, KEEPER_POSITION)),
+                    rotation_xyzw=tuple(map(float, KEEPER_QUATERNION)),
+                ),
             ),
             Object(
                 name="fixtures",
@@ -207,6 +220,29 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 usd_path=str(assets["fixtures"]),
                 initial_pose=Pose(),
             ),
+        ]
+        objects += [
+            Object(
+                name="tool",
+                object_type=ObjectType.ARTICULATION,
+                usd_path=str(assets["tool"]),
+                initial_pose=Pose(
+                    position_xyz=tuple(map(float, TOOL_POSITION)),
+                    rotation_xyzw=tuple(map(float, TOOL_QUATERNION)),
+                ),
+            )
+        ]
+        objects += [
+            Object(
+                name=n,
+                object_type=ObjectType.ARTICULATION,
+                usd_path=str(assets[n]),
+                initial_pose=Pose(
+                    position_xyz=tuple(map(float, p)),
+                    rotation_xyzw=tuple(map(float, CLIP_QUATERNION)),
+                ),
+            )
+            for n, p in CLIP_POSITIONS.items()
         ]
         all_objects = [*task_room("station", self.rig.top_cam), *objects]
         # Arena mutates init_state when applying a pose. Supply a separate
@@ -218,15 +254,41 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 ObjectType.RIGID: RigidObjectCfg,
                 ObjectType.ARTICULATION: ArticulationCfg,
             }.get(item.object_type, AssetBaseCfg)
-            item.asset_cfg_addon = {
-                **item.asset_cfg_addon,
-                "init_state": cls.InitialStateCfg(),
-            }
+            initial = (
+                cls.InitialStateCfg(joint_pos={}, joint_vel={})
+                if item.name == "chain"
+                else cls.InitialStateCfg()
+            )
+            item.asset_cfg_addon = {**item.asset_cfg_addon, "init_state": initial}
+            if item.name in {"chain", "connector", "keeper", "tool", "clip0", "clip1"}:
+                item.spawn_cfg_addon = {
+                    **item.spawn_cfg_addon,
+                    "activate_contact_sensors": False,
+                }
 
         def configure(cfg):
             from isaaclab_physx.physics.physx_manager_cfg import PhysxCfg
+            from yam_arena.constants import FINGER_OPEN
 
             cfg = env_cfg_callback(CONTROL_HZ)(cfg)
+            cfg.sim.dt = 1.0 / PHYSICS_HZ
+            cfg.decimation = PHYSICS_HZ // CONTROL_HZ
+            cfg.sim.render_interval = cfg.decimation
+            # Arena merges nested dictionaries when building the scene. Clear
+            # its generic joint selector after that merge: this pre-clamped
+            # fixture has fixed links and no movable joints.
+            cfg.scene.chain.init_state.joint_pos = {}
+            cfg.scene.chain.init_state.joint_vel = {}
+            # Reset directly to the standard READY posture. Starting at all
+            # zero joint angles sweeps the forearms through raised fixtures
+            # before the first observation; it is not part of the task.
+            for name in ARMS:
+                initial = getattr(cfg.scene, name).init_state
+                initial.joint_pos = {
+                    **dict(zip(ARM_JOINTS, READY)),
+                    **dict.fromkeys(FINGER_JOINTS, FINGER_OPEN),
+                }
+                initial.joint_vel = {".*": 0.0}
             # Empty passive actuator groups use the standard PhysX path.
             # The optional Newton actuator wrapper must not drive free hinges.
             cfg.sim.use_newton_actuators = False
@@ -266,42 +328,46 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
             )
             for n in ARMS
         }
-        self._callback = self._base.sim.physics_manager.register_callback(
-            self._observe_physics,
-            IsaacEvents.POST_PHYSICS_STEP,
-            order=100,
-            name="chain_link_validity",
-            wrap_weak_ref=False,
-        )
-
-    def _observe_physics(self, dt):
-        if not self._audit_active:
-            return
-        try:
-            chain = self._base.scene["chain"]
-            transforms = numpy(chain.root_view.get_link_transforms())[0]
-            poses = {"chain:" + n: p for n, p in zip(chain.body_names, transforms)}
-            poses.update(
-                {
-                    n + ":Body": numpy(self._base.scene[n].root_view.get_transforms())[
-                        0
-                    ]
-                    for n in ("connector", "keeper")
-                }
-            )
-            self.scorer.observe_physics(world_points(self._local, poses))
-        except Exception as exc:
-            self._audit_error = exc
 
     def reset(self, scene, *, seed=None):
         self._ensure_sim()
-        self._audit_active = False
         self._env.reset(seed=seed)
-        chain = self._base.scene["chain"]
-        q = chain.data.joint_pos
-        q = q.torch if hasattr(q, "torch") else q
-        zeros = self._torch.zeros(q.shape, dtype=q.dtype, device=q.device)
-        chain.write_joint_state_to_sim_index(position=zeros, velocity=zeros)
+        from yam_arena.constants import FINGER_OPEN
+
+        for name in ARMS:
+            robot = self._base.scene[name]
+            values = dict(zip(ARM_JOINTS, READY)) | dict.fromkeys(
+                FINGER_JOINTS, FINGER_OPEN
+            )
+            q = self._torch.tensor(
+                [[values[n] for n in robot.joint_names]],
+                dtype=self._torch.float32,
+                device=self._base.device,
+            )
+            robot.write_joint_state_to_sim_index(
+                position=q, velocity=self._torch.zeros_like(q)
+            )
+            robot.actuators.target_command.set_position_index(value=q)
+            robot.actuators.target_command.set_velocity_index(
+                value=self._torch.zeros_like(q)
+            )
+        # Restore the declared layout after initializing the robot posture;
+        # these writes are reset-only and precede all scoring/observations.
+        for name in ("chain", "connector", "keeper", "tool", "clip0", "clip1"):
+            asset = self._base.scene[name]
+            pose = asset.data.default_root_pose.torch.clone()
+            pose[:, :3] += self._base.scene.env_origins
+            asset.write_root_pose_to_sim_index(root_pose=pose)
+            vel = asset.data.default_root_vel.torch.clone()
+            asset.write_root_velocity_to_sim_index(
+                root_velocity=self._torch.zeros_like(vel)
+            )
+        for name in ("tool", "clip0", "clip1"):
+            asset = self._base.scene[name]
+            q = asset.data.joint_pos
+            q = q.torch if hasattr(q, "torch") else q
+            zeros = self._torch.zeros(q.shape, dtype=q.dtype, device=q.device)
+            asset.write_joint_state_to_sim_index(position=zeros, velocity=zeros)
         self._instruction = scene.instruction
         for _ in range(10):
             self._env.step(self._ready)
@@ -309,9 +375,7 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
             for _ in range(4):
                 self._base.sim.render()
         self.scorer.reset()
-        self._audit_error = None
         self._t = 0.0
-        self._audit_active = True
         self.metrics = self.scorer.evaluate(self.state())
         if self.metrics["score"] != 0 or self.metrics["violations"]:
             raise RuntimeError(f"Invalid reset: {self.metrics}")
@@ -364,10 +428,7 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 n: {"pose": p.tolist(), "velocity": v.tolist()}
                 for n, p, v in zip(chain.body_names, poses, velocity)
             },
-            "mechanism": {
-                n: float(q)
-                for n, q in zip(chain.joint_names, numpy(chain.data.joint_pos)[0])
-            },
+            "mechanism": {},
             "hands": {},
         }
         for n in ("connector", "keeper"):
@@ -376,6 +437,37 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
                 "pose": numpy(obj.data.root_link_pose_w)[0].tolist(),
                 "velocity": numpy(obj.data.root_com_vel_w)[0].tolist(),
             }
+        obj = self._base.scene["tool"]
+        tool_names = obj.body_names
+        tool_poses = numpy(obj.data.body_link_pose_w)[0]
+        tool_velocities = numpy(obj.data.body_com_vel_w)[0]
+        tool_id = obj.body_names.index("Body")
+        result["tool"] = {
+            "pose": tool_poses[tool_id].tolist(),
+            "velocity": tool_velocities[tool_id].tolist(),
+        }
+        result["mechanism"]["applicator_slide_m"] = dict(
+            zip(obj.joint_names, numpy(obj.data.joint_pos)[0].tolist())
+        )
+        result["clips"] = {}
+        clip_poses = {}
+        for n in ("clip0", "clip1"):
+            obj = self._base.scene[n]
+            result["clips"][n] = {
+                "pose": numpy(obj.data.root_link_pose_w)[0].tolist(),
+                "velocity": numpy(obj.data.root_com_vel_w)[0].tolist(),
+                "joints": dict(
+                    zip(obj.joint_names, numpy(obj.data.joint_pos)[0].tolist())
+                ),
+            }
+            clip_poses.update(
+                {
+                    n + ":" + name: pose
+                    for name, pose in zip(
+                        obj.body_names, numpy(obj.data.body_link_pose_w)[0]
+                    )
+                }
+            )
         for n in ARMS:
             robot = self._base.scene[n]
             q = numpy(robot.data.joint_pos)[0]
@@ -391,6 +483,8 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
             {
                 **{"chain:" + n: v["pose"] for n, v in result["bodies"].items()},
                 **{n + ":Body": result[n]["pose"] for n in ("connector", "keeper")},
+                **{"tool:" + name: pose for name, pose in zip(tool_names, tool_poses)},
+                **clip_poses,
             },
         )
         result["bounds"] = {
@@ -400,13 +494,17 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
         return result
 
     def _task_step(self):
-        if self._audit_error is not None:
-            raise RuntimeError("Native physics audit failed") from self._audit_error
+        state = self.state()
+        # Workspace checks share the declared control/video sampling rate.
+        # The min/max corners retain every body's exact coordinate extrema.
+        self.scorer.observe_workspace(
+            {name: np.asarray(bounds) for name, bounds in state["bounds"].items()}
+        )
         if "invalid_state" in self.scorer.violations:
             raise RuntimeError("Nonfinite native physics state; trial is invalid")
-        if self.scorer.physics_samples != round(self._t * 240):
-            raise RuntimeError("Incomplete per-physics-step audit")
-        self.metrics = self.scorer.evaluate(self.state())
+        if self.scorer.workspace_samples != round(self._t * CONTROL_HZ):
+            raise RuntimeError("Incomplete control-frame workspace audit")
+        self.metrics = self.scorer.evaluate(state)
         return StepResult(
             observation=self._observation(),
             terminated=self.metrics["success"],
@@ -436,10 +534,6 @@ class ChainLinkEnvironment(YamArenaEmbodiment):
         )
 
     def close(self):
-        self._audit_active = False
-        if self._callback is not None:
-            self._callback.deregister()
-            self._callback = None
         if self._env is not None:
             self._env.close()
             self._env = self._base = None

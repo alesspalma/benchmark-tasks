@@ -1,15 +1,31 @@
 {
-  "scope": "Executing scripted reference inputs and calibration provenance",
-  "source_sha256": "e416a5f7a88d638b0ce04c317eba00e26f4e66616e67f434f28df5ee2dd18de7",
-  "runtime_inputs": [
-    "elapsed time"
+  "scope": "offline nominal IK and robot command screen only",
+  "mode": "demo",
+  "actions": 3440,
+  "duration_s": 172.0,
+  "worst_ik_m": 9.839999101619178e-05,
+  "worst_ik_rad": 0.0003315152276306393,
+  "maximum_step_change": [
+    0.040000000000000036,
+    0.025486326900237666,
+    0.014853676365009671,
+    0.019810560286598666,
+    0.040000000000000036,
+    0.040000000000000036,
+    0.040000000000000036,
+    0.040000000000000036,
+    0.03993856494708381,
+    0.02521173206095617,
+    0.040000000000000036,
+    0.040000000000000036,
+    0.040000000000000036,
+    0.040000000000000036
   ],
-  "runtime_simulator_object_pose_feedback": false,
-  "runtime_image_processing": false,
-  "environment_access_registry": false,
-  "ordinary_robot_commands": 14,
-  "program_sha256": "f05496beef0fcfb96d67cfb708a855ca88abe8cd392013ab403ee4622476dc93",
-  "calibration": "Earlier simulator-assisted teaching under standard Inspect guards; calibration itself is not demo evidence. The final proof is fresh native re-execution of robot commands by the clock-only policy.",
-  "standard_guard_preservation_test": "Every command remains bit-identical through the standard ClampGuard and DeltaLimitGuard.",
-  "denied_observation_test": "Full program executes when all fields except state_time raise on access."
+  "program_sha256": "d24e2f3d1a3f72978852acdfffc66a9bd2895e8bab10f073749e4b8a25479607",
+  "runtime_inputs": [
+    "elapsed time",
+    "measured robot joints"
+  ],
+  "source_sha256": "5393a9a0996eae1db7f6af983df3c17533022f16c6bfdaea1e8562471da46e7e",
+  "physical_motion_unchanged_since_nominal_check": true
 }

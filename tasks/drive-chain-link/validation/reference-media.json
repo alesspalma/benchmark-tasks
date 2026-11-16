@@ -1,27 +1,31 @@
 {
-  "scope": "Fresh native physics execution of the clock-only robot program with actual cameras",
-  "source_sha256": "e416a5f7a88d638b0ce04c317eba00e26f4e66616e67f434f28df5ee2dd18de7",
+  "kind": "reference",
+  "score": 1.0,
+  "source_run": "final-native-reference",
+  "scope": "Fresh native physics execution using time and ordinary measured robot joints, with actual cameras",
+  "source_sha256": "5393a9a0996eae1db7f6af983df3c17533022f16c6bfdaea1e8562471da46e7e",
   "source_unchanged": true,
   "native_score": 1.0,
-  "steps": 1180,
-  "physics_audits": 14160,
-  "instruction": "Join and retain the two loose ends of the chain using the yellow connecting link and blue retaining plate. Leave the assembled joint in its service cradle, the chain seated on its guide, and both hands released.",
+  "steps": 3651,
+  "workspace_audits": 3651,
+  "instruction": "Join and retain the two chain ends using the yellow connecting link, blue cover plate and the two spring clips in the bench-mounted applicator. Leave the assembled joint in its service cradle, the chain seated on its guide, and both hands released.",
   "controller": {
     "kind": "precalibrated fourteen-joint/gripper program",
     "inputs": [
-      "elapsed time"
+      "elapsed time",
+      "measured joint positions"
     ],
-    "program_sha256": "f05496beef0fcfb96d67cfb708a855ca88abe8cd392013ab403ee4622476dc93",
+    "program_sha256": "d24e2f3d1a3f72978852acdfffc66a9bd2895e8bab10f073749e4b8a25479607",
     "runtime_object_state_feedback": false
   },
-  "native_receipt_sha256": "b7335b1eaafba2d93fdbc269e65b1c4e0cddc8fa7d780482105f99467b30e9b8",
-  "native_trace_sha256": "958caf7daaa1f839f63c3d8e72d7bc8e1d2709a37d4451946edf986812a20e55",
+  "native_receipt_sha256": "29d6522ef02a284b06e26d4d970f9984292ae83c833b33d2af5a56e65067a9fb",
+  "native_trace_sha256": "5b6b96d356a0a8a1e677d5abeaf38530f670f32443744da2e9535ca6e3eb0eeb",
   "tracks": {
     "top_cam": {
-      "sha256": "8e28410a7e7b974e303d2490637f399bbd2c1dc73d63a6c5dc689ff8d4d3982e",
-      "all_frames_decoded": 1181,
-      "minimum_frame_mean": 157.1180752840909,
-      "minimum_frame_std": 59.49552293792754,
+      "sha256": "f1de3045caf49187eb039c9919990c6d88b01fdcd0774bc20eb888211972df75",
+      "all_frames_decoded": 3652,
+      "minimum_frame_mean": 150.7772490530303,
+      "minimum_frame_std": 58.0642842798904,
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -32,20 +36,20 @@
             "height": 176,
             "pix_fmt": "yuv420p",
             "r_frame_rate": "20/1",
-            "nb_frames": "1181"
+            "nb_frames": "3652"
           }
         ],
         "format": {
-          "duration": "59.050000",
-          "size": "416226"
+          "duration": "182.600000",
+          "size": "966058"
         }
       }
     },
     "left_cam": {
-      "sha256": "72d95fbfd118fa913956a74794f31d763addd11d9ba85b68cea94372d5c5cbc5",
-      "all_frames_decoded": 1181,
-      "minimum_frame_mean": 51.241861979166664,
-      "minimum_frame_std": 55.71594653324606,
+      "sha256": "671655ded3123d51c8cc00b9ef4a58ee976e83b9a2f392427f03685c3c1249ed",
+      "all_frames_decoded": 3652,
+      "minimum_frame_mean": 47.979379734848486,
+      "minimum_frame_std": 33.09186156844063,
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -56,20 +60,20 @@
             "height": 176,
             "pix_fmt": "yuv420p",
             "r_frame_rate": "20/1",
-            "nb_frames": "1181"
+            "nb_frames": "3652"
           }
         ],
         "format": {
-          "duration": "59.050000",
-          "size": "645508"
+          "duration": "182.600000",
+          "size": "719989"
         }
       }
     },
     "right_cam": {
-      "sha256": "aa9876c68955aa69d0a8534eff7a4dbabebc8246ae7a45d9f7eff571d2aae840",
-      "all_frames_decoded": 1181,
-      "minimum_frame_mean": 90.51770241477273,
-      "minimum_frame_std": 59.701968833536775,
+      "sha256": "afb9c04b012209cf6c493dd51cc8c56b8d6526a3a51dbcae4d4637b090ab6222",
+      "all_frames_decoded": 3652,
+      "minimum_frame_mean": 58.36151160037879,
+      "minimum_frame_std": 34.10598675128884,
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -80,12 +84,12 @@
             "height": 176,
             "pix_fmt": "yuv420p",
             "r_frame_rate": "20/1",
-            "nb_frames": "1181"
+            "nb_frames": "3652"
           }
         ],
         "format": {
-          "duration": "59.050000",
-          "size": "523088"
+          "duration": "182.600000",
+          "size": "1221908"
         }
       }
     }
@@ -101,35 +105,42 @@
         "height": 528,
         "pix_fmt": "yuv420p",
         "r_frame_rate": "20/1",
-        "nb_frames": "1181"
+        "nb_frames": "3652"
       }
     ],
     "format": {
-      "duration": "59.050000",
-      "size": "2795427"
+      "duration": "182.600000",
+      "size": "5566911"
     }
   },
   "dream_api_used": false,
   "visually_reviewed": true,
   "three_cameras_valid": true,
   "files": {
+    "final-right_cam.png": {
+      "bytes": 37892,
+      "sha256": "d2490e305793ed48e54f7e4eff2ee7a6d030455e49f46f0305c9eeb6524d1664"
+    },
     "setup.png": {
-      "bytes": 67746,
-      "sha256": "c15026908eea4fa3710b5a1224ff39a08c34045a0cc6db2af840ea030687279a"
+      "bytes": 69326,
+      "sha256": "223d5c619d6648c5810bf9f825dcdf6dab2873c1cd72444d087ca2c638a5a128"
     },
     "demo.mp4": {
-      "bytes": 2795427,
-      "sha256": "24bcfc5c7861ada786c70f89770a0ca8859adb7b069f620ddeff5ae477fb52b9"
-    },
-    "final-top.png": {
-      "bytes": 68523,
-      "sha256": "137ff94efaca890f9aef124a7e687878b41d78985f7d02044cdd8e276696212f"
+      "bytes": 5566911,
+      "sha256": "83a87435398d60b8e9443513f7b2206c35e0f69cf4901a297d108274276a6480"
     },
     "review.png": {
-      "bytes": 641001,
-      "sha256": "7bf4acc7ccf6c9fc5a7cb9e378dc51be4df97a4d918462b8a6e785900e139ce8"
+      "bytes": 811847,
+      "sha256": "c5b6354e4b994d50eefa6e41ec833cdeb9e651e893e6233f8b249b5351837393"
+    },
+    "final-top_cam.png": {
+      "bytes": 71783,
+      "sha256": "34ad40c13f44780d4c00f489c994ce0f4b070490307577f47511a0cab519452c"
+    },
+    "final-left_cam.png": {
+      "bytes": 51146,
+      "sha256": "4dbadf5fd352935435ed532ef50490ab9dd436337e7c97a9762cd8311e5f525c"
     }
   },
-  "full_composite_decode_passed": true,
-  "visual_review": "Initial layout, chain-end joining, keeper insertion, final assembly and both wrist views inspected; no team identity or overlays. Chain remains seated and hands release/withdraw."
+  "visual_review": "Reviewed eight staged composite frames, reset view and final three camera views. Parts render correctly; connecting link and cover are fitted, tool withdrawn, hands released. No team identity."
 }
