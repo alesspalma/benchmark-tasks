@@ -109,6 +109,23 @@ class Writer:
             }
         )
 
+    def clear_panel(self, s, path, size, position):
+        self.box(s, path, size, position, (0.65, 0.82, 0.88))
+        mat = self.Shade.Material.Define(s, "/Asset/InspectionPolycarbonate")
+        shader = self.Shade.Shader.Define(s, "/Asset/InspectionPolycarbonate/Shader")
+        shader.CreateIdAttr("UsdPreviewSurface")
+        from pxr import Sdf
+
+        shader.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).Set(
+            self.Gf.Vec3f(0.65, 0.82, 0.88)
+        )
+        shader.CreateInput("opacity", Sdf.ValueTypeNames.Float).Set(0.22)
+        shader.CreateInput("roughness", Sdf.ValueTypeNames.Float).Set(0.18)
+        mat.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), "surface")
+        self.Shade.MaterialBindingAPI.Apply(s.GetPrimAtPath(path)).Bind(mat)
+        self.records[-1]["material"] = "transparent polycarbonate inspection pane"
+        self.records[-1]["opacity"] = 0.22
+
     def cylinder(
         self, s, path, radius, length, position, color, axis="Z", collide=True
     ):
@@ -151,6 +168,15 @@ class Writer:
         )
 
     def convex(self, s, path, vertices, triangles, color):
+        # A convex solid must have nondegenerate outward faces: native
+        # collision hulls can conceal a winding error in the rendered mesh.
+        points = np.asarray(vertices, dtype=float)
+        centroid = points.mean(axis=0)
+        for face in triangles:
+            a, b, c = points[face]
+            normal = np.cross(b - a, c - a)
+            if np.dot(normal, (a + b + c) / 3 - centroid) <= 1e-14:
+                raise ValueError(f"Degenerate or inward convex face in {path}")
         x = self.Geom.Mesh.Define(s, path)
         x.CreatePointsAttr([self.Gf.Vec3f(*map(float, p)) for p in vertices])
         x.CreateFaceVertexCountsAttr([3] * len(triangles))
@@ -171,11 +197,19 @@ class Writer:
             }
         )
 
-    def slide(self, s, path, parent, child, travel, stiffness, rest):
+    def slide(
+        self, s, path, parent, child, travel, stiffness, rest, axis="Z", reverse=False
+    ):
         j = self.Phy.PrismaticJoint.Define(s, path)
         j.CreateBody0Rel().SetTargets([parent])
         j.CreateBody1Rel().SetTargets([child])
-        j.CreateAxisAttr("Z")
+        j.CreateAxisAttr(axis)
+        if reverse:
+            # Native bearing axis reversed in both joint frames; body frames
+            # and their physical meshes remain unchanged.
+            q = self.Gf.Quatf(0.0, self.Gf.Vec3f(0, 0, 1))
+            j.CreateLocalRot0Attr(q)
+            j.CreateLocalRot1Attr(q)
         j.CreateLowerLimitAttr(0.0)
         j.CreateUpperLimitAttr(travel)
         j.CreateCollisionEnabledAttr(False)

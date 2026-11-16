@@ -1,4 +1,4 @@
-"""Separated bimanual straight-pull gate, upright capture and in-jar discharge."""
+"""Blue side intake at depth; separate orange bottom release above the jar."""
 
 import numpy as np
 
@@ -102,6 +102,16 @@ def waypoints(mode="demo"):
         return p.moves
     support = source + C.SUPPORT_GRASP
     p.add(
+        2,
+        "clear right hand laterally from lower handle",
+        right=(source + C.GATE_GRASP + [-0.08, -0.14, 0], SIDE_X, 1),
+    )
+    p.add(
+        2,
+        "park right arm before extracting sampler",
+        right=(np.array([0.32, -0.30, 1.08]), SIDE_X, 1),
+    )
+    p.add(
         3,
         "withdraw closed sample over source",
         left=(support + [0, 0, 0.19], SIDE_X, left_grip),
@@ -115,20 +125,49 @@ def waypoints(mode="demo"):
     p.add(2, "shed exterior grains into source")
     if mode == "retain":
         return p.moves
-    discharge = C.JAR + [0, 0, 0.012]
+    discharge = C.JAR + [0, 0, C.DISCHARGE_HEIGHT]
     sample = discharge + C.SUPPORT_GRASP
     p.add(
-        4, "closed sample above jar", left=(sample + [0, 0, 0.135], SIDE_X, left_grip)
+        4, "closed sample above jar", left=(sample + [0, 0, 0.090], SIDE_X, left_grip)
     )
-    p.add(3, "lower sampling head inside jar", left=(sample, SIDE_X, left_grip))
-    p.add(1, "settle head inside jar")
-    operate(discharge, "discharge")
+    p.add(3, "position bottom outlet above jar rim", left=(sample, SIDE_X, left_grip))
+    p.add(1, "settle closed sampler above jar")
+    # This is a distinct, horizontal bottom-discharge stroke. The blue
+    # intake shutter stays at its closed stop throughout this operation.
+    handle = discharge + C.DUMP_GRASP
+    p.add(
+        3,
+        "approach orange bottom-slide handle",
+        right=(handle + [-0.08, 0, 0.06], SIDE_X, 1),
+    )
+    p.add(2, "reach orange bottom-slide handle", right=(handle, SIDE_X, 1))
+    p.add(1, "settle bottom-slide reach")
+    p.add(2, "grasp orange bottom-slide handle", right=(handle, SIDE_X, right_grip))
+    opened = handle + [-C.DUMP_TRAVEL - 0.001, 0, 0]
+    p.add(
+        4, "pull floor aside for gravity discharge", right=(opened, SIDE_X, right_grip)
+    )
+    p.add(5, "sample falls through bottom into jar")
+    p.add(
+        4,
+        "return empty bottom plate to closed stop",
+        right=(handle, SIDE_X, right_grip),
+    )
+    p.add(2, "settle closed bottom plate")
+    p.add(2, "release orange discharge handle", right=(handle, SIDE_X, 1))
+    p.add(
+        2, "clear orange handle horizontally", right=(handle + [-0.08, 0, 0], SIDE_X, 1)
+    )
     if mode == "deliver":
         return p.moves
     p.add(
-        3, "lift empty closed sampler", left=(sample + [0, 0, 0.19], SIDE_X, left_grip)
+        3,
+        "park right arm clear of empty sampler",
+        right=(np.array([0.32, -0.30, 1.08]), SIDE_X, 1),
     )
-    p.add(3, "park right arm", right=(np.array([0.32, -0.30, 1.08]), SIDE_X, 1))
+    p.add(
+        3, "lift empty closed sampler", left=(sample + [0, 0, 0.09], SIDE_X, left_grip)
+    )
     p.add(
         4,
         "return closed probe above wide cradle",

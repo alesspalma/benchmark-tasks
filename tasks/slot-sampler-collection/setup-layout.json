@@ -1,8 +1,8 @@
 {
   "KEY": "slot_sampler",
-  "TITLE": "Collect a granule sample with a spring-closed slide probe",
+  "TITLE": "Collect a granule sample with a bottom-discharge probe",
   "INSTRUCTION": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
-  "DESCRIPTION": "An upright 300 mm sampling probe has a blue sliding gate over its lower side port. Pulling its separate right-side handle upward opens the gate; a permanent spring closes it on release. The left support grip is higher and on the opposite side. Lower the sampling head inside the jar before reopening the gate to discharge. A tub contains free-flowing granules; an empty jar and wide storage cradle are on the table.",
+  "DESCRIPTION": "An upright 300 mm sampling probe has two independent spring-closed shutters. Pull the blue handle upward while the head is buried to admit granules through the side port; close it before withdrawal. Hold the closed probe above the jar and pull the lower orange handle horizontally toward the robot to slide the bottom plate aside. The sample falls vertically into the jar; the blue intake stays closed. Release the orange handle to close the floor, then return the probe to its cradle.",
   "MAX_STEPS": 2800,
   "TOP": 0.7474999999999999,
   "TUB": [
@@ -137,35 +137,49 @@
   "source": "slot_sampler/builder.py",
   "objects": [
     {
-      "name": "outer probe",
-      "type": "hollow closed-tip tube with one side window and external grips",
-      "nominal_material": "aluminum and polymer grips",
-      "length_m": 0.3,
-      "outside_diameter_m": 0.032,
-      "wall_m": 0.0015,
+      "name": "probe frame",
+      "type": "hollow square stem and chamber with separate side and bottom openings",
+      "nominal_material": "aluminum, rubber support grip, transparent polycarbonate back wall",
       "mass_kg": 0.28,
+      "length_m": 0.3,
+      "head_envelope_m": [
+        0.054,
+        0.064,
+        0.054
+      ],
       "position_m": [
         0.43,
         0.38,
-        0.7685
+        0.7535
       ]
     },
     {
-      "name": "inner sleeve",
-      "type": "hollow tube, closed bottom and open proximal outlet, radial turning lever",
-      "nominal_material": "aluminum and polymer grip",
-      "length_m": 0.31,
-      "wall_m": 0.001,
-      "inside_diameter_m": 0.0265,
-      "mass_kg": 0.09,
-      "hinge_range_rad": [
-        -1.5707963267948966,
-        0
+      "name": "blue intake shutter",
+      "type": "passive spring-return Z slide",
+      "nominal_material": "aluminum/polymer assembly with rubber grip",
+      "mass_kg": 0.07,
+      "travel_m": 0.05,
+      "grasp_m": [
+        -0.05,
+        -0.08,
+        0.22
+      ]
+    },
+    {
+      "name": "orange discharge floor",
+      "type": "passive spring-return -X slide",
+      "nominal_material": "aluminum/polymer assembly with rubber grip",
+      "mass_kg": 0.065,
+      "travel_m": 0.058,
+      "grasp_m": [
+        -0.105,
+        -0.08,
+        0.13
       ]
     },
     {
       "name": "source tub",
-      "type": "fixed polymer tray",
+      "type": "fixed polymer tub",
       "inner_size_m": [
         0.105,
         0.105,
@@ -182,26 +196,26 @@
       "name": "sample jar",
       "type": "fixed square polymer cup",
       "inner_size_m": [
-        0.08,
-        0.08,
-        0.07
+        0.11,
+        0.11,
+        0.095
       ],
       "wall_m": 0.003,
       "position_m": [
         0.35,
-        0.3,
+        0.15,
         0.7474999999999999
       ]
     },
     {
       "name": "granules",
-      "type": "individual native rigid polymer calibration spheres",
+      "type": "native rigid polymer spheres",
       "quantity": 1960,
       "diameter_m": 0.0068,
       "mass_each_kg": 0.00018,
-      "nominal_density_kg_m3": 1093.3196273868245,
       "static_friction": 0.3,
       "dynamic_friction": 0.2,
+      "restitution": 0,
       "initial_lattice": [
         14,
         14,
@@ -210,29 +224,49 @@
       "lattice_pitch_m": 0.0070999999999999995
     },
     {
-      "name": "probe stand",
-      "type": "fixed polymer keyed storage rack",
+      "name": "probe cradle",
+      "type": "fixed polymer stand",
       "foot_size_m": [
-        0.09,
-        0.09,
+        0.116,
+        0.116,
         0.006
       ],
-      "guide_height_m": 0.12,
+      "wall_height_m": 0.03,
+      "clear_opening_m": [
+        0.1,
+        0.1
+      ],
       "reference_origin_m": [
         0.43,
         0.38,
-        0.7685
+        0.7535
       ]
+    },
+    {
+      "name": "secondary containment",
+      "type": "fixed polymer tray",
+      "centre_m": [
+        0.4,
+        0.16,
+        0.7474999999999999
+      ],
+      "inner_size_m": [
+        0.52,
+        0.62,
+        0.05
+      ],
+      "wall_m": 0.003,
+      "base_thickness_m": 0.008
     }
   ],
   "CHAMBER_TOP": 0.05,
-  "FLOOR_MID_HEIGHT": 0.012,
-  "FLOOR_SLOPE": 0.3333333333333333,
+  "FLOOR_MID_HEIGHT": 0.004,
+  "FLOOR_SLOPE": 0.0,
   "GATE_CLOSED": 0.002,
   "GATE_GRASP": [
     -0.05,
     -0.08,
-    0.19
+    0.22
   ],
   "GATE_OPEN": 0.012,
   "GATE_PRELOAD": 0.02,
@@ -298,7 +332,24 @@
     "gate_grasp_m": [
       -0.05,
       -0.08,
-      0.19
+      0.22
+    ],
+    "bottom_mass_kg": 0.065,
+    "floor_type": "4mm sliding plate,flat topz4mm,7mm closing-edge bevel fromx20..27mm",
+    "back_wall": "3mm transparent polycarbonate,opacity0.22",
+    "bottom_joint": "BottomSlide",
+    "bottom_axis": "-X",
+    "bottom_travel_m": 0.058,
+    "bottom_spring_N_per_m": 20.0,
+    "bottom_spring_rest_m": -0.05,
+    "bottom_grasp_m": [
+      -0.105,
+      -0.08,
+      0.13
+    ],
+    "rubber_grip_friction": [
+      1.2,
+      1.0
     ]
   },
   "native_demo_cameras": [
@@ -317,5 +368,15 @@
     640,
     528
   ],
-  "grain_ccd": true
+  "grain_ccd": true,
+  "DUMP_GRASP": [
+    -0.105,
+    -0.08,
+    0.13
+  ],
+  "DUMP_TRAVEL": 0.058,
+  "DUMP_CLOSED": 0.002,
+  "DUMP_SPRING": 20.0,
+  "DUMP_PRELOAD": 0.05,
+  "DISCHARGE_HEIGHT": 0.113
 }

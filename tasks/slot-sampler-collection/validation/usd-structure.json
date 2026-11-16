@@ -1,9 +1,10 @@
 {
   "scope": "Offline USD/schema structure only; no physics or feasibility claim",
+  "hostname": "tengu",
   "assets": [
     {
       "file": "probe.usda",
-      "sha256": "5a4b76a183c1409fa06935f386c449d217c0971c5b3d1823892f74d0c0e63c8f",
+      "sha256": "2bc9b7935cadb6df4b03f0460764b97e1600e9985cd9f7ef5f672136d619f49e",
       "errors": [],
       "failed_checks": [],
       "joints": [
@@ -12,6 +13,13 @@
           "bodies": [
             "/Asset/Outer",
             "/Asset/Gate"
+          ]
+        },
+        {
+          "path": "/Asset/BottomSlide",
+          "bodies": [
+            "/Asset/Outer",
+            "/Asset/Bottom"
           ]
         }
       ],

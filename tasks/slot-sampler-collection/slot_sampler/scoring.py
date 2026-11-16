@@ -1,4 +1,4 @@
-"""Actual delivered mass after physical side-port entry and gate closure."""
+"""Actual mass admitted at the side and discharged through the separate bottom."""
 
 from itertools import product
 
@@ -46,6 +46,7 @@ class Scorer:
             & (local[:, 2] < C.CHAMBER_TOP - margin)
         )
         gate = probe["joints"]["GateSlide"]
+        bottom = probe["joints"]["BottomSlide"]
         buried = (
             abs(p[0] - C.TUB[0]) < 0.025
             and abs(p[1] - C.TUB[1]) < 0.025
@@ -70,19 +71,19 @@ class Scorer:
             )
             self.admitted.update(np.flatnonzero(entry & side & from_source).tolist())
         # Only a real grain still enclosed after closing becomes eligible.
-        if gate <= C.GATE_CLOSED:
+        if gate <= C.GATE_CLOSED and bottom <= C.DUMP_CLOSED:
             self.captured.update(i for i in self.admitted if inside[i])
-        # A filled head is lowered inside the jar. Its contents are still
-        # held by the tool until each whole grain actually leaves the open
-        # port. Merely placing the filled head in the jar is not delivery.
-        if self.previous_local is not None and gate >= C.GATE_OPEN:
-            boundary = C.INNER_FRONT + C.RADIUS - 0.0005
+        # Whole-grain crossing through the physically uncovered bottom.
+        # Holding a full sampler above or inside the jar earns no delivery.
+        if self.previous_local is not None and bottom > 2 * C.RADIUS:
+            boundary = -C.RADIUS + 0.0005
             exits = (
-                (self.previous_local[:, 0] < boundary)
-                & (local[:, 0] >= boundary)
+                (self.previous_local[:, 2] > boundary)
+                & (local[:, 2] <= boundary)
+                & (local[:, 0] > C.INNER_BACK - C.RADIUS)
+                & (local[:, 0] < C.INNER_FRONT + C.RADIUS)
                 & (np.abs(local[:, 1]) < C.INNER_HALF_WIDTH + C.RADIUS)
-                & (local[:, 2] > C.WINDOW[0] - C.RADIUS)
-                & (local[:, 2] + C.RADIUS < gate + 0.0005)
+                & (local[:, 0] - C.RADIUS > 0.027 - bottom - 0.0005)
             )
             self.discharged.update(
                 i for i in np.flatnonzero(exits) if i in self.captured
@@ -125,6 +126,7 @@ class Scorer:
         ready &= (
             quat_xyzw_to_matrix(np.asarray(p["pose"][3:]))[2, 2] > 0.98
             and p["joints"]["GateSlide"] <= C.GATE_CLOSED
+            and p["joints"]["BottomSlide"] <= C.DUMP_CLOSED
         )
         settled = (
             np.linalg.norm(p["velocity"][:3]) < 0.015
@@ -169,6 +171,7 @@ class Scorer:
             "discharged_grains": len(self.discharged),
             "inside_grains": self.inside_count,
             "gate_open_m": float(p["joints"]["GateSlide"]),
+            "bottom_open_m": float(p["joints"]["BottomSlide"]),
             "probe_parked": bool(ready),
             "physics_samples": self.samples,
             "violations": sorted(self.violations),

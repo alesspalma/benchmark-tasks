@@ -12,7 +12,7 @@ def state(p=None, n=28):
     probe = {
         "pose": [*p, 0, 0, 0, 1.0],
         "velocity": [0.0] * 6,
-        "joints": {"GateSlide": C.GATE_TRAVEL},
+        "joints": {"GateSlide": C.GATE_TRAVEL, "BottomSlide": 0.0},
     }
     return {
         "time_s": 0.0,
@@ -37,14 +37,14 @@ def load(sc, s, close=True):
 
 
 def deliver(sc, s):
-    # Synthetic physical exit across the front port before the settled mass
+    # Synthetic physical exit through the separate bottom before the settled mass
     # is placed in its final jar positions. No captured IDs means no credit.
-    origin = C.JAR + [0, 0, 0.012]
+    origin = C.JAR + [0, 0, C.DISCHARGE_HEIGHT]
     s["objects"]["probe"]["pose"] = [*origin, 0, 0, 0, 1]
-    s["objects"]["probe"]["joints"]["GateSlide"] = C.GATE_TRAVEL
-    s["grains"][:] = origin + [C.INNER_FRONT - 0.005, 0, 0.025]
+    s["objects"]["probe"]["joints"]["BottomSlide"] = C.DUMP_TRAVEL
+    s["grains"][:] = origin + [0.010, 0, 0.025]
     sc.observe(s)
-    s["grains"][:] = origin + [C.INNER_FRONT + C.RADIUS + 0.001, 0, 0.025]
+    s["grains"][:] = origin + [0.010, 0, -C.RADIUS - 0.001]
     sc.observe(s)
     n = len(s["grains"])
     s["grains"] = np.array(
@@ -61,6 +61,7 @@ def deliver(sc, s):
     p = s["objects"]["probe"]
     p["pose"] = [*C.PROBE, 0, 0, 0, 1.0]
     p["joints"]["GateSlide"] = 0.0
+    p["joints"]["BottomSlide"] = 0.0
     s["bounds"] = {
         "probe:Outer": [C.PROBE + [-0.018, -0.08, -0.01], C.PROBE + [0.018, 0.08, 0.32]]
     }
@@ -183,7 +184,7 @@ def test_grains_entering_through_solid_back_do_not_count():
     assert finish(sc, s)["score"] == 0.0
 
 
-def test_grains_below_sloped_floor_are_not_inside_sample():
+def test_grains_below_floor_are_not_inside_sample():
     sc = Scorer()
     s = state()
     s["grains"][:, 2] -= 0.020
@@ -197,7 +198,7 @@ def test_filled_probe_inside_jar_is_not_delivered_material():
     sc = Scorer()
     s = state()
     load(sc, s)
-    origin = C.JAR + [0, 0, 0.012]
+    origin = C.JAR + [0, 0, C.DISCHARGE_HEIGHT]
     s["objects"]["probe"]["pose"] = [*origin, 0, 0, 0, 1]
     s["grains"][:] = origin + [0.010, 0, 0.025]
     sc.observe(s)
@@ -205,3 +206,36 @@ def test_filled_probe_inside_jar_is_not_delivered_material():
     assert result["captured_grains"] == 28
     assert result["delivered_grams"] == 0
     assert result["score"] == 0
+
+
+def test_open_bottom_cannot_capture_material():
+    sc = Scorer()
+    s = state()
+    s["objects"]["probe"]["joints"]["BottomSlide"] = C.DUMP_TRAVEL
+    load(sc, s)
+    assert not sc.captured
+    deliver(sc, s)
+    assert finish(sc, s)["score"] == 0.0
+
+
+def test_reopened_bottom_prevents_full_score():
+    sc = Scorer()
+    s = state()
+    load(sc, s)
+    deliver(sc, s)
+    s["objects"]["probe"]["joints"]["BottomSlide"] = C.DUMP_TRAVEL
+    assert finish(sc, s)["score"] == 0.7
+
+
+def test_side_dump_does_not_count_as_bottom_discharge():
+    sc = Scorer()
+    s = state()
+    load(sc, s)
+    origin = C.JAR + [0, 0, C.DISCHARGE_HEIGHT]
+    s["objects"]["probe"]["pose"] = [*origin, 0, 0, 0, 1]
+    s["objects"]["probe"]["joints"]["GateSlide"] = C.GATE_TRAVEL
+    s["grains"][:] = origin + [0.010, 0, 0.025]
+    sc.observe(s)
+    s["grains"][:] = origin + [0.040, 0, 0.025]
+    sc.observe(s)
+    assert not sc.discharged
