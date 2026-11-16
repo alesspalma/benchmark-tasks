@@ -1,0 +1,143 @@
+{
+  "kind": "reference",
+  "score": 1.0,
+  "source_run": "sampler-slide-003",
+  "scope": "Fresh native physics execution using time and ordinary measured robot joints, with actual cameras",
+  "source_sha256": "7deb553baa66a9da85644752762cb281485b3047cbd1850bc740a156822d29a8",
+  "source_unchanged": true,
+  "native_score": 1.0,
+  "steps": 2257,
+  "physics_audits": 27084,
+  "instruction": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
+  "controller": {
+    "inputs": [
+      "elapsed time",
+      "joint positions"
+    ]
+  },
+  "native_receipt_sha256": "9d012edd531f5d68d1b3fa570e7bbfe55d8f7e3bf59f0ffc98a64461b4a01038",
+  "native_trace_sha256": "c8eb7630e95a347b4cc776523c73d3dfbd6fea4f71a67567ade2b48a9b0b2ab2",
+  "tracks": {
+    "top_cam": {
+      "sha256": "bf32aad3b5d086a9bedb34599b5e7c53cf6b94d115b007826e06bc23443c10ec",
+      "all_frames_decoded": 2258,
+      "minimum_frame_mean": 156.6967578125,
+      "minimum_frame_std": 57.9532880381427,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "nb_frames": "2258"
+          }
+        ],
+        "format": {
+          "duration": "112.900000",
+          "size": "1765818"
+        }
+      }
+    },
+    "left_cam": {
+      "sha256": "3f067c78738e92cf054d68f6653ace0625828c3550d08f19fbc156bfeccf92ff",
+      "all_frames_decoded": 2258,
+      "minimum_frame_mean": 110.6468287037037,
+      "minimum_frame_std": 35.69428317119417,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "nb_frames": "2258"
+          }
+        ],
+        "format": {
+          "duration": "112.900000",
+          "size": "1374252"
+        }
+      }
+    },
+    "right_cam": {
+      "sha256": "f0c00743db1ff2393b4fcbb6dd10f2215b982ce4d046557e9ea2409e04350324",
+      "all_frames_decoded": 2258,
+      "minimum_frame_mean": 123.69861400462963,
+      "minimum_frame_std": 41.36953783729427,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "nb_frames": "2258"
+          }
+        ],
+        "format": {
+          "duration": "112.900000",
+          "size": "1775113"
+        }
+      }
+    }
+  },
+  "composition": "Every initial/action frame preserved in order, top above both wrists; resize and spatial stacking only; no overlays, generated frames, temporal edits or speed changes.",
+  "demo_probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 1080,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "20/1",
+        "nb_frames": "2258"
+      }
+    ],
+    "format": {
+      "duration": "112.900000",
+      "size": "10702612"
+    }
+  },
+  "dream_api_used": false,
+  "visually_reviewed": true,
+  "three_cameras_valid": true,
+  "files": {
+    "final-right_cam.png": {
+      "bytes": 82185,
+      "sha256": "ee9c4785b2748779c4ed3b0e13c12727e06081ece3e66cb78e6b02dfb72cb133"
+    },
+    "setup.png": {
+      "bytes": 192743,
+      "sha256": "afc255af2b0819e22e43f52e84a0bf137262f0665fee64340851e60fc466a5ed"
+    },
+    "demo.mp4": {
+      "bytes": 10702612,
+      "sha256": "5660cb37ea8ab9e1d48a47744498418aeb91ad1fde8982b1da42c20c94d98b4a"
+    },
+    "review.png": {
+      "bytes": 1905201,
+      "sha256": "bc28cc7a30674743118211ba803331c044f984debaa5a33f0b0bca4d5d44235b"
+    },
+    "final-top_cam.png": {
+      "bytes": 174523,
+      "sha256": "ef8c78a51b4b77f041ff18fa48858972331eeac1864d1eb132e56fa8cbcbf02b"
+    },
+    "final-left_cam.png": {
+      "bytes": 84758,
+      "sha256": "65c721555b0f6e48bcd9fd9597f491ac62058a2bee956272aec34a61ee7c3fa7"
+    }
+  },
+  "visual_review": "Reviewed the staged three-camera contact sheet, reset and final views. The separated straight-pull handle operates without arm collision; the probe remains upright, releases granules inside the jar, closes and rests upright in the cradle with hands clear. No team identity in footage."
+}

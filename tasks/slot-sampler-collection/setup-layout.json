@@ -1,9 +1,9 @@
 {
   "KEY": "slot_sampler",
-  "TITLE": "Collect a granule sample with a closing slot probe",
+  "TITLE": "Collect a granule sample with a spring-closed slide probe",
   "INSTRUCTION": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
-  "DESCRIPTION": "A 300 mm two-sleeve sampling probe has a rotating window near its closed pointed end. A tub contains free-flowing granules. An empty sample jar and a probe stand are on the table.",
-  "MAX_STEPS": 2400,
+  "DESCRIPTION": "An upright 300 mm sampling probe has a blue sliding gate over its lower side port. Pulling its separate right-side handle upward opens the gate; a permanent spring closes it on release. The left support grip is higher and on the opposite side. Lower the sampling head inside the jar before reopening the gate to discharge. A tub contains free-flowing granules; an empty jar and wide storage cradle are on the table.",
+  "MAX_STEPS": 2800,
   "TOP": 0.7474999999999999,
   "TUB": [
     0.43,
@@ -12,27 +12,27 @@
   ],
   "JAR": [
     0.35,
-    0.3,
+    0.15,
     0.7474999999999999
   ],
   "PROBE": [
     0.43,
     0.38,
-    0.7685
+    0.7535
   ],
   "RADIUS": 0.0034,
   "MASS": 0.00018,
   "WINDOW": [
-    0.015,
-    0.085
+    0.004,
+    0.05
   ],
   "TUB_INNER": [
     0.105,
     0.105
   ],
   "TUB_H": 0.145,
-  "JAR_R": 0.04,
-  "JAR_H": 0.07,
+  "JAR_R": 0.055,
+  "JAR_H": 0.095,
   "PROBE_LENGTH": 0.3,
   "world_frame": "x away from robot bases, +y left arm side, z up; meters and radians",
   "rig": {
@@ -224,5 +224,98 @@
         0.7685
       ]
     }
-  ]
+  ],
+  "CHAMBER_TOP": 0.05,
+  "FLOOR_MID_HEIGHT": 0.012,
+  "FLOOR_SLOPE": 0.3333333333333333,
+  "GATE_CLOSED": 0.002,
+  "GATE_GRASP": [
+    -0.05,
+    -0.08,
+    0.19
+  ],
+  "GATE_OPEN": 0.012,
+  "GATE_PRELOAD": 0.02,
+  "GATE_SPRING": 25.0,
+  "GATE_TRAVEL": 0.05,
+  "INNER_BACK": -0.024,
+  "INNER_FRONT": 0.0275,
+  "INNER_HALF_WIDTH": 0.024,
+  "SAMPLING_BASE_HEIGHT": 0.03,
+  "SAMPLING_MAX_BASE_HEIGHT": 0.055,
+  "SUPPORT_GRASP": [
+    -0.01,
+    0.07,
+    0.255
+  ],
+  "secondary_containment": {
+    "centre_xy_m": [
+      0.4,
+      0.16
+    ],
+    "inner_size_m": [
+      0.52,
+      0.62
+    ],
+    "wall_height_m": 0.05,
+    "base_thickness_m": 0.008
+  },
+  "storage_cradle": {
+    "foot_m": [
+      0.116,
+      0.116,
+      0.006
+    ],
+    "clear_opening_m": [
+      0.1,
+      0.1
+    ],
+    "wall_height_m": 0.03
+  },
+  "probe": {
+    "frame_mass_kg": 0.28,
+    "shutter_mass_kg": 0.07,
+    "sample_head_envelope_m": [
+      0.054,
+      0.054,
+      0.054
+    ],
+    "front_port_height_m": [
+      0.004,
+      0.05
+    ],
+    "gate_joint": "GateSlide",
+    "gate_travel_m": 0.05,
+    "spring_N_per_m": 25.0,
+    "spring_rest_m": -0.02,
+    "damping_Ns_per_m": 2.0,
+    "friction": 0.03,
+    "support_grasp_m": [
+      -0.01,
+      0.07,
+      0.255
+    ],
+    "gate_grasp_m": [
+      -0.05,
+      -0.08,
+      0.19
+    ]
+  },
+  "native_demo_cameras": [
+    640,
+    360
+  ],
+  "demo_composite": [
+    1280,
+    1080
+  ],
+  "model_cameras": [
+    320,
+    176
+  ],
+  "model_composite": [
+    640,
+    528
+  ],
+  "grain_ccd": true
 }

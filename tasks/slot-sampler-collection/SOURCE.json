@@ -13,8 +13,24 @@
     "url": "https://github.com/kairosiann/yam-isaac-lab-arena",
     "commit": "0059d02a1a91bc6834c1d0846022891df0c78730"
   },
-  "custom_assets": "Original native primitive geometry under MIT; no manufacturer meshes.",
+  "custom_assets": "Original primitive and convex-wedge geometry under MIT; no manufacturer meshes.",
   "control_hz": 20,
   "physics_hz": 240,
-  "seed": 1415158438
+  "seed": 1415158438,
+  "references": [
+    {
+      "url": "https://www.buerkle.de/en/powder-sampler-mini_p5346-3010",
+      "usage": "Linear spring-return sample admission, closure and re-opening over a collection vessel; operating principle only. Original enlarged rectangular head for coarse calibration granules."
+    },
+    {
+      "url": "https://www.buerkle.de/en/microsampler_p89",
+      "usage": "Closed insertion, opening at depth, closed withdrawal and reopening to empty. No OEM CAD or dimensional replica."
+    },
+    {
+      "url": "https://www.bls.gov/ooh/production/quality-control-inspectors.htm",
+      "usage": "Industrial sampling and quality-control occupation context."
+    }
+  ],
+  "mechanism": "Passive GateSlide Z prismatic joint,0..50mm; constant25N/m spring with-20mm rest point,2Ns/m damping and0.03 friction. Right arm operates a broad flat tab. The controller supplies only ordinary14 robot controls and reads time/robot joints.",
+  "grain_contact_resolution": "Native constant continuous collision detection,240Hz physics,20Hz control"
 }

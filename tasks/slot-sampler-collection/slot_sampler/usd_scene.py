@@ -36,7 +36,16 @@ class Writer:
         p.CreateRestitutionAttr(0)
         return s
 
-    def body(self, s, path, mass, position=(0, 0, 0), fixed=False, articulation=False):
+    def body(
+        self,
+        s,
+        path,
+        mass,
+        position=(0, 0, 0),
+        fixed=False,
+        articulation=False,
+        ccd=False,
+    ):
         x = self.Geom.Xform.Define(s, path)
         x.AddTranslateOp().Set(self.Gf.Vec3d(*map(float, position)))
         x.AddOrientOp(precision=self.Geom.XformOp.PrecisionDouble).Set(
@@ -46,6 +55,8 @@ class Writer:
         self.Phy.RigidBodyAPI.Apply(p)
         self.Phy.MassAPI.Apply(p).CreateMassAttr(mass)
         self.Px.PhysxRigidBodyAPI.Apply(p).CreateMaxDepenetrationVelocityAttr(0.5)
+        if ccd:
+            self.Px.PhysxRigidBodyAPI.Apply(p).CreateEnableCCDAttr(True)
         if articulation:
             self.Phy.ArticulationRootAPI.Apply(p)
             a = self.Px.PhysxArticulationAPI.Apply(p)
@@ -110,12 +121,71 @@ class Writer:
         x.CreateAxisAttr(axis)
         x.AddTranslateOp().Set(self.Gf.Vec3d(*map(float, position)))
         self._finish(s, x, color, collide)
+        self.records.append(
+            {
+                "asset": Path(s.GetRootLayer().identifier).stem,
+                "solid": path,
+                "kind": "cylinder",
+                "radius": radius,
+                "length": length,
+                "axis": axis,
+                "position": list(position),
+                "color": list(color),
+            }
+        )
 
     def sphere(self, s, path, radius, position, color):
         x = self.Geom.Sphere.Define(s, path)
         x.CreateRadiusAttr(radius)
         x.AddTranslateOp().Set(self.Gf.Vec3d(*map(float, position)))
         self._finish(s, x, color, True, contact=0.00008)
+        self.records.append(
+            {
+                "asset": Path(s.GetRootLayer().identifier).stem,
+                "solid": path,
+                "kind": "sphere",
+                "radius": radius,
+                "position": list(position),
+                "color": list(color),
+            }
+        )
+
+    def convex(self, s, path, vertices, triangles, color):
+        x = self.Geom.Mesh.Define(s, path)
+        x.CreatePointsAttr([self.Gf.Vec3f(*map(float, p)) for p in vertices])
+        x.CreateFaceVertexCountsAttr([3] * len(triangles))
+        x.CreateFaceVertexIndicesAttr([i for face in triangles for i in face])
+        x.CreateSubdivisionSchemeAttr("none")
+        self._finish(s, x, color, True)
+        self.Phy.MeshCollisionAPI.Apply(x.GetPrim()).CreateApproximationAttr(
+            "convexHull"
+        )
+        self.records.append(
+            {
+                "asset": Path(s.GetRootLayer().identifier).stem,
+                "solid": path,
+                "kind": "convex_mesh",
+                "vertices": vertices,
+                "triangles": triangles,
+                "color": list(color),
+            }
+        )
+
+    def slide(self, s, path, parent, child, travel, stiffness, rest):
+        j = self.Phy.PrismaticJoint.Define(s, path)
+        j.CreateBody0Rel().SetTargets([parent])
+        j.CreateBody1Rel().SetTargets([child])
+        j.CreateAxisAttr("Z")
+        j.CreateLowerLimitAttr(0.0)
+        j.CreateUpperLimitAttr(travel)
+        j.CreateCollisionEnabledAttr(False)
+        self.Px.PhysxJointAPI.Apply(j.GetPrim()).CreateJointFrictionAttr(0.03)
+        drive = self.Phy.DriveAPI.Apply(j.GetPrim(), "linear")
+        drive.CreateTypeAttr("force")
+        drive.CreateStiffnessAttr(stiffness)
+        drive.CreateDampingAttr(2.0)
+        drive.CreateTargetPositionAttr(rest)
+        return j
 
     def ring(self, s, path, radius, thickness, length, z, color, n=32, omit=()):
         for k in range(n):

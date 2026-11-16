@@ -181,12 +181,21 @@ class Environment(YamArenaEmbodiment):
 
         def configure(cfg):
             from isaaclab_physx.physics.physx_manager_cfg import PhysxCfg
+            from yam_arena.constants import FINGER_OPEN
 
             cfg = env_cfg_callback(20)(cfg)
+            for name in ARMS:
+                initial = getattr(cfg.scene, name).init_state
+                initial.joint_pos = {
+                    **dict(zip(ARM_JOINTS, READY)),
+                    **dict.fromkeys(FINGER_JOINTS, FINGER_OPEN),
+                }
+                initial.joint_vel = {".*": 0.0}
             cfg.sim.use_newton_actuators = False
             if self.physics_device == "cpu":
                 cfg.sim.use_fabric = False
             cfg.sim.physics = PhysxCfg(
+                enable_ccd=True,
                 gpu_max_rigid_contact_count=2**20,
                 gpu_max_rigid_patch_count=2**18,
                 gpu_found_lost_pairs_capacity=2**20,

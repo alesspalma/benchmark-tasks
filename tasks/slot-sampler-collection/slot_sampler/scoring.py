@@ -1,4 +1,6 @@
-"""Real mass delivery with native side-window capture and closed retention."""
+"""Actual delivered mass after physical side-port entry and gate closure."""
+
+from itertools import product
 
 import numpy as np
 from yam_arena.urdf import quat_xyzw_to_matrix
@@ -14,6 +16,7 @@ class Scorer:
     def reset(self):
         self.admitted = set()
         self.captured = set()
+        self.discharged = set()
         self.previous_inside = None
         self.previous_local = None
         self.previous_points = None
@@ -33,22 +36,28 @@ class Scorer:
             self.violations.add("invalid_state")
             return
         local = (points - p[:3]) @ r
+        margin = C.RADIUS - 0.0005
+        floor = C.FLOOR_MID_HEIGHT - C.FLOOR_SLOPE * local[:, 0]
         inside = (
-            (np.linalg.norm(local[:, :2], axis=1) < 0.0096)
-            & (local[:, 2] > 0.006 + C.RADIUS - 0.0005)
-            & (local[:, 2] < 0.310 - C.RADIUS + 0.0005)
+            (local[:, 0] > C.INNER_BACK + margin)
+            & (local[:, 0] < C.INNER_FRONT - margin)
+            & (np.abs(local[:, 1]) < C.INNER_HALF_WIDTH - margin)
+            & (local[:, 2] > floor + margin * np.sqrt(1 + C.FLOOR_SLOPE**2))
+            & (local[:, 2] < C.CHAMBER_TOP - margin)
         )
-        angle = probe["joints"]["Sleeve"]
+        gate = probe["joints"]["GateSlide"]
         buried = (
             abs(p[0] - C.TUB[0]) < 0.025
             and abs(p[1] - C.TUB[1]) < 0.025
-            and C.TOP <= p[2] < C.TOP + 0.025
+            and C.TOP <= p[2] < C.TOP + C.SAMPLING_MAX_BASE_HEIGHT
             and r[2, 2] > 0.97
         )
-        if self.previous_inside is not None and angle < -1.2 and buried:
+        if self.previous_inside is not None and gate >= C.GATE_OPEN and buried:
             entry = inside & ~self.previous_inside
             side = (
-                (self.previous_local[:, 0] > 0.002)
+                (self.previous_local[:, 0] >= C.INNER_FRONT - margin)
+                & (local[:, 0] < self.previous_local[:, 0])
+                & (local[:, 2] + C.RADIUS < gate + 0.0005)
                 & (local[:, 2] > C.WINDOW[0] - C.RADIUS)
                 & (local[:, 2] < C.WINDOW[1] + C.RADIUS)
             )
@@ -61,8 +70,23 @@ class Scorer:
             )
             self.admitted.update(np.flatnonzero(entry & side & from_source).tolist())
         # Only a real grain still enclosed after closing becomes eligible.
-        if angle > -0.08:
+        if gate <= C.GATE_CLOSED:
             self.captured.update(i for i in self.admitted if inside[i])
+        # A filled head is lowered inside the jar. Its contents are still
+        # held by the tool until each whole grain actually leaves the open
+        # port. Merely placing the filled head in the jar is not delivery.
+        if self.previous_local is not None and gate >= C.GATE_OPEN:
+            boundary = C.INNER_FRONT + C.RADIUS - 0.0005
+            exits = (
+                (self.previous_local[:, 0] < boundary)
+                & (local[:, 0] >= boundary)
+                & (np.abs(local[:, 1]) < C.INNER_HALF_WIDTH + C.RADIUS)
+                & (local[:, 2] > C.WINDOW[0] - C.RADIUS)
+                & (local[:, 2] + C.RADIUS < gate + 0.0005)
+            )
+            self.discharged.update(
+                i for i in np.flatnonzero(exits) if i in self.captured
+            )
         self.previous_inside = inside
         self.previous_local = local
         self.previous_points = points.copy()
@@ -81,7 +105,7 @@ class Scorer:
             (points - C.RADIUS >= lo - 0.0005) & (points + C.RADIUS <= hi + 0.0005),
             axis=1,
         )
-        eligible = np.array([i in self.captured for i in range(len(points))])
+        eligible = np.array([i in self.discharged for i in range(len(points))])
         velocity = np.asarray(
             s.get("grain_velocities", np.full((len(points), 6), np.inf))
         )
@@ -89,10 +113,18 @@ class Scorer:
         delivered = int(np.sum(in_jar & eligible & settled_grains))
         grams = delivered * C.MASS * 1000
         p = s["objects"]["probe"]
-        ready = np.linalg.norm(np.asarray(p["pose"][:3]) - C.PROBE) < 0.012
+        rotation = quat_xyzw_to_matrix(np.asarray(p["pose"][3:]))
+        corners = np.asarray(
+            list(product((-0.027, 0.027), (-0.027, 0.027), (0.0, 0.054)))
+        )
+        head = corners @ rotation.T + p["pose"][:3]
+        ready = bool(
+            np.all(np.abs(head[:, :2] - C.PROBE[:2]) <= 0.0505)
+            and abs(p["pose"][2] - C.PROBE[2]) < 0.005
+        )
         ready &= (
             quat_xyzw_to_matrix(np.asarray(p["pose"][3:]))[2, 2] > 0.98
-            and p["joints"]["Sleeve"] > -0.08
+            and p["joints"]["GateSlide"] <= C.GATE_CLOSED
         )
         settled = (
             np.linalg.norm(p["velocity"][:3]) < 0.015
@@ -134,7 +166,9 @@ class Scorer:
             "delivered_grains": delivered,
             "admitted_grains": len(self.admitted),
             "captured_grains": len(self.captured),
+            "discharged_grains": len(self.discharged),
             "inside_grains": self.inside_count,
+            "gate_open_m": float(p["joints"]["GateSlide"]),
             "probe_parked": bool(ready),
             "physics_samples": self.samples,
             "violations": sorted(self.violations),

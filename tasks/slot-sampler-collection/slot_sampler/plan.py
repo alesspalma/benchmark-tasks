@@ -1,120 +1,144 @@
-"""Two hands operate a passive physical sleeve, capture and discharge material."""
-
-import math
+"""Separated bimanual straight-pull gate, upright capture and in-jar discharge."""
 
 import numpy as np
 
 from . import config as C
-from .motion import SIDE_X, SIDE_Y, Program, rotation
+from .motion import SIDE_X, Program
 
 
 def waypoints(mode="demo"):
     if mode == "hold":
         return {}
     p = Program()
-    offset = np.array([0.0, 0.060, 0.255])
-    grasp = C.PROBE + offset
-    p.add(3.0, "approach outer sleeve", left=(grasp + [-0.08, 0, 0], SIDE_X, 1.0))
-    p.add(2.0, "reach outer sleeve", left=(grasp, SIDE_X, 1.0))
-    p.add(2.0, "support outer sleeve", left=(grasp, SIDE_X, 0.06))
-    p.add(3.0, "lift probe clear", left=(grasp + [0, 0, 0.17], SIDE_X, 0.06))
-    origin = C.TUB + [0, 0, 0.014]
-    target = origin + offset
-    p.add(4.0, "closed probe over source", left=(target + [0, 0, 0.17], SIDE_X, 0.06))
-    p.add(4.0, "insert closed sampling chamber", left=(target, SIDE_X, 0.06))
+    left_grip = 0.06
+    right_grip = 0.06
+    grasp = C.PROBE + C.SUPPORT_GRASP
+    p.add(3, "approach support handle", left=(grasp + [-0.08, 0, 0.03], SIDE_X, 1))
+    p.add(2, "reach support handle", left=(grasp, SIDE_X, 1))
+    p.add(2, "grasp support handle", left=(grasp, SIDE_X, left_grip))
+    p.add(
+        3,
+        "lift closed probe from cradle",
+        left=(grasp + [0, 0, 0.19], SIDE_X, left_grip),
+    )
+    source = C.TUB + [-0.012, 0, C.SAMPLING_BASE_HEIGHT]
+    support = source + C.SUPPORT_GRASP
+    p.add(
+        4,
+        "closed probe above granules",
+        left=(support + [0, 0, 0.19], SIDE_X, left_grip),
+    )
+    p.add(4, "insert closed sample chamber", left=(support, SIDE_X, left_grip))
+    p.add(1, "settle inserted probe")
     if mode == "insert":
         return p.moves
-    lever = lambda angle: origin + rotation("Z", angle) @ np.array([0.0, -0.068, 0.312])
-    p.add(3.0, "approach sleeve lever", right=(lever(0) + [0, -0.08, 0], SIDE_Y, 1.0))
-    p.add(2.0, "reach sleeve lever", right=(lever(0), SIDE_Y, 1.0))
-    p.add(2.0, "grasp sleeve lever", right=(lever(0), SIDE_Y, 0.14))
-    for a in np.linspace(0, -math.pi / 2, 13)[1:]:
+
+    def operate(origin, stage):
+        handle = origin + C.GATE_GRASP
         p.add(
-            0.40,
-            "open buried sampling window",
-            right=(lever(a), rotation("Z", a) @ SIDE_Y, 0.14),
+            3,
+            "approach " + stage + " gate handle",
+            right=(handle + [-0.08, 0, 0.08], SIDE_X, 1),
         )
-    p.add(3.0, "admit granules through window")
-    for delta in (
-        [0, 0, 0.010],
-        [0, 0, 0],
-        [0, 0, 0.010],
-        [0, 0, 0],
-        [0.003, 0, 0],
-        [-0.003, 0, 0],
-        [0, 0.003, 0],
-        [0, -0.003, 0],
-        [0, 0, 0],
-    ):
+        p.add(2, "reach " + stage + " gate handle", right=(handle, SIDE_X, 1))
+        p.add(1, "settle " + stage + " handle reach")
+        p.add(2, "grasp " + stage + " gate handle", right=(handle, SIDE_X, right_grip))
         p.add(
-            0.55,
-            "gently agitate open probe",
-            left=(target + delta, SIDE_X, 0.06),
-            right=(
-                lever(-math.pi / 2) + delta,
-                rotation("Z", -math.pi / 2) @ SIDE_Y,
-                0.14,
-            ),
+            3,
+            "pull " + stage + " gate open",
+            right=(handle + [0, 0, C.GATE_TRAVEL + 0.001], SIDE_X, right_grip),
         )
-    if mode == "open":
+        p.add(
+            4 if stage == "sampling" else 5,
+            "fill chamber" if stage == "sampling" else "drain sample inside jar",
+        )
+        if stage == "sampling":
+            for dz in (0.008, 0, 0.008, 0):
+                p.add(
+                    1,
+                    "settle material through open port",
+                    left=(origin + C.SUPPORT_GRASP + [0, 0, dz], SIDE_X, left_grip),
+                    right=(
+                        handle + [0, 0, C.GATE_TRAVEL + 0.001 + dz],
+                        SIDE_X,
+                        right_grip,
+                    ),
+                )
+        if stage == "sampling":
+            # Sweep the open port through fresh material, rather than relying
+            # on gravity to fill an uphill side chamber.
+            delta = np.array([0.024, 0, 0])
+            p.add(
+                4,
+                "fill open chamber by a short buried sweep",
+                left=(origin + C.SUPPORT_GRASP + delta, SIDE_X, left_grip),
+                right=(
+                    handle + [0, 0, C.GATE_TRAVEL + 0.001] + delta,
+                    SIDE_X,
+                    right_grip,
+                ),
+            )
+            origin = origin + delta
+            handle = origin + C.GATE_GRASP
+        if mode == "open" and stage == "sampling":
+            return None
+        p.add(
+            3,
+            "return " + stage + " gate to closed stop",
+            right=(handle, SIDE_X, right_grip),
+        )
+        p.add(2, "settle closed " + stage + " gate")
+        p.add(2, "release " + stage + " gate handle", right=(handle, SIDE_X, 1))
+        p.add(
+            2,
+            "clear " + stage + " gate handle",
+            right=(handle + [-0.08, 0, 0], SIDE_X, 1),
+        )
+        p.add(1, "open clear right gripper", right=(handle + [-0.08, 0, 0], SIDE_X, 1))
+        return origin
+
+    source = operate(source, "sampling")
+    if source is None:
         return p.moves
-    for a in np.linspace(-math.pi / 2, 0.0, 13)[1:]:
+    support = source + C.SUPPORT_GRASP
+    p.add(
+        3,
+        "withdraw closed sample over source",
+        left=(support + [0, 0, 0.19], SIDE_X, left_grip),
+    )
+    for dx in (-0.008, 0.008, 0):
         p.add(
-            0.40,
-            "close filled window",
-            right=(lever(a), rotation("Z", a) @ SIDE_Y, 0.14),
+            1,
+            "shed exterior grains over source",
+            left=(support + [dx, 0, 0.19], SIDE_X, left_grip),
         )
-    p.add(2.0, "release sleeve lever", right=(lever(0), SIDE_Y, 1.0))
-    p.add(3.0, "clear sleeve lever", right=(lever(0) + [0, -0.06, 0], SIDE_Y, 1.0))
-    p.add(3.0, "withdraw retained sample", left=(target + [0, 0, 0.17], SIDE_X, 0.06))
-    for delta in (
-        [0.006, 0, 0],
-        [-0.006, 0, 0],
-        [0, 0.006, 0],
-        [0, -0.006, 0],
-        [0, 0, 0],
-    ):
-        p.add(
-            0.8,
-            "clear loose exterior grains over source",
-            left=(target + [0, 0, 0.17] + delta, SIDE_X, 0.06),
-        )
-    p.add(2.0, "let loose exterior grains fall back")
+    p.add(2, "shed exterior grains into source")
     if mode == "retain":
         return p.moves
-    outlet = np.array([C.JAR[0], C.JAR[1], C.TOP + 0.40])
-    proximal = np.array([0.0, 0.0, 0.310])
-    pivot = lambda angle: outlet + rotation("X", angle) @ (offset - proximal)
-    over = pivot(0.0)
-    p.add(4.0, "sample outlet over jar", left=(over, SIDE_X, 0.06))
-    for a in np.linspace(0, -math.pi, 19)[1:]:
-        p.add(
-            0.35,
-            "invert about discharge opening",
-            left=(pivot(a), rotation("X", a) @ SIDE_X, 0.06),
-        )
-    low = pivot(-math.pi) + [0, 0, -0.315]
-    inverse = rotation("X", -math.pi) @ SIDE_X
-    p.add(3.0, "lower discharge opening", left=(low, inverse, 0.06))
-    p.add(4.0, "discharge actual sample")
-    for a in (-math.pi + 0.12, -math.pi - 0.12, -math.pi):
-        p.add(
-            1.0,
-            "release remaining granules",
-            left=(low, rotation("X", a) @ SIDE_X, 0.06),
-        )
+    discharge = C.JAR + [0, 0, 0.012]
+    sample = discharge + C.SUPPORT_GRASP
+    p.add(
+        4, "closed sample above jar", left=(sample + [0, 0, 0.135], SIDE_X, left_grip)
+    )
+    p.add(3, "lower sampling head inside jar", left=(sample, SIDE_X, left_grip))
+    p.add(1, "settle head inside jar")
+    operate(discharge, "discharge")
     if mode == "deliver":
         return p.moves
-    p.add(3.0, "raise empty sampler", left=(pivot(-math.pi), inverse, 0.06))
-    for a in np.linspace(-math.pi, 0, 19)[1:]:
-        p.add(
-            0.30,
-            "restore probe upright",
-            left=(pivot(a), rotation("X", a) @ SIDE_X, 0.06),
-        )
-    p.add(4.0, "return probe to stand", left=(grasp + [0, 0, 0.17], SIDE_X, 0.06))
-    p.add(3.0, "support probe in stand", left=(grasp, SIDE_X, 0.06))
-    p.add(2.0, "release probe", left=(grasp, SIDE_X, 1.0))
-    p.add(2.0, "clear parked probe", left=(grasp + [-0.10, 0, 0.03], SIDE_X, 1.0))
-    p.add(2.0, "settle sample")
+    p.add(
+        3, "lift empty closed sampler", left=(sample + [0, 0, 0.19], SIDE_X, left_grip)
+    )
+    p.add(3, "park right arm", right=(np.array([0.32, -0.30, 1.08]), SIDE_X, 1))
+    p.add(
+        4,
+        "return closed probe above wide cradle",
+        left=(grasp + [0, 0, 0.19], SIDE_X, left_grip),
+    )
+    p.add(3, "lower probe onto cradle foot", left=(grasp, SIDE_X, left_grip))
+    p.add(2, "release supported sampler", left=(grasp, SIDE_X, 1))
+    p.add(2, "settle probe with fingers fully open")
+    p.add(2, "withdraw left fingers", left=(grasp + [-0.08, 0, 0], SIDE_X, 1))
+    p.add(1, "open clear left hand", left=(grasp + [-0.08, 0, 0], SIDE_X, 1))
+    p.add(3, "park left arm", left=(np.array([0.27, 0.35, 1.05]), SIDE_X, 1))
+    p.add(2, "settle retained jar sample")
     return p.moves

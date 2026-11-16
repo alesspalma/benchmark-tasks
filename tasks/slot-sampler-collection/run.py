@@ -8,7 +8,7 @@ import socket
 import subprocess
 import time
 import traceback
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -29,19 +29,20 @@ def plain(value):
 
 
 def main():
+    c = importlib.import_module(PACKAGE + ".config")
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--device", default="cpu")
     p.add_argument("--physics-device", default="cpu")
     p.add_argument("--no-cameras", action="store_true")
     p.add_argument("--policy", default="demo")
-    p.add_argument("--max-steps", type=int, default=2400)
+    p.add_argument("--max-steps", type=int, default=c.MAX_STEPS)
     p.add_argument("--seed", type=int, default=1415158438)
-    p.add_argument("--width", type=int, default=320)
-    p.add_argument("--height", type=int, default=176)
+    p.add_argument("--width", type=int, default=640)
+    p.add_argument("--height", type=int, default=360)
     a = p.parse_args()
-    if not 1 <= a.max_steps <= 2400:
-        raise ValueError("max-steps must be in [1,2400]")
+    if not 1 <= a.max_steps <= c.MAX_STEPS:
+        raise ValueError(f"max-steps must be in [1,{c.MAX_STEPS}]")
     a.output = a.output.resolve()
     a.output.mkdir(parents=True, exist_ok=False)
     from inspect_robots import Scene
@@ -63,7 +64,7 @@ def main():
         "seed": a.seed,
         "policy": a.policy,
         "dream_api_used": False,
-        "started_at_utc": datetime.now(timezone.utc).isoformat(),
+        "started_at_utc": datetime.now(UTC).isoformat(),
         "control_hz": 20,
         "physics_hz": 240,
         "instruction": c.INSTRUCTION,

@@ -1,0 +1,16 @@
+{
+  "scope": "Read-only actual native trace: gate seating during extraction and closed horizontal transfer",
+  "source_sha256": "7deb553baa66a9da85644752762cb281485b3047cbd1850bc740a156822d29a8",
+  "first_fully_closed_capture_step": 1053,
+  "initial_extraction_maximum_gap_m": 0.010226478800177574,
+  "initial_extraction_note": "The closing gate initially rests against granules at the lip. It fully seats when the head clears the bed, while still over the source. This precedes transfer to the jar.",
+  "closed_transfer_frames": 160,
+  "maximum_gate_opening_during_transfer_and_lowering_m": 8.975207492767368e-07,
+  "gate_closed_tolerance_m": 0.002,
+  "closed_transfer_passed": true,
+  "captured_grains": 134,
+  "delivered_grains": 134,
+  "delivered_grams": 24.12,
+  "probe_empty_at_end": true,
+  "violations": []
+}
