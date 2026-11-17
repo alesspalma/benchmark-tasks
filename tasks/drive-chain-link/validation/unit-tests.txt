@@ -30,6 +30,6 @@ test_two_clips_on_one_pin_cannot_retain_both_pins (test_scoring.ScoringTests.tes
 test_unseated_cover (test_scoring.ScoringTests.test_unseated_cover) ... ok
 
 ----------------------------------------------------------------------
-Ran 30 tests in 6.063s
+Ran 30 tests in 5.917s
 
 OK

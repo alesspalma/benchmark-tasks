@@ -60,5 +60,11 @@
   ],
   "fidelity": "Representative 100 mm conveyor joint: 12 mm pins, 12.2 mm bores, a closed cover and two passive spring clips in real grooves. End nests and five hold-downs fix the loop. A bench-mounted applicator moves on two passive prismatic guides representing linear bearings. All fitting uses native contact; constant angular springs approximate clip compliance. Fixture and spring parameters remain constant throughout each episode.",
   "runtime_configuration": "Standard PhysX actuator path, a permanently clamped zero-DOF loop, a fixed-base passive two-axis applicator guide, passive clip springs, and the standard fourteen robot controls. No runtime constraint or physics-property switching.",
-  "reference_controller": "Nominal Cartesian fixture program converted to fourteen robot controls. Runtime input is elapsed time and ordinary measured robot joints only, with integral joint tracking and synchronization at declared precision poses; no task-body/contact/score feedback."
+  "reference_controller": "Nominal Cartesian fixture program converted to fourteen robot controls. Runtime input is elapsed time and ordinary measured robot joints only, with integral joint tracking and synchronization at declared precision poses; no task-body/contact/score feedback.",
+  "reconstruction": {
+    "inventory": "scene-inventory.json:22bodies,18joints,120applicator/fixture solids,all asset starts and material/joint details",
+    "full_native_geometry": "reconstruction/native-solids.json.gz:byte-exact original2782records; decompressedSHA256bae4e5a4c390f6c0e9c9cea5112a2ffafbc14385d48da7f6d6ef12f1823c0e0b",
+    "cad": "reconstruction/parts.scad:originalOpenSCADmodelsinmillimetres",
+    "instructions": "reconstruction/README.md"
+  }
 }

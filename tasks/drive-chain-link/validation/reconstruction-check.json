@@ -1,0 +1,20 @@
+{
+  "reviewed_task": "TK-N8LRG2",
+  "feedback": "Referenced scene-inventory.json missing from archive; provide dimensions, materials, joints and starting transforms for custom clips, guided applicator and fixture.",
+  "fix": "Compact explicit root inventory, readable reconstruction guide, exact native geometry archive and OpenSCAD fabrication models.",
+  "source_sha256": "5393a9a0996eae1db7f6af983df3c17533022f16c6bfdaea1e8562471da46e7e",
+  "evaluated_python_unchanged": true,
+  "instruction_unchanged": true,
+  "media_reused": "M-MRC6ZC",
+  "new_dream_episodes": 0,
+  "new_media_uploads": 0,
+  "inventory_bytes": 42623,
+  "all18joints": true,
+  "all22bodies": true,
+  "all120applicator_fixture_solids": true,
+  "exact_native_geometry_preserved": true,
+  "cad_meshes_positive_native_volume": 2538,
+  "cad_module_references_valid": true,
+  "openscad_stl_or_hardware_validation": false,
+  "all_joint_attachment_frames_explicit": true
+}
