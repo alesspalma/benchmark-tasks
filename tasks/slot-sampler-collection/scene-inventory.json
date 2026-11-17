@@ -1,17 +1,17 @@
 [
   {
     "asset": "probe",
-    "solid": "/Asset/Outer/Back",
+    "solid": "/Asset/Outer/SleeveBack",
     "kind": "box",
     "size": [
-      0.003,
       0.048,
-      0.046
+      0.003,
+      0.029
     ],
     "position": [
-      -0.0255,
       0,
-      0.027
+      -0.0225,
+      0.0205
     ],
     "color": [
       0.65,
@@ -23,17 +23,81 @@
   },
   {
     "asset": "probe",
-    "solid": "/Asset/Outer/Side0",
-    "kind": "box",
-    "size": [
-      0.054,
-      0.003,
-      0.046
+    "solid": "/Asset/Outer/NotchLipChamfer",
+    "kind": "convex_mesh",
+    "vertices": [
+      [
+        -0.024,
+        -0.024,
+        0
+      ],
+      [
+        -0.024,
+        -0.024,
+        0.006
+      ],
+      [
+        -0.024,
+        -0.021,
+        0.006
+      ],
+      [
+        0.024,
+        -0.024,
+        0
+      ],
+      [
+        0.024,
+        -0.024,
+        0.006
+      ],
+      [
+        0.024,
+        -0.021,
+        0.006
+      ]
     ],
-    "position": [
-      0,
-      -0.0255,
-      0.027
+    "triangles": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        3,
+        5,
+        4
+      ],
+      [
+        0,
+        3,
+        4
+      ],
+      [
+        0,
+        4,
+        1
+      ],
+      [
+        1,
+        4,
+        5
+      ],
+      [
+        1,
+        5,
+        2
+      ],
+      [
+        0,
+        2,
+        5
+      ],
+      [
+        0,
+        5,
+        3
+      ]
     ],
     "color": [
       0.5,
@@ -43,57 +107,17 @@
   },
   {
     "asset": "probe",
-    "solid": "/Asset/Outer/BottomRail00",
+    "solid": "/Asset/Outer/SleeveFront",
     "kind": "box",
     "size": [
-      0.054,
-      0.004,
-      0.002
-    ],
-    "position": [
-      0,
-      -0.03,
-      -0.002
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/BottomRail01",
-    "kind": "box",
-    "size": [
-      0.054,
-      0.004,
-      0.002
-    ],
-    "position": [
-      0,
-      -0.03,
-      0.007
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/Side2",
-    "kind": "box",
-    "size": [
-      0.054,
+      0.048,
       0.003,
-      0.046
+      0.035
     ],
     "position": [
       0,
-      0.0255,
-      0.027
+      0.0225,
+      0.0175
     ],
     "color": [
       0.5,
@@ -103,17 +127,217 @@
   },
   {
     "asset": "probe",
-    "solid": "/Asset/Outer/BottomRail20",
+    "solid": "/Asset/Outer/SleeveSide0",
     "kind": "box",
     "size": [
-      0.054,
-      0.004,
-      0.002
+      0.003,
+      0.042,
+      0.035
+    ],
+    "position": [
+      -0.0225,
+      0,
+      0.0175
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/CapX0",
+    "kind": "box",
+    "size": [
+      0.017,
+      0.048,
+      0.003
+    ],
+    "position": [
+      -0.0155,
+      0,
+      0.0365
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/CapY0",
+    "kind": "box",
+    "size": [
+      0.014,
+      0.017,
+      0.003
     ],
     "position": [
       0,
-      0.03,
-      -0.002
+      -0.0155,
+      0.0365
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/StemX0",
+    "kind": "box",
+    "size": [
+      0.002,
+      0.018,
+      0.232
+    ],
+    "position": [
+      -0.008,
+      0,
+      0.154
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/StemY0",
+    "kind": "box",
+    "size": [
+      0.014,
+      0.002,
+      0.232
+    ],
+    "position": [
+      0,
+      -0.008,
+      0.154
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/SleeveSide2",
+    "kind": "box",
+    "size": [
+      0.003,
+      0.042,
+      0.035
+    ],
+    "position": [
+      0.0225,
+      0,
+      0.0175
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/CapX2",
+    "kind": "box",
+    "size": [
+      0.017,
+      0.048,
+      0.003
+    ],
+    "position": [
+      0.0155,
+      0,
+      0.0365
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/CapY2",
+    "kind": "box",
+    "size": [
+      0.014,
+      0.017,
+      0.003
+    ],
+    "position": [
+      0,
+      0.0155,
+      0.0365
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/StemX2",
+    "kind": "box",
+    "size": [
+      0.002,
+      0.018,
+      0.232
+    ],
+    "position": [
+      0.008,
+      0,
+      0.154
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/StemY2",
+    "kind": "box",
+    "size": [
+      0.014,
+      0.002,
+      0.232
+    ],
+    "position": [
+      0,
+      0.008,
+      0.154
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/BarrelGripX0",
+    "kind": "box",
+    "size": [
+      0.004,
+      0.024,
+      0.08
+    ],
+    "position": [
+      -0.01,
+      0,
+      0.18
     ],
     "color": [
       0.12,
@@ -123,17 +347,17 @@
   },
   {
     "asset": "probe",
-    "solid": "/Asset/Outer/BottomRail21",
+    "solid": "/Asset/Outer/BarrelGripY0",
     "kind": "box",
     "size": [
-      0.054,
+      0.016,
       0.004,
-      0.002
+      0.08
     ],
     "position": [
       0,
-      0.03,
-      0.007
+      -0.01,
+      0.18
     ],
     "color": [
       0.12,
@@ -143,17 +367,377 @@
   },
   {
     "asset": "probe",
-    "solid": "/Asset/Outer/Cap",
+    "solid": "/Asset/Outer/BarrelGripX2",
     "kind": "box",
     "size": [
-      0.054,
-      0.054,
+      0.004,
+      0.024,
+      0.08
+    ],
+    "position": [
+      0.01,
+      0,
+      0.18
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/BarrelGripY2",
+    "kind": "box",
+    "size": [
+      0.016,
+      0.004,
+      0.08
+    ],
+    "position": [
+      0,
+      0.01,
+      0.18
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/RodBushingX00",
+    "kind": "box",
+    "size": [
+      0.00375,
+      0.014,
+      0.01
+    ],
+    "position": [
+      -0.005125,
+      0,
+      0.043
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/RodBushingY00",
+    "kind": "box",
+    "size": [
+      0.0065,
+      0.00375,
+      0.01
+    ],
+    "position": [
+      0,
+      -0.005125,
+      0.043
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/RodBushingX02",
+    "kind": "box",
+    "size": [
+      0.00375,
+      0.014,
+      0.01
+    ],
+    "position": [
+      0.005125,
+      0,
+      0.043
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/RodBushingY02",
+    "kind": "box",
+    "size": [
+      0.0065,
+      0.00375,
+      0.01
+    ],
+    "position": [
+      0,
+      0.005125,
+      0.043
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/RodBushingX10",
+    "kind": "box",
+    "size": [
+      0.00375,
+      0.014,
+      0.01
+    ],
+    "position": [
+      -0.005125,
+      0,
+      0.26
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/RodBushingY10",
+    "kind": "box",
+    "size": [
+      0.0065,
+      0.00375,
+      0.01
+    ],
+    "position": [
+      0,
+      -0.005125,
+      0.26
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/RodBushingX12",
+    "kind": "box",
+    "size": [
+      0.00375,
+      0.014,
+      0.01
+    ],
+    "position": [
+      0.005125,
+      0,
+      0.26
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/RodBushingY12",
+    "kind": "box",
+    "size": [
+      0.0065,
+      0.00375,
+      0.01
+    ],
+    "position": [
+      0,
+      0.005125,
+      0.26
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/FingerRestX0",
+    "kind": "box",
+    "size": [
+      0.011,
+      0.036,
+      0.004
+    ],
+    "position": [
+      -0.0125,
+      0,
+      0.194
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/FingerRestY0",
+    "kind": "box",
+    "size": [
+      0.014,
+      0.011,
+      0.004
+    ],
+    "position": [
+      0,
+      -0.0125,
+      0.194
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/FingerRestX2",
+    "kind": "box",
+    "size": [
+      0.011,
+      0.036,
+      0.004
+    ],
+    "position": [
+      0.0125,
+      0,
+      0.194
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Outer/FingerRestY2",
+    "kind": "box",
+    "size": [
+      0.014,
+      0.011,
+      0.004
+    ],
+    "position": [
+      0,
+      0.0125,
+      0.194
+    ],
+    "color": [
+      0.12,
+      0.15,
+      0.18
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Rod/PocketFloor",
+    "kind": "box",
+    "size": [
+      0.04,
+      0.04,
+      0.004
+    ],
+    "position": [
+      0,
+      0,
+      0.002
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Rod/PocketBack",
+    "kind": "box",
+    "size": [
+      0.034,
+      0.003,
+      0.02
+    ],
+    "position": [
+      0,
+      0.0185,
+      0.01
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Rod/PocketSide0",
+    "kind": "box",
+    "size": [
+      0.003,
+      0.04,
+      0.02
+    ],
+    "position": [
+      -0.0185,
+      0,
+      0.01
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Rod/PocketSide2",
+    "kind": "box",
+    "size": [
+      0.003,
+      0.04,
+      0.02
+    ],
+    "position": [
+      0.0185,
+      0,
+      0.01
+    ],
+    "color": [
+      0.5,
+      0.55,
+      0.59
+    ]
+  },
+  {
+    "asset": "probe",
+    "solid": "/Asset/Rod/PocketRoof",
+    "kind": "box",
+    "size": [
+      0.04,
+      0.04,
       0.003
     ],
     "position": [
       0,
       0,
-      0.0515
+      0.0215
     ],
     "color": [
       0.5,
@@ -163,466 +747,17 @@
   },
   {
     "asset": "probe",
-    "solid": "/Asset/Outer/ShedRoof",
-    "kind": "convex_mesh",
-    "vertices": [
-      [
-        -0.027,
-        -0.027,
-        0.053
-      ],
-      [
-        0.027,
-        -0.027,
-        0.053
-      ],
-      [
-        0.027,
-        0.027,
-        0.053
-      ],
-      [
-        -0.027,
-        0.027,
-        0.053
-      ],
-      [
-        0,
-        0,
-        0.085
-      ]
-    ],
-    "triangles": [
-      [
-        0,
-        2,
-        1
-      ],
-      [
-        0,
-        3,
-        2
-      ],
-      [
-        0,
-        1,
-        4
-      ],
-      [
-        1,
-        2,
-        4
-      ],
-      [
-        2,
-        3,
-        4
-      ],
-      [
-        3,
-        0,
-        4
-      ]
-    ],
-    "color": [
-      0.5,
-      0.55,
-      0.59
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/Stem00",
-    "kind": "box",
-    "size": [
-      0.002,
-      0.018,
-      0.215
-    ],
-    "position": [
-      -0.008,
-      0.0,
-      0.1925
-    ],
-    "color": [
-      0.5,
-      0.55,
-      0.59
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/Stem02",
-    "kind": "box",
-    "size": [
-      0.002,
-      0.018,
-      0.215
-    ],
-    "position": [
-      0.008,
-      0.0,
-      0.1925
-    ],
-    "color": [
-      0.5,
-      0.55,
-      0.59
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/Stem10",
-    "kind": "box",
-    "size": [
-      0.018,
-      0.002,
-      0.215
-    ],
-    "position": [
-      0.0,
-      -0.008,
-      0.1925
-    ],
-    "color": [
-      0.5,
-      0.55,
-      0.59
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/Stem12",
-    "kind": "box",
-    "size": [
-      0.018,
-      0.002,
-      0.215
-    ],
-    "position": [
-      0.0,
-      0.008,
-      0.1925
-    ],
-    "color": [
-      0.5,
-      0.55,
-      0.59
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/SupportGrip",
-    "kind": "box",
-    "size": [
-      0.024,
-      0.076,
-      0.018
-    ],
-    "position": [
-      -0.01,
-      0.052,
-      0.255
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideArmY0",
+    "solid": "/Asset/Rod/InnerRod",
     "kind": "box",
     "size": [
       0.006,
-      0.035,
-      0.006
+      0.006,
+      0.287
     ],
     "position": [
       0,
-      -0.0175,
-      0.09
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideArmX0",
-    "kind": "box",
-    "size": [
-      0.029,
-      0.006,
-      0.006
-    ],
-    "position": [
-      0.0145,
-      -0.035,
-      0.09
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideX00",
-    "kind": "box",
-    "size": [
-      0.002,
-      0.012,
-      0.006
-    ],
-    "position": [
-      0.028,
-      -0.035,
-      0.09
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideY00",
-    "kind": "box",
-    "size": [
-      0.008,
-      0.002,
-      0.006
-    ],
-    "position": [
-      0.033,
-      -0.04,
-      0.09
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideX02",
-    "kind": "box",
-    "size": [
-      0.002,
-      0.012,
-      0.006
-    ],
-    "position": [
-      0.038,
-      -0.035,
-      0.09
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideY02",
-    "kind": "box",
-    "size": [
-      0.008,
-      0.002,
-      0.006
-    ],
-    "position": [
-      0.033,
-      -0.030000000000000002,
-      0.09
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideArmY1",
-    "kind": "box",
-    "size": [
-      0.006,
-      0.035,
-      0.006
-    ],
-    "position": [
       0,
-      -0.0175,
-      0.13
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideArmX1",
-    "kind": "box",
-    "size": [
-      0.029,
-      0.006,
-      0.006
-    ],
-    "position": [
-      0.0145,
-      -0.035,
-      0.13
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideX10",
-    "kind": "box",
-    "size": [
-      0.002,
-      0.012,
-      0.006
-    ],
-    "position": [
-      0.028,
-      -0.035,
-      0.13
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideY10",
-    "kind": "box",
-    "size": [
-      0.008,
-      0.002,
-      0.006
-    ],
-    "position": [
-      0.033,
-      -0.04,
-      0.13
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideX12",
-    "kind": "box",
-    "size": [
-      0.002,
-      0.012,
-      0.006
-    ],
-    "position": [
-      0.038,
-      -0.035,
-      0.13
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Outer/GuideY12",
-    "kind": "box",
-    "size": [
-      0.008,
-      0.002,
-      0.006
-    ],
-    "position": [
-      0.033,
-      -0.030000000000000002,
-      0.13
-    ],
-    "color": [
-      0.12,
-      0.15,
-      0.18
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Gate/Shutter",
-    "kind": "box",
-    "size": [
-      0.0025,
-      0.054,
-      0.054
-    ],
-    "position": [
-      0.02875,
-      0,
-      0.027
-    ],
-    "color": [
-      0.06,
-      0.32,
-      0.75
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Gate/Connector",
-    "kind": "box",
-    "size": [
-      0.008,
-      0.008,
-      0.008
-    ],
-    "position": [
-      0.031,
-      -0.029,
-      0.058
-    ],
-    "color": [
-      0.06,
-      0.32,
-      0.75
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Gate/PullRod",
-    "kind": "box",
-    "size": [
-      0.006,
-      0.006,
-      0.162
-    ],
-    "position": [
-      0.033,
-      -0.035,
-      0.139
+      0.1665
     ],
     "color": [
       0.5,
@@ -632,276 +767,20 @@
   },
   {
     "asset": "probe",
-    "solid": "/Asset/Gate/PullArmY",
-    "kind": "box",
-    "size": [
-      0.006,
-      0.045,
-      0.006
-    ],
+    "solid": "/Asset/Rod/PushButton",
+    "kind": "cylinder",
+    "radius": 0.015,
+    "length": 0.01,
+    "axis": "Z",
     "position": [
-      0.033,
-      -0.0575,
-      0.22
+      0,
+      0,
+      0.31
     ],
     "color": [
       0.06,
       0.32,
       0.75
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Gate/PullArmX",
-    "kind": "box",
-    "size": [
-      0.083,
-      0.006,
-      0.006
-    ],
-    "position": [
-      -0.0085,
-      -0.08,
-      0.22
-    ],
-    "color": [
-      0.06,
-      0.32,
-      0.75
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Gate/PullTab",
-    "kind": "box",
-    "size": [
-      0.06,
-      0.034,
-      0.018
-    ],
-    "position": [
-      -0.05,
-      -0.08,
-      0.22
-    ],
-    "color": [
-      0.06,
-      0.32,
-      0.75
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Bottom/Floor",
-    "kind": "convex_mesh",
-    "vertices": [
-      [
-        -0.027,
-        -0.027,
-        0
-      ],
-      [
-        0.027,
-        -0.027,
-        0
-      ],
-      [
-        0.02,
-        -0.027,
-        0.004
-      ],
-      [
-        -0.027,
-        -0.027,
-        0.004
-      ],
-      [
-        -0.027,
-        0.027,
-        0
-      ],
-      [
-        0.027,
-        0.027,
-        0
-      ],
-      [
-        0.02,
-        0.027,
-        0.004
-      ],
-      [
-        -0.027,
-        0.027,
-        0.004
-      ]
-    ],
-    "triangles": [
-      [
-        1,
-        2,
-        0
-      ],
-      [
-        2,
-        3,
-        0
-      ],
-      [
-        6,
-        5,
-        4
-      ],
-      [
-        7,
-        6,
-        4
-      ],
-      [
-        5,
-        1,
-        0
-      ],
-      [
-        4,
-        5,
-        0
-      ],
-      [
-        6,
-        2,
-        1
-      ],
-      [
-        5,
-        6,
-        1
-      ],
-      [
-        7,
-        3,
-        2
-      ],
-      [
-        6,
-        7,
-        2
-      ],
-      [
-        4,
-        0,
-        3
-      ],
-      [
-        7,
-        4,
-        3
-      ]
-    ],
-    "color": [
-      0.95,
-      0.36,
-      0.055
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Bottom/Connector",
-    "kind": "box",
-    "size": [
-      0.014,
-      0.014,
-      0.004
-    ],
-    "position": [
-      -0.03,
-      -0.029,
-      0.002
-    ],
-    "color": [
-      0.95,
-      0.36,
-      0.055
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Bottom/PullRod",
-    "kind": "box",
-    "size": [
-      0.006,
-      0.006,
-      0.132
-    ],
-    "position": [
-      -0.034,
-      -0.035,
-      0.068
-    ],
-    "color": [
-      0.5,
-      0.55,
-      0.59
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Bottom/PullArmY",
-    "kind": "box",
-    "size": [
-      0.006,
-      0.045,
-      0.006
-    ],
-    "position": [
-      -0.034,
-      -0.0575,
-      0.13
-    ],
-    "color": [
-      0.95,
-      0.36,
-      0.055
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Bottom/PullArmX",
-    "kind": "box",
-    "size": [
-      0.071,
-      0.006,
-      0.006
-    ],
-    "position": [
-      -0.0695,
-      -0.08,
-      0.13
-    ],
-    "color": [
-      0.95,
-      0.36,
-      0.055
-    ]
-  },
-  {
-    "asset": "probe",
-    "solid": "/Asset/Bottom/PullTab",
-    "kind": "box",
-    "size": [
-      0.06,
-      0.034,
-      0.018
-    ],
-    "position": [
-      -0.105,
-      -0.08,
-      0.13
-    ],
-    "color": [
-      0.95,
-      0.36,
-      0.055
     ]
   },
   {

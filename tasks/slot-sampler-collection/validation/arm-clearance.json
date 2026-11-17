@@ -1,7 +1,7 @@
 {
   "scope": "Offline nominal convex inter-arm screen; actual contact is tested natively.",
-  "frames": 630,
+  "frames": 635,
   "convex_pairs_checked": 0,
-  "minimum_conservative_aabb_gap_m": 0.0819929877133021,
+  "minimum_conservative_aabb_gap_m": 0.04952740188015339,
   "contacts": []
 }

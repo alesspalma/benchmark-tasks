@@ -1,13 +1,13 @@
 {
   "kind": "reference",
   "score": 1.0,
-  "source_run": "sampler-gravity-005",
+  "source_run": "sampler-notched-004",
   "scope": "Fresh native physics execution using time and ordinary measured robot joints, with actual cameras",
-  "source_sha256": "547ec4aa4485896fed8516082f6ec6302eb6d2ab9e537883220bfc0abd3416b5",
+  "source_sha256": "d9dedb75db681b8febeeed88bd9d014776b607cf0cf90e6161d00d80168a38ce",
   "source_unchanged": true,
   "native_score": 1.0,
-  "steps": 2355,
-  "physics_audits": 28260,
+  "steps": 2339,
+  "physics_audits": 28068,
   "instruction": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
   "controller": {
     "inputs": [
@@ -15,14 +15,14 @@
       "joint positions"
     ]
   },
-  "native_receipt_sha256": "938f9afac4f0d00be577995b2473dfbe90eaa76d6da31dc39dc7b81b2c797665",
-  "native_trace_sha256": "7fb339f9308fe51524ff174f002d3079e67261d1c5f633eac47e6005f7edb20b",
+  "native_receipt_sha256": "206aa0bd288e63954beb6106cac65c1597271cda818b6a5902ba59225eb1433a",
+  "native_trace_sha256": "727c014563de2de438113eb65b70bd75ae152fee83bbb98c56da9d8d4c9dc0c0",
   "tracks": {
     "top_cam": {
-      "sha256": "0e448b7974a96197a2ec732463e8046793178efca4fefe9cd7da2391a59509a2",
-      "all_frames_decoded": 2356,
-      "minimum_frame_mean": 156.01006510416667,
-      "minimum_frame_std": 58.19602326205582,
+      "sha256": "0c59e6f04f99fb6537bb40bbc3784433a04804b48339877d888d153f97c38be8",
+      "all_frames_decoded": 2340,
+      "minimum_frame_mean": 154.93204282407407,
+      "minimum_frame_std": 58.82883003369749,
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -33,20 +33,20 @@
             "height": 360,
             "pix_fmt": "yuv420p",
             "r_frame_rate": "20/1",
-            "nb_frames": "2356"
+            "nb_frames": "2340"
           }
         ],
         "format": {
-          "duration": "117.800000",
-          "size": "1986066"
+          "duration": "117.000000",
+          "size": "1798805"
         }
       }
     },
     "left_cam": {
-      "sha256": "42b9bc0f9563b372e4669a7cfa63cf4c0a1f6f88f507da77db575e52964fec3d",
-      "all_frames_decoded": 2356,
-      "minimum_frame_mean": 108.9655396412037,
-      "minimum_frame_std": 35.66655236926778,
+      "sha256": "37a842aff14224c80070e92edbbb9ad98bfff7eae7fd00c8081c54ccba60d433",
+      "all_frames_decoded": 2340,
+      "minimum_frame_mean": 101.91862123842593,
+      "minimum_frame_std": 49.5181022530526,
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -57,20 +57,20 @@
             "height": 360,
             "pix_fmt": "yuv420p",
             "r_frame_rate": "20/1",
-            "nb_frames": "2356"
+            "nb_frames": "2340"
           }
         ],
         "format": {
-          "duration": "117.800000",
-          "size": "1383258"
+          "duration": "117.000000",
+          "size": "2353977"
         }
       }
     },
     "right_cam": {
-      "sha256": "c19bb0ca74bb7aa4416017a485bcd55006734f678b88bc55e2712c5bfc23c1d2",
-      "all_frames_decoded": 2356,
-      "minimum_frame_mean": 108.41526331018518,
-      "minimum_frame_std": 41.094442204741206,
+      "sha256": "949a1bb1c9b8b14aac50d2f096a55f151a518738cb0fca5bca034e0784475eb1",
+      "all_frames_decoded": 2340,
+      "minimum_frame_mean": 122.40703993055556,
+      "minimum_frame_std": 33.740439411525955,
       "probe": {
         "programs": [],
         "stream_groups": [],
@@ -81,12 +81,12 @@
             "height": 360,
             "pix_fmt": "yuv420p",
             "r_frame_rate": "20/1",
-            "nb_frames": "2356"
+            "nb_frames": "2340"
           }
         ],
         "format": {
-          "duration": "117.800000",
-          "size": "1783600"
+          "duration": "117.000000",
+          "size": "1194538"
         }
       }
     }
@@ -102,12 +102,12 @@
         "height": 1080,
         "pix_fmt": "yuv420p",
         "r_frame_rate": "20/1",
-        "nb_frames": "2356"
+        "nb_frames": "2340"
       }
     ],
     "format": {
-      "duration": "117.800000",
-      "size": "11423422"
+      "duration": "117.000000",
+      "size": "11523961"
     }
   },
   "dream_api_used": false,
@@ -115,30 +115,29 @@
   "three_cameras_valid": true,
   "files": {
     "final-right_cam.png": {
-      "bytes": 86612,
-      "sha256": "6377a2be76d940f003676ae64e9690315b9fa671d1cfdea23c95368d1c58cf15"
+      "bytes": 85765,
+      "sha256": "d1c008071c48eeb9f76279de3376704eb68277a077c232752cae724ae22476ae"
     },
     "setup.png": {
-      "bytes": 193555,
-      "sha256": "ca044e7ecbf43a98e5507873bf103c1955eb6a943b57baec575dbdf1589b1f27"
+      "bytes": 196663,
+      "sha256": "2aae34a20db2f89e7fa2b7c09b5f49cc3f788df1f3e01f006bae6f2ec103243b"
     },
     "demo.mp4": {
-      "bytes": 11423422,
-      "sha256": "9069bd17ad572ebebfd0dcbeca4bb877801155ba2f7d3fadc0fbe7aae244a213"
+      "bytes": 11523961,
+      "sha256": "771ecddd99c0980d55fc20ae282494046ec0dc0dbc0031ad918884e9aacb7303"
     },
     "review.png": {
-      "bytes": 1954490,
-      "sha256": "d6567ae0191b4700f62c67470992c8997a7456d00ffda46e2040ded3372b37b1"
+      "bytes": 1971741,
+      "sha256": "d29b8a62d0729f3a48983db7e75c821e4a12648442a63ea52953b695f7b9b09b"
     },
     "final-top_cam.png": {
-      "bytes": 184511,
-      "sha256": "be82a1874d5fe653cb3bc68cbcc2f6be815d7ff5164136325734b060ed9bd1a7"
+      "bytes": 177521,
+      "sha256": "712d65a1d15177914c25e0e35725b20960f7773d2914a11a71353a062513135e"
     },
     "final-left_cam.png": {
-      "bytes": 97898,
-      "sha256": "77885420839117badb61178ef05fd256fc2b73f1c5dd6b1b579a71dbe8995849"
+      "bytes": 122352,
+      "sha256": "09306658db13eb08ac9c5d62907e75e34067dbf9273e6bcaea6b768ef8f20365"
     }
   },
-  "review_notes": "Inspected eight-stage actual three-camera contact sheet and actual bottom-discharge frame1626. Distinct blue intake and orange bottom slide; sample falls into jar; probe returned and hands released. All2356 initial/action frames decoded in every native camera; no temporal edits.",
-  "discharge_review_frame": 1626
+  "review_notes": "Inspected actual three-camera eight-stage contact sheet and final frames; natural barrel hold and topbutton presses,contained transfer,notch discharge intojar,closed samplerreturnedandhandsreleased. All2340N+1frames decoded per native640x360camera. Section schematic is separate original documentation,notnative media."
 }

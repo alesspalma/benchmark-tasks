@@ -1,39 +1,4 @@
 {
-  "KEY": "slot_sampler",
-  "TITLE": "Collect a granule sample with a bottom-discharge probe",
-  "INSTRUCTION": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
-  "DESCRIPTION": "An upright 300 mm sampling probe has two independent spring-closed shutters. Pull the blue handle upward while the head is buried to admit granules through the side port; close it before withdrawal. Hold the closed probe above the jar and pull the lower orange handle horizontally toward the robot to slide the bottom plate aside. The sample falls vertically into the jar; the blue intake stays closed. Release the orange handle to close the floor, then return the probe to its cradle.",
-  "MAX_STEPS": 2800,
-  "TOP": 0.7474999999999999,
-  "TUB": [
-    0.43,
-    0.02,
-    0.7474999999999999
-  ],
-  "JAR": [
-    0.35,
-    0.15,
-    0.7474999999999999
-  ],
-  "PROBE": [
-    0.43,
-    0.38,
-    0.7535
-  ],
-  "RADIUS": 0.0034,
-  "MASS": 0.00018,
-  "WINDOW": [
-    0.004,
-    0.05
-  ],
-  "TUB_INNER": [
-    0.105,
-    0.105
-  ],
-  "TUB_H": 0.145,
-  "JAR_R": 0.055,
-  "JAR_H": 0.095,
-  "PROBE_LENGTH": 0.3,
   "world_frame": "x away from robot bases, +y left arm side, z up; meters and radians",
   "rig": {
     "name": "station-calibrated",
@@ -134,48 +99,143 @@
     "top_m": 0.7474999999999999
   },
   "robot": "Two standard I2RT YAM arms with parallel grippers, as supplied by the pinned official adapter.",
-  "source": "slot_sampler/builder.py",
+  "KEY": "slot_sampler",
+  "TITLE": "Collect granules with a sleeve-and-notched-rod sampler",
+  "INSTRUCTION": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
+  "DESCRIPTION": "Inspired by Buerkle's powder sampler Mini (https://www.buerkle.de/en/powder-sampler-mini_p5346-3010). The right arm presses the blue top button downward to extend a notched collecting rod from its fixed outer sleeve. Granules enter the exposed side notch above its solid floor. Retracting the rod into the sleeve encloses the sample. Over the jar, tilt the closed sampler toward its side opening and extend the rod again to pour out the sample by gravity. The pocket floor moves with the rod; there is no horizontal discharge plate. The left hand grips the barrel. This original enlarged rectangular version uses coarse calibration granules.",
+  "MAX_STEPS": 2800,
+  "TOP": 0.7474999999999999,
+  "TUB": [
+    0.4,
+    0.02,
+    0.7474999999999999
+  ],
+  "JAR": [
+    0.22,
+    0.1,
+    0.7474999999999999
+  ],
+  "PROBE": [
+    0.28,
+    -0.06,
+    0.7535
+  ],
+  "RADIUS": 0.0034,
+  "MASS": 0.00018,
+  "WINDOW": [
+    0.004,
+    0.02
+  ],
+  "TUB_INNER": [
+    0.105,
+    0.105
+  ],
+  "TUB_H": 0.145,
+  "JAR_R": 0.055,
+  "JAR_H": 0.095,
+  "PROBE_LENGTH": 0.3,
+  "SUPPORT_GRASP": [
+    0.0,
+    0.0,
+    0.18
+  ],
+  "GATE_GRASP": [
+    0.0,
+    0.0,
+    0.326
+  ],
+  "GATE_TRAVEL": 0.025,
+  "GATE_CLOSED": 0.002,
+  "GATE_SPRING": 20.0,
+  "GATE_PRELOAD": 0.06,
+  "INNER_BACK": -0.017,
+  "INNER_FRONT": 0.0205,
+  "INNER_HALF_WIDTH": 0.017,
+  "CHAMBER_TOP": 0.02,
+  "FLOOR_SLOPE": 0.0,
+  "FLOOR_MID_HEIGHT": 0.004,
+  "SAMPLING_BASE_HEIGHT": 0.05,
+  "SAMPLING_MAX_BASE_HEIGHT": 0.055,
+  "DISCHARGE_HEIGHT": 0.05,
+  "DISCHARGE_TILT_DEG": 20.0,
+  "PORT_SIGN": -1.0,
+  "PORT_AXIS": 1,
   "objects": [
     {
-      "name": "probe frame",
-      "type": "hollow square stem and chamber with separate side and bottom openings",
-      "nominal_material": "aluminum, rubber support grip, transparent polycarbonate back wall",
+      "name": "fixed outer sampler",
+      "type": "62mm square sleeve and hollow18mm barrel,ordinary24mm rubber barrel grip,two square rod bushings",
+      "nominal_material": "aluminum,3mm polycarbonate inspection pane,rubber grip",
       "mass_kg": 0.28,
-      "length_m": 0.3,
-      "head_envelope_m": [
-        0.054,
-        0.064,
-        0.054
-      ],
       "position_m": [
-        0.43,
-        0.38,
+        0.28,
+        -0.06,
         0.7535
-      ]
+      ],
+      "sleeve_outer_m": [
+        0.048,
+        0.048,
+        0.038
+      ],
+      "sleeve_inner_m": [
+        0.042,
+        0.042,
+        0.035
+      ],
+      "barrel_height_m": 0.27,
+      "grip_outer_m": [
+        0.024,
+        0.024,
+        0.08
+      ],
+      "grip_center_m": [
+        0.0,
+        0.0,
+        0.18
+      ],
+      "bushing_hole_m": 0.0065,
+      "finger_rest_m": [
+        0.036,
+        0.036,
+        0.004
+      ],
+      "finger_rest_center_m": [
+        0,
+        0,
+        0.194
+      ],
+      "notch_lip_chamfer_height_m": 0.006
     },
     {
-      "name": "blue intake shutter",
-      "type": "passive spring-return Z slide",
-      "nominal_material": "aluminum/polymer assembly with rubber grip",
-      "mass_kg": 0.07,
-      "travel_m": 0.05,
-      "grasp_m": [
-        -0.05,
-        -0.08,
-        0.22
-      ]
-    },
-    {
-      "name": "orange discharge floor",
-      "type": "passive spring-return -X slide",
-      "nominal_material": "aluminum/polymer assembly with rubber grip",
-      "mass_kg": 0.065,
-      "travel_m": 0.058,
-      "grasp_m": [
-        -0.105,
-        -0.08,
-        0.13
-      ]
+      "name": "collecting rod",
+      "type": "6mm square rod with integral notched sampling pocket and30mm top pushbutton",
+      "nominal_material": "aluminum,polymer button",
+      "mass_kg": 0.085,
+      "pocket_outer_m": [
+        0.04,
+        0.04,
+        0.023
+      ],
+      "notch_width_m": 0.034,
+      "notch_height_m": [
+        0.004,
+        0.02
+      ],
+      "notch_direction": "local-Y",
+      "solid_floor_thickness_m": 0.004,
+      "button_radius_m": 0.015,
+      "button_height_m": 0.01,
+      "button_center_local_m": [
+        0,
+        0,
+        0.31
+      ],
+      "joint": "SampleSlide",
+      "travel_m": 0.025,
+      "axis": "-Z",
+      "spring_N_per_m": 20,
+      "spring_rest_m": -0.06,
+      "damping_Ns_per_m": 2,
+      "joint_friction": 0.03
     },
     {
       "name": "source tub",
@@ -187,14 +247,14 @@
       ],
       "wall_m": 0.003,
       "position_m": [
-        0.43,
+        0.4,
         0.02,
         0.7474999999999999
       ]
     },
     {
       "name": "sample jar",
-      "type": "fixed square polymer cup",
+      "type": "fixed polymer cup",
       "inner_size_m": [
         0.11,
         0.11,
@@ -202,156 +262,64 @@
       ],
       "wall_m": 0.003,
       "position_m": [
-        0.35,
-        0.15,
+        0.22,
+        0.1,
         0.7474999999999999
       ]
     },
     {
       "name": "granules",
-      "type": "native rigid polymer spheres",
+      "type": "repeatable dry polymer calibration spheres",
       "quantity": 1960,
       "diameter_m": 0.0068,
       "mass_each_kg": 0.00018,
-      "static_friction": 0.3,
-      "dynamic_friction": 0.2,
-      "restitution": 0,
       "initial_lattice": [
         14,
         14,
         10
       ],
-      "lattice_pitch_m": 0.0070999999999999995
+      "pitch_m": 0.0070999999999999995,
+      "static_friction": 0.3,
+      "dynamic_friction": 0.2,
+      "restitution": 0,
+      "ccd": true
     },
     {
-      "name": "probe cradle",
-      "type": "fixed polymer stand",
-      "foot_size_m": [
+      "name": "cradle",
+      "type": "fixed polymer support",
+      "foot_m": [
         0.116,
         0.116,
         0.006
       ],
-      "wall_height_m": 0.03,
       "clear_opening_m": [
         0.1,
         0.1
       ],
+      "wall_height_m": 0.03,
       "reference_origin_m": [
-        0.43,
-        0.38,
+        0.28,
+        -0.06,
         0.7535
       ]
     },
     {
       "name": "secondary containment",
       "type": "fixed polymer tray",
-      "centre_m": [
-        0.4,
-        0.16,
-        0.7474999999999999
-      ],
       "inner_size_m": [
         0.52,
         0.62,
         0.05
       ],
       "wall_m": 0.003,
-      "base_thickness_m": 0.008
+      "base_thickness_m": 0.008,
+      "reference_origin_m": [
+        0.4,
+        0.16,
+        0.7474999999999999
+      ]
     }
   ],
-  "CHAMBER_TOP": 0.05,
-  "FLOOR_MID_HEIGHT": 0.004,
-  "FLOOR_SLOPE": 0.0,
-  "GATE_CLOSED": 0.002,
-  "GATE_GRASP": [
-    -0.05,
-    -0.08,
-    0.22
-  ],
-  "GATE_OPEN": 0.012,
-  "GATE_PRELOAD": 0.02,
-  "GATE_SPRING": 25.0,
-  "GATE_TRAVEL": 0.05,
-  "INNER_BACK": -0.024,
-  "INNER_FRONT": 0.0275,
-  "INNER_HALF_WIDTH": 0.024,
-  "SAMPLING_BASE_HEIGHT": 0.03,
-  "SAMPLING_MAX_BASE_HEIGHT": 0.055,
-  "SUPPORT_GRASP": [
-    -0.01,
-    0.07,
-    0.255
-  ],
-  "secondary_containment": {
-    "centre_xy_m": [
-      0.4,
-      0.16
-    ],
-    "inner_size_m": [
-      0.52,
-      0.62
-    ],
-    "wall_height_m": 0.05,
-    "base_thickness_m": 0.008
-  },
-  "storage_cradle": {
-    "foot_m": [
-      0.116,
-      0.116,
-      0.006
-    ],
-    "clear_opening_m": [
-      0.1,
-      0.1
-    ],
-    "wall_height_m": 0.03
-  },
-  "probe": {
-    "frame_mass_kg": 0.28,
-    "shutter_mass_kg": 0.07,
-    "sample_head_envelope_m": [
-      0.054,
-      0.054,
-      0.054
-    ],
-    "front_port_height_m": [
-      0.004,
-      0.05
-    ],
-    "gate_joint": "GateSlide",
-    "gate_travel_m": 0.05,
-    "spring_N_per_m": 25.0,
-    "spring_rest_m": -0.02,
-    "damping_Ns_per_m": 2.0,
-    "friction": 0.03,
-    "support_grasp_m": [
-      -0.01,
-      0.07,
-      0.255
-    ],
-    "gate_grasp_m": [
-      -0.05,
-      -0.08,
-      0.22
-    ],
-    "bottom_mass_kg": 0.065,
-    "floor_type": "4mm sliding plate,flat topz4mm,7mm closing-edge bevel fromx20..27mm",
-    "back_wall": "3mm transparent polycarbonate,opacity0.22",
-    "bottom_joint": "BottomSlide",
-    "bottom_axis": "-X",
-    "bottom_travel_m": 0.058,
-    "bottom_spring_N_per_m": 20.0,
-    "bottom_spring_rest_m": -0.05,
-    "bottom_grasp_m": [
-      -0.105,
-      -0.08,
-      0.13
-    ],
-    "rubber_grip_friction": [
-      1.2,
-      1.0
-    ]
-  },
   "native_demo_cameras": [
     640,
     360
@@ -367,16 +335,5 @@
   "model_composite": [
     640,
     528
-  ],
-  "grain_ccd": true,
-  "DUMP_GRASP": [
-    -0.105,
-    -0.08,
-    0.13
-  ],
-  "DUMP_TRAVEL": 0.058,
-  "DUMP_CLOSED": 0.002,
-  "DUMP_SPRING": 20.0,
-  "DUMP_PRELOAD": 0.05,
-  "DISCHARGE_HEIGHT": 0.113
+  ]
 }

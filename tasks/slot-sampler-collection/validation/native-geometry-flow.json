@@ -1,0 +1,22 @@
+{
+  "scope": "Native physical execution; side-notch entry,full closure,side-notch gravity exit,settled mass; no hosted inference",
+  "source_sha256": "d9dedb75db681b8febeeed88bd9d014776b607cf0cf90e6161d00d80168a38ce",
+  "score": 1.0,
+  "delivered_grams": 6.3,
+  "captured_grains": 35,
+  "discharged_grains": 35,
+  "delivered_grains": 35,
+  "inside_remaining": 0,
+  "steps": 2339,
+  "simulated_s": 116.95,
+  "physics_samples": 28068,
+  "maximum_transfer_extension_m": 4.1427756514167413e-07,
+  "maximum_floor_contact_penetration_m": 0.0007654829012088099,
+  "maximum_flat_sleeve_contact_penetration_m": 0.00032514823798942714,
+  "chamfer_solid_center_hits": 0,
+  "maximum_bearing_alignment_error_m": 1.4491966066898746e-07,
+  "interpretation": "No sphere centres entered the solid floor or flat sleeve walls at240Hz; chamfer point-in-solid hits0. Reported sub-radius overlaps are ordinary native contact-solver penetration,not through-floor material movement.",
+  "grain_count_conserved": 1960,
+  "violations": [],
+  "dream_api_used": false
+}

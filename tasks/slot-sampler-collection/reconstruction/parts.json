@@ -1,0 +1,32 @@
+{
+  "Outer": {
+    "solids": 29,
+    "units": "mm",
+    "source": "scene-inventory.json"
+  },
+  "Rod": {
+    "solids": 7,
+    "units": "mm",
+    "source": "scene-inventory.json"
+  },
+  "Source": {
+    "solids": 5,
+    "units": "mm",
+    "source": "scene-inventory.json"
+  },
+  "Jar": {
+    "solids": 5,
+    "units": "mm",
+    "source": "scene-inventory.json"
+  },
+  "Stand": {
+    "solids": 5,
+    "units": "mm",
+    "source": "scene-inventory.json"
+  },
+  "Containment": {
+    "solids": 6,
+    "units": "mm",
+    "source": "scene-inventory.json"
+  }
+}

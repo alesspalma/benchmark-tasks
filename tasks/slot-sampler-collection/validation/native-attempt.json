@@ -2,11 +2,11 @@
   "status": "completed",
   "hostname": "tengu",
   "task": "slot_sampler",
-  "source_sha256": "547ec4aa4485896fed8516082f6ec6302eb6d2ab9e537883220bfc0abd3416b5",
+  "source_sha256": "d9dedb75db681b8febeeed88bd9d014776b607cf0cf90e6161d00d80168a38ce",
   "seed": 1415158438,
   "policy": "demo",
   "dream_api_used": false,
-  "started_at_utc": "2026-11-16T20:42:13.042087+00:00",
+  "started_at_utc": "2026-11-17T03:26:06.240350+00:00",
   "control_hz": 20,
   "physics_hz": 240,
   "instruction": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
@@ -18,48 +18,50 @@
   "final_metrics": {
     "score": 1.0,
     "success": true,
-    "delivered_grams": 18.72,
-    "delivered_grains": 104,
-    "admitted_grains": 104,
-    "captured_grains": 104,
-    "discharged_grains": 104,
+    "delivered_grams": 6.3,
+    "delivered_grains": 35,
+    "admitted_grains": 35,
+    "captured_grains": 35,
+    "discharged_grains": 35,
     "inside_grains": 0,
-    "gate_open_m": 4.801604447379759e-08,
-    "bottom_open_m": -6.119242357272014e-08,
+    "gate_open_m": -9.769014752691874e-08,
     "probe_parked": true,
-    "physics_samples": 28260,
+    "physics_samples": 28068,
+    "maximum_floor_penetration_m": 0.0007654829012088099,
+    "maximum_sleeve_penetration_m": 0.00032514823798942714,
+    "chamfer_solid_center_hits": 0,
     "violations": []
   },
-  "steps": 2355,
-  "worst_ik_m": 0.0019953985197424706,
-  "worst_ik_rad": 0.012082813239068,
-  "elapsed_wall_s": 334.11618565092795,
+  "steps": 2339,
+  "worst_ik_m": 9.956225727302117e-05,
+  "worst_ik_rad": 0.00032807779419265963,
+  "elapsed_wall_s": 325.95041537913494,
   "source_unchanged": true,
   "video_errors": {},
   "media": {
     "setup-top_cam.png": {
-      "bytes": 193555,
-      "sha256": "ca044e7ecbf43a98e5507873bf103c1955eb6a943b57baec575dbdf1589b1f27"
+      "bytes": 196663,
+      "sha256": "2aae34a20db2f89e7fa2b7c09b5f49cc3f788df1f3e01f006bae6f2ec103243b"
     },
     "left_cam.mp4": {
-      "bytes": 1383258,
-      "sha256": "42b9bc0f9563b372e4669a7cfa63cf4c0a1f6f88f507da77db575e52964fec3d"
+      "bytes": 2353977,
+      "sha256": "37a842aff14224c80070e92edbbb9ad98bfff7eae7fd00c8081c54ccba60d433"
     },
     "setup-left_cam.png": {
-      "bytes": 195892,
-      "sha256": "f361693e5c254f0ed0059812f1d52fe17c46bddd37e21fad10e6dfc6cc1e4990"
+      "bytes": 124316,
+      "sha256": "10d3dc0e7a9058756d4e0396b2c91b86d55d2002c3522d8c48abe203b56d64cc"
     },
     "top_cam.mp4": {
-      "bytes": 1986066,
-      "sha256": "0e448b7974a96197a2ec732463e8046793178efca4fefe9cd7da2391a59509a2"
+      "bytes": 1798805,
+      "sha256": "0c59e6f04f99fb6537bb40bbc3784433a04804b48339877d888d153f97c38be8"
     },
     "setup-right_cam.png": {
-      "bytes": 89789,
-      "sha256": "358fcd88bd61ddf18463ca7c57f430aa73687da2578d073aaae40863bc3c5376"
+      "bytes": 89369,
+      "sha256": "c090727f4955d2ef7fb84a3dee6b69a260f7bca2b65559cf0979f87363be921a"
     },
     "right_cam.mp4": {
-      "bytes": 1783600,
-      "sha256": "c19bb0ca74bb7aa4416017a485bcd55006734f678b88bc55e2712c5bfc23c1d2"
+      "bytes": 1194538,
+      "sha256": "949a1bb1c9b8b14aac50d2f096a55f151a518738cb0fca5bca034e0784475eb1"
     }
   }
 }

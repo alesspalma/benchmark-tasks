@@ -1,4 +1,4 @@
-"""Actual mass admitted at the side and discharged through the separate bottom."""
+"""Mass sampled through a real exposed notch, enclosed, and gravity-poured out."""
 
 from itertools import product
 
@@ -25,6 +25,9 @@ class Scorer:
         self.held = 0.0
         self.last_t = -1.0
         self.inside_count = 0
+        self.max_floor_penetration = 0.0
+        self.max_sleeve_penetration = 0.0
+        self.chamfer_center_hits = 0
 
     def observe(self, s):
         self.samples += 1
@@ -35,7 +38,40 @@ class Scorer:
         if not np.isfinite(points).all() or not np.isfinite(p).all():
             self.violations.add("invalid_state")
             return
-        local = (points - p[:3]) @ r
+        extension = probe["joints"]["SampleSlide"]
+        # Rod moves down inside the fixed sleeve. This is a read-only change
+        # of measurement coordinates, not a particle or body state update.
+        local = (points - p[:3]) @ r + [0, 0, extension]
+        local = local[:, [1, 0, 2]].copy()
+        local[:, 0] *= C.PORT_SIGN  # +measurement-X points out through tool -Y.
+        # Read-only geometric audit for the user's solid-material concern.
+        # This never supplies feedback to the controller or moves anything.
+        d = np.linalg.norm(
+            local - np.clip(local, [-0.020, -0.020, 0], [0.020, 0.020, 0.004]), axis=1
+        )
+        self.max_floor_penetration = max(
+            self.max_floor_penetration, float(np.maximum(C.RADIUS - d, 0).max())
+        )
+        sleeve = (points - p[:3]) @ r
+        for lo, hi in (
+            ([0.021, -0.021, 0], [0.024, 0.021, 0.035]),
+            ([-0.024, -0.021, 0], [-0.021, 0.021, 0.035]),
+            ([-0.024, 0.021, 0], [0.024, 0.024, 0.035]),
+            ([-0.024, -0.024, 0.006], [0.024, -0.021, 0.035]),
+        ):
+            d = np.linalg.norm(sleeve - np.clip(sleeve, lo, hi), axis=1)
+            self.max_sleeve_penetration = max(
+                self.max_sleeve_penetration, float(np.maximum(C.RADIUS - d, 0).max())
+            )
+        # A separate exact point-in-prism audit covers the chamfered lip.
+        hit = (
+            (np.abs(sleeve[:, 0]) < 0.024)
+            & (sleeve[:, 1] > -0.024)
+            & (sleeve[:, 1] < -0.024 + 0.5 * sleeve[:, 2])
+            & (sleeve[:, 2] > 0)
+            & (sleeve[:, 2] < 0.006)
+        )
+        self.chamfer_center_hits += int(hit.sum())
         margin = C.RADIUS - 0.0005
         floor = C.FLOOR_MID_HEIGHT - C.FLOOR_SLOPE * local[:, 0]
         inside = (
@@ -45,15 +81,15 @@ class Scorer:
             & (local[:, 2] > floor + margin * np.sqrt(1 + C.FLOOR_SLOPE**2))
             & (local[:, 2] < C.CHAMBER_TOP - margin)
         )
-        gate = probe["joints"]["GateSlide"]
-        bottom = probe["joints"]["BottomSlide"]
+        gate = extension
+        pocket_origin = p[:3] - r[:, 2] * extension
         buried = (
-            abs(p[0] - C.TUB[0]) < 0.025
-            and abs(p[1] - C.TUB[1]) < 0.025
-            and C.TOP <= p[2] < C.TOP + C.SAMPLING_MAX_BASE_HEIGHT
+            abs(pocket_origin[0] - C.TUB[0]) < 0.025
+            and abs(pocket_origin[1] - C.TUB[1]) < 0.025
+            and C.TOP <= pocket_origin[2] < C.TOP + C.SAMPLING_MAX_BASE_HEIGHT
             and r[2, 2] > 0.97
         )
-        if self.previous_inside is not None and gate >= C.GATE_OPEN and buried:
+        if self.previous_inside is not None and gate > 2 * C.RADIUS and buried:
             entry = inside & ~self.previous_inside
             side = (
                 (self.previous_local[:, 0] >= C.INNER_FRONT - margin)
@@ -71,19 +107,18 @@ class Scorer:
             )
             self.admitted.update(np.flatnonzero(entry & side & from_source).tolist())
         # Only a real grain still enclosed after closing becomes eligible.
-        if gate <= C.GATE_CLOSED and bottom <= C.DUMP_CLOSED:
+        if gate <= C.GATE_CLOSED:
             self.captured.update(i for i in self.admitted if inside[i])
-        # Whole-grain crossing through the physically uncovered bottom.
-        # Holding a full sampler above or inside the jar earns no delivery.
-        if self.previous_local is not None and bottom > 2 * C.RADIUS:
-            boundary = -C.RADIUS + 0.0005
+        # A whole grain leaves the exposed side notch; the solid floor
+        # remains attached underneath the pocket during fill AND emptying.
+        if self.previous_local is not None and gate > 2 * C.RADIUS:
+            boundary = C.INNER_FRONT + C.RADIUS - 0.0005
             exits = (
-                (self.previous_local[:, 2] > boundary)
-                & (local[:, 2] <= boundary)
-                & (local[:, 0] > C.INNER_BACK - C.RADIUS)
-                & (local[:, 0] < C.INNER_FRONT + C.RADIUS)
+                (self.previous_local[:, 0] < boundary)
+                & (local[:, 0] >= boundary)
                 & (np.abs(local[:, 1]) < C.INNER_HALF_WIDTH + C.RADIUS)
-                & (local[:, 0] - C.RADIUS > 0.027 - bottom - 0.0005)
+                & (local[:, 2] > C.WINDOW[0] - C.RADIUS)
+                & (local[:, 2] + C.RADIUS < gate + 0.0005)
             )
             self.discharged.update(
                 i for i in np.flatnonzero(exits) if i in self.captured
@@ -116,7 +151,7 @@ class Scorer:
         p = s["objects"]["probe"]
         rotation = quat_xyzw_to_matrix(np.asarray(p["pose"][3:]))
         corners = np.asarray(
-            list(product((-0.027, 0.027), (-0.027, 0.027), (0.0, 0.054)))
+            list(product((-0.024, 0.024), (-0.024, 0.024), (0.0, 0.038)))
         )
         head = corners @ rotation.T + p["pose"][:3]
         ready = bool(
@@ -125,8 +160,7 @@ class Scorer:
         )
         ready &= (
             quat_xyzw_to_matrix(np.asarray(p["pose"][3:]))[2, 2] > 0.98
-            and p["joints"]["GateSlide"] <= C.GATE_CLOSED
-            and p["joints"]["BottomSlide"] <= C.DUMP_CLOSED
+            and p["joints"]["SampleSlide"] <= C.GATE_CLOSED
         )
         settled = (
             np.linalg.norm(p["velocity"][:3]) < 0.015
@@ -170,9 +204,11 @@ class Scorer:
             "captured_grains": len(self.captured),
             "discharged_grains": len(self.discharged),
             "inside_grains": self.inside_count,
-            "gate_open_m": float(p["joints"]["GateSlide"]),
-            "bottom_open_m": float(p["joints"]["BottomSlide"]),
+            "gate_open_m": float(p["joints"]["SampleSlide"]),
             "probe_parked": bool(ready),
             "physics_samples": self.samples,
+            "maximum_floor_penetration_m": self.max_floor_penetration,
+            "maximum_sleeve_penetration_m": self.max_sleeve_penetration,
+            "chamfer_solid_center_hits": self.chamfer_center_hits,
             "violations": sorted(self.violations),
         }

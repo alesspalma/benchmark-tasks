@@ -1,4 +1,4 @@
-"""Upright sampler with separate physical intake and bottom-discharge slides."""
+"""A notched collecting rod extends from its sleeve, inspired by Buerkle Mini."""
 
 from . import config as C
 from .usd_scene import Writer
@@ -14,151 +14,148 @@ def create_assets(directory):
     mat.GetStaticFrictionAttr().Set(0.35)
     mat.GetDynamicFrictionAttr().Set(0.25)
     outer = w.body(s, "/Asset/Outer", 0.28, articulation=True)
-    # The bottom is an independent slide, never a suction piston. A clear
-    # polycarbonate back wall exposes the retained sample to the cameras.
-    w.clear_panel(s, outer + "/Back", (0.003, 0.048, 0.046), (-0.0255, 0, 0.027))
+    # Fixed 48 mm sleeve, open at its lower end. A notched rod retracts
+    # entirely into this sleeve; no floor or cross plate moves through it.
+    w.clear_panel(s, outer + "/SleeveBack", (0.048, 0.003, 0.029), (0, -0.0225, 0.0205))
+    # The bell-mouth guides coarse calibration beads into the sleeve as
+    # the filled pocket retracts, instead of trapping them at a square lip.
+    lip = [
+        [x, y, z]
+        for x in (-0.024, 0.024)
+        for y, z in ((-0.024, 0), (-0.024, 0.006), (-0.021, 0.006))
+    ]
+    lip_faces = [
+        [0, 1, 2],
+        [3, 5, 4],
+        [0, 3, 4],
+        [0, 4, 1],
+        [1, 4, 5],
+        [1, 5, 2],
+        [0, 2, 5],
+        [0, 5, 3],
+    ]
+    w.convex(s, outer + "/NotchLipChamfer", lip, lip_faces, steel)
+    w.box(s, outer + "/SleeveFront", (0.048, 0.003, 0.035), (0, 0.0225, 0.0175), steel)
     for side in (-1, 1):
         w.box(
             s,
-            outer + f"/Side{side + 1}",
-            (0.054, 0.003, 0.046),
-            (0, side * 0.0255, 0.027),
+            outer + f"/SleeveSide{side + 1}",
+            (0.003, 0.042, 0.035),
+            (side * 0.0225, 0, 0.0175),
             steel,
         )
-        # Upper/lower rails straddle the 4 mm floor with 1 mm running clearance.
-        for level, z in enumerate((-0.002, 0.007)):
-            w.box(
-                s,
-                outer + f"/BottomRail{side + 1}{level}",
-                (0.054, 0.004, 0.002),
-                (0, side * 0.030, z),
-                dark,
-            )
-    w.box(s, outer + "/Cap", (0.054, 0.054, 0.003), (0, 0, 0.0515), steel)
-    roof = [
-        [-0.027, -0.027, 0.053],
-        [0.027, -0.027, 0.053],
-        [0.027, 0.027, 0.053],
-        [-0.027, 0.027, 0.053],
-        [0, 0, 0.085],
-    ]
-    w.convex(
-        s,
-        outer + "/ShedRoof",
-        roof,
-        [[0, 2, 1], [0, 3, 2], [0, 1, 4], [1, 2, 4], [2, 3, 4], [3, 0, 4]],
-        steel,
-    )
-    # Hollow square stem and a broad ordinary support grip on the left side.
-    for axis in (0, 1):
-        for side in (-1, 1):
-            dims = [0.018, 0.018, 0.215]
-            dims[axis] = 0.002
-            pos = [0.0, 0.0, 0.1925]
-            pos[axis] = side * 0.008
-            w.box(s, outer + f"/Stem{axis}{side + 1}", dims, pos, steel)
-    w.box(
-        s, outer + "/SupportGrip", (0.024, 0.076, 0.018), (-0.010, 0.052, 0.255), dark
-    )
-    # Two visible guide bearings; the native prismatic constraint represents
-    # their linear bearing. Its spring is constant, never switched or latched.
-    for k, z in enumerate((0.090, 0.130)):
-        w.box(s, outer + f"/GuideArmY{k}", (0.006, 0.035, 0.006), (0, -0.0175, z), dark)
         w.box(
             s,
-            outer + f"/GuideArmX{k}",
-            (0.029, 0.006, 0.006),
-            (0.0145, -0.035, z),
+            outer + f"/CapX{side + 1}",
+            (0.017, 0.048, 0.003),
+            (side * 0.0155, 0, 0.0365),
+            steel,
+        )
+        w.box(
+            s,
+            outer + f"/CapY{side + 1}",
+            (0.014, 0.017, 0.003),
+            (0, side * 0.0155, 0.0365),
+            steel,
+        )
+        w.box(
+            s,
+            outer + f"/StemX{side + 1}",
+            (0.002, 0.018, 0.232),
+            (side * 0.008, 0, 0.154),
+            steel,
+        )
+        w.box(
+            s,
+            outer + f"/StemY{side + 1}",
+            (0.014, 0.002, 0.232),
+            (0, side * 0.008, 0.154),
+            steel,
+        )
+    # Ordinary rubber-covered barrel grip, not an added grasping handle.
+    for side in (-1, 1):
+        w.box(
+            s,
+            outer + f"/BarrelGripX{side + 1}",
+            (0.004, 0.024, 0.080),
+            (side * 0.010, 0, 0.180),
             dark,
         )
+        w.box(
+            s,
+            outer + f"/BarrelGripY{side + 1}",
+            (0.016, 0.004, 0.080),
+            (0, side * 0.010, 0.180),
+            dark,
+        )
+    # Two ordinary square guide bushings keep the6mm rod aligned in the barrel.
+    for k, z in enumerate((0.043, 0.260)):
         for side in (-1, 1):
             w.box(
                 s,
-                outer + f"/GuideX{k}{side + 1}",
-                (0.002, 0.012, 0.006),
-                (0.033 + side * 0.005, -0.035, z),
+                outer + f"/RodBushingX{k}{side + 1}",
+                (0.00375, 0.014, 0.010),
+                (side * 0.005125, 0, z),
                 dark,
             )
             w.box(
                 s,
-                outer + f"/GuideY{k}{side + 1}",
-                (0.008, 0.002, 0.006),
-                (0.033, -0.035 + side * 0.005, z),
+                outer + f"/RodBushingY{k}{side + 1}",
+                (0.0065, 0.00375, 0.010),
+                (0, side * 0.005125, z),
                 dark,
             )
-    gate = w.body(s, "/Asset/Gate", 0.070)
-    w.box(s, gate + "/Shutter", (0.0025, 0.054, 0.054), (0.02875, 0, 0.027), blue)
-    w.box(s, gate + "/Connector", (0.008, 0.008, 0.008), (0.031, -0.029, 0.058), blue)
-    w.box(s, gate + "/PullRod", (0.006, 0.006, 0.162), (0.033, -0.035, 0.139), steel)
-    w.box(s, gate + "/PullArmY", (0.006, 0.045, 0.006), (0.033, -0.0575, 0.220), blue)
-    w.box(s, gate + "/PullArmX", (0.083, 0.006, 0.006), (-0.0085, -0.080, 0.220), blue)
-    w.box(s, gate + "/PullTab", (0.060, 0.034, 0.018), tuple(C.GATE_GRASP), blue)
+    # Finger-rest collar on the barrel takes the axial pushbutton reaction.
+    # It is part of the handheld tool, with a central hole for the moving rod.
+    for side in (-1, 1):
+        w.box(
+            s,
+            outer + f"/FingerRestX{side + 1}",
+            (0.011, 0.036, 0.004),
+            (side * 0.0125, 0, 0.194),
+            dark,
+        )
+        w.box(
+            s,
+            outer + f"/FingerRestY{side + 1}",
+            (0.014, 0.011, 0.004),
+            (0, side * 0.0125, 0.194),
+            dark,
+        )
+    rod = w.body(s, "/Asset/Rod", 0.085)
+    # Pocket walls and floor belong to ONE rigid collecting rod.
+    # The -Y notch is the only inlet/outlet; the floor always stays beneath it.
+    w.box(s, rod + "/PocketFloor", (0.040, 0.040, 0.004), (0, 0, 0.002), steel)
+    w.box(s, rod + "/PocketBack", (0.034, 0.003, 0.020), (0, 0.0185, 0.010), steel)
+    for side in (-1, 1):
+        w.box(
+            s,
+            rod + f"/PocketSide{side + 1}",
+            (0.003, 0.040, 0.020),
+            (side * 0.0185, 0, 0.010),
+            steel,
+        )
+    w.box(s, rod + "/PocketRoof", (0.040, 0.040, 0.003), (0, 0, 0.0215), steel)
+    w.box(s, rod + "/InnerRod", (0.006, 0.006, 0.287), (0, 0, 0.1665), steel)
+    w.cylinder(s, rod + "/PushButton", 0.015, 0.010, (0, 0, 0.310), blue)
     w.slide(
         s,
-        "/Asset/GateSlide",
+        "/Asset/SampleSlide",
         outer,
-        gate,
+        rod,
         C.GATE_TRAVEL,
         C.GATE_SPRING,
         -C.GATE_PRELOAD,
-    )
-    # Orange bottom slide: a flat chamber floor and rigid, direct pull rod.
-    # The rod stays outside the head and moves toward -X, clear of the intake.
-    orange = (0.95, 0.36, 0.055)
-    dump = w.body(s, "/Asset/Bottom", 0.065)
-    # A shallow knife edge lifts grains as the plate closes instead of
-    # squeezing them against the front wall with a blunt vertical edge.
-    floor = [
-        [x, y, z]
-        for y in (-0.027, 0.027)
-        for x, z in ((-0.027, 0), (0.027, 0), (0.020, 0.004), (-0.027, 0.004))
-    ]
-    faces = [
-        [0, 2, 1],
-        [0, 3, 2],
-        [4, 5, 6],
-        [4, 6, 7],
-        [0, 1, 5],
-        [0, 5, 4],
-        [1, 2, 6],
-        [1, 6, 5],
-        [2, 3, 7],
-        [2, 7, 6],
-        [3, 0, 4],
-        [3, 4, 7],
-    ]
-    w.convex(s, dump + "/Floor", floor, [face[::-1] for face in faces], orange)
-    w.box(
-        s, dump + "/Connector", (0.014, 0.014, 0.004), (-0.030, -0.029, 0.002), orange
-    )
-    w.box(s, dump + "/PullRod", (0.006, 0.006, 0.132), (-0.034, -0.035, 0.068), steel)
-    w.box(
-        s, dump + "/PullArmY", (0.006, 0.045, 0.006), (-0.034, -0.0575, 0.130), orange
-    )
-    w.box(
-        s, dump + "/PullArmX", (0.071, 0.006, 0.006), (-0.0695, -0.080, 0.130), orange
-    )
-    w.box(s, dump + "/PullTab", (0.060, 0.034, 0.018), tuple(C.DUMP_GRASP), orange)
-    w.slide(
-        s,
-        "/Asset/BottomSlide",
-        outer,
-        dump,
-        C.DUMP_TRAVEL,
-        C.DUMP_SPRING,
-        -C.DUMP_PRELOAD,
-        axis="X",
+        axis="Z",
         reverse=True,
     )
-    # Ordinary rubber overmould on the three robot contact grips. The steel
-    # chamber and moving guides retain their original metal contact material.
     rubber = UsdShade.Material.Define(s, "/Asset/RubberGrip")
     rm = UsdPhysics.MaterialAPI.Apply(rubber.GetPrim())
     rm.CreateStaticFrictionAttr(1.2)
     rm.CreateDynamicFrictionAttr(1.0)
     rm.CreateRestitutionAttr(0.0)
-    for handle in (outer + "/SupportGrip", gate + "/PullTab", dump + "/PullTab"):
-        UsdShade.MaterialBindingAPI.Apply(s.GetPrimAtPath(handle)).Bind(
+    for suffix in ("BarrelGripX0", "BarrelGripX2", "BarrelGripY0", "BarrelGripY2"):
+        UsdShade.MaterialBindingAPI.Apply(s.GetPrimAtPath(outer + "/" + suffix)).Bind(
             rubber, materialPurpose="physics"
         )
     assets = [

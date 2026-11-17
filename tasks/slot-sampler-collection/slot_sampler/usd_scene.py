@@ -207,7 +207,9 @@ class Writer:
         if reverse:
             # Native bearing axis reversed in both joint frames; body frames
             # and their physical meshes remain unchanged.
-            q = self.Gf.Quatf(0.0, self.Gf.Vec3f(0, 0, 1))
+            q = self.Gf.Quatf(
+                0.0, self.Gf.Vec3f(1, 0, 0) if axis == "Z" else self.Gf.Vec3f(0, 0, 1)
+            )
             j.CreateLocalRot0Attr(q)
             j.CreateLocalRot1Attr(q)
         j.CreateLowerLimitAttr(0.0)

@@ -13,28 +13,20 @@
     "url": "https://github.com/kairosiann/yam-isaac-lab-arena",
     "commit": "0059d02a1a91bc6834c1d0846022891df0c78730"
   },
-  "custom_assets": "Original primitive and convex-roof geometry under MIT; no manufacturer meshes.",
+  "custom_assets": "Original box/cylinder geometry and generated OpenSCAD reconstruction under MIT; no manufacturer CAD or meshes.",
   "control_hz": 20,
   "physics_hz": 240,
   "seed": 1415158438,
   "references": [
     {
-      "url": "https://www.buerkle.de/en/easysampler-sampler-for-solids_p5360-1000",
-      "usage": "Separate capture and tip-discharge controls; upright emptying directly into a collection vessel. Our blue linear intake and orange sliding floor are original geometry, not an OEM replica."
-    },
-    {
       "url": "https://www.buerkle.de/en/powder-sampler-mini_p5346-3010",
-      "usage": "Linear spring-return sample admission, closure and re-opening over a collection vessel; operating principle only. Original enlarged rectangular head for coarse calibration granules."
-    },
-    {
-      "url": "https://www.buerkle.de/en/microsampler_p89",
-      "usage": "Closed insertion, opening at depth, closed withdrawal and reopening to empty. No OEM CAD or dimensional replica."
-    },
-    {
-      "url": "https://www.bls.gov/ooh/production/quality-control-inspectors.htm",
-      "usage": "Industrial sampling and quality-control occupation context."
+      "manufacturer": "Buerkle",
+      "product": "Powder sampler Mini,5346 family",
+      "usage": "Manufacturer describes a notched rod extended by a pushbutton,filled by gentle up/down motion,retracted into a sleeve to retain the sample,then extended to empty. This operating sequence,not OEM dimensions,is implemented."
     }
   ],
-  "mechanism": "Two independent constant passive spring-return native prismatic joints. GateSlide: +Z,0..50mm,25N/m,rest-20mm. BottomSlide: -X,0..58mm,20N/m,rest-50mm. Each has2Ns/m damping and0.03 friction. Both are driven only by robot contact; no suction, state writes, switched springs, latches or fixture motors. Controller reads elapsed time and ordinary robot joints.",
-  "grain_contact_resolution": "Native constant continuous collision detection,240Hz physics,20Hz control"
+  "mechanism": "Single passive SampleSlide prismatic bearing along-Z,0..25mm; constant20N/m spring with-60mm rest point,2Ns/m damping,0.03 jointfriction. Right closed gripper presses30mm topbutton and releases; left grips the ordinary barrel below its fingerrest. Pocket,floor,rod andbutton are one rigid moving body. The6mm chamfer at the sleeve mouth guides protruding coarse calibration beads inward during retraction. No transverse plate,suction,particle state writes or software latch.",
+  "grain_contact_resolution": "Native constant continuous collision detection,240Hz physics,20Hz control",
+  "reconstruction": "reconstruction/sampler.scad contains printable union modules generated from every native fixed/probe primitive; select Outer,Rod,Source,Jar,Stand,Containment orgranule. Render inOpenSCAD andexportSTL. Hardware/material assembly is documented inREADME.",
+  "category": "Other: laboratory research automation"
 }

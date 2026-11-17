@@ -4,22 +4,15 @@
   "assets": [
     {
       "file": "probe.usda",
-      "sha256": "2bc9b7935cadb6df4b03f0460764b97e1600e9985cd9f7ef5f672136d619f49e",
+      "sha256": "578f7d208b9f67d0d90e5b568993844d5ebdb9a143ac2d54e99d1ce65fd87c7e",
       "errors": [],
       "failed_checks": [],
       "joints": [
         {
-          "path": "/Asset/GateSlide",
+          "path": "/Asset/SampleSlide",
           "bodies": [
             "/Asset/Outer",
-            "/Asset/Gate"
-          ]
-        },
-        {
-          "path": "/Asset/BottomSlide",
-          "bodies": [
-            "/Asset/Outer",
-            "/Asset/Bottom"
+            "/Asset/Rod"
           ]
         }
       ],
@@ -27,7 +20,7 @@
     },
     {
       "file": "fixtures.usda",
-      "sha256": "f392d7a56887b05c5ccef8c4cd36cdd9d14487c1dd34f262646c5106c8d0b63d",
+      "sha256": "08a6f0d665b0083f9ff19025390702161356a23aecc8692eb79ecd80a237883a",
       "errors": [],
       "failed_checks": [],
       "joints": [],

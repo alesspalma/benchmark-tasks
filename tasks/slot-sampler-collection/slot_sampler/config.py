@@ -4,41 +4,39 @@ import numpy as np
 from yam_arena import station
 
 KEY = "slot_sampler"
-TITLE = "Collect a granule sample with a bottom-discharge probe"
+TITLE = "Collect granules with a sleeve-and-notched-rod sampler"
 INSTRUCTION = "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released."
-DESCRIPTION = "An upright 300 mm sampling probe has two independent spring-closed shutters. Pull the blue handle upward while the head is buried to admit granules through the side port; close it before withdrawal. Hold the closed probe above the jar and pull the lower orange handle horizontally toward the robot to slide the bottom plate aside. The sample falls vertically into the jar; the blue intake stays closed. Release the orange handle to close the floor, then return the probe to its cradle."
+DESCRIPTION = "Inspired by Buerkle's powder sampler Mini (https://www.buerkle.de/en/powder-sampler-mini_p5346-3010). The right arm presses the blue top button downward to extend a notched collecting rod from its fixed outer sleeve. Granules enter the exposed side notch above its solid floor. Retracting the rod into the sleeve encloses the sample. Over the jar, tilt the closed sampler toward its side opening and extend the rod again to pour out the sample by gravity. The pocket floor moves with the rod; there is no horizontal discharge plate. The left hand grips the barrel. This original enlarged rectangular version uses coarse calibration granules."
 MAX_STEPS = 2800
 TOP = station.TABLE_TOP
-TUB = np.array([0.43, 0.02, TOP])
-JAR = np.array([0.35, 0.15, TOP])
-PROBE = np.array([0.43, 0.38, TOP + 0.006])
+TUB = np.array([0.40, 0.02, TOP])
+JAR = np.array([0.22, 0.10, TOP])
+PROBE = np.array([0.28, -0.06, TOP + 0.006])
 RADIUS = 0.0034
 MASS = 0.00018
-WINDOW = (0.004, 0.050)
+WINDOW = (0.004, 0.020)
 TUB_INNER = (0.105, 0.105)
 TUB_H = 0.145
 JAR_R = 0.055
 JAR_H = 0.095
 PROBE_LENGTH = 0.300
-SUPPORT_GRASP = np.array([-0.010, 0.070, 0.255])
-GATE_GRASP = np.array([-0.050, -0.080, 0.220])
-GATE_TRAVEL = 0.050
+SUPPORT_GRASP = np.array([0.0, 0.0, 0.180])
+GATE_GRASP = np.array([0.0, 0.0, 0.326])
+GATE_TRAVEL = 0.025
 GATE_CLOSED = 0.002
-GATE_OPEN = 0.012
-GATE_SPRING = 25.0  # N/m; constant passive linear spring throughout the episode.
-GATE_PRELOAD = 0.020  # Spring rest point lies beyond the closed mechanical stop.
-INNER_BACK, INNER_FRONT, INNER_HALF_WIDTH = -0.024, 0.0275, 0.024
-CHAMBER_TOP = 0.050
+GATE_SPRING = 20.0  # N/m; constant passive linear spring throughout the episode.
+GATE_PRELOAD = 0.060  # Spring rest point lies beyond the closed mechanical stop.
+INNER_BACK, INNER_FRONT, INNER_HALF_WIDTH = -0.017, 0.0205, 0.017
+CHAMBER_TOP = 0.020
 FLOOR_SLOPE = 0.0
 FLOOR_MID_HEIGHT = 0.004
 
-SAMPLING_BASE_HEIGHT = 0.030
+SAMPLING_BASE_HEIGHT = 0.050
 SAMPLING_MAX_BASE_HEIGHT = 0.055
 
-# Separate spring-return bottom shutter, translating toward world -X.
-DUMP_GRASP = np.array([-0.105, -0.080, 0.130])
-DUMP_TRAVEL = 0.058
-DUMP_CLOSED = 0.002
-DUMP_SPRING = 20.0
-DUMP_PRELOAD = 0.050
-DISCHARGE_HEIGHT = JAR_H + 0.018
+DISCHARGE_HEIGHT = 0.050
+DISCHARGE_TILT_DEG = 20.0
+
+PORT_SIGN = -1.0  # Sampling notch faces the operator and native overview camera.
+
+PORT_AXIS = 1  # The notch faces the right wrist camera, along tool -Y.
