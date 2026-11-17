@@ -1,8 +1,8 @@
 {
   "KEY": "capsule_recovery",
-  "TITLE": "Empty a capsule machine's collector and load a fresh capsule",
-  "INSTRUCTION": "Clear the used capsules into the recycling tub and restore the capsule machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
-  "DESCRIPTION": "A capsule machine has a used capsule in its loading carrier and six spent capsules in its removable collector. A fresh gold capsule rests on a narrow pedestal on the left. An empty recycling tub is on the left. The apparatus is cold and unpowered.",
+  "TITLE": "Empty a capsule coffee machine's collector and load a fresh capsule",
+  "INSTRUCTION": "Clear the used capsules into the recycling tub and restore the coffee machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
+  "DESCRIPTION": "This is a capsule coffee machine with a rear water reservoir, front coffee outlet, drip grille, hinged loading head and removable used-capsule collector. One used capsule is in the loading carrier and six are in the collector. A fresh gold capsule rests on a narrow pedestal on the left, beside the green recycling tub. The machine is cold and unpowered for this mechanical clearing and reloading trial.",
   "MAX_STEPS": 2400,
   "TOP": 0.7474999999999999,
   "HINGE": [
@@ -329,5 +329,156 @@
       ]
     }
   ],
-  "CAPSULE_SLEEP_THRESHOLD": 0.0002
+  "CAPSULE_SLEEP_THRESHOLD": 0.0002,
+  "coffee_appliance_components": [
+    {
+      "name": "Rear reservoir",
+      "material": "clear polymer with dark polymer lid/foot",
+      "diameter_m": 0.05,
+      "height_m": 0.18,
+      "center_world_m": [
+        0.655,
+        0.04,
+        0.8474999999999999
+      ]
+    },
+    {
+      "name": "Reservoir lid",
+      "material": "polymer",
+      "diameter_m": 0.054,
+      "height_m": 0.008,
+      "center_world_m": [
+        0.655,
+        0.04,
+        0.9415
+      ]
+    },
+    {
+      "name": "Coffee outlet",
+      "material": "metal",
+      "diameter_m": 0.012,
+      "height_m": 0.018,
+      "center_world_m": [
+        0.405,
+        0,
+        0.9275
+      ]
+    },
+    {
+      "name": "Outlet housing",
+      "material": "polymer",
+      "size_m": [
+        0.02,
+        0.034,
+        0.018
+      ],
+      "center_world_m": [
+        0.405,
+        0,
+        0.9444999999999999
+      ]
+    },
+    {
+      "name": "Outlet bridge",
+      "material": "polymer",
+      "size_m": [
+        0.012,
+        0.19,
+        0.024
+      ],
+      "center_world_m": [
+        0.405,
+        0,
+        0.9644999999999999
+      ]
+    },
+    {
+      "name": "Drip grille, seven bars",
+      "material": "metal",
+      "bar_size_m": [
+        0.044,
+        0.004,
+        0.001
+      ],
+      "center_world_m": [
+        0.385,
+        0,
+        0.7559999999999999
+      ],
+      "y_pitch_m": 0.011
+    },
+    {
+      "name": "Hinge shaft",
+      "material": "steel",
+      "diameter_m": 0.006,
+      "length_m": 0.216,
+      "axis": "Y",
+      "center_world_m": [
+        0.55,
+        0.0,
+        0.9824999999999999
+      ]
+    },
+    {
+      "name": "Moving hinge ears, two",
+      "material": "polymer",
+      "size_m": [
+        0.018,
+        0.012,
+        0.044
+      ],
+      "center_world_m": [
+        0.55,
+        0.077,
+        0.9924999999999999
+      ],
+      "other_y_m": -0.077
+    },
+    {
+      "name": "Fork supports, two",
+      "material": "metal",
+      "size_m": [
+        0.006,
+        0.006,
+        0.025
+      ],
+      "center_world_m": [
+        0.405,
+        0.0195,
+        0.9954999999999999
+      ],
+      "other_y_m": -0.0195
+    },
+    {
+      "name": "Fixed carrier beams, two",
+      "material": "metal",
+      "size_m": [
+        0.004,
+        0.176,
+        0.004
+      ],
+      "center_world_m": [
+        0.42,
+        0,
+        0.9744999999999999
+      ],
+      "other_x_m": 0.46
+    },
+    {
+      "name": "Fixed carrier risers, two",
+      "material": "metal",
+      "size_m": [
+        0.004,
+        0.016,
+        0.008
+      ],
+      "center_world_m": [
+        0.42,
+        0,
+        0.9784999999999999
+      ],
+      "other_x_m": 0.46
+    }
+  ],
+  "physical_reconstruction": "reconstruction/BUILD.md; coffee_machine.scad; physical_housing.scad; hinge_kit.scad; mechanism.svg"
 }

@@ -1,12 +1,12 @@
-"""Cold, unpowered capsule-loading/ejection assembly at household scale."""
+"""Capsule coffee machine with passive loading/ejection and removable collector."""
 
 import numpy as np
 from yam_arena import station
 
 KEY = "capsule_recovery"
-TITLE = "Empty a capsule machine's collector and load a fresh capsule"
-INSTRUCTION = "Clear the used capsules into the recycling tub and restore the capsule machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished."
-DESCRIPTION = "A capsule machine has a used capsule in its loading carrier and six spent capsules in its removable collector. A fresh gold capsule rests on a narrow pedestal on the left. An empty recycling tub is on the left. The apparatus is cold and unpowered."
+TITLE = "Empty a capsule coffee machine's collector and load a fresh capsule"
+INSTRUCTION = "Clear the used capsules into the recycling tub and restore the coffee machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished."
+DESCRIPTION = "This is a capsule coffee machine with a rear water reservoir, front coffee outlet, drip grille, hinged loading head and removable used-capsule collector. One used capsule is in the loading carrier and six are in the collector. A fresh gold capsule rests on a narrow pedestal on the left, beside the green recycling tub. The machine is cold and unpowered for this mechanical clearing and reloading trial."
 MAX_STEPS = 2400
 TOP = station.TABLE_TOP
 HEAD_RISE = 0.040

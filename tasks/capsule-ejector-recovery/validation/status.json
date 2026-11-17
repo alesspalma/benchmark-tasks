@@ -1,38 +1,29 @@
 {
-  "status": "validation_complete",
-  "checked_at_utc": "2026-11-15T16:29:30.394129+00:00",
-  "source_sha256": "42fea875fc7539963b997780672d97c76cfe3b5d4048d2409b90d4ba7e24e437",
-  "source_unchanged_across_demo_and_model": true,
-  "native_full_score": true,
-  "registered_full_episode_validated": true,
+  "status": "revision_validated_media_uploaded",
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
   "native_score": 1.0,
-  "registered_score": 1.0,
-  "demo_steps": 2324,
+  "native_steps": 2332,
+  "max_steps": 2400,
+  "all_used_collected": 7,
+  "head_angle_deg": 3.51,
+  "hands_released": true,
+  "native_cameras": [
+    640,
+    360
+  ],
+  "demo_size": [
+    1280,
+    1080
+  ],
+  "fps": 20,
+  "unit_tests": 18,
+  "usd_assets": 11,
+  "dream_episodes": 1,
+  "parent_QC": "Passed native/source/drawings/actualmedia review; one Dream authorized.",
   "dream_score": 0.0,
   "dream_steps": 2400,
-  "dream_runs": 1,
-  "automatic_episode_reruns": false,
-  "model_trial_errors": 0,
-  "unit_tests": 18,
-  "scoring_tests": 16,
-  "geometry_tests": 2,
-  "usd_assets_passed": 11,
-  "physical_controls": {
-    "hold": 0.0,
-    "empty_without_reload_or_closure": 0.65
-  },
-  "three_camera_media_verified": true,
-  "standard_layout": "overview above left/right wrists",
-  "media_size": [
-    640,
-    528
-  ],
-  "media_fps": 20,
-  "media_codec": "H.264 yuv420p",
-  "initial_demo_and_model_images_byte_identical": true,
-  "media_uploads": 1,
-  "media_id": "M-8TH8AS",
-  "instruction_matches_demo_and_model": true,
-  "secret_and_blind_metadata_scan_passed": true,
-  "pending_validation": []
+  "dream_runtime_error": null,
+  "source_unchanged": true,
+  "media_id": "M-5LLKRT",
+  "media_uploads": 1
 }

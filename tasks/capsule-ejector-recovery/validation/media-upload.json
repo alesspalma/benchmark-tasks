@@ -1,20 +1,30 @@
 {
   "status": "completed",
-  "started_at_utc": "2026-11-15T16:28:15.355765+00:00",
-  "completed_at_utc": "2026-11-15T16:28:20.381923+00:00",
-  "media_id": "M-8TH8AS",
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
+  "task": "capsule-ejector-recovery",
+  "revision_of": "TK-QAH7UF",
+  "same_pr": 2147,
+  "started_at_utc": "2026-11-17T04:52:43.992171+00:00",
+  "uploader_sha256": "2271cab9a5f81992998623827536327e185035d17c439fe5175012330d29d95c",
   "files": {
-    "dream-1.mp4": {
-      "bytes": 6146077,
-      "sha256": "d058d5c76d402169b0dbbcf411cc96ce67009dc2ba06c37e7314b726d9f9bc7e"
+    "demo": {
+      "name": "demo.mp4",
+      "bytes": 12347014,
+      "sha256": "99f31f2bb99f6125c3453a4c276fb74c2c5b0b7902308d5bc67e8bee19c331c1"
     },
-    "demo.mp4": {
-      "bytes": 4110922,
-      "sha256": "3b49820c8aa1410c0b6301ca6350fac44e8e4cc7b1b305dd2a35a901ff2bde0b"
+    "video": {
+      "name": "dream-1.mp4",
+      "bytes": 6938927,
+      "sha256": "6f36738ed509f6f4670a94e829c2746a20aeeeb0f9eeb9c18851b7d400c6809c"
     },
-    "setup.png": {
-      "bytes": 63545,
-      "sha256": "7d7a4dec7709f8205da4a6289126269abd7ca7fac001500498ab3e042734616b"
+    "screenshot": {
+      "name": "setup.png",
+      "bytes": 194230,
+      "sha256": "9214bf3f16cd39b4ff031fd4bc2d0bbdd454da1f661cf7eafca5917da392a427"
     }
-  }
+  },
+  "exit_code": 0,
+  "uploader_output": "Uploaded. Media ID M-5LLKRT written to /media/nvme/palma/robocurve_challenge/benchmark-tasks-capsule-recovery/tasks/capsule-ejector-recovery/task.json. Commit it and open your pull request.\n",
+  "completed_at_utc": "2026-11-17T04:52:52.084807+00:00",
+  "media_id": "M-5LLKRT"
 }

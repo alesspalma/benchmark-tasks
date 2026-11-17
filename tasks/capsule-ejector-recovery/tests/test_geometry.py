@@ -1,10 +1,9 @@
 """Containment regressions for tilted solids and round native colliders."""
 
 import numpy as np
+from capsule_recovery.geometry import collision_points, world_bounds
 from pxr import Gf, Usd, UsdGeom, UsdPhysics
 from yam_arena.urdf import axis_angle_matrix
-
-from capsule_recovery.geometry import collision_points, world_bounds
 
 
 def scene(tmp_path):

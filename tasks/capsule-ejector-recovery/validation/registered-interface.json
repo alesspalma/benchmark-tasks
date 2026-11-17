@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scope": "Two scripted hold steps verify registration and native320x176 cameras; not a full-score demo.",
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
+  "report_sha256": "d04d16481e6fcb0750e9b542396f2ceb3bafa6aa18856f00bfdd39d7161ad661",
+  "dream_api_used": false,
+  "steps": 2,
+  "camera_frames_each": 3
+}

@@ -113,6 +113,7 @@ class Writer:
         x.CreateAxisAttr(axis)
         x.AddTranslateOp().Set(self.Gf.Vec3d(*map(float, position)))
         self._finish(s, x, color, collide)
+        return x
 
     def sphere(self, s, path, radius, position, color):
         x = self.Geom.Sphere.Define(s, path)

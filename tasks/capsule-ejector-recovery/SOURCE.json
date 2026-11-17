@@ -13,7 +13,7 @@
     "url": "https://github.com/kairosiann/yam-isaac-lab-arena",
     "commit": "0059d02a1a91bc6834c1d0846022891df0c78730"
   },
-  "custom_assets": "Original native primitive geometry under MIT; no manufacturer meshes.",
+  "custom_assets": "Original native primitive geometry, generated printable CAD and dimensioned mechanism drawings under MIT; no manufacturer meshes.",
   "control_hz": 20,
   "physics_hz": 240,
   "seed": 1415158438,
@@ -33,5 +33,35 @@
     "maximum_pairwise_translation_m": 0.002,
     "maximum_pairwise_rotation_degrees": 2.0,
     "maximum_instantaneous_linear_speed_m_s": 0.015
-  }
+  },
+  "physical_reconstruction": {
+    "instructions": "reconstruction/BUILD.md",
+    "native_geometry_models": "reconstruction/coffee_machine.scad",
+    "bearing_stop_kit": "reconstruction/hinge_kit.scad",
+    "physical_housing": "reconstruction/physical_housing.scad",
+    "dimension_drawing": "reconstruction/mechanism.svg",
+    "units": "mm",
+    "hinge_axis": "Y",
+    "hinge_origin_relative_to_base_mm": [
+      50,
+      0,
+      235
+    ],
+    "hinge_limits_degrees": [
+      0,
+      85
+    ],
+    "shaft_diameter_mm": 6,
+    "bearing_bore_mm": 6.2
+  },
+  "references": [
+    {
+      "url": "https://www.nespresso.com/qa/en/machine-assistance/atelier-machine-assistance",
+      "sections": [
+        "Coffee Preparation",
+        "Daily Maintenance"
+      ],
+      "usage": "Manufacturer operating procedure for lever ejection, capsule-container emptying/refit and loading the next capsule; no assets redistributed."
+    }
+  ]
 }

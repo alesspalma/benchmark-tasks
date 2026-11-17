@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
+  "original_task_id": "TK-QAH7UF",
+  "same_pr": 2147,
+  "rules_snapshot": "research/submission-rules-2026-11-17T042325Z",
+  "review_prompt_version": 24,
+  "feedback_response": {
+    "physical_build": "Dimensioned mechanism.svg, native-USD-derived printable models, hinge6mmshaft/6.2mmbore,85degree stop,collector/ejector assembly specifications in reconstruction/BUILD.md.",
+    "coffee_identity": "Coffee machine named explicitly in title/instruction/context; native appliance has coffee outlet,dripgrille,rearreservoir and darkhousing.",
+    "matching_demo": "Fresh unchanged-source native fullscore1.0/2332actions with native640x360 cameras and1280x1080 composite."
+  },
+  "unit_tests": 18,
+  "usd_assets": 11,
+  "native_score": 1.0,
+  "native_steps": 2332,
+  "max_steps": 2400,
+  "camera_profile_verified": true,
+  "registered_interface_passed": true,
+  "demo_visually_reviewed": true,
+  "demo_fully_decoded": true,
+  "field_length_fidelity": 463,
+  "dream_episodes": 1,
+  "remaining": "Push revision to existing PR2147.",
+  "dream_score": 0.0,
+  "dream_steps": 2400,
+  "model_media_reviewed": true,
+  "parent_publication_QC_passed": true,
+  "media_id": "M-5LLKRT",
+  "media_upload_verified": true
+}

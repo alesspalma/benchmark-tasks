@@ -1,0 +1,25 @@
+{
+  "scope": "One matching hosted Dream-1 episode through Inspect Robots.",
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
+  "environment_id": "capsule_recovery-24d155c84bd8c996",
+  "model": "dreamlabs/dream-1-beta",
+  "score": 0.0,
+  "steps": 2400,
+  "max_steps": 2400,
+  "seed": 0,
+  "native_seed": 1415158438,
+  "total_trials": 1,
+  "errored_trials": 0,
+  "error": null,
+  "source_unchanged": true,
+  "instruction": "Clear the used capsules into the recycling tub and restore the coffee machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
+  "camera_size": [
+    320,
+    176
+  ],
+  "frames_per_camera": 2401,
+  "wall_time_s": 170.50373393809423,
+  "report_sha256": "e153925d6f13a7b1deb3f35ed04cdea5a38af59d13534f45416535de3531baf7",
+  "launch_receipt_sha256": "0d7c528fadcbe0dd0d93334d3b175463d5ab00e92b640e25ee08c12ad64a3448",
+  "automatic_episode_reruns": false
+}

@@ -96,7 +96,7 @@ def create_assets(directory):
     assets = []
     silver = (0.53, 0.56, 0.58)
     dark = (0.10, 0.12, 0.14)
-    case = (0.72, 0.74, 0.72)
+    case = (0.17, 0.19, 0.20)
     s = w.stage("machine")
     base = w.body(s, "/Asset/Base", 2.8, fixed=True, articulation=True)
     # Cutaway shell and a genuine open ejection path below the loading carrier.
@@ -123,6 +123,39 @@ def create_assets(directory):
             case,
         )
     w.box(s, base + "/Foot", (0.28, 0.17, 0.008), (0.50, 0, C.TOP + 0.004), dark)
+    # Fixed, ordinary coffee-appliance components: the outlet is behind the
+    # withdrawn collector's maximum X, and its drip grille stays below it.
+    # These do not alter the passive ejection mechanism or its taught path.
+    w.box(
+        s, base + "/OutletBridge", (0.012, 0.190, 0.024),
+        (0.405, 0, C.TOP + 0.217), case,
+    )
+    w.box(
+        s, base + "/CoffeeOutletHousing", (0.020, 0.034, 0.018),
+        (0.405, 0, C.TOP + 0.197), dark,
+    )
+    w.cylinder(
+        s, base + "/CoffeeOutlet", 0.006, 0.018,
+        (0.405, 0, C.TOP + 0.180), silver,
+    )
+    for k in range(7):
+        w.box(
+            s, base + f"/DripGrille{k}", (0.044, 0.004, 0.001),
+            (0.385, (k - 3) * 0.011, C.TOP + 0.0085), silver,
+        )
+    tank = w.cylinder(
+        s, base + "/WaterReservoir", 0.025, 0.180,
+        (0.655, 0.040, C.TOP + 0.100), (0.56, 0.75, 0.80),
+    )
+    tank.CreateDisplayOpacityAttr([0.45])
+    w.cylinder(
+        s, base + "/ReservoirLid", 0.027, 0.008,
+        (0.655, 0.040, C.TOP + 0.194), dark,
+    )
+    w.cylinder(
+        s, base + "/ReservoirFoot", 0.025, 0.010,
+        (0.655, 0.040, C.TOP + 0.005), dark,
+    )
     # Fixed service modules occupy the lower shell. Only the shallow central
     # capsule cassette is removable; the housing does not travel with it.
     w.box(
@@ -175,6 +208,18 @@ def create_assets(directory):
             (0.445, y, C.TOP + 0.188 + C.HEAD_RISE),
             dark,
         )
+    # Cross-beams below the moving fork and short central risers connect the
+    # fixed carrier arcs to the housing. The 16 mm-wide risers leave the fork's
+    # y=+/-19.5 mm lifting tines unobstructed in the physical reconstruction.
+    for x in (0.420, 0.460):
+        w.box(
+            s, base + f"/CarrierBeam{x}", (0.004, 0.176, 0.004),
+            (x, 0, C.TOP + 0.227), silver,
+        )
+        w.box(
+            s, base + f"/CarrierRiser{x}", (0.004, 0.016, 0.008),
+            (x, 0, C.TOP + 0.231), silver,
+        )
     head = w.body(s, "/Asset/Head", 0.22)
     w.box(
         s,
@@ -199,6 +244,23 @@ def create_assets(directory):
         (0.006, 0.041, 0.006),
         (0.405, 0, C.TOP + 0.194 + C.HEAD_RISE),
         silver,
+    )
+    # Two solid supports connect the lifting fork to the lid in the supplied
+    # physical reconstruction; they remain outside the capsule envelope.
+    for side in (-1, 1):
+        w.box(
+            s, head + f"/ForkSupport{side + 1}", (0.006, 0.006, 0.025),
+            (0.405, side * 0.0195, C.TOP + 0.248), silver,
+        )
+        w.box(
+            s, head + f"/HingeEar{side + 1}", (0.018, 0.012, 0.044),
+            (C.HINGE[0], side * 0.077, C.HINGE[2] + 0.010), dark,
+        )
+    # The native revolute bearing supplies the internal pin/bore constraint.
+    # Draw the visible shaft; printable parts include actual 6.2 mm bores.
+    w.cylinder(
+        s, base + "/HingeShaft", 0.003, 0.216,
+        C.HINGE, silver, axis="Y",
     )
     # Ordinary bar handle; the right end is clear of the machine's sidewall.
     w.cylinder(

@@ -1,0 +1,63 @@
+{
+  "kind": "dream",
+  "original_log": "adhoc_d161db60.json",
+  "original_log_sha256": "e153925d6f13a7b1deb3f35ed04cdea5a38af59d13534f45416535de3531baf7",
+  "environment_id": "capsule_recovery-24d155c84bd8c996",
+  "score": 0.0,
+  "steps": 2400,
+  "camera_validation": {
+    "top_cam": {
+      "frames": 2401,
+      "minimum_mean": 154.81906960227272,
+      "minimum_std": 57.80487230914984
+    },
+    "left_cam": {
+      "frames": 2401,
+      "minimum_mean": 86.12781131628788,
+      "minimum_std": 53.061478525286816
+    },
+    "right_cam": {
+      "frames": 2401,
+      "minimum_mean": 131.75559895833334,
+      "minimum_std": 44.6075990196223
+    }
+  },
+  "composition": "Every native initial/action frame in order at 20 fps; overview above left/right wrists. Resize/stack only; no overlays, temporal edits or generated frames.",
+  "encoding_requires_inference": false,
+  "ffprobe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 528,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "20/1",
+        "nb_frames": "2401"
+      }
+    ],
+    "format": {
+      "duration": "120.050000",
+      "size": "6938927"
+    }
+  },
+  "full_decode_passed": true,
+  "files": {
+    "dream-1.mp4": {
+      "bytes": 6938927,
+      "sha256": "6f36738ed509f6f4670a94e829c2746a20aeeeb0f9eeb9c18851b7d400c6809c"
+    },
+    "setup.png": {
+      "bytes": 64164,
+      "sha256": "2d7f7327c87c33852c297e2e38ce96fe2f95eb3d3e77e69f7e3e9cc166dbedb4"
+    },
+    "review.png": {
+      "bytes": 2493278,
+      "sha256": "fa77c3baf79c65e4ed292fac0135dafb248aeda77da9f153a405c5a35d817c51"
+    }
+  },
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
+  "visually_reviewed": true,
+  "review_notes": "Viewed eight native overview/left/right composites, including initial and final states. Model approaches the coffee machine but does not complete ejection/emptying/reload. Score0.0 matches final state. Actual2401N+1frames from all native320x176cameras; no edited chronology or reruns."
+}

@@ -1,21 +1,21 @@
 {
-  "title": "Empty a capsule machine's collector and load a fresh capsule",
+  "title": "Empty a capsule coffee machine's collector and load a fresh capsule",
   "category": "Societal relatability",
-  "instruction": "Clear the used capsules into the recycling tub and restore the capsule machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
-  "context": "Emptying the used-pod collector and reloading after ejection are routine capsule-machine maintenance. The task requires handling a loose container, disposing of its contents and restoring it before loading and closing the head.",
-  "setup": "Calibrated two-arm YAM bench. Anchored polymer/metal capsule mechanism, 280×210×290 mm, with passive hinged head; removable polymer cassette, inner 120×82×65 mm, 2 mm walls, 65 g and 30×55×24 mm pull bar. Six spent aluminium/polymer capsule envelopes start in a 3×2 cassette layer; one is in the carrier. Capsules: 24–33 mm body diameter, 26 mm height, 37 mm flange; spent 12 g, fresh 8 g. Fresh capsule on a 70 mm polymer pedestal; fixed polymer recycling tray, inner 300×300×55 mm, on the left. Fixed modules, guides and exact coordinates: setup-layout.json and README.md.",
+  "instruction": "Clear the used capsules into the recycling tub and restore the coffee machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
+  "context": "Emptying the used-capsule container and loading the next pod are familiar steps of using a capsule coffee machine. The robot must eject the used pod, handle and empty a loose collector, refit it, then seat the fresh capsule and close the loading head. Nespresso Atelier documents this lever/ejection/container procedure: https://www.nespresso.com/qa/en/machine-assistance/atelier-machine-assistance .",
+  "setup": "Calibrated two-arm YAM station and parallel grippers. Anchored capsule coffee machine: dark polymer housing with metal carrier/fork, rear empty reservoir, front coffee outlet and drip grille. Complete closed appliance envelope approximately 322 x 240 x 290 mm; housing 280 x 210 x 290 mm. Fixed body 2.8 kg; passive 220 g head with Y-axis hinge at (0.550,0,0.9825) m, 0–85 degrees. Removable polymer collector: 120 x 82 x 65 mm inside, 2 mm walls, 65 g, front bar 30 x 55 x 24 mm; root (0.485,0,0.7575) m. Six spent capsules in a 3 x 2 collector layer and one in the carrier. Reusable aluminum/polymer capsule envelopes: body diameter24–33 mm, height26 mm, flange diameter37 mm; spent12 g, fresh8 g. Fresh capsule at (0.560,0.250,0.8175) m on a fixed70 mm polymer stand. Fixed green polymer recycling tray on left: 300 x 300 x 55 mm inside, root (0.370,0.270,0.7475) m. Reservoir, outlet, grille, hinge ears/shaft, carrier beams/risers, guides and all exact dimensions/poses are listed in README, setup-layout.json and the generated CAD inventory. Printable parts, dimension drawings and assembly specifications: reconstruction/BUILD.md.",
   "scoring": "0.35: all seven used capsules contained at rest in recycling tray. 0.65: collector also fitted within 9 mm, upright cosine >0.99. 1: fresh seated within 3.5 mm horizontally/3 mm vertically and upright cosine >0.99; head <4 degrees closed; loose bodies below 15 mm/s and stable within 2 mm/2 degrees over 1 s; grippers open >40 mm and robot bodies >3 mm clear for 1 s. Drop/invalid: 0.",
   "run_limit": "2,400 control steps; 120 seconds at 20 Hz.",
   "reset_notes": "Restore all bodies and passive joints to the fixed reset and settle before scoring. No consumables in simulation.",
-  "fidelity": "Original cold, unpowered cutaway mechanism at household scale. Native rigid cups, passive over-centre head, lifting fork and removable collector use contact physics. Capsule deformation and the water circuit are outside this mechanical clearing/reloading task.",
+  "fidelity": "The cold coffee machine uses native rigid contacts, a passive 0–85 degree head hinge, lifting fork, removable collector and real-size capsule envelopes. The fork lifts and gravity-ejects the used capsule. Printable parts specify the collector, carrier, hinge bearing and mechanical stops; the native revolute joint represents the internal bearing/stop hardware. This trial covers mechanical clearing and reloading; the heater, pump and water circuit are inactive.",
   "scores": "Dream-1 run: 0.0; demo: 1.0",
   "keywords": [
     "bimanual",
-    "capsule machine",
-    "collector maintenance",
+    "coffee machine",
+    "capsule collector",
     "passive ejector",
     "container emptying",
     "reloading"
   ],
-  "media": "M-8TH8AS"
+  "media": "M-5LLKRT"
 }

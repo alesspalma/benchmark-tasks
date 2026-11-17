@@ -1,0 +1,144 @@
+{
+  "kind": "reference",
+  "score": 1.0,
+  "source_run": "capsule-revision-native-001",
+  "scope": "Fresh native physics execution using time and ordinary measured robot joints, with actual cameras",
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
+  "source_unchanged": true,
+  "native_score": 1.0,
+  "steps": 2332,
+  "physics_audits": 27984,
+  "instruction": "Clear the used capsules into the recycling tub and restore the coffee machine with its collection bin fitted, the fresh capsule correctly seated, and its head fully closed. Release both hands when finished.",
+  "controller": {
+    "inputs": [
+      "elapsed time",
+      "joint positions"
+    ]
+  },
+  "native_receipt_sha256": "6cb6c5e7589a8f241f64036c2a085445e1ff6430d81957078ef541f8aeb8ef7d",
+  "native_trace_sha256": "f6446042520ce432639436ca7ae5cf037fb6e81787ee5a946e418aa2178d74f7",
+  "tracks": {
+    "top_cam": {
+      "sha256": "7dd8643404a6a3f829e1e68022d0d7728bdc707cee796367e25cebc7bb8c32ec",
+      "all_frames_decoded": 2333,
+      "minimum_frame_mean": 152.31658564814813,
+      "minimum_frame_std": 61.492485766198214,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "nb_frames": "2333"
+          }
+        ],
+        "format": {
+          "duration": "116.650000",
+          "size": "1934842"
+        }
+      }
+    },
+    "left_cam": {
+      "sha256": "f73497033b4774babd2a6aab9f10342c2e6d4725dd4d4886a2c38c63d4291967",
+      "all_frames_decoded": 2333,
+      "minimum_frame_mean": 41.91550491898148,
+      "minimum_frame_std": 38.21934514805621,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "nb_frames": "2333"
+          }
+        ],
+        "format": {
+          "duration": "116.650000",
+          "size": "3090987"
+        }
+      }
+    },
+    "right_cam": {
+      "sha256": "9240582ac81830ac19e412a951b51e2e493129c4595ca20c866f3e6e374df740",
+      "all_frames_decoded": 2333,
+      "minimum_frame_mean": 103.15091145833334,
+      "minimum_frame_std": 33.3482124814675,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 360,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "20/1",
+            "nb_frames": "2333"
+          }
+        ],
+        "format": {
+          "duration": "116.650000",
+          "size": "1062337"
+        }
+      }
+    }
+  },
+  "composition": "Every initial/action frame preserved in order, top above both wrists; resize and spatial stacking only; no overlays, generated frames, temporal edits or speed changes.",
+  "demo_probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 1080,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "20/1",
+        "nb_frames": "2333"
+      }
+    ],
+    "format": {
+      "duration": "116.650000",
+      "size": "12347014"
+    }
+  },
+  "dream_api_used": false,
+  "visually_reviewed": true,
+  "three_cameras_valid": true,
+  "files": {
+    "final-right_cam.png": {
+      "bytes": 110346,
+      "sha256": "b9c80cd16aa24e6cafd272a009817a67cc484e62c375db1f20eb6f3a69c87b9e"
+    },
+    "setup.png": {
+      "bytes": 194230,
+      "sha256": "9214bf3f16cd39b4ff031fd4bc2d0bbdd454da1f661cf7eafca5917da392a427"
+    },
+    "demo.mp4": {
+      "bytes": 12347014,
+      "sha256": "99f31f2bb99f6125c3453a4c276fb74c2c5b0b7902308d5bc67e8bee19c331c1"
+    },
+    "review.png": {
+      "bytes": 2144937,
+      "sha256": "cdc834782218d56dfb7f4881dbeb457e41957e9cadfec8d0d94c9079567c5dbf"
+    },
+    "final-top_cam.png": {
+      "bytes": 192217,
+      "sha256": "55b71eb0881857750e5b4d8cafcf3600fa83a3db7fab4d91c04240bee0ff17a0"
+    },
+    "final-left_cam.png": {
+      "bytes": 75605,
+      "sha256": "1a8874530a81bd573d5bb3faf1214f30532e2ddfa627e613fd4f47a5208bd85e"
+    }
+  },
+  "full_decode_passed": true,
+  "review_notes": "Agent and parent viewed eight-stage native three-camera contact sheet and final state: head opened/ejected; collector withdrawn, tipped, emptied and refitted; fresh capsule loaded; head closed; all bodies at rest and hands released. Setup visibly identifies coffee machine by outlet, grille and rear reservoir. All2333nativeinitial/actionframespreserved."
+}
