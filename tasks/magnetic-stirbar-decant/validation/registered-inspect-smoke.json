@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "source_sha256": "23c47e8ec4c80a92706208eb74fc5bcbcaaac2a47d96cde0f1d544a557ba2f0b",
+  "environment_id": "magnetic_decant-23c47e8ec4c80a92",
+  "steps": 2,
+  "seed": 0,
+  "derived_native_seed": 1415158438,
+  "policy": "magnetic_decant_scripted",
+  "mode": "hold",
+  "score": 0.0,
+  "error": null,
+  "dream_api_used": false,
+  "dream_plugin_overlay_present": true,
+  "report": "artifacts/magnetic-stirbar-decant-inspect-smoke-001/adhoc_8b9a838c.json",
+  "report_sha256": "11261e7d75f95087134c07fa6829aa79e603c77c3f421b7fbc1ec740a963f686",
+  "cameras": {
+    "top_cam": {
+      "count": 3,
+      "shape": [
+        176,
+        320,
+        3
+      ],
+      "dtype": "uint8",
+      "std_min": 58.208360513266804,
+      "hashes": [
+        "8cf57c098174d2ae92fa571e371233f7fad92fe1c46995cc5fda9387ecd97795",
+        "f0a8d11ea708037bbceac0fef46d518cad66cbcf2d575990128b115441435194",
+        "3c1e47f3ba6943bcd50897987097cb38f94dc89bb7e2e02e984f7a9747022004"
+      ]
+    },
+    "left_cam": {
+      "count": 3,
+      "shape": [
+        176,
+        320,
+        3
+      ],
+      "dtype": "uint8",
+      "std_min": 48.809782909312,
+      "hashes": [
+        "14e8fe0f758633bffcaa69589ce3dcd3b6da22355fb15b2e082a39379f0b53e8",
+        "0fde8d5a61aecdbde59e02aa90ccf433a8d9d9c69017bdbc6b14391085e156ca",
+        "0c27f520841d8c5dd4876b4ef732f1d60d8349a689089a18e38ea03de0ce96d6"
+      ]
+    },
+    "right_cam": {
+      "count": 3,
+      "shape": [
+        176,
+        320,
+        3
+      ],
+      "dtype": "uint8",
+      "std_min": 49.65403982646392,
+      "hashes": [
+        "450f12995e4bcb35ae0a9cdc6b080a52fb445b144a875fa6f14b749ea6325ba5",
+        "8fad51d27c8d36f3d98b5179f5a4bdf6855b861329aa84d43aa72befa9a16978",
+        "e8f93f4188c3b84a65f01e2d7fb78f01a19a84878adf2202c956139ed0787067"
+      ]
+    }
+  }
+}

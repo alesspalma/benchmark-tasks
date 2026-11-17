@@ -1,0 +1,139 @@
+{
+  "stage": "ready_for_submission",
+  "passed": true,
+  "source_sha256": "23c47e8ec4c80a92706208eb74fc5bcbcaaac2a47d96cde0f1d544a557ba2f0b",
+  "review_prompt_version": 24,
+  "five_criteria": {
+    "importance": {
+      "passed": true,
+      "category": "Other",
+      "evidence": "Bel-Art externalrestrainer is sold for stir-barretention duringdecanting;OGI Bio workinglab protocol explicitly retainsbar whileemptying vessel. Distinct through-glass field capture/retention duringliquidtransfer,not ordinarypouring,barinsertion ormagneticpickup. Nooccupationheadcount claim."
+    },
+    "construct_validity": {
+      "passed": true,
+      "evidence": "Actual-size70x95mm hollow250mLbeakers,30x8mmfreebar,ordinarycentralgriprestrainer withspecifiedcustomN42core12x10x8mm andthroughfacemagnetization;1.31T*volume/mu0=1.00Am2. Nativeforces,torques,reactions andcontacts;noattachments,snapping,kinematicobjectactuation orphase-triggeredtransfers. Analyticconservativewater withfiniteflight andactualopening/wall/robotblocking;nativewatermass/COM/inertiaupdates.",
+      "same_motion_no_magnet": "The same90degpour retainsbar andcollects150mL withouttool,score0becauseexplicitrequestedrestraintwasnotperformed. We do notclaim90degnecessarily losesanunrestrainedbar. Separate110degstress physicallylosesbar."
+    },
+    "scoring": {
+      "passed": true,
+      "evidence": "17tests andfivefinal-source nativecounterexamples:hold0,same90degmissingtool0,separate110deginversion0withbarloss,heldmagneticpour0.7,alternativefull1.0. Functionalcollected/spilledvolume,observablebar-surface/innerwallrelationship,continuousfull-barcontainment andstableindependentsupport/release. Noverticalbarorientation,armassignment orfield-force threshold."
+    },
+    "clarity_reproducibility": {
+      "passed": true,
+      "evidence": "README specifies fixedposes,dimensions,materials,parameters,run/reset/scoring;setup-layout.json,5compliantUSDassets,dimensionedsealedcorecaseSCADandcommercialbeaker/bar/toolreferences. Inexpensivecleanwaterreusableprops,1gbalance/cylinderandvideoevaluation. MIT;originalgeneratedgeometry;engineeringparameters distinguishedfromOEM/hardwaremeasurements."
+    },
+    "feasibility": {
+      "passed": true,
+      "native_score": 1.0,
+      "actions": 1561,
+      "limit": 2800,
+      "evidence": "NativeYAMfreegrasp/capture/pour/release completed150mLcollected,0spill,barcontained and apparatusstable,released2s;threeactual640x360RGBstreams1562frameseach. Exactsourceunchanged. RegisteredInspect2steps,320x176threeviews,seed0,score0,noerror."
+    }
+  },
+  "native_assets_sha256": {
+    "source": "0453ec1a69d2e9a39c0da70c2e73842136b4f1aaf63a8c69d542b82581e61c70",
+    "receiver": "0453ec1a69d2e9a39c0da70c2e73842136b4f1aaf63a8c69d542b82581e61c70",
+    "bar": "51e386ab7e73ae83768b4eec46045ca1a26a529d3a921e80778946f959f50285",
+    "restrainer": "451748995458402575b9558eaeac81a370528049bf78a9d13a8072d902cde8c1",
+    "fixtures": "b7bc12926b92afaa59953b04d45e9a7768077bd2da19cb7c28891336cfc9f1a0"
+  },
+  "offline_native_asset_hash_match": {
+    "source": true,
+    "receiver": true,
+    "bar": true,
+    "restrainer": true,
+    "fixtures": true
+  },
+  "registered_smoke": {
+    "passed": true,
+    "source_sha256": "23c47e8ec4c80a92706208eb74fc5bcbcaaac2a47d96cde0f1d544a557ba2f0b",
+    "environment_id": "magnetic_decant-23c47e8ec4c80a92",
+    "steps": 2,
+    "seed": 0,
+    "derived_native_seed": 1415158438,
+    "policy": "magnetic_decant_scripted",
+    "mode": "hold",
+    "score": 0.0,
+    "error": null,
+    "dream_api_used": false,
+    "dream_plugin_overlay_present": true,
+    "report": "artifacts/magnetic-stirbar-decant-inspect-smoke-001/adhoc_8b9a838c.json",
+    "report_sha256": "11261e7d75f95087134c07fa6829aa79e603c77c3f421b7fbc1ec740a963f686",
+    "cameras": {
+      "top_cam": {
+        "count": 3,
+        "shape": [
+          176,
+          320,
+          3
+        ],
+        "dtype": "uint8",
+        "std_min": 58.208360513266804,
+        "hashes": [
+          "8cf57c098174d2ae92fa571e371233f7fad92fe1c46995cc5fda9387ecd97795",
+          "f0a8d11ea708037bbceac0fef46d518cad66cbcf2d575990128b115441435194",
+          "3c1e47f3ba6943bcd50897987097cb38f94dc89bb7e2e02e984f7a9747022004"
+        ]
+      },
+      "left_cam": {
+        "count": 3,
+        "shape": [
+          176,
+          320,
+          3
+        ],
+        "dtype": "uint8",
+        "std_min": 48.809782909312,
+        "hashes": [
+          "14e8fe0f758633bffcaa69589ce3dcd3b6da22355fb15b2e082a39379f0b53e8",
+          "0fde8d5a61aecdbde59e02aa90ccf433a8d9d9c69017bdbc6b14391085e156ca",
+          "0c27f520841d8c5dd4876b4ef732f1d60d8349a689089a18e38ea03de0ce96d6"
+        ]
+      },
+      "right_cam": {
+        "count": 3,
+        "shape": [
+          176,
+          320,
+          3
+        ],
+        "dtype": "uint8",
+        "std_min": 49.65403982646392,
+        "hashes": [
+          "450f12995e4bcb35ae0a9cdc6b080a52fb445b144a875fa6f14b749ea6325ba5",
+          "8fad51d27c8d36f3d98b5179f5a4bdf6855b861329aa84d43aa72befa9a16978",
+          "e8f93f4188c3b84a65f01e2d7fb78f01a19a84878adf2202c956139ed0787067"
+        ]
+      }
+    }
+  },
+  "model_media": {
+    "source_sha256": "23c47e8ec4c80a92706208eb74fc5bcbcaaac2a47d96cde0f1d544a557ba2f0b",
+    "score": 0.0,
+    "steps": 2800,
+    "frames_per_camera": 2801,
+    "native_camera_pixels": [
+      320,
+      176
+    ],
+    "source_frame_sha256": "fb55cb55b765d4e7cf3bbe8f79a47f1298355d35eb6e95385648000a3a7acb95",
+    "composite": {
+      "codec_name": "h264",
+      "width": 640,
+      "height": 528,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "20/1",
+      "nb_frames": "2801"
+    },
+    "bytes": 6504048,
+    "sha256": "0e97e5e83020c8d8f27feb167ba6804d91f9e4a3102dc98bc98f0cfd023edbf8",
+    "report_sha256": "2af7212419974d3312b4234ccbfca141ee4564dfd3b03f483ae34db7aae92ab0",
+    "chronology": "All actual initial/action frames in order",
+    "paid_episodes": 1,
+    "error": null
+  },
+  "paid_episodes": 1,
+  "media_id": "M-TWHHBF",
+  "root_source_qa": "passed;qa-release.json,source23c47e8e",
+  "root_model_visual_review": "passed;root message independently reviewed actualsixframes andall8403nativearrays"
+}

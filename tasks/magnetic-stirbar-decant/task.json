@@ -1,0 +1,20 @@
+{
+  "title": "Decant a laboratory liquid while retaining its magnetic stirring bar",
+  "category": "Other",
+  "keywords": [
+    "laboratory automation",
+    "magnetic stir-bar restrainer",
+    "decanting",
+    "through-glass magnetic retention",
+    "wet-lab handling"
+  ],
+  "instruction": "Use the magnetic stir-bar restrainer to pour at least 140 mL into the empty beaker, keeping the stirring bar inside its original beaker. Leave both beakers upright and the restrainer on the mat, with both hands released.",
+  "context": "Laboratory decanting with an external magnetic stir-bar restrainer keeps the stirring bar in the original vessel while the liquid is transferred. The robot must capture the free bar through glass and maintain magnetic coupling during a controlled pour. This is a documented common wet-lab procedure using a commercial tool form.",
+  "setup": "Two full-size 250 mL low-form borosilicate beakers (70 mm OD x 95 mm, 2 mm walls, 3 mm base, 110 g dry mass) stand on separate 100 x 100 x 4 mm rubber mats in a 550 x 580 mm catch tray. The source contains 150 mL clean water and a free white 30 x 8 mm, 5 g PTFE-coated magnetic stirring bar. The receiver is empty. A blue external magnetic restrainer (80 x 25 x 10 mm face; 16 mm diameter x 27 mm stem; 32 mm diameter x 7 mm thumb disk; 70 g) lies flat on a 180 x 160 x 4 mm rubber mat at the left. Both beakers, bar and tool are native free bodies; the transparent open beakers have pouring lips and volume graduations. Native YAM station, two parallel-gripper arms and three cameras. README specifies all fixed poses, materials, engineering magnetic parameters and dimensioned reconstruction.",
+  "scoring": "0 before 70 mL is collected with the external restrainer holding the bar against the original beaker inner wall; 0.4 at 70 mL; 0.7 at 140 mL. Full score 1.0 at 140 mL with at most 5 mL spilled, after both beakers are upright and supported, the restrainer rests on its mat, and all robot collision geometry stays 15 mm clear for 2 seconds; linear speed below 20 mm/s and angular speed below 0.2 rad/s. The score is permanently 0 if any part of the bar leaves its original vessel beyond the stated 2-3 mm measurement tolerance, an object falls off the work surface, or more than 10 mL spills. Collected/spilled volume is measurable with a cylinder or 1 g balance; retention/support are visually observable. No arm assignment or demonstrated grasp sequence is required.",
+  "run_limit": "2,800 control steps (140 seconds at 20 Hz)",
+  "reset_notes": "Reusable standard lab glassware, PTFE bar, magnetic restrainer, mats and catch tray. Restore 150 mL clean water and the bar in the source, empty receiver/tray, dry exterior glass and gripper pads, and restore fixed poses. No perishable or one-off material.",
+  "fidelity": "Full-size hollow beakers and free native bar/tool contacts. Symmetric finite-size dipole forces/torques provide through-glass retention with reaction; magnetic moments and wet friction are stated engineering estimates. Analytic gravity free-surface/outflow with finite ballistic flight preserves collection,wall/robot blocking,spill and water mass/COM/inertia. It omits turbulent slosh,wetting and glass fracture. Dimensioned reconstruction and physical calibration procedure are supplied.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-TWHHBF"
+}

@@ -1,0 +1,46 @@
+{
+  "scope": "Offline USD/schema structure only; no physics or feasibility claim",
+  "hostname": "tengu",
+  "assets": [
+    {
+      "file": "source.usda",
+      "sha256": "0453ec1a69d2e9a39c0da70c2e73842136b4f1aaf63a8c69d542b82581e61c70",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "receiver.usda",
+      "sha256": "0453ec1a69d2e9a39c0da70c2e73842136b4f1aaf63a8c69d542b82581e61c70",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "bar.usda",
+      "sha256": "51e386ab7e73ae83768b4eec46045ca1a26a529d3a921e80778946f959f50285",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "restrainer.usda",
+      "sha256": "451748995458402575b9558eaeac81a370528049bf78a9d13a8072d902cde8c1",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "fixtures.usda",
+      "sha256": "b7bc12926b92afaa59953b04d45e9a7768077bd2da19cb7c28891336cfc9f1a0",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    }
+  ]
+}

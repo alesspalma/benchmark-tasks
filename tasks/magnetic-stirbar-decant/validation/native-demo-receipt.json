@@ -1,0 +1,74 @@
+{
+  "status": "completed",
+  "hostname": "tengu",
+  "task": "magnetic_decant",
+  "source_sha256": "23c47e8ec4c80a92706208eb74fc5bcbcaaac2a47d96cde0f1d544a557ba2f0b",
+  "seed": 1415158438,
+  "policy": "demo",
+  "dream_api_used": false,
+  "started_at_utc": "2026-11-17T11:11:52.025867+00:00",
+  "control_hz": 20,
+  "physics_hz": 480,
+  "instruction": "Use the magnetic stir-bar restrainer to pour at least 140 mL into the empty beaker, keeping the stirring bar inside its original beaker. Leave both beakers upright and the restrainer on the mat, with both hands released.",
+  "controller_inputs": [
+    "elapsed time",
+    "joint positions"
+  ],
+  "cameras_enabled": true,
+  "native_asset_sha256": {
+    "source": "0453ec1a69d2e9a39c0da70c2e73842136b4f1aaf63a8c69d542b82581e61c70",
+    "receiver": "0453ec1a69d2e9a39c0da70c2e73842136b4f1aaf63a8c69d542b82581e61c70",
+    "bar": "51e386ab7e73ae83768b4eec46045ca1a26a529d3a921e80778946f959f50285",
+    "restrainer": "451748995458402575b9558eaeac81a370528049bf78a9d13a8072d902cde8c1",
+    "fixtures": "b7bc12926b92afaa59953b04d45e9a7768077bd2da19cb7c28891336cfc9f1a0"
+  },
+  "final_metrics": {
+    "score": 1.0,
+    "task_score": 1.0,
+    "success": true,
+    "delivered_eligible_ml": 150.0,
+    "receiver_ml": 150.0,
+    "spilled_ml": 0.0,
+    "bar_retained": true,
+    "upright": true,
+    "stable": true,
+    "supported": true,
+    "tool_supported": true,
+    "hands_clear": true,
+    "released_stable_seconds": 2.0499999999998835,
+    "violations": [],
+    "mass_balance_ml": 150.0
+  },
+  "steps": 1561,
+  "worst_ik_m": 9.903501871835352e-05,
+  "worst_ik_rad": 0.0003321166183407239,
+  "elapsed_wall_s": 274.75636056787334,
+  "source_unchanged": true,
+  "video_errors": {},
+  "media": {
+    "setup-top_cam.png": {
+      "bytes": 194875,
+      "sha256": "4ebfa6286766a4d0d031adfea95bb3ada05e0318ca2f85b2c6244fc33f7d0519"
+    },
+    "left_cam.mp4": {
+      "bytes": 2824865,
+      "sha256": "81af8d31fec172abcc410d7c9b071d43be657205249d0bbd9ef342d808220bea"
+    },
+    "setup-left_cam.png": {
+      "bytes": 102560,
+      "sha256": "8dfeab3ccf877e705d6209e78ec41679d174c97c99bf75e71dc1d7510f23bfd0"
+    },
+    "top_cam.mp4": {
+      "bytes": 1389474,
+      "sha256": "d09c8eacd077760f824c51fa3624ebf1f57e55d2c01616e38575c8774fedd2f1"
+    },
+    "setup-right_cam.png": {
+      "bytes": 106370,
+      "sha256": "8609813eaa2e361bfea2035f3ff75bfb58035673dd70128aa8dc9a60dc1f2597"
+    },
+    "right_cam.mp4": {
+      "bytes": 2785079,
+      "sha256": "7437689519cd9ff2c3c29fca9766eac590de079edc3c87c3ca34d578e5906037"
+    }
+  }
+}

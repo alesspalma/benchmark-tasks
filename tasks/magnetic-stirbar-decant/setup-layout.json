@@ -1,0 +1,118 @@
+{
+  "units": "metres",
+  "world_axes": "+X forward,+Y left,+Z up",
+  "table_top_m": 0.7475,
+  "fixed_reset": true,
+  "control_hz": 20,
+  "physics_hz": 480,
+  "objects": {
+    "source": {
+      "position_m": [
+        0.4,
+        -0.06,
+        0.7555
+      ],
+      "quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "water_ml": 150
+    },
+    "receiver": {
+      "position_m": [
+        0.22,
+        -0.06,
+        0.7555
+      ],
+      "quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "water_ml": 0
+    },
+    "bar": {
+      "position_m": [
+        0.4,
+        -0.06,
+        0.7627
+      ],
+      "quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "restrainer": {
+      "position_m": [
+        0.25,
+        0.24,
+        0.7607
+      ],
+      "quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "catch_tray": {
+      "base_xy_centre_m": [
+        0.36,
+        0.03
+      ],
+      "base_bottom_z_m": 0.7475,
+      "inside_xy_m": [
+        0.55,
+        0.58
+      ],
+      "wall_height_m": 0.025,
+      "base_thickness_m": 0.004,
+      "wall_thickness_m": 0.005
+    },
+    "mats": {
+      "source": {
+        "centre_m": [
+          0.4,
+          -0.06,
+          0.7535
+        ],
+        "size_m": [
+          0.1,
+          0.1,
+          0.004
+        ]
+      },
+      "receiver": {
+        "centre_m": [
+          0.22,
+          -0.06,
+          0.7535
+        ],
+        "size_m": [
+          0.1,
+          0.1,
+          0.004
+        ]
+      },
+      "tool": {
+        "centre_m": [
+          0.25,
+          0.24,
+          0.7535
+        ],
+        "size_m": [
+          0.18,
+          0.16,
+          0.004
+        ]
+      }
+    }
+  },
+  "initial_settle_actions": 35,
+  "measured_reset": "Actual native settle state is in the validation run reset.json; stated CAD starts are before that short settle."
+}
