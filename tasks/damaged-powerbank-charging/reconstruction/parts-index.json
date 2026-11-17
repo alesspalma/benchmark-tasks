@@ -1,0 +1,24 @@
+{
+  "units": "millimetres",
+  "parts": [
+    "intact_Body",
+    "intact_Body_ACBlade0",
+    "intact_Body_ACBlade1",
+    "damaged_Body",
+    "damaged_Body_ACBlade0",
+    "damaged_Body_ACBlade1",
+    "socket_Socket",
+    "socket_Leaf0_0_N",
+    "socket_Leaf0_0_P",
+    "socket_Leaf0_1_N",
+    "socket_Leaf0_1_P",
+    "socket_Leaf1_0_N",
+    "socket_Leaf1_0_P",
+    "socket_Leaf1_1_N",
+    "socket_Leaf1_1_P",
+    "supports_IntactPad",
+    "supports_DamagedPad"
+  ],
+  "source_inventory_sha256": "fbc72f6dd56c62a3c6372574768413c5a822f17209d3104df29f2e42794f5a48",
+  "build_note": "External models follow native geometry; hollow split shells and blade recesses support inert ballast/LED assembly. Use ordinary metal plug blades and a disconnected Type-A receptacle or specified sprung contacts. Cosmetic port/lens openings must be drilled/fitted during assembly."
+}

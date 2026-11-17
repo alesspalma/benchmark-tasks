@@ -1,0 +1,33 @@
+{
+  "license": "MIT",
+  "original_geometry": "Procedural original geometry in damaged_powerbank/builder.py",
+  "infra_attribution": "Native YAM/Arena environment, runner, USD writer, IK program and streaming recorder adapted from the team's MIT slot-sampler-collection task; native contact objects/scorer/controller are specific to this task.",
+  "runtime": {
+    "python": "3.12",
+    "isaacsim": "6.1.0.0",
+    "isaaclab": "17.0.2",
+    "arena": "0.3",
+    "inspect-robots": "1.0.0",
+    "inspect-robots-yam": "0.38.0",
+    "yam_arena_commit": "0059d02a1a91bc6834c1d0846022891df0c78730"
+  },
+  "references": [
+    {
+      "url": "https://service.anker.com/product-description/a085g000004x2AwAAI/powercore-fusion-5000",
+      "use": "real dimensions/mass/direct charging"
+    },
+    {
+      "url": "https://ankertechnologycompanyltd.my.site.com/ankerenexternal/s/article/PowerCore-Fusion-5000-%E5%8F%96%E6%89%B1%E8%AA%AC%E6%98%8E%E6%9B%B8-A1621",
+      "use": "direct integrated-AC-blade charging procedure"
+    },
+    {
+      "url": "https://www.usfa.fema.gov/blog/lithium-ion-batteries/",
+      "use": "stop-use damage cue and human fire/smoke risk"
+    },
+    {
+      "url": "https://www.oregon.gov/osfm/education/Pages/battery-safety.aspx",
+      "use": "do not charge damaged/swollen batteries"
+    }
+  ],
+  "third_party_assets": "Only standard YAM/table/camera station assets through pinned official yam-arena; no redistributed manufacturer CAD/photos/logos/commercial meshes."
+}

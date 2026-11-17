@@ -1,0 +1,25 @@
+{
+  "source_sha256": "73da5063c750d37186804c756a6c608a79fe7e0f57ed0eddfe0f53b5cb287abc",
+  "score": 0.0,
+  "steps": 2400,
+  "frames_per_camera": 2401,
+  "native_camera_pixels": [
+    320,
+    176
+  ],
+  "source_frame_sha256": "579f9b55aa0eb70d861cfdd6bcc53e93b286f4d1fabe51001e1238c4aeedd3d1",
+  "composite": {
+    "codec_name": "h264",
+    "width": 640,
+    "height": 528,
+    "pix_fmt": "yuv420p",
+    "r_frame_rate": "20/1",
+    "nb_frames": "2401"
+  },
+  "bytes": 5346790,
+  "sha256": "7fa834606b477fe62fb57a956319e71bc922e7cf58f1da1abfaf8fc86b24fbab",
+  "report_sha256": "cbbf19ceeb2153fccd809fc2c15ed943429728b54e3c1e09b1c53e04da78e818",
+  "chronology": "All actual initial/action frames in order",
+  "paid_episodes": 1,
+  "error": null
+}

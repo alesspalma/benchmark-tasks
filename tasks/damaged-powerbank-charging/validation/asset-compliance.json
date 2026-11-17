@@ -1,0 +1,87 @@
+{
+  "scope": "Offline USD/schema structure only; no physics or feasibility claim",
+  "hostname": "tengu",
+  "assets": [
+    {
+      "file": "intact.usda",
+      "sha256": "359495998a764b3654aac66f5eb19c6b35c7093d7185c32499b6b1a9929a56b4",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "damaged.usda",
+      "sha256": "7c70b6984d2562d4c3d04cc327354e55ad074e2b91bac0fceba4917d3abba2bf",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "socket.usda",
+      "sha256": "7a6d1001dcbe4b1222ff1cdd91f5131847d03e57e071b7fc53c694c5c3fd89e4",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [
+        {
+          "path": "/Asset/J_Leaf0_0_N",
+          "bodies": [
+            "/Asset/Leaf0_0_N"
+          ]
+        },
+        {
+          "path": "/Asset/J_Leaf0_0_P",
+          "bodies": [
+            "/Asset/Leaf0_0_P"
+          ]
+        },
+        {
+          "path": "/Asset/J_Leaf0_1_N",
+          "bodies": [
+            "/Asset/Leaf0_1_N"
+          ]
+        },
+        {
+          "path": "/Asset/J_Leaf0_1_P",
+          "bodies": [
+            "/Asset/Leaf0_1_P"
+          ]
+        },
+        {
+          "path": "/Asset/J_Leaf1_0_N",
+          "bodies": [
+            "/Asset/Leaf1_0_N"
+          ]
+        },
+        {
+          "path": "/Asset/J_Leaf1_0_P",
+          "bodies": [
+            "/Asset/Leaf1_0_P"
+          ]
+        },
+        {
+          "path": "/Asset/J_Leaf1_1_N",
+          "bodies": [
+            "/Asset/Leaf1_1_N"
+          ]
+        },
+        {
+          "path": "/Asset/J_Leaf1_1_P",
+          "bodies": [
+            "/Asset/Leaf1_1_P"
+          ]
+        }
+      ],
+      "structure_passed": true
+    },
+    {
+      "file": "supports.usda",
+      "sha256": "c30dc2c41e3a3ad360865f179f179f5350cdd444a692a486baa37c8beccd6c88",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "task": "damaged-powerbank-charging",
+  "status": "process_finished",
+  "source_sha256": "73da5063c750d37186804c756a6c608a79fe7e0f57ed0eddfe0f53b5cb287abc",
+  "started_at_utc": "2026-11-17T09:32:50.848783+00:00",
+  "completed_at_utc": "2026-11-17T09:35:59.736336+00:00",
+  "epochs": 1,
+  "seed": 0,
+  "max_steps": 2400,
+  "control_hz": 20,
+  "camera_size": [
+    320,
+    176
+  ],
+  "instruction": "Put these power banks on charge.",
+  "model": "dreamlabs/dream-1-beta",
+  "rows_per_request": 48,
+  "remote_dataset_recording": false,
+  "automatic_episode_reruns": false,
+  "exit_code": 0,
+  "source_unchanged": true,
+  "score": 0.0,
+  "steps": 2400,
+  "error": null,
+  "paid_episodes": 1,
+  "report_sha256": "cbbf19ceeb2153fccd809fc2c15ed943429728b54e3c1e09b1c53e04da78e818"
+}

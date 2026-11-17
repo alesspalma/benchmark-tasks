@@ -1,0 +1,68 @@
+{
+  "units": "metres",
+  "world_axes": {
+    "+X": "away from arm bases",
+    "+Y": "toward left-arm side",
+    "+Z": "up"
+  },
+  "table_top_m": 0.7475,
+  "banks": {
+    "intact": {
+      "position_m": [
+        0.285,
+        -0.11,
+        0.791641
+      ],
+      "quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "damaged": {
+      "position_m": [
+        0.285,
+        0.15,
+        0.791641
+      ],
+      "quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "socket_reference_m": [
+    0.485,
+    0.02,
+    0.8425
+  ],
+  "outlet_centres_m": [
+    [
+      0.485,
+      -0.11,
+      0.8425
+    ],
+    [
+      0.485,
+      0.15,
+      0.8425
+    ]
+  ],
+  "canonical_seed": 1415158438,
+  "inspect_seed": 0,
+  "object_jitter": 0,
+  "control_hz": 20,
+  "physics_hz": 240,
+  "demo_native_camera_pixels": [
+    640,
+    360
+  ],
+  "dream_native_camera_pixels": [
+    320,
+    176
+  ],
+  "robot": "pinned official bimanual YAM calibrated station, standard parallel grippers"
+}
