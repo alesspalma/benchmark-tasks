@@ -1,21 +1,21 @@
 {
   "kind": "reference",
   "score": 1.0,
-  "source_run": "sampler-notched-004",
+  "source_run": "sampler-final-native-001",
   "scope": "Fresh native physics execution using time and ordinary measured robot joints, with actual cameras",
-  "source_sha256": "d9dedb75db681b8febeeed88bd9d014776b607cf0cf90e6161d00d80168a38ce",
+  "source_sha256": "c4762ca442ac229641040e08a3da432352744a545d9917da5efd60bf7c0077c2",
   "source_unchanged": true,
   "native_score": 1.0,
   "steps": 2339,
   "physics_audits": 28068,
-  "instruction": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
+  "instruction": "Collect at least 5 grams of granules from the tub into the sample jar using the sleeve-and-notched-rod sampler. Return the closed sampler upright to its holder and release both hands.",
   "controller": {
     "inputs": [
       "elapsed time",
       "joint positions"
     ]
   },
-  "native_receipt_sha256": "206aa0bd288e63954beb6106cac65c1597271cda818b6a5902ba59225eb1433a",
+  "native_receipt_sha256": "a28c95b835b48fca77afe9e95957511eddf72e0768859e742a7aee6f625eb38e",
   "native_trace_sha256": "727c014563de2de438113eb65b70bd75ae152fee83bbb98c56da9d8d4c9dc0c0",
   "tracks": {
     "top_cam": {
@@ -139,5 +139,6 @@
       "sha256": "09306658db13eb08ac9c5d62907e75e34067dbf9273e6bcaea6b768ef8f20365"
     }
   },
-  "review_notes": "Inspected actual three-camera eight-stage contact sheet and final frames; natural barrel hold and topbutton presses,contained transfer,notch discharge intojar,closed samplerreturnedandhandsreleased. All2340N+1frames decoded per native640x360camera. Section schematic is separate original documentation,notnative media."
+  "full_decode_passed": true,
+  "review_notes": "Inspected eight-stage native overview/wrist contact sheet: barrel hold, side-notch fill, enclosed transfer, inclined notch discharge, closed return and hands released. All initial/action frames preserved; final outcome agrees with independent native geometry/flow audit."
 }

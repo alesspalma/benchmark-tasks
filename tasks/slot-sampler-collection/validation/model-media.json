@@ -1,0 +1,64 @@
+{
+  "kind": "dream",
+  "original_log": "adhoc_a1d15872.json",
+  "original_log_sha256": "1a765ae9df002319ef50cb83f1e5f380416b61921009b72e2a4c1749a6403081",
+  "environment_id": "slot_sampler-c4762ca442ac2296",
+  "score": 0.0,
+  "steps": 2800,
+  "camera_validation": {
+    "top_cam": {
+      "frames": 2801,
+      "minimum_mean": 156.1822147253788,
+      "minimum_std": 50.55905449010348
+    },
+    "left_cam": {
+      "frames": 2801,
+      "minimum_mean": 122.60975378787879,
+      "minimum_std": 43.11912487890654
+    },
+    "right_cam": {
+      "frames": 2801,
+      "minimum_mean": 134.05921519886363,
+      "minimum_std": 39.210454979265684
+    }
+  },
+  "composition": "Every native initial/action frame in order at 20 fps; overview above left/right wrists. Resize/stack only; no overlays, temporal edits or generated frames.",
+  "encoding_requires_inference": false,
+  "ffprobe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 528,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "20/1",
+        "nb_frames": "2801"
+      }
+    ],
+    "format": {
+      "duration": "140.050000",
+      "size": "6710715"
+    }
+  },
+  "full_decode_passed": true,
+  "files": {
+    "dream-1.mp4": {
+      "bytes": 6710715,
+      "sha256": "1e45993bf23d2cb447c8e300f1962d18458383ffa6bb2d288dacb0c27b775c4b"
+    },
+    "setup-dream.png": {
+      "bytes": 64407,
+      "sha256": "12d9eb0b430844945eab0e1d5685bdae4e5c2f369578c426abd26788b42d0791"
+    },
+    "dream-review.png": {
+      "bytes": 2168079,
+      "sha256": "5b8dff144776f6ae6134114d8521d4e993c9520cd894c78eb9556d9bc7f88ae1"
+    }
+  },
+  "source_sha256": "c4762ca442ac229641040e08a3da432352744a545d9917da5efd60bf7c0077c2",
+  "visually_reviewed": true,
+  "review_notes": "Inspected eight evenly spaced actual overview/wrist composites, including initial and final states. Cameras are valid. The model approaches the tool but does not complete the sampling operation; final jar outcome agrees with score0.0. No temporal edits or episode reruns.",
+  "source_manifest_sha256": "1a60e689e76280e70182b0d7c89e86427c8a104ae52b57a508897283d450d15d"
+}

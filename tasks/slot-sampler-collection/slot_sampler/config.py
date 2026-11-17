@@ -5,8 +5,8 @@ from yam_arena import station
 
 KEY = "slot_sampler"
 TITLE = "Collect granules with a sleeve-and-notched-rod sampler"
-INSTRUCTION = "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released."
-DESCRIPTION = "Inspired by Buerkle's powder sampler Mini (https://www.buerkle.de/en/powder-sampler-mini_p5346-3010). The right arm presses the blue top button downward to extend a notched collecting rod from its fixed outer sleeve. Granules enter the exposed side notch above its solid floor. Retracting the rod into the sleeve encloses the sample. Over the jar, tilt the closed sampler toward its side opening and extend the rod again to pour out the sample by gravity. The pocket floor moves with the rod; there is no horizontal discharge plate. The left hand grips the barrel. This original enlarged rectangular version uses coarse calibration granules."
+INSTRUCTION = "Collect at least 5 grams of granules from the tub into the sample jar using the sleeve-and-notched-rod sampler. Return the closed sampler upright to its holder and release both hands."
+DESCRIPTION = "This is a sleeve-and-notched-rod granule sampler. Its operating sequence is documented by Buerkle for the powder sampler Mini (https://www.buerkle.de/en/powder-sampler-mini_p5346-3010). Hold the barrel with the left hand. Press the blue top button downward with the right hand to extend the collecting rod. Granules enter the exposed side notch above the rod's integral floor. Release the button to retract the rod into the sleeve and enclose the sample before withdrawing. Over the jar, tilt the closed sampler toward its side opening and press the button again to expose the notch and empty the sample by gravity. Release the button, return the closed sampler upright to its holder, and release both hands. The rectangular pocket and coarse clean granules are specified in the setup."
 MAX_STEPS = 2800
 TOP = station.TABLE_TOP
 TUB = np.array([0.40, 0.02, TOP])

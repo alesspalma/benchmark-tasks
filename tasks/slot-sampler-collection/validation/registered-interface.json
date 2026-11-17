@@ -1,0 +1,16 @@
+{
+  "scope": "Two-step registered scripted hold, interface and native 320x176 cameras only; not a full-score demonstration.",
+  "passed": true,
+  "dream_api_used": false,
+  "source_sha256": "c4762ca442ac229641040e08a3da432352744a545d9917da5efd60bf7c0077c2",
+  "report_sha256": "5ef6e444dd22e500f6cb6b138d124d0a6f162bb4dd83ec0c2ceb427ab92c52db",
+  "total_steps": 2,
+  "camera_frames": {
+    "left_cam": 3,
+    "right_cam": 3,
+    "top_cam": 3
+  },
+  "environment_id": "slot_sampler-c4762ca442ac2296",
+  "gpu0_success": true,
+  "prior_gpu1_attempt": "Stopped during renderer initialization, no model inference."
+}

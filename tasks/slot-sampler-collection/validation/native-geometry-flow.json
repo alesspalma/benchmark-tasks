@@ -1,6 +1,6 @@
 {
   "scope": "Native physical execution; side-notch entry,full closure,side-notch gravity exit,settled mass; no hosted inference",
-  "source_sha256": "d9dedb75db681b8febeeed88bd9d014776b607cf0cf90e6161d00d80168a38ce",
+  "source_sha256": "c4762ca442ac229641040e08a3da432352744a545d9917da5efd60bf7c0077c2",
   "score": 1.0,
   "delivered_grams": 6.3,
   "captured_grains": 35,

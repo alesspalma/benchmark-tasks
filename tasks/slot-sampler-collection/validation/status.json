@@ -1,46 +1,17 @@
 {
-  "status": "native_full_score_verified_model_pending",
-  "source_sha256": "d9dedb75db681b8febeeed88bd9d014776b607cf0cf90e6161d00d80168a38ce",
-  "native_full_score": true,
-  "score": 1.0,
+  "status": "validated_media_uploaded",
+  "source_sha256": "c4762ca442ac229641040e08a3da432352744a545d9917da5efd60bf7c0077c2",
+  "native_score": 1.0,
   "delivered_grams": 6.3,
-  "captured_grains": 35,
-  "discharged_grains": 35,
-  "delivered_grains": 35,
-  "inside_remaining": 0,
-  "steps": 2339,
-  "simulated_s": 116.95,
+  "native_steps": 2339,
   "max_steps": 2800,
-  "violations": [],
   "unit_tests": 18,
-  "usd_assets_passed": 2,
-  "interarm_gap_m": 0.04952740188015339,
+  "registered_interface_passed": true,
   "visually_reviewed": true,
-  "review_video": "artifacts/sampler-notched-ready-004/demo.mp4",
-  "native_camera_size": [
-    640,
-    360
-  ],
-  "video_size": [
-    1280,
-    1080
-  ],
-  "fps": 20,
-  "frames_each": 2340,
-  "dream_runs": 0,
-  "media_uploads": 0,
-  "prs_opened": 0,
-  "reference": "https://www.buerkle.de/en/powder-sampler-mini_p5346-3010",
-  "remaining_before_submission": [
-    "User review of manufacturer-based mechanism",
-    "Current final submission checklist and one matching Dream-1 episode",
-    "Media upload,task.json and pull request"
-  ],
-  "prior_native_trials": {
-    "notched001": "completed0.0,pocketcouldnotextend",
-    "notched002": "completed0.0,squarelipjam",
-    "notched003": "completed0.0,physicalflowworkedbutexitguardincorrect",
-    "notched004": "completed1.0,currentreference"
-  },
-  "active_native_processes": []
+  "dream_runs": 1,
+  "dream_score": 0.0,
+  "dream_steps": 2800,
+  "model_runtime_error": null,
+  "media_uploads": 1,
+  "media_id": "M-K2FCFM"
 }

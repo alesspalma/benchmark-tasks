@@ -2,14 +2,14 @@
   "status": "completed",
   "hostname": "tengu",
   "task": "slot_sampler",
-  "source_sha256": "d9dedb75db681b8febeeed88bd9d014776b607cf0cf90e6161d00d80168a38ce",
+  "source_sha256": "c4762ca442ac229641040e08a3da432352744a545d9917da5efd60bf7c0077c2",
   "seed": 1415158438,
   "policy": "demo",
   "dream_api_used": false,
-  "started_at_utc": "2026-11-17T03:26:06.240350+00:00",
+  "started_at_utc": "2026-11-17T03:53:53.325828+00:00",
   "control_hz": 20,
   "physics_hz": 240,
-  "instruction": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
+  "instruction": "Collect at least 5 grams of granules from the tub into the sample jar using the sleeve-and-notched-rod sampler. Return the closed sampler upright to its holder and release both hands.",
   "controller_inputs": [
     "elapsed time",
     "joint positions"
@@ -35,7 +35,7 @@
   "steps": 2339,
   "worst_ik_m": 9.956225727302117e-05,
   "worst_ik_rad": 0.00032807779419265963,
-  "elapsed_wall_s": 325.95041537913494,
+  "elapsed_wall_s": 343.53080135188065,
   "source_unchanged": true,
   "video_errors": {},
   "media": {

@@ -1,0 +1,23 @@
+{
+  "scope": "One hosted Dream-1 episode through Inspect Robots; no episode reruns.",
+  "source_sha256": "c4762ca442ac229641040e08a3da432352744a545d9917da5efd60bf7c0077c2",
+  "environment_id": "slot_sampler-c4762ca442ac2296",
+  "model": "dreamlabs/dream-1-beta",
+  "seed": 0,
+  "native_seed": 1415158438,
+  "score": 0.0,
+  "steps": 2800,
+  "max_steps": 2800,
+  "total_trials": 1,
+  "errored_trials": 0,
+  "error": null,
+  "source_unchanged": true,
+  "camera_size": [
+    320,
+    176
+  ],
+  "frames_per_camera": 2801,
+  "control_hz": 20,
+  "report_sha256": "1a765ae9df002319ef50cb83f1e5f380416b61921009b72e2a4c1749a6403081",
+  "launch_receipt_sha256": "394a777648ef9ed6f41e9b3f2d5272fe441307bea953df0206aae4ff6108e4cb"
+}

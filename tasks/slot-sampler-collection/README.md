@@ -1,18 +1,28 @@
 # Collect granules with a sleeve-and-notched-rod sampler
 
-This task follows the operating principle of the [Bürkle powder sampler Mini, 5346 family](https://www.buerkle.de/en/powder-sampler-mini_p5346-3010). The manufacturer describes extending a notched inner rod with a pushbutton, moving gently to fill its collecting notch, retracting the rod into its sleeve, withdrawing the enclosed sample, and extending it again over a collecting vessel.
+This is a sleeve-and-notched-rod granule sampling task for laboratory research automation. It tests collecting material from within a granular bed, enclosing it before withdrawal, transporting it without loss and discharging it into a receiving jar. The operating procedure is documented for the [Bürkle powder sampler Mini, 5346 family](https://www.buerkle.de/en/powder-sampler-mini_p5346-3010): extend the inner rod with the pushbutton, move gently to fill its collecting notch, retract it into the sleeve, withdraw the enclosed sample and extend it again over a collecting vessel.
 
 The reconstruction uses **one moving collecting rod**. Its pocket, solid floor and blue top button are the same rigid part. Pressing the button extends the pocket down from the sleeve; granules enter through the exposed side notch **above** the floor. Releasing the button lets a permanent spring retract and enclose the pocket. Over the jar, the left arm tilts the enclosed tool 20 degrees toward the notch and the right arm presses the button again: the exposed sample rolls/pours out by gravity. There is no suction or transverse discharge plate.
 
-The left gripper holds the barrel below its finger-rest collar; the right gripper presses the ordinary top button with closed fingers. There are no offset control tabs or grasping handles. This is original rectangular geometry inspired by the documented operating principle, not an OEM dimensional replica.
+The left gripper holds the barrel below its finger-rest collar; the right gripper presses the ordinary top button with closed fingers. The task supplies a rectangular pocket and sleeve with printable reconstruction models, an ordinary barrel grip and a spring-return button.
 
-The matching native demonstration scores **1.0**, delivering **6.30 g** (all 35 captured grains) in **2,339 actions / 116.95 seconds**. The pocket is empty, the rod closed and the sampler supported with both hands released. Its source stayed unchanged during the run. The actual-camera video contains all **2,340 initial/action frames per camera**. The earlier hybrid demonstration is superseded. No matching Dream-1 episode, upload or submission has occurred.
+The native full-score demonstration delivers **6.30 g** (all 35 captured grains) in **2,339 actions / 116.95 seconds**. The pocket is empty, the rod closed and the sampler upright in its holder with both hands released. The actual-camera video contains all **2,340 initial/action frames per camera**. Validation receipts identify the exact source and outcome of each submitted run.
+
+The submitted **Dream-1 beta** evaluation is one episode of **2,800 actions**,
+scoring **0.0**, with no runtime error or episode rerun. Its three native camera
+recordings contain **2,801 initial/action frames each**. The full-score scripted
+demo and model run use the same source revision, instruction, fixed reset and
+primary scorer. See `validation/` for source hashes and run/media evidence.
 
 ![Section diagram of the retractable notched rod](reconstruction/mechanism.svg)
 
 ## Relevance and category
 
-**Other — laboratory research automation.** Sampling granular feedstocks is preparation work for formulation and materials experiments. This task isolates physically acquiring, enclosing, transporting and discharging a contained subsample. The manufacturer identifies raw-material sampling in pharmaceutical, medical-product and biotechnology settings. The task uses standard clean calibration spheres so repeated trials do not expose shared grippers to loose powder or variable food material.
+**Other — laboratory research automation.** Obtaining a contained subsample is a material-preparation step for formulation and materials experiments. The distinctive operation is exposing the sampling notch inside a granular bed while supporting the tool, enclosing the filled pocket before withdrawal, then coordinating tool tilt and button pressure to release the sample into a separate jar. The manufacturer documents raw-material sampling applications. Standard clean calibration spheres provide repeatable material for trials on shared robot rigs.
+
+## Instruction
+
+Collect at least 5 grams of granules from the tub into the sample jar using the sleeve-and-notched-rod sampler. Return the closed sampler upright to its holder and release both hands.
 
 ## Fixed setup
 
@@ -65,13 +75,29 @@ python run.py --policy demo --device cuda:0 --physics-device cpu \
   --output /tmp/sampler-native
 ```
 
-Output directories must be new. Control 20 Hz, native physics 240 Hz; continuous collision detection stays enabled for the granules. Budget: 2,800 actions / 140 seconds. The nominal reference program is 127 seconds. Reset restores geometry and all grains, retracts SampleSlide to zero, initializes READY/open grippers and settles 2.5 seconds. No layout jitter; Inspect seed 0 derives native seed 1415158438. Modes `hold`, `insert`, `open`, `retain` and `deliver` stop at intermediate substeps.
+Output directories must be new. Control 20 Hz, native physics 240 Hz; continuous collision detection stays enabled for the granules. Budget: 2,800 actions / 140 seconds. The nominal reference program is 127 seconds and reaches full score after 116.95 simulated seconds; the measured native run took about 5.7 minutes of wall time on an RTX PRO 6000 with CPU physics. Hosted model inference adds wall time. Reset restores geometry and all grains, retracts SampleSlide to zero, initializes READY/open grippers and settles 2.5 seconds. No layout jitter; Inspect seed 0 derives native seed 1415158438. Modes `hold`, `insert`, `open`, `retain` and `deliver` stop at intermediate substeps.
 
 The reference reads elapsed time and ordinary measured robot joints only. Object/grain poses and scores are used exclusively for read-only scoring/auditing. There are no runtime object/particle state writes, spawning/deleting material, motorized fixtures or software latches.
 
 Registered evaluation: `--embodiment slot_sampler --policy slot_sampler_scripted --scorer task_score`, fixed jitter 0, 20 Hz and the instruction in config.py. A hosted evaluation substitutes `--policy dream -P model=dreamlabs/dream-1-beta -P rows_per_request=48 -P record=false`, one epoch without episode reruns. The direct native runner uses the same environment and controller factory.
 
-Demo: three native 640×360 cameras; 1280×1080, 20 fps composite, 1280×720 overview above two 640×360 wrists, left then right. Dream-1: three native 320×176 views and a 640×528 composite. Both use H.264/yuv420p and preserve every initial/action frame in order. Paid hosted evaluation follows successful native validation and user review.
+To reproduce the registered scripted evaluation:
+
+```bash
+inspect-robots run --embodiment slot_sampler --policy slot_sampler_scripted \
+  -E device=cuda:0 -E physics_device=cpu -E object_jitter=0 -E control_hz=20 \
+  -E cam_width=640 -E cam_height=360 \
+  --instruction "Collect at least 5 grams of granules from the tub into the sample jar using the sleeve-and-notched-rod sampler. Return the closed sampler upright to its holder and release both hands." \
+  --scorer task_score --max-steps 2800 --epochs 1 --seed 0 \
+  --store-frames --no-prompt --grader none --no-rerun --no-rerun-save \
+  --log-dir /tmp/sampler-scripted-inspect
+```
+
+For Dream-1, configure `DREAM_API_KEY` in the process environment, use the
+hosted-policy arguments above and native camera dimensions 320×176, and choose
+a fresh log directory. No key belongs in the task files.
+
+Demo: three native 640×360 cameras; 1280×1080, 20 fps composite, 1280×720 overview above two 640×360 wrists, left then right. Dream-1: three native 320×176 views and a 640×528 composite. Both use H.264/yuv420p and preserve every initial/action frame in order. Both evaluations use the same task, fixed layout, instruction and primary scorer.
 
 ## Numeric score
 
