@@ -1,0 +1,12 @@
+{
+  "source_sha256": "16a528b4fb95e4482e42ca86c2e216ac286a8b0ab50ef0234e96d945340b9e00",
+  "report": "artifacts/earmuff-fit-inspect-smoke-045/adhoc_bc72d417.json",
+  "report_sha256": "bdfb8a35ae54145c811fe4f820fde70dcb31b40b0007a94eaf72f6a39c531574",
+  "steps": 2,
+  "error": null,
+  "model_calls": 0,
+  "cameras": [
+    320,
+    176
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "source_sha256": "16a528b4fb95e4482e42ca86c2e216ac286a8b0ab50ef0234e96d945340b9e00",
+  "control_hz": 20,
+  "physics_hz": 480,
+  "native_score": 1.0,
+  "actions": 1309,
+  "frames_per_camera": 1310,
+  "native_cameras": [
+    640,
+    360
+  ],
+  "composite": [
+    1280,
+    1080
+  ],
+  "fps": 20,
+  "receipt_sha256": "d64442e90624d101d6ec745e5532a02539f7d9d31a7239c6ecf3e7927ee5494e",
+  "trace_sha256": "123d38fbc6e79dfed1d3c5df6665a7ec2f648d2b2f3a7432be6b672de638d35d",
+  "final_metrics": {
+    "score": 1.0,
+    "success": true,
+    "left": {
+      "fit": true,
+      "pinna_opening_fraction": 0.7790940650183519,
+      "max_cushion_gap_m": 0.00019988209931816325,
+      "min_cushion_gap_m": -6.298424719358708e-06,
+      "cup_center_error_m": [
+        -0.0021930065155029155,
+        -0.000831260681152246
+      ],
+      "cup_normal_cosine": 0.9999508630617109
+    },
+    "right": {
+      "fit": true,
+      "pinna_opening_fraction": 0.9661765951683938,
+      "max_cushion_gap_m": 0.00020041172788085038,
+      "min_cushion_gap_m": -0.00012588205506451622,
+      "cup_center_error_m": [
+        -0.000568481922149644,
+        -0.0043814325332640625
+      ],
+      "cup_normal_cosine": 0.9999507088421544
+    },
+    "crown_seated": true,
+    "crown_surface_gap_m": 0.00017921411242838303,
+    "crown_contact_force_N": 0.0,
+    "crown_error_m": [
+      0.011094112396240252,
+      0.0016788552748039365,
+      -0.0005750846862793146
+    ],
+    "hands_clear": true,
+    "stable": true,
+    "joints": {
+      "LeftElastic": 0.2794887125492096,
+      "RightElastic": -0.24082736670970917,
+      "LeftHeight": 0.030775755643844604,
+      "LeftBearingSpring0": 2.998060517711565e-05,
+      "LeftBearingSpring2": 2.9667016860912554e-05,
+      "RightHeight": 0.036902885884046555,
+      "RightBearingSpring0": 2.9557924790424295e-05,
+      "RightBearingSpring2": 3.000416654685978e-05,
+      "LeftTilt": -0.25489047169685364,
+      "RightTilt": 0.2682307958602905,
+      "LeftFoam00": 0.0021386391017585993,
+      "LeftFoam01": 0.002168564358726144,
+      "LeftFoam02": 0.002228423487395048,
+      "LeftFoam03": 0.0023075691424310207,
+      "LeftFoam04": 0.002436299342662096,
+      "LeftFoam05": 0.0025718538090586662,
+      "LeftFoam06": 0.00267432420514524,
+      "LeftFoam07": 0.0027281087823212147,
+      "LeftFoam08": 0.0027276307810097933,
+      "LeftFoam09": 0.002724560210481286,
+      "LeftFoam10": 0.0026652866508811712,
+      "LeftFoam11": 0.0025585286784917116,
+      "LeftFoam12": 0.0024206675589084625,
+      "LeftFoam13": 0.002315553603693843,
+      "LeftFoam14": 0.002235261257737875,
+      "LeftFoam15": 0.0021731453016400337,
+      "RightFoam00": 0.0027591069228947163,
+      "RightFoam01": 0.0027033365331590176,
+      "RightFoam02": 0.0025992707815021276,
+      "RightFoam03": 0.0024627484381198883,
+      "RightFoam04": 0.0023350429255515337,
+      "RightFoam05": 0.002256229752674699,
+      "RightFoam06": 0.002197086811065674,
+      "RightFoam07": 0.0021701662335544825,
+      "RightFoam08": 0.002206025645136833,
+      "RightFoam09": 0.0022692258935421705,
+      "RightFoam10": 0.002350341761484742,
+      "RightFoam11": 0.0024526729248464108,
+      "RightFoam12": 0.0025927159003913403,
+      "RightFoam13": 0.0025748107582330704,
+      "RightFoam14": 0.0027580647729337215,
+      "RightFoam15": 0.002759090857580304
+    },
+    "violations": []
+  },
+  "initial_score": 0.0
+}

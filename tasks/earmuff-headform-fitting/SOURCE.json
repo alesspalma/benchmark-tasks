@@ -1,0 +1,65 @@
+{
+  "task": "earmuff-headform-fitting",
+  "license": "MIT",
+  "geometry": "Original dimensioned procedural reconstruction; no third-party meshes",
+  "infrastructure_attribution": {
+    "task": "slot-sampler-collection",
+    "repository": "https://github.com/alesspalma/benchmark-tasks",
+    "license": "MIT",
+    "reused": [
+      "native environment/runner structure",
+      "calibrated Cartesian IK program",
+      "USD primitive helpers",
+      "read-only geometry bounds"
+    ]
+  },
+  "runtime": {
+    "python": "3.12",
+    "isaacsim": "6.1.0.0",
+    "isaaclab": "17.0.2",
+    "isaaclab-arena": "0.3",
+    "inspect-robots": "1.0.0",
+    "inspect-robots-yam": "0.38.0",
+    "yam_arena_commit": "0059d02a1a91bc6834c1d0846022891df0c78730"
+  },
+  "primary_references": [
+    {
+      "url": "https://multimedia.3m.com/mws/media/845196O/3m-peltor-x-series-passive-hearing-protection-earmuff-technical-data-sheet.pdf",
+      "use": "Over-head fitting sequence and materials",
+      "redistributed": false
+    },
+    {
+      "url": "https://multimedia.3m.com/mws/media/1566723O/certificado-fono-x1a-en-352-1.pdf",
+      "use": "X1A reference mass184g; medium fit width145mm, height130mm; measured headband force11.8N (pp4-8)",
+      "redistributed": false
+    },
+    {
+      "url": "https://stacks.cdc.gov/view/cdc/210634/cdc_210634_DS1.pdf",
+      "use": "ANSI/ASA S12.6-2016 headband-force fixture width/height and mechanical force measurement",
+      "redistributed": false
+    },
+    {
+      "url": "https://openusd.org/release/api/class_usd_physics_drive_a_p_i.html",
+      "use": "Angular-drive stiffness and damping use per-degree units; SI per-radian parameters converted by pi/180",
+      "redistributed": false
+    }
+  ],
+  "parameter_provenance": {
+    "sourced": [
+      "reference mass184g",
+      "medium145mm temporal envelope",
+      "130mm crown-to-ear height",
+      "11.8N fitted force target"
+    ],
+    "engineered_estimates": [
+      "explicit cup contour and opening",
+      "headform anatomy geometry",
+      "band spring coefficient to match fitted load",
+      "45mm height rail stroke/friction",
+      "cup pivot stiffness",
+      "foam sector stiffness/damping",
+      "material friction"
+    ],
+    "physical_validation": "Not performed; native-simulation evidence is recorded separately."
+  }
+}

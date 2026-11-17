@@ -1,0 +1,50 @@
+{
+  "basis": "Native measured hinge positions/lever arms and foam compressions, evaluated with the authored SI spring coefficients; these are calculated simulation loads, not physical-hardware measurements or direct contact-force sensor readings.",
+  "band_spring_Nm_per_rad": 6.1,
+  "foam_spring_N_per_m": 300.0,
+  "force_reference_N": 11.8,
+  "finger_limit_N": 40.0,
+  "sides": {
+    "Left": {
+      "peak_free_spread_spring_equivalent": {
+        "force_N": 24.098157303429844,
+        "step": 288,
+        "hinge_rad": 0.44799545407295227,
+        "vertical_lever_m": 0.11340171098709106,
+        "height_m": 0.04499546065926552
+      },
+      "conservative_required_grip_per_finger_N": 18.53704407956142,
+      "final_cushion_normal_load_N_mean": 11.722357438411564,
+      "final_cushion_normal_load_N_sd": 0.0002828355602606937,
+      "relative_difference_to_reference": -0.006579878100715031
+    },
+    "Right": {
+      "peak_free_spread_spring_equivalent": {
+        "force_N": 19.587410474094256,
+        "step": 288,
+        "hinge_rad": -0.33417370915412903,
+        "vertical_lever_m": 0.10406988859176636,
+        "height_m": 0.0007185937720350921
+      },
+      "conservative_required_grip_per_finger_N": 15.06723882622635,
+      "final_cushion_normal_load_N_mean": 11.834234101697803,
+      "final_cushion_normal_load_N_sd": 0.00020323874324547898,
+      "relative_difference_to_reference": 0.002901195059135775
+    }
+  },
+  "maximum_approximate_spread_load_N": 24.098157303429844,
+  "all_required_finger_loads_below40N": true,
+  "ring_area_m2": 0.003343122465141424,
+  "pressure_at_reference_load_Pa": 3529.6343831367317,
+  "native_crown_contact": {
+    "peak_force_N": 15.474612819617267,
+    "final20_force_N_min": 0.0,
+    "final20_force_N_max": 0.0,
+    "final20_surface_gap_m_min": 0.00017921217146876778,
+    "final20_surface_gap_m_max": 0.00017994510768715166,
+    "final20_all_crown_seated": true,
+    "final20_all_hands_clear": true,
+    "final20_all_both_cups_fit": true,
+    "force_interpretation": "Native Band-to-Skull normal force is diagnostic. Zero force does not fail the unchanged public0.5mm band-seating geometry criterion."
+  }
+}

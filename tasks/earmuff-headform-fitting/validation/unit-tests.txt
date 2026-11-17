@@ -1,0 +1,4 @@
+Final source16a528b4fb95e4482e42ca86c2e216ac286a8b0ab50ef0234e96d945340b9e00
+python -m pytest -q tests
+............. [100%]
+13 passed in0.22s

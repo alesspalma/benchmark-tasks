@@ -1,0 +1,36 @@
+{
+  "source_sha256": "16a528b4fb95e4482e42ca86c2e216ac286a8b0ab50ef0234e96d945340b9e00",
+  "score": 0.0,
+  "steps": 2400,
+  "frames_per_camera": 2401,
+  "native_camera_pixels": [
+    320,
+    176
+  ],
+  "source_frame_sha256": "d5a9e5b824baabbe1d72637e6c5acb72794d17b1b8fa2c8bf6727855f60cd4a2",
+  "composite": {
+    "codec_name": "h264",
+    "width": 640,
+    "height": 528,
+    "pix_fmt": "yuv420p",
+    "r_frame_rate": "20/1",
+    "nb_frames": "2401"
+  },
+  "bytes": 7784446,
+  "sha256": "b7aae03e132d15ded78d76c2ca0578fa936ee8bef88dde1ed29544474d14387a",
+  "report_sha256": "927903df8ce62113dcb031ba2691cdebec2dfd629b731556c8e706ff2a164326",
+  "chronology": "All actual initial/action frames in order",
+  "paid_episodes": 1,
+  "error": null,
+  "visually_reviewed": true,
+  "sampled_frame_indices": [
+    0,
+    480,
+    960,
+    1440,
+    1920,
+    2400
+  ],
+  "contact_sheet": "research/ten-task-implementation-2026-11-17/08-earmuff-headform-fitting/model-contact-sheet.jpg",
+  "visual_review": "Six actual frames reviewed: clear native cameras and anonymous scene; model attempts remain unsuccessful, preserved without edits or omissions."
+}

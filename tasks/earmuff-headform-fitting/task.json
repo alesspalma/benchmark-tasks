@@ -1,0 +1,19 @@
+{
+  "title": "Fit and adjust hearing protectors on an adult headform",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual",
+    "wearable fitting",
+    "elastic headband",
+    "circumaural contact"
+  ],
+  "instruction": "Put the hearing protectors on the manikin and adjust both cups so they sit properly around its ears. Leave both hands clear when finished.",
+  "context": "Assisting a person with over-ear hearing protectors requires spreading a sprung band, clearing the ears, and fitting both cushions continuously against the head. The manufacturer-documented fitting procedure requires the ears inside the cup openings, even cushion contact, adjusted cup height and the headband straight across the crown.",
+  "setup": "A full-size rigid PETG adult headform is fixed on a 190 x 200 x 14 mm base at (480,0) mm on the calibrated YAM table. It is 335 mm high, has 145 mm temporal width, 190 mm skull depth, ear centres 205 mm above the table and 28 x 60 mm pinnae protruding 14 mm. A 184 g overhead twin-band hearing protector hangs freely from an ordinary rigid polymer T-shaped storage stand centred at (260,0) mm: 130 x 200 x 12 mm base, 12 x 12 mm post, and 60 x 40 x 10 mm crossbar whose top is 220 mm above the table. The protector has 80 x 104 mm oval ABS cups, 44 x 70 mm cushion openings, 12 mm PU-foam/PVC cushions, passive cup pivots, 45 mm frictional height slides and an elastic coated-steel headband. Its two inward cushion surfaces initially lie 68 mm apart. Full dimensions, fixed poses, material parameters and printable headform files are in the README and reconstruction folder. Both standard YAM grippers start open in READY; no randomized layout. Secure the headform and storage-stand bases against sliding and tipping with ordinary removable mounting tape under the bases. The protector rests freely on the stand.",
+  "scoring": "0 if neither cup is properly fitted or the band is not seated within0.5 mm of the crown at its seating point. 0.3 for a seated band and one fitted cup;0.7 for a seated band and both fitted cups. 1.0 if that fit remains for1 second with linear speed below15 mm/s, angular speed below0.15 rad/s, both gripper centres at least90 mm from cups/crown, and every robot part at least3 mm from the protector. Proper fit requires the complete pinna inside the44 x70 mm opening, cup centre within10 mm horizontally/vertically of its ear, no cushion gap above1 mm, no trapped ear, and inward-normal cosine at least0.97 relative to the temporal-head normal (about14.07 degrees). Band placement is within15 mm fore/aft,12 mm laterally and14 degrees tilt. Inspect with photos, ruler,1 mm cushion feeler,0.5 mm crown feeler and hand-release video. Exact native face geometry implements the gap test; contact force is diagnostic. The score measures released mechanical fit.",
+  "run_limit": "2,400 control steps (120 seconds at 20 Hz)",
+  "reset_notes": "Remove the hearing protector, return both height slides to the short position and the cups upright, and rest the crown on the headphone stand in the marked layout. The ordinary earmuff and clean headform are reusable; nothing is consumed.",
+  "fidelity": "Native contacts couple a full-size headform to passive band springs, preloaded friction guides, cup pivots and 16 compliant cushion sectors per cup. Geometry and foam/guide parameters are dimensioned engineering reconstructions. The band targets the published X1A 11.8 N medium-fit load. Scoring checks ear enclosure,1 mm cushion gaps,0.5 mm band seating and released mechanical fit; native contact force is diagnostic.",
+  "scores": "Dream-1 (dreamlabs/dream-1-beta):0.0 in2400 control steps; scripted demo:1.0 in1309 control steps.",
+  "media": "M-A2R9YS"
+}
