@@ -29,5 +29,5 @@
       "use": "do not charge damaged/swollen batteries"
     }
   ],
-  "third_party_assets": "Only standard YAM/table/camera station assets through pinned official yam-arena; no redistributed manufacturer CAD/photos/logos/commercial meshes."
+  "third_party_assets": "See Third-party assets and licenses in README.md for the source and license of each runtime station asset."
 }
