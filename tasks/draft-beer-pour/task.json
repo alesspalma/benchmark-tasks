@@ -15,5 +15,6 @@
   "run_limit": "800 actions (40 seconds at 20 Hz)",
   "reset_notes": "Return the clean empty glass to its mat, close the tap and empty the drip tray. Use refrigerated draft beer from the same balanced line; one serving is used per trial.",
   "fidelity": "Full-size glass contact and manual faucet travel use native rigid-body physics. A geometric stream responds to the actual valve and vessel pose, distinguishing wall contact from direct impact. Gravity-levelled contents, overflow and native load transfer are computed from vessel geometry. Foam generation and decay use documented engineering coefficients; splash droplets, unsteady slosh and glass fracture are omitted.",
-  "scores": "Scripted demo: 1.0 after 428 actions (21.4 s). Dream-1: 0.0 after 800 actions (40 s)."
+  "scores": "Scripted demo: 1.0 after 428 actions (21.4 s). Dream-1: 0.0 after 800 actions (40 s).",
+  "media": "M-M6T7EC"
 }
