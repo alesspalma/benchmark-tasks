@@ -56,7 +56,8 @@ def apple(w):
     for j in range(12):
         lo, hi = (j-.52)*math.tau/12, (j+.52)*math.tau/12
         points = [(r*math.cos(a), r*math.sin(a), z)
-                  for z, outer in bands for a in (lo,hi) for r in (.0135, outer)]
+                  for z, outer in bands for a in (lo,hi)
+                  for r in (.0145, max(.0145, outer))]
         # Convex hull uses the complete set of points, with per-band faces.
         faces = [
             (4*k,4*k+1,4*k+5,4*k+4) for k in range(len(bands)-1)
@@ -73,7 +74,12 @@ def core(w):
     stage = w.stage("core")
     p = w.body(stage, "/Asset/Core", .013, ccd=True)
     w.cylinder(stage, p + "/Column", C.CORE_RADIUS, 2*C.CORE_HALF_LENGTH,
+               (0., 0., 0.), FLESH, collide=False)
+    # The narrow contact spine lets the pulp compress at the blade. The
+    # tissue response supplies cutting force and the finite friction fit.
+    w.cylinder(stage, p + "/ContactSpine", .0058, 2*C.CORE_HALF_LENGTH,
                (0., 0., 0.), FLESH)
+    w.Geom.Imageable(stage.GetPrimAtPath(p + "/ContactSpine")).MakeInvisible()
     w.cylinder(stage, p + "/StemSkin", .0092, .0029, (0., 0., .031), PEEL, collide=False)
     w.cylinder(stage, p + "/Stem", .00155, .008, (.001, -.001, .038),
                (.28, .13, .043), collide=False)

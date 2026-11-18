@@ -1,15 +1,66 @@
-# Core a whole apple
+# Core a whole apple with a tube corer
 
-This feasibility prototype models a cook holding a medium Gala apple on a cutting board while working a hand corer down its stem axis. The [OXO 20181](https://www.oxo.com/shop/kitchenware/tools-gadgets/fruit-vegetable-tools/corer-475.html) is a 203 mm stainless-steel corer with a soft handle. The native trials did not verify a cut or extraction.
+Brace a whole apple, work the ring blade down its stem axis, and lift the cut
+plug in the corer. The intact cored fruit can then be stuffed or sliced. A
+full-size hand corer with a soft handle, such as the [OXO 20181][corer], is
+suitable for the physical trial.
 
-The apple is 74 mm across and 66 mm high. Its mass including the core is 155 g. The brown polyethylene-equivalent cutting board is 248 × 172 × 10 mm. The setup uses metres and the YAM station coordinate frame. The board is centred at X 0.385 m, Y 0.017 m from the centreline. The apple is at X 0.386 m, Y 0.029 m, stem up. The corer lies flat at X 0.289 m, Y −0.218 m measured at its cutter tip, handle pointing in the positive X direction.
+## Setup and reset
 
-The fruit shell, detached core and tool are native rigid bodies. The model uses a force surrogate to represent tissue cutting and limited contact retention of the cut core. It applies equal and opposite reaction forces from measured geometry and velocities. The script reads actual state only to aim the corer and controls the arms through their joint inputs. The nominal 9–11 N cutting reaction is an engineering estimate. Instrumental apple puncture results give an order of magnitude for tissue loading. They use a different probe and test geometry from a manual tube blade. [Apple flesh puncture study](https://www.jstage.jst.go.jp/article/hortj/90/3/90_UTD-256/_html/-char/en)
+Use a firm medium green apple, about 74 mm in diameter, 66 mm high and 155 g,
+at room temperature. Stand it stem-up on a 248 × 172 × 10 mm polyethylene
+board. Use a 200 mm stainless-steel tube corer with a nominal 21 mm cutting
+diameter and a soft handle about 25 mm across. The simulation uses these
+working dimensions and an open channel above the blade.
 
-Run from this task directory in the benchmark simulator environment.
+Place the board and corer on the standard YAM worktop, 747.5 mm above the
+floor. In the YAM station frame, positive X points forward and positive Y
+points left. Place the board centre at X 385 mm, Y 17 mm. Centre the apple
+at X 386 mm, Y 29 mm. Lay the corer flat on the worktop with its blade at
+X 289 mm, Y −218 mm and its handle toward positive X. Start with both
+grippers open and the tool unattached. For another physical trial, remove
+the cut plug from the corer, wipe the tool and board, and replace the fruit
+with a fresh apple of matching dimensions.
+
+## Run and score
+
+Use the Robocurve YAM simulation environment and run from this directory.
 
 ```sh
-python run.py --device cuda:0 --physics-device cpu --output runs/native
+python -m pip install -e .
+python run.py --device cuda:0 --physics-device cpu --output runs/demo
+python run.py --device cuda:0 --physics-device cpu --output runs/hold --policy hold --no-cameras
+python run.py --device cuda:0 --physics-device cpu --output runs/shallow --policy shallow --no-cameras
 ```
 
-The native run uses fixed seed 1415158438, 240 Hz physics and 20 Hz controls. The runner writes measured traces and exits on success or at 520 actions. Three native 640 × 360 cameras record the setup and actions. Use `--no-cameras` for a physics trace alone.
+The reference uses seed 1415158438, 240 Hz physics and 20 Hz control. A
+trial is limited to 680 actions (34 seconds). The runner records the setup,
+three native 640 × 360 views and per-action checks in `trace.jsonl`. It
+reports the score in `receipt.json`. The scripted policy uses the corer and
+apple poses for alignment and sends the same form of joint commands as a
+learned policy.
+
+- **1.0** when the central plug has been cut free and the apple is intact,
+  supported only by the board, upright within 22° of vertical and within
+  45 mm of its start. Both grippers clear the fruit, and the corer retains
+  the plug with its bottom at least 10 mm above the apple's top for 0.4 s.
+- **0.5** when the core has been cut free and the apple is upright on the
+  board within 45 mm of its start, while the full condition is incomplete.
+- **0.0** otherwise. A cut free plug can be checked by gently lifting
+  it after the trial. Use a ruler and side video to judge lift clearance.
+
+## Simulation fidelity
+
+The tool, apple shell and plug are native rigid bodies. The cut interface
+uses inset contact meshes to approximate pulp compliance. An aligned blade
+must physically travel through the fruit against a rate-dependent axial
+reaction before the tissue link releases. The modeled high-speed reaction
+is about 9–11 N. This engineering estimate uses [published penetration
+measurements][texture] as context. The cited tests use solid probes and
+different loading geometries. Limited equal-and-opposite forces represent
+the cut pulp wedging in the corer's bore. The model represents the stem
+axis cut and retention with geometry and forces, without modeling juice
+or individual tissue fibres.
+
+[corer]: https://www.oxo.com/shop/kitchenware/tools-gadgets/fruit-vegetable-tools/corer-475.html
+[texture]: https://www.jstage.jst.go.jp/article/hortj/90/3/90_UTD-256/_html/-char/en

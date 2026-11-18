@@ -25,10 +25,17 @@ class Scorer:
             np.linalg.norm((core[:3]-fruit[:3])[:2]) <= .024
             and -.020 < core[2]-fruit[2] < .094
         )
-        extracted = tissue["separated"] and clear
-        self.hold = self.hold+1 if extracted and board else 0
+        core_low = core[2] - C.CORE_HALF_LENGTH
+        lifted = core_low >= fruit[2] + C.FRUIT_HEIGHT + .010
+        apple_center = fruit[:3] + np.array([0., 0., .035])
+        hands_clear = all(
+            np.linalg.norm(np.asarray(point)-apple_center) >= .054
+            for hand in state["hands"].values() for point in hand["points"]
+        )
+        extracted = tissue["separated"] and clear and lifted and tissue["tube_grip"]
+        self.hold = self.hold+1 if extracted and board and hands_clear else 0
         success = self.hold >= 8
         score = 1. if success else .5 if tissue["separated"] and board else 0.
         return {"score":score, "success":success, "apple_on_board":bool(board),
-                "core_clear":bool(clear), "hold_frames":self.hold,
+                "core_clear":bool(clear), "hands_clear":hands_clear, "hold_frames":self.hold,
                 "tip_xyz":tool[:3].tolist(), **tissue}

@@ -76,8 +76,10 @@ class Environment(YamArenaEmbodiment):
             raise ValueError("Fixed reset and 20 Hz required")
         super().__init__(scene="station", object_jitter=0, control_hz=20, **kwargs)
         camera = self.rig.top_cam
-        position = np.array([.067, -.157, 1.256])
-        sight = np.array([.374, -.050, .817]) - position
+        # View the board from the working side so the right wrist does not
+        # hide the apple and blade during the cut.
+        position = np.array([.71, -.37, 1.25])
+        sight = np.array([.386, -.077, .854]) - position
         sight /= np.linalg.norm(sight)
         screen_right = np.cross(sight, [0.0, 0.0, 1.0])
         screen_right /= np.linalg.norm(screen_right)
