@@ -1,0 +1,19 @@
+{
+  "title": "Homogenize a capped sample on a touch vortex mixer",
+  "category": "Other",
+  "keywords": [
+    "sample preparation",
+    "vortex mixing",
+    "pressure coupling",
+    "research laboratory"
+  ],
+  "instruction": "Mix the liquid in the capped tube until its color is uniform using the touch vortex mixer. Stand the tube upright beside the mixer when you are done.",
+  "context": "Pressure-activated vortex mixing is routine preparation of sealed laboratory samples before dividing them into replicate aliquots for measurement. The robot centres a capped tube in the rubber cup and sustains downward load as the motor orbits the contact at 2,800 rpm. A commercially available BV101 mixer and a standard skirted tube reproduce the operation.",
+  "setup": "A 1,100 × 1,300 mm laminated bench, 747.5 mm high, holds a 99 × 94 × 66 mm ABS touch vortex mixer on rubber feet. Its Ø46 mm rubber cup is unpressed. A Ø30 × 115 mm transparent polypropylene skirted 50 mL tube with a blue screw cap stands upright 45 mm farther from the robot and 154 mm to the right of the mixer centre. It contains 12 mL of blue food-grade glycerol and water under 23 mL of clear water. The fixed coordinates and named products are in the README.",
+  "scoring": "1.0 for at least 90% reduction in photo colour contrast between the upper and lower liquid, then the capped tube resting upright within 230 mm of the mixer, within 12° of vertical and with at least 30 mm pad clearance and the motor off for 1 s. 0.5 for the same contrast reduction before all placement conditions hold. 0.25 for 40% to under 90% contrast reduction. 0 otherwise or if the tube is lost from the counter or its contents escape. Verify mixing on the running cup from the video and compare two 3 mm patches against a white background before and after.",
+  "run_limit": "640 actions (32 seconds at 20 Hz)",
+  "reset_notes": "Use a clean, dry capped tube with fresh layers. Put it upright at the marked position. Ensure the cup is unloaded and the mixer is off.",
+  "fidelity": "The full-size mixer and tube use rigid-body contacts. A native spring switch gates force-limited orbital drives at the specified 4 mm orbit and 2,800 rpm. Spring and friction values are engineering estimates. A colour-mixing model uses measured tube-bottom vibration during cup contact to represent homogenization. The tube remains sealed; internal flow and slosh are represented by the colour model.",
+  "scores": "Scripted demo: 1.0 after 452 actions (22.6 seconds).",
+  "media": ""
+}
