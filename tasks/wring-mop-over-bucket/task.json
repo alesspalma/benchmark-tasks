@@ -1,0 +1,20 @@
+{
+  "title": "Wring a wet yacht mop in a cone bucket",
+  "category": "Societal relatability",
+  "keywords": [
+    "floor cleaning",
+    "mop",
+    "wringing",
+    "bimanual",
+    "liquid extraction"
+  ],
+  "instruction": "Wring out the wet mop using the bucket's cone wringer. Lift the mop slightly to drain over the bucket. Keep the water in the bucket.",
+  "context": "A cone wringer removes excess water from a wet mop so it can clean a floor without leaving puddles. The robot controls a full-length shaft and turns it under downward pressure, then lifts the head to drain over the pail.",
+  "setup": "Two YAM arms on 750 mm steel stands, 610 mm apart, face a floor-standing 15 L polypropylene cone bucket (360 × 360 × 293 mm). The cone centre is 340 mm forward of the arm bases and centred between them. The pail contains 3 L of water. An upright 1,219 mm steel shaft with a 10 oz white rayon mop head rests in the cone. The mop holds 200 g of added water. Mount details and starting positions are in the README.",
+  "scoring": "Measure caught water by pail mass gain. Award 1.0 for ≥100 g caught and the mop neck held ≥405 mm above the floor, ≤100 mm from the cone axis, within 22° of vertical for 0.45 s. Award 0.5 for ≥100 g caught before the lift condition, 0.25 for 40–<100 g caught, and 0 otherwise. More than 8 g spill, a tipped pail or a damaged mop scores 0.",
+  "run_limit": "400 actions (20 seconds at 20 Hz)",
+  "reset_notes": "Recharge the mop head to 200 ± 5 g water above its dry mass, let fast dripping cease, restore the bucket to 3 L and return the wet head to its starting position inside the cone wringer.",
+  "fidelity": "The full-size shaft, bucket, cone and gripper contacts use rigid-body physics. Six spring-backed rayon bundles approximate wet head compliance and create real wringing resistance. A mass model uses their compression and shaft twist relative to the bucket to compute expelled water. Rendered droplets represent that outflow. The cone profile and stiffness are engineering estimates.",
+  "scores": "Scripted demo: 1.0 in 284 actions (14.20 seconds).",
+  "media": ""
+}
