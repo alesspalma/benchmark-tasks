@@ -1,0 +1,13 @@
+{
+  "title": "Pour a draft beer with a proper foam head",
+  "category": "Societal relatability",
+  "keywords": ["bartending", "bimanual", "draft faucet", "foam control", "pouring"],
+  "instruction": "Pour a draft beer into the glass with about an inch of foam. Close the tap and leave the glass on the coaster.",
+  "context": "A bartender manages flow against a tilted glass wall, then uprights the glass to form a stable foam head. The pour coordinates an independent manual tap and glass orientation to serve a recognisable pint without overflow. The Brewers Association documents the technique in the Draught Beer Quality Manual, pp. 55–56.",
+  "setup": "On a 747.5 mm high bar counter, a fixed stainless single-column draft tower has a 62 mm diameter by 265 mm column, downward nozzle 249 mm above the counter, and a 26 by 83 mm wooden lever handle on a self-closing manual valve. An empty upright 76 by 165 mm clear 16 oz pub glass stands on a 100 by 4 mm black rubber mat. A stainless 135 by 145 by 12 mm drip tray sits under the spout. A blue 94 by 5 mm rubber coaster is 60 mm closer to the robot and 80 mm further right than the mat. The fixed positions are dimensioned in README.md.",
+  "scoring": "1.0 for 330–425 mL retained beer, 16–34 mm foam, 3–18 mm rim clearance and at most 12 mL spilled, with tap closed and glass upright, released and on the coaster for 0.6 s. 0.5 for a released upright glass on the coaster with the tap closed, at least 240 mL retained and at most 25 mL spilled when the full condition is unmet. 0 otherwise. Measure foam and gap from a side photo against a ruler, and beer and spill with a tared balance or measuring jug. README.md defines the placement, release and closure tolerances.",
+  "run_limit": "800 actions (40 seconds at 20 Hz)",
+  "reset_notes": "Return the clean empty glass to its mat, close the tap and empty the drip tray. Use refrigerated draft beer from the same balanced line; one serving is used per trial.",
+  "fidelity": "Full-size glass contact and manual faucet travel use native rigid-body physics. A geometric stream responds to the actual valve and vessel pose, distinguishing wall contact from direct impact. Gravity-levelled contents, overflow and native load transfer are computed from vessel geometry. Foam generation and decay use documented engineering coefficients; splash droplets, unsteady slosh and glass fracture are omitted.",
+  "scores": "Scripted demo: 1.0"
+}
