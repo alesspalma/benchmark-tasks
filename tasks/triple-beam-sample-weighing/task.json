@@ -1,0 +1,19 @@
+{
+  "title": "Weigh a steel specimen on a mechanical triple-beam balance",
+  "category": "Other",
+  "keywords": [
+    "mechanical balance",
+    "laboratory weighing",
+    "poise adjustment",
+    "force feedback"
+  ],
+  "instruction": "Weigh the steel specimen with the three sliding weights. Leave the specimen on the pan and the pointer lined up with zero, with both hands clear.",
+  "context": "A triple-beam balance measures mass by gravitational leverage. Operators seat the two coarse poises and adjust the fine rider while watching an unsupported zero pointer. The University of Idaho research balance SOP and Minnesota DOT laboratory manual document real use of this instrument.",
+  "setup": "On a 747.5 mm-high laminated YAM bench, a 610 g mechanical triple-beam balance has a 161 × 418 mm simulated cast-metal base, three captive graduated metal poises, a pointer and a Ø152 mm stainless pan. The pan is left of the pointer. A plain Ø40 × 34.2 mm mild-steel specimen of measured mass 337.0 g sits at the pan centre. All poises start at zero and the loaded pointer is off zero. Model and marked positions are in the README.",
+  "scoring": "1.0 when the specimen is on the pan, both notched poises are seated and the reading is within 1.0 g of the specimen mass. The unsupported pointer must stay within 1.5 mm of zero for at least 1.2 s, with both grippers at least 45 mm clear of the sample, riders and pointer. 0.5 for the same sample, poise and clearance conditions with reading within 10 g and pointer within 10 mm when the full condition is unmet. 0 otherwise. Use the poise readings, a ruler at the pointer and end-of-trial video.",
+  "run_limit": "760 actions (38 seconds at 20 Hz)",
+  "reset_notes": "Clean and zero the unloaded balance, return all three poises to zero and place the same unlabelled specimen on the pan centre. Confirm its mass independently before the first trial.",
+  "fidelity": "The native scale uses a level load-bearing pan, moving hinge, gravity-driven lever and captive contact-driven sliders. A passive bounded force from the nearest index models the coarse and medium rail notches. A guided vertical pan bearing and rotational damping represent the instrument’s parallel-link support and magnetic damping. Body proportions and damping are engineering estimates.",
+  "scores": "Scripted demo: 1.0 after 403 actions (20.15 seconds).",
+  "media": ""
+}
