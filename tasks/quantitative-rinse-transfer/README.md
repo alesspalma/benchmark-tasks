@@ -7,9 +7,10 @@ squeezable wash bottle, then drains the washings through a funnel into the
 receiving flask. Preserving the full sample amount matters for downstream
 concentration measurements. This task covers that last recovery operation.
 
-The University of Toronto [analytical procedures][toronto] document separate
-wall rinsing and draining through the funnel. The New Mexico Water Resources
-Research Institute [laboratory procedure][nmsu] shows that operation explicitly.
+The UMass Amherst [laboratory procedures][umass] describe a wash-bottle jet
+and funnel for quantitative transfer into a volumetric flask. The University of
+Toronto [analytical procedures][toronto] show the separate beaker-wall rinse
+and drain through the funnel.
 Dilute blue food colouring and room-temperature water provide a straightforward
 repeatable analogue for a visible, water-soluble retained residue.
 
@@ -27,14 +28,18 @@ The fixed starting arrangement uses seed `1415158438`. The action limit is
 680 at 20 Hz (34 seconds). Physics runs at 240 Hz. The script records all three
 640 × 360 cameras and a trace with the measured native pressure-wall
 deformation, modelled water and solute balances, and scorer outputs.
-Use `--no-cameras` for physics alone, or `--policy dry` for a control that
-follows the same motion with a much shallower squeeze.
+Use `--no-cameras` for physics alone. With `--policy dry` the robot follows the
+same motion with a much shallower squeeze. With `--policy hold` the arms remain
+at their starting positions for the full trial.
 A new run requires an unused output directory.
 
 The Inspect Robots embodiment is `rinse_transfer`. The scripted policy is
 `rinse_transfer_scripted` and the scorer is `task_score`. Model observations
 are the three RGB images and fourteen native YAM joint coordinates. The
-reference uses elapsed time and those joint observations.
+reference uses elapsed time and those joint observations. The fixed overview
+lens is at X 610 mm, Y −105 mm and height 1370 mm. The left wrist lens is on
+the upper side of the gripper during the beaker's side grasp, with a fixed
+mount at X 0 mm, Y 58 mm and Z 73 mm in the gripper's coordinates.
 
 ## Bench and reset
 
@@ -105,11 +110,15 @@ Rigid contact shapes approximate the flexible wall, thin glass and lips.
 The receiver and seated funnel are held at their bench positions in the
 simulation. Splash droplets, vessel breakage and thin retained films after
 draining are omitted. All local props use original procedural USD geometry,
-licensed under the included MIT license. The standard YAM model and room
-are provided through the adapter.
+licensed under the included MIT license. The YAM adapter supplies the standard
+procedural room and the I2RT Robotics [YAM arm and gripper assets][i2rt], under
+the [MIT license][i2rt-license]. The adapter provides the source revision and
+license as `SOURCE_COMMIT` and `LICENSE.i2rt` alongside the installed assets.
 
+[umass]: https://www.ecs.umass.edu/cee/reckhow/courses/572/572bk11/572BK11.html
 [toronto]: https://sites.chem.utoronto.ca/chemistry/coursenotes/CHM317/pdfs/CHM317Procs.pdf
-[nmsu]: https://nmwrri.nmsu.edu/publications/technical-reports/tr-documents/tr125.pdf
 [bottle]: https://www.thermofisher.com/order/catalog/product/2402-0125PK
 [beaker]: https://ecatalog.corning.com/life-sciences/b2b/US/en/General-Labware/Beakers/Beakers%2C-Glass/PYREX%C2%AE-Beakers%2C-Low-Form%2C-Double-Scale%2C-Graduated/p/1000-50
 [flask]: https://ecatalog.corning.com/life-sciences/b2b/CA/en/General-Labware/Flasks/Flasks%2C-Glass/PYREX%C2%AE-Class-A-Volumetric-Flasks-with-PYREX%C2%AE-Standard-Taper-Stopper/p/5640-50
+[i2rt]: https://github.com/i2rt-robotics/i2rt/tree/120c3c81400171174604e503943f8d1ebc891058
+[i2rt-license]: https://github.com/i2rt-robotics/i2rt/blob/120c3c81400171174604e503943f8d1ebc891058/LICENSE

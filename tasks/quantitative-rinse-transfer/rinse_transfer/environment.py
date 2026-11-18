@@ -14,7 +14,7 @@ from inspect_robots.embodiment import PRIVILEGED_SUCCESS
 from inspect_robots.types import Observation, StepResult
 from inspect_robots_yam.config import observation_space
 from yam_arena import ik
-from yam_arena.constants import ARM_JOINTS, FINGER_JOINTS, READY
+from yam_arena.constants import ARM_JOINTS, FINGER_JOINTS, READY, TCP_OFFSET
 from yam_arena.inspect_embodiment import (
     ARMS,
     JOINT_GUIDE,
@@ -82,10 +82,25 @@ class Environment(YamArenaEmbodiment):
         tip_down = axis_angle_matrix(np.array([1.0, 0.0, 0.0]), np.deg2rad(-14.0))
         pitch = quat_xyzw_to_matrix(right.rot_xyzw) @ tip_down
         right = replace(right, rot_xyzw=tuple(ik.matrix_to_quat_xyzw(pitch)))
-        # A closer fixed overview still covers both arms and all three vessels.
+        # Mount the left lens on the upper side of the gripper during the
+        # side grasp so a low beaker does not take the lens below the bench.
+        left = self.rig.wrist_cams["left"]
+        left_position = np.array([0.0, 0.058, 0.073])
+        left_sight = np.asarray(TCP_OFFSET) + [0.0, 0.0, 0.016] - left_position
+        left_sight /= np.linalg.norm(left_sight)
+        left_right = np.array([1.0, 0.0, 0.0])
+        left_rotation = np.column_stack(
+            (left_right, np.cross(left_right, left_sight), -left_sight)
+        )
+        left = replace(
+            left,
+            pos=tuple(left_position),
+            rot_xyzw=tuple(ik.matrix_to_quat_xyzw(left_rotation)),
+        )
+        # View the funnel from the far side of the bench, away from the elbow.
         camera = self.rig.top_cam
-        position = np.array([-0.102, 0.119, 1.51])
-        sight = np.array([0.291, 0.120, 0.802]) - position
+        position = np.array([0.610, -0.105, 1.370])
+        sight = np.array([0.326, 0.225, 0.855]) - position
         sight /= np.linalg.norm(sight)
         screen_right = np.cross(sight, [0.0, 0.0, 1.0])
         screen_right /= np.linalg.norm(screen_right)
@@ -98,7 +113,7 @@ class Environment(YamArenaEmbodiment):
             rot_xyzw=tuple(ik.matrix_to_quat_xyzw(cam_rotation)),
         )
         self.rig = replace(
-            self.rig, top_cam=camera, wrist_cams={**self.rig.wrist_cams, "right": right}
+            self.rig, top_cam=camera, wrist_cams={"left": left, "right": right}
         )
         self.render_images = bool(render_images)
         self.physics_device = physics_device

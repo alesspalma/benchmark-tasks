@@ -69,11 +69,23 @@ def waypoints(mode="demo"):
     action.add(1.15, "guide the pouring lip above the funnel", left=receive(33))
     action.add(2.3, "drain the rinsings into the flask", left=receive(86))
     action.add(2.0, "let the flask collect the rinse")
+    pour_tcp, pour_rotation, pour_grip = receive(86)
     action.add(
-        1.6,
-        "level the beaker above the funnel rim",
-        left=grasp_at(lift + [0.0, 0.0, 0.055]),
+        1.30,
+        "retreat from the funnel without rotating the beaker",
+        left=(pour_tcp + [0.0, 0.075, 0.0], pour_rotation, pour_grip),
     )
+    action.add(
+        1.40,
+        "carry the tilted beaker around the far edge of the funnel",
+        left=(pour_tcp + [0.120, 0.075, -0.026], pour_rotation, pour_grip),
+    )
+    action.add(
+        2.30,
+        "level the beaker on the clear side of the funnel",
+        left=grasp_at(lift + [0.044, 0.021, 0.0]),
+    )
+    action.add(1.15, "carry the upright beaker over its mark", left=grasp_at(lift))
     action.add(
         1.5, "set down the emptied beaker", left=(BEAKER_START, LEFT_SIDE, BEAKER_CLOSE)
     )

@@ -9,12 +9,12 @@
     "solute recovery"
   ],
   "instruction": "Rinse the blue residue from the inside of the beaker with the wash bottle and collect the rinsings in the flask. Leave the glassware upright without spilling the sample.",
-  "context": "Quantitative transfer is a routine measurement preparation step. A directed wash-bottle jet dissolves retained sample from the beaker walls, and a controlled drain recovers that measured sample in a volumetric receiver.",
+  "context": "Quantitative transfer is routine in the preparation of analytical samples and standards. The robot compresses the wash bottle to direct water onto the beaker walls, then pours the dissolved residue through a funnel. Recovering the retained material preserves the sample amount used for concentration measurements.",
   "setup": "A standard 747.5 mm high YAM bench holds a 125 mL LDPE wash bottle (48.3 mm body diameter, 119.4 mm high, bent spout), a 50 mL low-form borosilicate beaker (42 × about 56 mm), and a 50 mL volumetric flask with a 55 mm short-stem lab funnel. The 70 mL wash bottle aims toward the adjacent source beaker. Blue food-colour stock coats two lower wall bands without a free pool. The receiver starts empty. The README gives exact positions and real instrument references.",
   "scoring": "1.0 for ≥90% of the retained dye collected in the flask, ≤25 mL rinse used and ≤3 mL spilled. The beaker and bottle must stand upright, within 45 mm of their marks, unsupported for 0.4 s, with fingers clear. 0.5 for ≥65% recovered within the same rinse and spill budgets when the full criterion is unmet. 0 otherwise. Read liquid weight and compare receiver colour with same-volume 65% and 90% reference dilutions. README defines the placement and comparison method.",
   "run_limit": "680 actions (34 s at 20 Hz)",
   "reset_notes": "Coat the inside of the clean beaker with blue food-colour stock, let any pool drain and weigh the retained aliquot. Refill the wash bottle with 70 mL of water and empty the receiver.",
   "fidelity": "Native spring-backed LDPE wall contact displaces water from the real-size bottle. A ballistic stream and contact with the gravity-levelled pool dissolve dye locally. Measured beaker tilt governs runoff and funnel capture. Rinse and dye are conserved. The spring rate and dissolution constants are engineering estimates. The seated funnel and receiver remain fixed. Splash droplets and residual films after drainage are omitted.",
-  "scores": "Archived native prototype: 0.5 after 570 actions. Light-squeeze comparison: 0.0.",
+  "scores": "Scripted demo: 1.0 after 601 actions (30.05 s). Held-arm and light-squeeze controls: 0.0 each.",
   "media": ""
 }

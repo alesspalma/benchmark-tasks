@@ -35,6 +35,8 @@ class ScriptedPolicy(PolicyBase):
             max((sum(w["duration"] for w in v) for v in self.moves.values()), default=0)
             + 2
         )
+        if self.mode == "hold":
+            self.duration = config.MAX_STEPS / 20
         self.phase = "ready"
         self.worst_ik_m = 0.0
         self.worst_ik_rad = 0.0
