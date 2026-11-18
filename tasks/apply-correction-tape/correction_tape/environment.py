@@ -81,12 +81,13 @@ class Environment(YamArenaEmbodiment):
         tip_down = axis_angle_matrix(np.array([1.0, 0.0, 0.0]), np.deg2rad(-14.0))
         pitch = quat_xyzw_to_matrix(right.rot_xyzw) @ tip_down
         right = replace(right, rot_xyzw=tuple(ik.matrix_to_quat_xyzw(pitch)))
-        # Frame the clipboard and the hand during the marking stroke.
+        # Look along the work surface from across the gripper, with print
+        # reading left to right in the frame.
         camera = self.rig.top_cam
-        position = np.array([.078, -.117, 1.275])
-        sight = np.array([.375, -.125, .752]) - position
+        position = np.array([.62, .06, 1.13])
+        sight = np.array([.385, -.147, .755]) - position
         sight /= np.linalg.norm(sight)
-        screen_right = np.cross(sight, [0.0, 0.0, 1.0])
+        screen_right = np.array([1., 0., 0.]) - sight * sight[0]
         screen_right /= np.linalg.norm(screen_right)
         cam_rotation = np.column_stack(
             (screen_right, np.cross(screen_right, sight), -sight)
@@ -95,6 +96,7 @@ class Environment(YamArenaEmbodiment):
             camera,
             pos=tuple(position),
             rot_xyzw=tuple(ik.matrix_to_quat_xyzw(cam_rotation)),
+            lens=replace(camera.lens, fx=1.22 * camera.lens.fx, fy=1.22 * camera.lens.fy),
         )
         self.rig = replace(
             self.rig, top_cam=camera, wrist_cams={**self.rig.wrist_cams, "right": right}
@@ -290,6 +292,7 @@ class Environment(YamArenaEmbodiment):
         return (
             array(self._applicator.root_view.get_root_transforms())[0],
             array(self._clipboard.root_view.get_transforms())[0],
+            float(array(self._applicator.root_view.get_dof_positions())[0, 0]),
         )
 
     def _material_step(self, dt):

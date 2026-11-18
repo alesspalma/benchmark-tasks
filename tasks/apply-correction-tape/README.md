@@ -1,48 +1,91 @@
 # Apply correction tape to one entry
 
 The robot grasps a dry correction-tape dispenser, covers the marked HOLD
-entry on a clipped stock sheet and leaves PACK and SHIP readable. The
-side-action housing measures approximately 82 × 35 × 16 mm. Its 4 mm
-transfer width follows [Tombow MONO 68620][product]. The outline, mass and
-small transfer-edge flex are approximated. The [manufacturer's application
-instructions][technique] use smooth pressure, an angle of roughly 45° and
-a lift to release the coating at the end.
+entry on a clipped stock sheet and leaves PACK and SHIP readable. Applying
+a 4 mm dry film to one entry on a paper form requires maintaining narrow
+edge contact and pressure through the stroke. Use a [Tombow MONO Original
+68620][product] or an equivalent 4 mm side-action dispenser. The
+[manufacturer's application instructions][technique] call for firm,
+even pressure, about a 45° angle and a lift at the end.
 
-## Native prototype
+## Run the native reference
 
 From this folder, use the Robocurve YAM simulation environment.
 
 ```sh
 python -m pip install -e .
-python run.py --device cuda:0 --physics-device cpu --no-cameras --output runs/demo
+python run.py --device cuda:0 --physics-device cpu --output runs/demo
+python run.py --device cuda:0 --physics-device cpu --no-cameras --policy hover --output runs/hover
+python run.py --device cuda:0 --physics-device cpu --no-cameras --policy hold --output runs/hold
 python -c 'from correction_tape.paper import write_svg; write_svg("stock-log.svg")'
 ```
 
-The fixed scene uses seed 1415158438, a maximum of 480 steps at 20 Hz and
-PhysX substeps at 240 Hz. The native demonstration's controller measures
-the tool and clipboard poses for in-hand alignment and commands the YAM
-through the ordinary joint targets. The benchmark observation interface
-contains three RGB images and joint coordinates. The native runner
-produces a trace and score receipt.
+The native demo records three 640 × 360 camera views at 20 Hz and writes
+`receipt.json` with the score and number of actions. The fixed scene uses
+seed 1415158438, up to 480 actions (24 seconds) at 20 Hz, and 240 Hz physics.
+The local reference aligns the edge just above the sheet and measures the
+hand's joint position, tool and clipboard poses, and the blade's spring
+travel to correct the stroke. Its sole commands are ordinary joint and
+gripper targets. The model interface contains three RGB views and joint
+positions. The hover control follows the same stroke above the paper. The
+hold control sends the initial joint targets for the full action budget.
 
-An A5 sheet sits under the normal clip on a 232 × 165 × 6 mm fibreboard
-clipboard. Print the generated sheet at 100%. The YAM bench top is 747.5 mm
-above the floor. In the robot station frame, forward is +X and the left-arm side
-is +Y. The clipboard centre is X 382 mm, Y −93 mm. Orient it so the words read
-along +X from PACK to SHIP. Set the housing broad-face-down with the transfer
-nose pointing toward −X. Place the nose at X 302 mm, Y −270 mm. Reset with a fresh
-sheet and an applicator with dry coating at the tip.
+## Reproduce the setup
 
-Both free props use native gravity and contacts. The simulated paper stays
-flat on the clipboard as a thin rigid surface. The transfer blade has
-a 2.5 mm spring travel that approximates compliance at the tip. The environment
-projects the physically loaded blade's swept outline onto the sheet and displays
-persistent film from the measured poses. It omits adhesive layers, the carrier
-through the case and paper tearing. A photo of the real sheet would show how
-much ink remains uncovered, along with tape on either neighbouring entry.
+The two parallel-gripper YAM arms mount 610 mm apart at the rear of a
+level 1,100 × 1,300 mm laminated bench. The bench surface is 747.5 mm above
+the floor in the station model. Use the midpoint between the arms as
+the origin in plan, with +X pointing forward and +Y toward the left arm.
 
-The native feasibility trials grasped and returned the dispenser. The contact
-stroke did not cover the target, and the prototype was parked with a score of 0.
+| Item | Starting layout |
+| --- | --- |
+| Fibreboard clipboard, 232 × 165 × 6 mm, with a metal clip | Centre X 382 mm, Y −93 mm, lying flat. Its long axis runs along +X, with the clip on the −X end. |
+| A5 stock sheet, 210 × 148 mm, printed on standard paper | Print the generated SVG at 100% and clip it flat and centred. The entries read PACK, HOLD and SHIP along +X. HOLD has a red underline. |
+| Side-action plastic dispenser, approximately 82 × 35 × 16 mm with a 4 mm wide transfer edge | Broad face down with the nose at X 302 mm, Y −270 mm, pointing toward −X. The housing lies along +X behind the nose. |
+
+Reset with a fresh printed sheet and dry coating loaded on the applicator.
+Return both props to their specified positions and start with open grippers.
+The three cameras and their mounting transforms are defined in the code.
+
+## Score
+
+Use the original printed pattern and a perpendicular photo of the final sheet
+to estimate the proportion of each entry's original ink area covered by
+white coating. An entry's original ink area is the dark glyph strokes, including
+thin areas at the edges. Use the reference dimensions to estimate excess
+coating outside a 26 × 7 mm rectangle centred on HOLD. The clipboard must
+remain on the work surface with the sheet intact.
+
+- **1.0** if at least 94% of HOLD and at most 2% of either adjacent entry are
+  covered, with no more than 16 mm² of excess coating outside the rectangle.
+  The dispenser must also be flat, released and clear of the grippers for
+  0.4 s, within 50 mm of its starting location.
+- **0.5** if at least 65% of HOLD is covered and those adjacent-entry and
+  excess-film conditions hold, before achieving all full-score conditions.
+- **0.0** otherwise.
+
+## Simulation
+
+The two free props use native gravity and contacts. The sheet is a rigid,
+clipped surface. A physical spring in the tool allows up to 2.5 mm of
+blade travel, with an estimated stiffness of 3.6 N/mm. When the blade is
+loaded at the correct angle and moves along its transfer direction, its
+measured edges sweep out persistent white coating on the sheet. The model
+covers the deposition step and omits the internal carrier, individual
+adhesive layers and paper tearing.
+
+The clipboard, dispenser and printed artwork use original geometry and
+the included MIT license. The bench and camera supports are geometric
+primitives generated by the YAM adapter. The adapter's I2RT YAM meshes
+are MIT-licensed. [YAM asset license][yam-license]
+
+## Native reference results
+
+The camera-recorded reference scored 1.0 in 378 actions (18.9 seconds).
+It covered 95.2% of the marked ink with zero neighbouring ink covered.
+The unpressed stroke and the full-length stationary control each scored
+0.0 with no film laid.
 
 [product]: https://www.tombowusa.com/products/mono-correction-tape-original-white
 [technique]: https://www.tombowusa.com/pages/support-orders-frequently-asked-questions
+[yam-license]: https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/assets/yam/LICENSE.i2rt

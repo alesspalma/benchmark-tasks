@@ -1,0 +1,18 @@
+{
+  "title": "Cover a marked entry with a correction tape dispenser",
+  "category": "Societal relatability",
+  "keywords": [
+    "correction tape",
+    "paper forms",
+    "narrow contact",
+    "controlled pressure"
+  ],
+  "instruction": "Cover the marked HOLD entry with the correction tape. Keep PACK and SHIP readable. Set the dispenser back beside the clipboard.",
+  "context": "Dry correction tape lets someone amend one entry on a printed form without rewriting the sheet. The robot must keep a 4 mm transfer edge loaded and aligned as it lays an opaque strip over the marked word.",
+  "setup": "A 1,100 × 1,300 mm laminated bench stands 747.5 mm high in the YAM station model, with two parallel-gripper arms mounted 610 mm apart. Put an A5 printed stock sheet under the metal clip of a 232 × 165 × 6 mm fibreboard clipboard. The clipboard centre is X 382 mm, Y −93 mm, with PACK, HOLD and SHIP reading along +X. HOLD is underlined red. Lay a side-action plastic correction tape dispenser, approximately 82 × 35 × 16 mm with a 4 mm transfer edge, broad-face-down with its nose at X 302 mm, Y −270 mm, pointing toward −X. The README gives the station frame and the printable sheet.",
+  "scoring": "1.0 for at least 94% of HOLD ink covered, at most 2% of either adjacent word covered, and no more than 16 mm² of excess coating outside a 26 × 7 mm rectangle centred on HOLD. The sheet stays intact on the bench and the released dispenser lies flat within 50 mm of its start for at least 0.4 s. 0.5 if the sheet, adjacent-word and excess-film conditions hold and at least 65% of HOLD ink is covered, before all full-score conditions hold. 0.0 otherwise. Compare the sheet against the printed pattern in a perpendicular photo.",
+  "run_limit": "480 actions (24 seconds at 20 Hz)",
+  "reset_notes": "Replace the A5 sheet with a fresh copy printed at 100%. Clip it flat in the fixed position. Use a side-action dispenser with dry correction tape loaded at the tip. Return it face down to the specified pose and start with open grippers.",
+  "fidelity": "A full-size side-action dispenser uses native rigid contacts and a spring-loaded 4 mm transfer blade. The spring stiffness and housing mass are estimates. The loaded blade's measured motion deposits persistent coating on the rigid clipped sheet. The material model represents transfer at the blade and omits the internal carrier, individual adhesive layers and paper tearing.",
+  "scores": "Scripted demo: 1.0 in 378 actions (18.9 s). The unpressed stroke and the full-length stationary control each scored 0.0."
+}

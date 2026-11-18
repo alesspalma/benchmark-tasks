@@ -93,7 +93,7 @@ class Tape:
         from pxr import Gf, UsdGeom
 
         film = UsdGeom.Mesh.Get(stage, "/World/envs/env_0/clipboard/Board/TransferredFilm")
-        points = [Gf.Vec3f(float(x), float(y), C.PAPER_Z + .00012)
+        points = [Gf.Vec3f(float(x), float(y), C.PAPER_Z + .0006)
                   for face in self.faces for x, y in face]
         film.GetPointsAttr().Set(points)
         film.GetFaceVertexCountsAttr().Set([4] * len(self.faces))

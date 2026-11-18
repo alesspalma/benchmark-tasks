@@ -27,13 +27,15 @@ def waypoints(mode="demo"):
     p.add(1.25, "align around the housing", right=grasp_at(C.TOOL_START, grip=1.))
     p.add(.8, "grasp the casing", right=grasp_at(C.TOOL_START))
     p.add(1.2, "lift the dispenser", right=grasp_at(clear))
-    start = C.BOARD_START + [-.0064, C.ROW_Y, C.PAPER_Z]
-    end = C.BOARD_START + [.0064, C.ROW_Y, C.PAPER_Z]
+    start = C.BOARD_START + [-.0074, C.ROW_Y, C.PAPER_Z]
+    end = C.BOARD_START + [.0074, C.ROW_Y, C.PAPER_Z]
     p.add(1.45, "pitch the nose toward the marked word", right=at_nose(start + [0, 0, .063]))
+    p.add(.8, "align the blade just above the paper", right=at_nose(start + [0, 0, .014]))
+    p.add(.65, "align the blade across the entry")
     press = .0014 if mode == "demo" else -.005
-    p.add(1.65, "press the blade evenly", right=at_nose(start - [0, 0, press]))
-    p.add(.40, "stabilize the loaded blade")
-    p.add(2.35, "draw the coating across the entry", right=at_nose(end - [0, 0, press]))
+    p.add(.85, "press the blade evenly", right=at_nose(start - [0, 0, press]))
+    p.add(1.4, "stabilize the loaded blade")
+    p.add(3.50, "draw the coating across the entry", right=at_nose(end - [0, 0, press]))
     p.add(.85, "lift cleanly from the end of the line", right=at_nose(end + [0, 0, .05]))
     p.add(1.5, "return the tool to its parking place", right=grasp_at(clear))
     p.add(1.1, "set the dispenser down", right=grasp_at(C.TOOL_START))

@@ -37,24 +37,41 @@ class ScriptedPolicy(PolicyBase):
             max((sum(w["duration"] for w in v) for v in self.moves.values()), default=0)
             + 2
         )
+        if self.mode == "hold":
+            self.duration = config.MAX_STEPS / 20
         self.phase = "ready"
         self.grasp_adjustment = np.zeros(3)
+        self.line_trim = np.zeros(2)
+        self.press_trim = 0.
         self.worst_ik_m = 0.0
         self.worst_ik_rad = 0.0
 
-    def _register_nose(self, position, rotation, joints):
+    def _register_nose(self, position, rotation, joints, phase):
         # The demo tracks the held applicator. The model receives ordinary RGB
         # and joint observations. Corrections still use YAM joint commands.
-        tool, board = self.native_feedback()
+        tool, board, compression = self.native_feedback()
         hand_p, hand_r = ik.tcp_pose(joints[7:13], station.BASES["right"])
         tool_r = quat_xyzw_to_matrix(tool[3:7])
         measured_toe = tool[:3] + tool_r @ config.TOOL_TOE
         measured_offset = hand_r.T @ (measured_toe - hand_p)
         nominal_offset = plan.TOP.T @ (config.TOOL_TOE - config.TOOL_GRIP)
         adjustment = rotation @ (nominal_offset - measured_offset)
-        adjustment += board[:3] - config.BOARD_START
+        board_r = quat_xyzw_to_matrix(board[3:7])
+        nominal_toe = position + rotation @ nominal_offset - config.BOARD_START
+        adjustment += board[:3] + board_r @ nominal_toe - (config.BOARD_START + nominal_toe)
         self.grasp_adjustment = .7 * self.grasp_adjustment + .3 * np.clip(adjustment, -.024, .024)
-        return position + self.grasp_adjustment
+        local_trim = np.r_[self.line_trim, self.press_trim]
+        if phase.startswith(("align the blade", "press the", "stabilize", "draw the")):
+            edge = measured_toe + tool_r[:, 2] * compression
+            error = nominal_toe[:2] - (board_r.T @ (edge - board[:3]))[:2]
+            self.line_trim = np.clip(self.line_trim + .055 * error, -.012, .012)
+            local_trim[:2] = self.line_trim + .5 * error
+            if self.mode == "demo" and phase.startswith(("stabilize", "draw the")):
+                # 0.75 mm of spring travel corresponds to about 2.7 N at the tip.
+                error = compression - .00075
+                self.press_trim = float(np.clip(self.press_trim + .30 * error, -.010, .005))
+                local_trim[2] = self.press_trim + .55 * error
+        return position + self.grasp_adjustment + board_r @ local_trim
 
     def action_at(self, t, joint_pos=None):
         out = []
@@ -78,11 +95,13 @@ class ScriptedPolicy(PolicyBase):
                 age -= w["duration"]
                 pos, rot, grip = goal, r, g
             if name == "right" and self.native_feedback and joint_pos is not None:
-                if label.startswith(("pitch the", "press the", "stabilize", "draw the", "lift cleanly")):
-                    pos = self._register_nose(pos, rot, np.asarray(joint_pos))
+                if label.startswith(("pitch the", "align the blade", "press the", "stabilize", "draw the", "lift cleanly")):
+                    pos = self._register_nose(pos, rot, np.asarray(joint_pos), label)
                 else:
                     self.grasp_adjustment *= .82
-                    pos = pos + self.grasp_adjustment
+                    self.line_trim *= .82
+                    self.press_trim *= .82
+                    pos = pos + self.grasp_adjustment + np.r_[self.line_trim, self.press_trim]
             q, pe, re = ik.solve(
                 pos,
                 ik.matrix_to_quat_xyzw(rot),

@@ -40,7 +40,9 @@ def clipboard(w):
     for i, (x, y) in enumerate((x, y) for x in (-.097, .097) for y in (-.066, .066)):
         w.box(s, body + f"/Foot{i}", (.023, .025, .0015), (x, y, .00025), (.17, .17, .16))
     for j, (color, rectangles) in enumerate(paper.artwork()):
-        quads(w, s, body + f"/Print{j}", rectangle_points(rectangles, C.PAPER_Z + .00004), color)
+        # The small visual offset prevents the print from fighting the paper
+        # surface in the native cameras. It does not change contact height.
+        quads(w, s, body + f"/Print{j}", rectangle_points(rectangles, C.PAPER_Z + .0003), color)
     quads(w, s, body + "/TransferredFilm", [], paper.COATING)
     return s
 
