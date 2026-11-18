@@ -48,7 +48,10 @@ def box_asset(w):
 
 def tab_asset(w):
     s = w.stage("pull_tab")
-    b = w.body(s, "/Asset/Tab", .006, ccd=True)
+    b = w.body(s, "/Asset/Tab", C.TAB_MASS, ccd=True)
+    body = w.Px.PhysxRigidBodyAPI.Get(s, b)
+    body.CreateLinearDampingAttr(35.)
+    body.CreateAngularDampingAttr(12.)
     # The stiffened leader folds toward the near side at the starting corner.
     w.box(s, b + "/Pull", C.TAB_SIZE, (0, 0, 0), TAPE)
     m = w.Phy.MaterialAPI.Get(s, "/Asset/Physics")

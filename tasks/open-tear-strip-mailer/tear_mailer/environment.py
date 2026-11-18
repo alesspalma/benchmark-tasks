@@ -299,15 +299,21 @@ class Environment(YamArenaEmbodiment):
         try:
             view = self._mailer.root_view
             box = array(view.get_root_transforms())[0]
-            tab = array(self._tab.root_view.get_transforms())[0, :3]
+            tab = array(self._tab.root_view.get_transforms())[0]
             force = self.material.advance(float(dt), box[:3],
-                                          quat_xyzw_to_matrix(box[3:]), tab)
-            self._apply(self._tab.root_view, force, tab)
+                                          quat_xyzw_to_matrix(box[3:]), tab[:3],
+                                          quat_xyzw_to_matrix(tab[3:]))
+            self._apply(self._tab.root_view, force, tab[:3])
             self._apply(self._tray, -force, self.material.front)
             angle = float(array(view.get_dof_positions())[0, 0])
             speed = float(array(view.get_dof_velocities())[0, 0])
-            sealed = 1. - self.material.progress / config.TEAR_LENGTH
-            torque = -min(2.1, angle * 22.) * (sealed > 0.) - .055 * speed
+            sealed = self.material.progress < config.TEAR_LENGTH
+            # A folded paper crease tends to relax slightly after the seam
+            # is freed. The modest spring can't open far enough to pass.
+            if sealed:
+                torque = -min(2.1, angle * 22.) - .055 * speed
+            else:
+                torque = .075 * (np.deg2rad(31.) - angle) - .035 * speed
             self._effort = self._wp.array([[torque]], dtype=self._wp.float32,
                                           device=self._base.device)
             view.set_dof_actuation_forces(self._effort, self._mailer._ALL_INDICES)
