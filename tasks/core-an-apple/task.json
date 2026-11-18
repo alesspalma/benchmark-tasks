@@ -1,7 +1,12 @@
 {
   "title": "Core a whole apple with a tube corer",
   "category": "Societal relatability",
-  "keywords": ["apple coring", "food preparation", "bimanual", "controlled cutting"],
+  "keywords": [
+    "apple coring",
+    "food preparation",
+    "bimanual",
+    "controlled cutting"
+  ],
   "instruction": "Hold the apple steady and remove its core with the corer. Leave the cored apple upright on the board and lift the core clear.",
   "context": "Coring removes the seeds and fibrous centre in one plug while keeping the whole apple intact for stuffing or slicing. The robot has to align a loose hand corer with the stem axis, work it under load, and withdraw the plug without lifting or tipping the apple.",
   "setup": "On the standard YAM worktop, stand a firm green apple (74 mm wide, 66 mm high, about 155 g) stem-up on a 248 × 172 × 10 mm polyethylene cutting board. Lay a 200 mm stainless-steel tube corer with a 21 mm blade and 25 mm soft handle flat on the worktop. The blade is at X 289 mm, Y −218 mm and the handle points in +X. The apple is at X 386 mm, Y 29 mm, with the board centred at X 385 mm, Y 17 mm. Start with both grippers open.",
@@ -9,5 +14,6 @@
   "run_limit": "680 actions (34 seconds at 20 Hz)",
   "reset_notes": "Clear the corer, wipe the board and tool, and replace the apple with a fresh apple of matching size and firmness. Restore the marked poses and open both grippers.",
   "fidelity": "The rigid corer, apple shell and plug have native contacts. Inset meshes approximate pulp compliance at the cutting edge. A rate-dependent axial reaction and penetration work represent tissue separation. Finite bore forces represent retention of the detached core. The nominal 9–11 N cutting reaction is an engineering estimate.",
-  "scores": "Scripted demo: 1.0 after 618 actions (30.9 s). The stationary control and the shallow-cut control each scored 0.0."
+  "scores": "Scripted demo: 1.0 after 618 actions (30.9 s). The stationary control and the shallow-cut control each scored 0.0. Dream-1: 0.0 after 680 actions.",
+  "media": "M-XBTUB5"
 }
