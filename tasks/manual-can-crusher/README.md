@@ -1,12 +1,10 @@
 # Compact an aluminum can in a wall-mounted hand crusher
 
-Prototype parked after native feasibility testing. The tool and the empty can
-are full-size. The reference failed to place the can squarely in the cradle
-and retain the lever grip on return. Its demonstrated score is 0.0.
-
-Place the empty can in the open cradle. Pull the handle through the resistance
-of the can, then raise it to send the compacted can into the bin. This saves
-space where aluminum is already kept in a separate recycling stream.
+Place the empty can in the open cradle and pull the handle through the first
+buckle and the remainder of the compression stroke. Release the handle to let
+the ram return, then pick up the flattened can and put it into the bin.
+This saves space where aluminum is already kept in a separate recycling
+stream.
 [EPA guidance on sorting and compaction](https://www.epa.gov/recycle/how-do-i-recycle-common-recyclables)
 
 ## Run
@@ -19,21 +17,23 @@ python -m pip install -e .
 python run.py --device cuda:0 --physics-device cpu --output runs/demo
 ```
 
-The embodiment is `can_crusher` and the native policy is
-`can_crusher_scripted`. The fixed layout uses seed 1415158438. The trial allows
-780 actions at 20 Hz, or 39 seconds, with native physics at 240 Hz. The
+The embodiment is `can_crusher` and the reference policy is
+`can_crusher_scripted`. This runner reads the native handle angle for trajectory
+tracking during the press. The fixed layout uses seed 1415158438. The trial allows
+920 actions at 20 Hz, or 46 seconds, with native physics at 480 Hz. The
 runner records a receipt and all three native camera views at 640 × 360.
 Use `--policy load-only` for the ordinary load and release without pulling
 the lever, or `--policy hold --no-cameras` for a stationary control.
 
 ## Setup
 
-Mount a [Dial Easy Pull EP1026](https://dialind.com/product/easy-pull-can-crusher/)
-on a rigid vertical support with the supplied mount and its ordinary discharge
-space below. The full commercial machine measures 159 × 102 × 502 mm including
-its handle. The representative assembly reproduces the two pivoting parallel
-platens, guide rods, moving lever and passive discharge described in
-[US6076455A](https://patents.google.com/patent/US6076455A/en).
+Mount a full-size hand can crusher with a fixed base plate and a guided ram on
+a rigid vertical support. The scene uses a 340 mm pull lever, steel guides,
+a slotted connection between the lever pin and the ram, and a preloaded return
+spring. The fixed support and vertical compression follow the operation in
+[US5009155A](https://patents.google.com/patent/US5009155A/en).
+Spring-return manual operation is documented in
+[US5331889A](https://patents.google.com/patent/US5331889A/en).
 All distances in the table are measured from the midpoint of the two pedestal
 base mounting axes. X points from the arms toward the wall, Y to the arms'
 left and Z upward.
@@ -42,16 +42,36 @@ left and Z upward.
 | --- | --- | --- |
 | Supports | Two bolted metal YAM pedestals, about 160 × 160 × 833 mm, with 220 mm square feet | Y ±305 mm, arm mounting surface Z 820 mm. Hands open and clear. |
 | Vertical mount | Plywood or structural panel, 32 × 580 × 1,240 mm | Front face X 492 mm. Crusher centered at Y 0. |
-| Can crusher | Wall-mounted plastic body and lever, steel hinge pins and guides, 140 × 98 mm pressure faces in the simulator | Lever pivot at X 457 mm, Z 837 mm. Open cradle around X 408 mm, Y 0, Z 756 mm. The crossbar is 340 mm from its pivot and the jaw gap is 128 mm. Lever starts raised. |
+| Can crusher | Rigid back plate, steel hinge pins, guides and pressure faces, 140 × 98 mm. 1.4 mm rubber cradle pad and 36 mm-wide, 3 mm-high buckling boss with a round footprint | Lever pivot at X 457 mm, Z 832 mm. Open cradle centered on X 408 mm, Y 0, Z 757 mm. The crossbar is 340 mm from its pivot. Open clearance is 171 mm between the pad and the boss. Lever starts raised and reaches a 115° closed stop. |
 | Can | Empty standard 12 fl oz aluminum beverage can with its original pull tab, about Ø66 × 122 mm, 14 g | Upright, on the side shelf at X 333 mm, Y 198 mm and Z 748 mm. |
 | Side shelf | Plywood, 265 × 190 × 18 mm | Shelf top at Z 748 mm. Its center is 39 mm behind the can along X. |
 | Collection bin | Ordinary 301 × 224 × 204 mm plastic bin on a rigid shelf, initially empty | Opening centered at X 342 mm, Y 0. Bin floor at Z 220 mm. |
 
 Use one empty, drained can of the same standard format per trial. Clear the
-collection bin and return the lever to its upper stop between trials. The
-simulator models the can as an empty shell and ignores logos and residual
-liquid. The physical scene uses the ordinary dispensing mechanism and can be
-assembled with a ruler, stock mounting hardware and a level.
+collection bin, return the lever to its upper stop and place the can upright
+on the shelf between trials.
+
+For a fabricated equivalent, use 6 mm guide rods on 154 mm centers over the
+back of the two pressure faces. The pin is 105 mm from the handle pivot. The
+roller travels in two horizontal channels attached to the ram. Build the
+channels from off-the-shelf channel stock and fasten the frame to the vertical
+support. The depth and width of the anvil support and the three starting
+positions are given above. Exact geometry and dimensions can be exported as
+USD and a JSON inventory from this directory.
+
+```bash
+python - <<'PY'
+from isaaclab.app import AppLauncher
+
+app = AppLauncher(headless=True, device="cpu").app
+try:
+    from can_crusher.builder import create_assets
+
+    create_assets("runs/geometry")
+finally:
+    app.close()
+PY
+```
 
 ## Scoring
 
@@ -69,13 +89,16 @@ ended and the final position of the lever.
 
 ## Simulation and licenses
 
-Robot-to-grip, platen-to-can, and bin contacts use PhysX. The lever transmits
-load through its pinned slider loop. Native end bodies compress the shell
-against a bounded material force. An axial spring supplies the initial load,
-and plastic set follows the shortening already achieved after buckling.
-The visible wall folds with the end-to-end distance. This reduced shell
-model estimates the load curve and omits sheet tearing and exact crease
-location. A published test of hand-lever crushers reports loads of about
+Robot grasps, the lever, the slotted drive-pin linkage, the return spring and
+contact with the bin run in PhysX. The upper cap contact uses a reduced
+axial law from the measured ram gap, can alignment and support. It compresses
+the native shell joint and applies the opposing load through the ram to the
+lever. The spring model uses 30 kN/m initial axial stiffness, a 300 N
+buckling threshold, and 4 mm rebound. The shallow convex boss localizes
+initial buckling, a feature documented for household crushers in
+[US4301722A](https://patents.google.com/patent/US4301722A/en). The shell wall
+folds with the end-to-end distance. Exact crease geometry and sheet tearing
+are outside the model. A published test of a hand-lever crusher reports
 22–89 N at the grip for aluminum cans.
 [Hand-lever load reference](https://patents.google.com/patent/US4290354A/en)
 

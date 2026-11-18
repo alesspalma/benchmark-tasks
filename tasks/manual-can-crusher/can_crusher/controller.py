@@ -1,4 +1,4 @@
-"""Fixed-layout reference using elapsed time and ordinary joint observations."""
+"""Fixed-layout reference with optional measured lever-angle feedback."""
 
 import numpy as np
 from inspect_robots.policy import PolicyBase, PolicyInfo
@@ -10,7 +10,7 @@ from . import config, plan
 
 
 class ScriptedPolicy(PolicyBase):
-    def __init__(self, mode="hold"):
+    def __init__(self, mode="demo"):
         self.mode = mode
         low = np.r_[ik.LOWER, 0.0, ik.LOWER, 0.0]
         high = np.r_[ik.UPPER, 1.0, ik.UPPER, 1.0]
@@ -30,7 +30,7 @@ class ScriptedPolicy(PolicyBase):
         }
         self.previous = np.r_[config.STOWED["left"], 1.0, config.STOWED["right"], 1.0]
         self.integral = np.zeros(14)
-        self.duration = config.EVALUATION_TIME if self.mode == "hold" else (
+        self.duration = config.MAX_STEPS / 20.0 if self.mode == "hold" else (
             max((sum(w["duration"] for w in v) for v in self.moves.values()), default=0)
             + 2
         )
@@ -38,11 +38,12 @@ class ScriptedPolicy(PolicyBase):
         self.worst_ik_m = 0.0
         self.worst_ik_rad = 0.0
 
-    def action_at(self, t, joint_pos=None):
+    def action_at(self, t, joint_pos=None, lever_rad=None):
         out = []
         labels = []
         for name in ("left", "right"):
             pos, rot, grip = self.starts[name]
+            phase = "settle"
             age = t
             for w in self.moves.get(name, []):
                 goal = np.asarray(w["position"])
@@ -53,10 +54,17 @@ class ScriptedPolicy(PolicyBase):
                     pos = pos + s * (goal - pos)
                     rot = ik.slerp_matrix(rot, r, s)
                     grip += s * (g - grip)
-                    labels.append(w.get("label", "move"))
+                    phase = w["label"]
+                    labels.append(phase)
                     break
                 age -= w["duration"]
                 pos, rot, grip = goal, r, g
+            if lever_rad is not None and phase in (plan.PULL_PHASE, plan.FINISH_PHASE):
+                delta = pos - config.PIVOT
+                desired = np.rad2deg(np.arctan2(delta[0], delta[2]))
+                tracked = max(desired, np.rad2deg(lever_rad) - 10.)
+                if tracked > desired:
+                    pos, rot, grip = plan.lever_pose(tracked, grip, name)
             q, pe, re = ik.solve(
                 pos,
                 ik.matrix_to_quat_xyzw(rot),

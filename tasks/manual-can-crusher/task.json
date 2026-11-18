@@ -1,0 +1,13 @@
+{
+  "title": "Flatten an empty drink can with a wall-mounted can crusher",
+  "category": "Societal relatability",
+  "keywords": ["manual press", "recycling", "lever", "buckling"],
+  "instruction": "Load the empty can in the wall-mounted crusher. Pull the handle to flatten it, release the handle, then put the crushed can in the bin.",
+  "context": "Flattening used cans saves space in a separately sorted aluminum recycling stream. The robot loads a loose can, pulls the lever through the resistance of its first buckle and continuing collapse, and collects the flattened can.",
+  "setup": "Two parallel-gripper YAM arms are on 820 mm steel pedestals 610 mm apart. A hand crusher is mounted on a 580 × 1240 × 32 mm rigid panel. It has 140 × 98 mm steel pressure faces, a rubber cradle pad, a 340 mm lever, and 171 mm open clearance. An empty 12 fl oz aluminum can (66 × 122 mm) stands upright on a plywood loading shelf to the left of the crusher. A 301 × 224 × 204 mm open plastic bin sits below the cradle.",
+  "scoring": "1.0 for a can at most 35 mm high settled in the bin for 0.6 seconds with the handle within 12° of its open stop. 0.5 for a can at most 70 mm high in the cradle or bin when full conditions are unmet. 0.25 for a can seated in the cradle when the compaction conditions are unmet. 0.0 otherwise. Use a ruler and the trial video.",
+  "run_limit": "920 actions (46 seconds at 20 Hz)",
+  "reset_notes": "Start with the handle at the open stop and the collection bin empty. Place a new drained, empty 12 fl oz can upright on the shelf for each trial.",
+  "fidelity": "PhysX models the two grippers, linked lever and sliding ram, spring return, and bin. An axial material model calculates opposing ram and shell loads from native positions and models initial buckling and rebound. Can shortening and folded appearance follow the shell joint. The model estimates the load curve and crease geometry.",
+  "scores": "Scripted demo: 1.0 in 837 actions. Stationary control: 0.0. Loading without pulling the lever: 0.25. Hosted model score pending."
+}

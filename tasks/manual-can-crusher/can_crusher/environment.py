@@ -75,8 +75,8 @@ class Environment(YamArenaEmbodiment):
             raise ValueError("Fixed reset and 20 Hz required")
         super().__init__(scene="station", object_jitter=0, control_hz=20, **kwargs)
         # Oblique overview on an independent camera stand.
-        eye = np.array([-.48, .36, 1.54])
-        target = np.array([.32, .0, .76])
+        eye = np.array([-.48, -.12, 1.62])
+        target = np.array([.32, .03, .76])
         optical_z = (eye-target) / np.linalg.norm(eye-target)
         optical_x = np.cross([0.,0.,1.], optical_z)
         optical_x /= np.linalg.norm(optical_x)
@@ -116,6 +116,8 @@ class Environment(YamArenaEmbodiment):
         self._audit_error = None
         self._material_callback = None
         self._plastic_offset = 0.
+        self._press_force = 0.
+        self._buckled = False
 
     def _ensure_sim(self, goal=None):
         global _APP
@@ -205,12 +207,14 @@ class Environment(YamArenaEmbodiment):
                 }
 
         def configure(cfg):
+            from isaaclab.managers import EventTermCfg
             from isaaclab_physx.physics.physx_manager_cfg import PhysxCfg
             from yam_arena.constants import FINGER_OPEN
 
             cfg = env_cfg_callback(20)(cfg)
             cfg.sim.dt = 1. / config.PHYSICS_HZ
             cfg.decimation = config.PHYSICS_HZ // 20
+            cfg.sim.render_interval = cfg.decimation
             for name in ARMS:
                 initial = getattr(cfg.scene, name).init_state
                 initial.joint_pos = {
@@ -229,6 +233,8 @@ class Environment(YamArenaEmbodiment):
                 gpu_found_lost_aggregate_pairs_capacity=2**20,
                 gpu_total_aggregate_pairs_capacity=2**20,
             )
+            cfg.events.axial_contact = EventTermCfg(func=self._exclude_duplicate_axial_contact,
+                                                    mode="prestartup")
             return cfg
 
         robot = BimanualYamEmbodiment(
@@ -268,9 +274,15 @@ class Environment(YamArenaEmbodiment):
         import warp as wp
         self._can = self._base.scene["can"]
         self._crusher = self._base.scene["crusher"]
+        self._cap = self._can.body_names.index("Top")
+        self._heel = self._can.body_names.index("Bottom")
         self._hinge = self._crusher.joint_names.index("Lever")
+        self._slide = self._crusher.joint_names.index("Slide")
         self._can_target = torch.zeros((1, 1), dtype=torch.float32, device=self._base.device)
         self._can_target_wp = wp.from_torch(self._can_target)
+        self._can_forces = torch.zeros((1, self._can.num_bodies, 3), dtype=torch.float32,
+                                       device=self._base.device)
+        self._can_forces_wp = wp.from_torch(self._can_forces).flatten()
         self._hinge_effort = torch.zeros((1, self._crusher.num_joints),
                                           dtype=torch.float32, device=self._base.device)
         self._hinge_effort_wp = wp.from_torch(self._hinge_effort)
@@ -280,20 +292,60 @@ class Environment(YamArenaEmbodiment):
             self._apply_shell_response, IsaacEvents.PRE_PHYSICS_STEP, order=55,
             name=config.KEY + "_shell", wrap_weak_ref=False)
 
+    @staticmethod
+    def _exclude_duplicate_axial_contact(env, _env_ids):
+        # Use the reduced axial contact law for this pair only. The grippers,
+        # base plate, surrounding fixture and collection bin keep native contacts.
+        from pxr import UsdPhysics
+
+        for namespace in env.scene.env_prim_paths:
+            ram = env.sim.stage.GetPrimAtPath(namespace + "/crusher/Upper")
+            UsdPhysics.FilteredPairsAPI.Apply(ram).CreateFilteredPairsRel().AddTarget(
+                namespace + "/can/Top")
+
+    def _axial_force(self, can_pose, slide, slide_speed):
+        # Approximate the seated can's axial stiffness, first buckle, permanent
+        # strain and rebound. The lower plate is the stationary reaction support.
+        x, y, z, qx, qy = can_pose[:5]
+        support_z = config.LOWER[2] + config.PLATE_HALF + .0014
+        centred = abs(x - config.LOAD[0]) < .022 and abs(y) < .020
+        supported = abs(z - support_z) < .006 and 1. - 2. * (qx*qx + qy*qy) > .97
+        ram_z = (config.LOWER[2] + config.GUIDE_LENGTH + slide
+                 - config.PLATE_HALF - config.BUCKLING_BOSS_HEIGHT)
+        gap = ram_z - z
+        rest = config.CAN_HEIGHT + self._plastic_offset
+        if not centred or not supported or gap >= rest:
+            return 0.
+        elastic_force = config.AXIAL_STIFFNESS * (rest - gap)
+        self._buckled = self._buckled or elastic_force >= config.BUCKLE_FORCE
+        if self._buckled:
+            new_rest = max(config.CAN_BOTTOM_STOP + config.AXIAL_REBOUND,
+                           gap + config.AXIAL_REBOUND)
+            self._plastic_offset = min(self._plastic_offset, new_rest - config.CAN_HEIGHT)
+        force = elastic_force - config.AXIAL_DAMPING * min(slide_speed, 0.)
+        return min(force, config.AXIAL_FORCE_LIMIT)
+
     def _apply_shell_response(self, _dt):
-        # Plastic shortening follows native travel after the initial elastic buckle.
-        # The drive's resting length stays longer than the minimum reached length.
+        # The same axial load compresses the shell and opposes ram travel.
         try:
             view = self._can.root_view
-            fold = float(array(view.get_dof_positions())[0, 0])
-            if fold < -.010:
-                self._plastic_offset = min(self._plastic_offset, fold + .006)
+            frame = self._crusher.root_view
+            angle, slide = array(frame.get_dof_positions())[0, [self._hinge, self._slide]]
+            speed, slide_speed = array(frame.get_dof_velocities())[0, [self._hinge, self._slide]]
+            self._press_force = self._axial_force(
+                array(view.get_root_transforms())[0], slide, slide_speed)
             self._can_target[0, 0] = self._plastic_offset
             view.set_dof_position_targets(self._can_target_wp, self._can._ALL_INDICES)
-            frame = self._crusher.root_view
-            angle = float(array(frame.get_dof_positions())[0, self._hinge])
-            # A light over-centre spring supports the open grip at the setup stop.
-            self._hinge_effort[0, self._hinge] = 2.6 * max(0., 1. + angle/.22)
+            self._can_forces[0, self._cap, 2] = -self._press_force
+            self._can_forces[0, self._heel, 2] = self._press_force
+            view.apply_forces_and_torques_at_position(
+                force_data=self._can_forces_wp, torque_data=None, position_data=None,
+                indices=self._can._ALL_INDICES, is_global=False)
+            # A preloaded return spring and a damped hinge reopen the unloaded press.
+            self._hinge_effort[0, self._hinge] = (
+                2.6 * max(0., 1. + angle/.22) - .68 * angle - .55 * np.sin(angle) - .55 * speed
+            )
+            self._hinge_effort[0, self._slide] = self._press_force
             frame.set_dof_actuation_forces(self._hinge_effort_wp, self._crusher._ALL_INDICES)
         except Exception as error:
             self._audit_error = error
@@ -309,6 +361,8 @@ class Environment(YamArenaEmbodiment):
         self._ensure_sim()
         self._audit_error = None
         self._plastic_offset = 0.
+        self._press_force = 0.
+        self._buckled = False
         self._env.reset(seed=seed)
         self._instruction = scene.instruction
         for _ in range(self.spec["settle_actions"]):
@@ -335,6 +389,7 @@ class Environment(YamArenaEmbodiment):
             "crusher_joints": array(crusher.get_dof_positions())[0].tolist(),
             "can_height": config.CAN_HEIGHT + fold,
             "plastic_height": config.CAN_HEIGHT + self._plastic_offset,
+            "press_force_n": self._press_force,
             "can_pose": array(view.get_root_transforms())[0].tolist(),
             "can_speed": float(np.linalg.norm(array(view.get_root_velocities())[0, :3])),
             "hands": {n: tcp_world(self._base.scene[n]).tolist() for n in ARMS},
@@ -353,7 +408,13 @@ class Environment(YamArenaEmbodiment):
         )
 
     def diagnostics(self):
-        return self.state()
+        return {
+            **self.state(),
+            "can_links": dict(zip(self._can.body_names,
+                                  array(self._can.root_view.get_link_transforms())[0].tolist(), strict=True)),
+            "crusher_links": dict(zip(self._crusher.body_names,
+                                      array(self._crusher.root_view.get_link_transforms())[0].tolist(), strict=True)),
+        }
 
     def _observation(self):
         if self.render_images:

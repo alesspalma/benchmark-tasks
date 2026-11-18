@@ -32,45 +32,63 @@ def machine(w):
     mount = w.body(stage, "/Asset/Mount", 6., fixed=True, articulation=True)
     w.Px.PhysxArticulationAPI.Get(stage, mount).CreateEnabledSelfCollisionsAttr(False)
     handle = w.body(stage, "/Asset/Handle", .23, position=C.PIVOT)
-    lower = w.body(stage, "/Asset/Lower", .17, position=C.LOWER)
     upper_origin = C.PIVOT + [0., 0., C.DRIVE_RADIUS]
     upper = w.body(stage, "/Asset/Upper", .17, position=upper_origin)
+    pin = w.body(stage, "/Asset/Pin", .03, position=upper_origin)
     inertia(w, stage, handle, (.006, .010, .004))
-    inertia(w, stage, lower, (.00045, .00032, .00055))
     inertia(w, stage, upper, (.00038, .00027, .00048))
+    inertia(w, stage, pin, (.00001, .00001, .00001))
     frame = (.075, .085, .095)
     lever = (.15, .17, .18)
     steel = (.38, .40, .42)
+    rubber = w.Shade.Material.Define(stage, "/Asset/Rubber")
+    rubber_props = w.Phy.MaterialAPI.Apply(rubber.GetPrim())
+    rubber_props.CreateStaticFrictionAttr(1.0)
+    rubber_props.CreateDynamicFrictionAttr(.80)
+    rubber_props.CreateRestitutionAttr(0.)
     w.box(stage, mount + "/Back", (.015, .144, .240), (.484, 0., .804), frame)
     for side in (-1, 1):
         y = side * .070
         w.box(stage, mount + f"/HingeSide{side}", (.045, .010, .103), (.467, y, .790), frame)
         w.box(stage, handle + f"/PullMember{side}", (.013, .009, C.LEVER_LENGTH),
               (0., side * .076, C.LEVER_LENGTH / 2.), lever)
-        w.cylinder(stage, lower + f"/Guide{side}", .003, .155,
-                   (.010, side * .055, .0775), steel, collide=False)
+        w.cylinder(stage, mount + f"/SpringCover{side}", .014, .011,
+                   C.PIVOT + [0., side * .082, 0.], steel, axis="Y", collide=False)
+        w.cylinder(stage, mount + f"/Guide{side}", .003, .224,
+                   C.LOWER + [.010, side * .077, .112], steel)
         w.cylinder(stage, mount + f"/Bolt{side}", .006, .009, (.475, side * .054, .906), steel,
                    axis="X", collide=False)
+        for offset in (-.008, .008):
+            w.box(stage, upper + f"/Slot{side}_{offset > 0}", (.145, .010, .006),
+                  (-.058, side * .072, offset), steel, collide=False)
     w.cylinder(stage, handle + "/Grip", .015, .161, (0., 0., C.LEVER_LENGTH),
                (.21, .22, .23), axis="Y")
     w.cylinder(stage, handle + "/GripInset", .0157, .063, (0., 0., C.LEVER_LENGTH),
                (.31, .37, .43), axis="Y", collide=False)
-    for link in (lower, upper):
-        w.box(stage, link + "/PressureFace", (.098, .140, .012), (-.044, 0., 0.), frame)
+    w.box(stage, upper + "/PressureFace", (.098, .140, .028), (-.044, 0., .008), frame)
+    w.cylinder(stage, upper + "/BucklingBoss", .018, C.BUCKLING_BOSS_HEIGHT,
+               (C.CENTER_OFFSET, 0., -C.PLATE_HALF - C.BUCKLING_BOSS_HEIGHT/2.), steel)
+    w.box(stage, mount + "/BasePlate", (.098, .140, .012),
+          C.LOWER + [-.044, 0., 0.], frame)
+    w.box(stage, mount + "/SupportPad", (.086, .083, .0014),
+          C.LOWER + [-.048, 0., .0067], (.23, .22, .22))
+    for path in (handle + "/Grip", mount + "/SupportPad"):
+        w.Shade.MaterialBindingAPI.Get(stage, path).Bind(rubber, materialPurpose="physics")
     # A shallow cup at the cradle locates the can while it is loaded.
     for y in (-.0455, .0455):
-        w.box(stage, lower + f"/CradleSide{y > 0}", (.068, .004, .009),
-              (-.047, y, .0095), lever)
-    w.box(stage, lower + "/CradleBack", (.006, .090, .012), (-.008, 0., .010), lever)
+        w.box(stage, mount + f"/CradleSide{y > 0}", (.068, .004, .009),
+              C.LOWER + [-.047, y, .0095], lever)
+    w.box(stage, mount + "/CradleBack", (.006, .090, .012), C.LOWER + [-.008, 0., .010], lever)
+    w.cylinder(stage, pin + "/Roller", .008, .159, (0., 0., 0.), steel, axis="Y", collide=False)
 
     hinge = joint(w, stage, "Lever", w.Phy.RevoluteJoint, mount, handle, "Y",
                   C.PIVOT, (0., 0., 0.), (math.degrees(C.CLOSED), 0.))
     w.Px.PhysxJointAPI.Apply(hinge.GetPrim()).CreateJointFrictionAttr(.28)
-    joint(w, stage, "Cradle", w.Phy.RevoluteJoint, mount, lower, "Y",
-          C.LOWER, (0., 0., 0.), (-80., 4.))
-    joint(w, stage, "Slide", w.Phy.PrismaticJoint, lower, upper, "Z",
-          (0., 0., C.GUIDE_LENGTH), (0., 0., 0.), (-.109, .001))
-    joint(w, stage, "PlatenPin", w.Phy.RevoluteJoint, handle, upper, "Y",
+    joint(w, stage, "Slide", w.Phy.PrismaticJoint, mount, upper, "Z",
+          upper_origin, (0., 0., 0.), (-.153, .002))
+    joint(w, stage, "RollerSlot", w.Phy.PrismaticJoint, upper, pin, "X",
+          (0., 0., 0.), (0., 0., 0.), (-C.DRIVE_RADIUS - .002, .003))
+    joint(w, stage, "DrivePin", w.Phy.RevoluteJoint, handle, pin, "Y",
           (0., 0., C.DRIVE_RADIUS), (0., 0., 0.), (-180., 180.), external=True)
     return stage
 
@@ -96,9 +114,9 @@ def beverage_can(w):
     w.Px.PhysxJointAPI.Apply(j.GetPrim()).CreateJointFrictionAttr(.015)
     drive = w.Phy.DriveAPI.Apply(j.GetPrim(), "linear")
     drive.CreateTypeAttr("force")
-    drive.CreateStiffnessAttr(39000.)
-    drive.CreateDampingAttr(2.5)
-    drive.CreateMaxForceAttr(520.)
+    drive.CreateStiffnessAttr(C.AXIAL_STIFFNESS)
+    drive.CreateDampingAttr(C.AXIAL_DAMPING)
+    drive.CreateMaxForceAttr(C.AXIAL_FORCE_LIMIT)
     drive.CreateTargetPositionAttr(0.)
     drive.CreateTargetVelocityAttr(0.)
     mesh = w.Geom.Mesh.Define(stage, bottom + "/ThinWall")

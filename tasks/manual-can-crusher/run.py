@@ -69,7 +69,7 @@ def main():
         "control_hz": 20,
         "physics_hz": c.PHYSICS_HZ,
         "instruction": c.INSTRUCTION,
-        "controller_inputs": ["elapsed time", "joint positions"],
+        "controller_inputs": ["elapsed time", "joint positions", "native lever angle"],
         "cameras_enabled": not a.no_cameras,
     }
     (a.output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
@@ -136,7 +136,8 @@ def main():
             writers[name] = writer
         with (a.output / "trace.jsonl").open("w") as trace:
             for k in range(a.max_steps):
-                action = policy.action_at((k + 1) / 20, obs.state["joint_pos"])
+                lever_rad = np.deg2rad(env.metrics["lever_degrees"])
+                action = policy.action_at((k + 1) / 20, obs.state["joint_pos"], lever_rad)
                 result = env.step(Action(data=action))
                 steps = k + 1
                 obs = result.observation

@@ -70,7 +70,7 @@ class Writer:
             j.CreateLocalPos1Attr(self.Gf.Vec3f(0, 0, 0))
         return path
 
-    def _finish(self, s, geom, color, collide, contact=0.00015):
+    def _finish(self, s, geom, color, collide, contact=0.002):
         geom.CreateDisplayColorAttr([self.Gf.Vec3f(*color)])
         if collide:
             p = geom.GetPrim()

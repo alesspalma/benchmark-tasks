@@ -17,7 +17,7 @@ class Scorer:
 
     def evaluate(self, state):
         position = np.asarray(state["can_pose"][:3])
-        height = state["plastic_height"]
+        height = max(state["can_height"], state["plastic_height"])
         angle = state["lever_rad"]
         x, y, z = position - C.BIN_CENTER
         self.peak_fold = max(self.peak_fold, C.CAN_HEIGHT - state["can_height"])
