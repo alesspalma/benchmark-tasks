@@ -15,6 +15,6 @@
   "run_limit": "680 actions (34 s at 20 Hz)",
   "reset_notes": "Coat the inside of the clean beaker with blue food-colour stock, let any pool drain and weigh the retained aliquot. Refill the wash bottle with 70 mL of water and empty the receiver.",
   "fidelity": "Native spring-backed LDPE wall contact displaces water from the real-size bottle. A ballistic stream and contact with the gravity-levelled pool dissolve dye locally. Measured beaker tilt governs runoff and funnel capture. Rinse and dye are conserved. The spring rate and dissolution constants are engineering estimates. The seated funnel and receiver remain fixed. Splash droplets and residual films after drainage are omitted.",
-  "scores": "Scripted demo: 1.0 after 601 actions (30.05 s). Held-arm and light-squeeze controls: 0.0 each.",
-  "media": ""
+  "scores": "Scripted demo: 1.0 after 601 actions (30.05 s). Held-arm and light-squeeze controls: 0.0 each. Dream-1: 0.0 after 680 actions.",
+  "media": "M-9QFPG4"
 }
