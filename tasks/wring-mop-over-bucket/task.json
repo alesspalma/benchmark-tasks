@@ -16,5 +16,5 @@
   "reset_notes": "Recharge the mop head to 200 ± 5 g water above its dry mass, let fast dripping cease, restore the bucket to 3 L and return the wet head to its starting position inside the cone wringer.",
   "fidelity": "The full-size shaft, bucket, cone and gripper contacts use rigid-body physics. Six spring-backed rayon bundles approximate wet head compliance and create real wringing resistance. A mass model uses their compression and shaft twist relative to the bucket to compute expelled water. Rendered droplets represent that outflow. The cone profile and stiffness are engineering estimates.",
   "scores": "Scripted demo: 1.0 after 284 actions (14.2 s). Dream-1: 0.0 after 400 actions (20 s).",
-  "media": ""
+  "media": "M-E5XAFK"
 }
