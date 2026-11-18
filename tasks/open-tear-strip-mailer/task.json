@@ -1,7 +1,13 @@
 {
   "title": "Open a corrugated mailer by pulling its tear strip",
   "category": "Societal relatability",
-  "keywords": ["unboxing", "tear strip", "corrugated mailer", "pinch grasp", "counterholding"],
+  "keywords": [
+    "unboxing",
+    "tear strip",
+    "corrugated mailer",
+    "pinch grasp",
+    "counterholding"
+  ],
   "instruction": "Pull the tear strip all the way off and lift the lid so the book is visible. Leave the book in the mailer.",
   "context": "Opening a sealed book mailer requires holding the packed carton steady while pulling the small starter tab through a resistant tear, then lifting the freed cover. The strip lets the recipient open the package without bringing a cutter near the contents.",
   "setup": "An unopened 252 × 165 × 50 mm single-wall kraft corrugated book mailer has a 232 × 10 mm reinforced front pull strip, a doubled-paper starter tab and a rear crease hinge. Set it at X 337 mm, Y 10 mm with the strip toward the two arms on a level 747.5 mm high bench. A 148 × 105 × 19 mm paperback lies flat inside. The README gives the packed coordinates and a retail-style carton reference.",
@@ -9,5 +15,6 @@
   "run_limit": "600 actions (30 seconds at 20 Hz)",
   "reset_notes": "Place the same paperback in a fresh unopened easy-open mailer after each physical trial. Close the factory seal fully with its starter tab accessible. The simulated reset uses seed 1415158438.",
   "fidelity": "Grippers pinch and pull a native tab against measured-pose tension, and lift the rigid front flap on its contact-driven hinge. The tear threshold, leader stiffness and light crease springback are estimates. The flexible ribbon is represented by a moving tear front and render geometry attached to the native leading piece after detachment.",
-  "scores": "Scripted demo: 1.0 in 466 actions (23.3 s). No-action control: 0.0 in 600 actions. Full tear with no lift: 0.6."
+  "scores": "Scripted demo: 1.0 in 466 actions (23.3 s). No-action control: 0.0 in 600 actions. Full tear with no lift: 0.6. Dream-1: 0.0 after 600 actions.",
+  "media": "M-727ASU"
 }
