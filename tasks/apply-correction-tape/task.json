@@ -14,5 +14,6 @@
   "run_limit": "480 actions (24 seconds at 20 Hz)",
   "reset_notes": "Replace the A5 sheet with a fresh copy printed at 100%. Clip it flat in the fixed position. Use a side-action dispenser with dry correction tape loaded at the tip. Return it face down to the specified pose and start with open grippers.",
   "fidelity": "A full-size side-action dispenser uses native rigid contacts and a spring-loaded 4 mm transfer blade. The spring stiffness and housing mass are estimates. The loaded blade's measured motion deposits persistent coating on the rigid clipped sheet. The material model represents transfer at the blade and omits the internal carrier, individual adhesive layers and paper tearing.",
-  "scores": "Scripted demo: 1.0 in 378 actions (18.9 s). The unpressed stroke and the full-length stationary control each scored 0.0."
+  "scores": "Scripted demo: 1.0 in 378 actions (18.9 s). The unpressed stroke and the full-length stationary control each scored 0.0. Dream-1: 0.0 after 480 actions.",
+  "media": "M-QHN94U"
 }
