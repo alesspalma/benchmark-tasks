@@ -4,6 +4,7 @@ import math
 import numpy as np
 
 from . import config as C
+from . import worker
 from .usd_scene import Writer
 
 WHITE = (.89, .90, .89)
@@ -20,6 +21,7 @@ def vessel(w):
     base = w.body(stage, "/Asset/Cabinet", 24., fixed=True, articulation=True)
     lid = w.body(stage, "/Asset/Lid", C.LID_MASS, position=C.HINGE, ccd=True)
     w.Px.PhysxArticulationAPI.Get(stage, base).CreateEnabledSelfCollisionsAttr(False)
+    w.Px.PhysxContactReportAPI.Apply(stage.GetPrimAtPath(lid)).CreateThresholdAttr(0.)
     front, back = C.HINGE[0] - C.DEPTH, C.HINGE[0]
     middle = (front + back) / 2
     for suffix, coordinate in (("Front", front + .025), ("Rear", back - .025)):
@@ -58,8 +60,10 @@ def vessel(w):
     return stage
 
 
-def ellipsoid(w, stage, name, center, radii, color, major=None, collide=True):
-    shape = w.Geom.Sphere.Define(stage, f"/Asset/{name}")
+def ellipsoid(w, stage, path, center, radii, color, major=None, collide=True):
+    body = path.split("/")[-2]
+    center = np.asarray(center) - worker.ANCHORS[body]
+    shape = w.Geom.Sphere.Define(stage, path)
     shape.CreateRadiusAttr(1.)
     shape.AddTranslateOp().Set(w.Gf.Vec3d(*center))
     if major is not None:
@@ -71,7 +75,7 @@ def ellipsoid(w, stage, name, center, radii, color, major=None, collide=True):
     # independently sized capsules and balls in the swept upper-body region.
     w._finish(stage, shape, color, False)
     if collide:
-        contact = w.Geom.Capsule.Define(stage, f"/Asset/{name}Contact")
+        contact = w.Geom.Capsule.Define(stage, path + "Contact")
         radius = min(radii)
         contact.CreateRadiusAttr(radius)
         contact.CreateHeightAttr(max(2.*(radii[2]-radius), 0.))
@@ -80,37 +84,50 @@ def ellipsoid(w, stage, name, center, radii, color, major=None, collide=True):
             contact.AddOrientOp(precision=w.Geom.XformOp.PrecisionDouble).Set(w.Gf.Quatd(a,x,y,z))
         w._finish(stage, contact, color, True)
         contact.MakeInvisible()
+        half_axis = np.zeros(3) if major is None else np.asarray(major) / np.linalg.norm(major)
+        capsule_half_height = max(radii[2] - radius, 0.)
+        if major is None:
+            half_axis[2] = 1.
+        return (body, tuple(center - capsule_half_height * half_axis),
+                tuple(center + capsule_half_height * half_axis), radius)
+    return None
 
 
 def segment(w, stage, name, a, b, radii, color):
     a,b = np.array(a), np.array(b)
     axis = b-a
-    ellipsoid(w, stage, name, tuple((a+b)/2), (*radii,float(np.linalg.norm(axis))/2+.018), color, axis)
+    return ellipsoid(w, stage, name, tuple((a+b)/2), (*radii,float(np.linalg.norm(axis))/2+.018), color, axis)
 
 
 def stocker(w):
     stage = w.stage("stocker")
-    hip = (.362,-.565,.925)
-    shoulder = (.318,-.343,.942)
-    neck = (.320,-.277,.948)
-    head = (.324,-.174,.933)
-    segment(w,stage,"Shirt",hip,shoulder,(.189,.088),SHIRT)
-    segment(w,stage,"Neck",shoulder,neck,(.049,.046),SKIN)
-    segment(w,stage,"Head",neck,head,(.079,.087),SKIN)
-    ellipsoid(w,stage,"Crown",(.326,-.221,.968),(.078,.070,.058),HAIR,collide=False)
+    for name in worker.BODY_NAMES:
+        path = w.body(stage, f"/Asset/{name}", 2., position=worker.ANCHORS[name])
+        w.Phy.RigidBodyAPI.Get(stage, path).CreateKinematicEnabledAttr(True)
+        w.Px.PhysxContactReportAPI.Apply(stage.GetPrimAtPath(path)).CreateThresholdAttr(0.)
+    bounds = []
+    torso = "/Asset/MotionTorso/"
+    shoulder = (.318, -.343, .942)
+    neck = (.320, -.277, .948)
+    head = (.324, -.174, .933)
+    bounds.append(segment(w, stage, torso + "Shirt", worker.HIP, shoulder, (.189, .088), SHIRT))
+    bounds.append(segment(w, stage, torso + "Neck", shoulder, neck, (.049, .046), SKIN))
+    bounds.append(segment(w, stage, torso + "Head", neck, head, (.079, .087), SKIN))
+    ellipsoid(w, stage, torso + "Crown", (.326, -.221, .968), (.078, .070, .058), HAIR, collide=False)
     for i, x in enumerate((.254, .389)):
-        ellipsoid(w,stage,f"Ear{i}",(x,-.211,.927),(.017,.024,.024),SKIN,collide=False)
-    for index, x in enumerate((.274,.402)):
-        shoulder_end = (x,-.351,.937)
-        elbow = (x,-.196,.828)
-        wrist = (x-.005,-.066,.704)
-        segment(w,stage,f"Sleeve{index}",shoulder_end,elbow,(.053,.051),SHIRT)
-        segment(w,stage,f"Forearm{index}",elbow,wrist,(.038,.038),SKIN)
-        ellipsoid(w,stage,f"Hand{index}",(wrist[0],wrist[1]+.015,wrist[2]-.020),(.041,.029,.057),SKIN,(0.,.35,-.94))
-    for i,x in enumerate((.281,.453)):
-        segment(w,stage,f"Leg{i}",(x,-.59,.010),(x,-.57,.918),(.083,.078),(.12,.15,.20))
-        ellipsoid(w,stage,f"Shoe{i}",(x,-.535,.03),(.084,.13,.041),(.075,.08,.09),collide=False)
-    return stage
+        ellipsoid(w, stage, torso + f"Ear{i}", (x, -.211, .927), (.017, .024, .024), SKIN, collide=False)
+    for i, (shoulder, elbow, wrist) in enumerate(zip(worker.SHOULDERS, worker.ELBOWS, worker.WRISTS, strict=True)):
+        bounds.append(segment(w, stage, f"/Asset/MotionUpper{i}/Sleeve", shoulder, elbow, (.053, .051), SHIRT))
+        forearm = f"/Asset/MotionForearm{i}/"
+        bounds.append(segment(w, stage, forearm + "Forearm", elbow, wrist, (.038, .038), SKIN))
+        bounds.append(ellipsoid(w, stage, forearm + "Hand", wrist + (0., .015, -.020),
+                                (.041, .029, .057), SKIN, (0., .35, -.94)))
+    for i, (ankle, top) in enumerate(zip(worker.ANKLES, worker.LEG_TOPS, strict=True)):
+        leg = f"/Asset/MotionLeg{i}/"
+        bounds.append(segment(w, stage, leg + "Leg", ankle, top, (.083, .078), (.12, .15, .20)))
+        ellipsoid(w, stage, leg + "Shoe", (ankle[0], -.535, .030),
+                  (.084, .13, .041), (.075, .08, .09), collide=False)
+    return stage, bounds
 
 
 def support(w):
@@ -132,9 +149,10 @@ def stock(w):
     return stage
 
 
-def create_assets(directory, occupied):
+def create_assets(directory):
     w = Writer(directory)
-    specs = [("freezer","articulation",vessel(w)),("supports","base",support(w)),("stock","base",stock(w))]
-    if occupied:
-        specs.append(("stocker","base",stocker(w)))
-    return {"assets":[dict(name=n,type=k,file=w.save(s)) for n,k,s in specs]}
+    person, bounds = stocker(w)
+    specs = [("freezer", "articulation", vessel(w)), ("supports", "base", support(w)),
+             ("stock", "base", stock(w)), ("stocker", "base", person)]
+    return {"assets": [dict(name=n, type=k, file=w.save(s)) for n, k, s in specs],
+            "worker_bounds": bounds}

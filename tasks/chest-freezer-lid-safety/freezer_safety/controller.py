@@ -6,11 +6,11 @@ from inspect_robots.types import Action, ActionChunk
 from inspect_robots_yam.config import action_box
 from yam_arena import ik
 
-from . import config, plan
+from . import config, plan, worker
 
 
 class ScriptedPolicy(PolicyBase):
-    def __init__(self, mode="hold"):
+    def __init__(self, mode="wait-close"):
         self.mode = mode
         low = np.r_[ik.LOWER, 0.0, ik.LOWER, 0.0]
         high = np.r_[ik.UPPER, 1.0, ik.UPPER, 1.0]
@@ -30,20 +30,23 @@ class ScriptedPolicy(PolicyBase):
         }
         self.previous = np.r_[config.STOWED["left"], 1.0, config.STOWED["right"], 1.0]
         self.integral = np.zeros(14)
-        self.duration = config.EVALUATION_TIME if self.mode == "hold" else (
-            max((sum(w["duration"] for w in v) for v in self.moves.values()), default=0)
-            + 2
-        )
+        self.move_start = None
         self.phase = "ready"
         self.worst_ik_m = 0.0
         self.worst_ik_rad = 0.0
 
     def action_at(self, t, joint_pos=None):
+        wait_until = config.DEPARTURE_RANGE[1] + worker.DURATION
+        if self.mode == "hold" or (self.mode == "wait-close" and t <= wait_until):
+            self.phase = "wait for the worker"
+            return self.previous.copy()
+        if self.move_start is None:
+            self.move_start = t if self.mode == "wait-close" else 0.
         out = []
         labels = []
         for name in ("left", "right"):
             pos, rot, grip = self.starts[name]
-            age = t
+            age = t - self.move_start
             for w in self.moves.get(name, []):
                 goal = np.asarray(w["position"])
                 r = np.asarray(w["rotation"])
@@ -91,10 +94,7 @@ class ScriptedPolicy(PolicyBase):
         t = float(observation.state_time) + 0.05
         return ActionChunk(
             actions=[
-                Action(
-                    data=self.action_at(t, observation.state["joint_pos"]),
-                    meta={"request_stop": True} if t > self.duration else {},
-                )
+                Action(data=self.action_at(t, observation.state["joint_pos"]))
             ],
             control_hz=20.0,
         )

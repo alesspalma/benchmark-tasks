@@ -36,8 +36,7 @@ def main():
     p.add_argument("--device", default="cpu")
     p.add_argument("--physics-device", default="cpu")
     p.add_argument("--no-cameras", action="store_true")
-    p.add_argument("--policy", default="hold", choices=("hold", "close"))
-    p.add_argument("--clear", action="store_true")
+    p.add_argument("--policy", default="wait-close", choices=("wait-close", "hold", "immediate-close"))
     p.add_argument("--max-steps", type=int, default=c.MAX_STEPS)
     p.add_argument("--seed", type=int, default=1415158438)
     p.add_argument("--width", type=int, default=640)
@@ -72,7 +71,6 @@ def main():
         "instruction": c.INSTRUCTION,
         "controller_inputs": ["elapsed time", "joint positions"],
         "cameras_enabled": not a.no_cameras,
-        "occupied": not a.clear,
     }
     (a.output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
     try:
@@ -80,7 +78,6 @@ def main():
             device=a.device,
             physics_device=a.physics_device,
             render_images=not a.no_cameras,
-            occupied=not a.clear,
             cam_width=a.width,
             cam_height=a.height,
         )
@@ -168,7 +165,7 @@ def main():
                     writer.stdin.write(
                         np.ascontiguousarray(result.observation.images[name]).tobytes()
                     )
-                if result.terminated or steps / 20 > policy.duration:
+                if result.terminated:
                     break
         (a.output / "final.json").write_text(
             json.dumps(plain(env.diagnostics())) + "\n"
