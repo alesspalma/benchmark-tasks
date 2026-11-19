@@ -15,5 +15,6 @@
   "run_limit": "700 actions (35 seconds at 20 Hz)",
   "reset_notes": "Refill the blue source to 62.0 mL with blue-dyed water. Empty the receiver and dry the pipette. Let the bulb expand and vent it to atmosphere. Return the pipette to its stand and both beakers to their starting marks.",
   "fidelity": "Gripper contact moves four native joints for the bulb squeeze and its three spring-return valves. The pneumatic model uses pressure, head and physical tip position to determine aspiration, retention and drainage. Conserved water volumes produce a visible meniscus. The bulb compliance is lumped and the liquid model is quasi-static.",
-  "scores": "Scripted demo: 1.0 in 570 actions. Stationary control: 0.0 in 700 actions. No delivery-valve press: 0.0 in 700 actions."
+  "scores": "Scripted demo: 1.0 in 570 actions. Stationary control: 0.0 in 700 actions. No delivery-valve press: 0.0 in 700 actions. Dream-1: 0 after 700 actions.",
+  "media": "M-TVDQ98"
 }
