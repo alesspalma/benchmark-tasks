@@ -269,6 +269,21 @@ class Environment(YamArenaEmbodiment):
             for n in ARMS
         }
 
+    def _show_gaps(self, cleared):
+        from pxr import UsdGeom
+
+        stage = self._base.sim.stage
+        cassette = f"{self._base.scene.env_prim_paths[0]}/cassette/Layer"
+        for index, removed in enumerate(cleared):
+            path = f"{cassette}/Gap{index}"
+            gap = UsdGeom.Imageable.Get(stage, path)
+            if not gap:
+                raise RuntimeError(f"Cassette gap witness is missing: {path}")
+            visibility = UsdGeom.Tokens.invisible if removed else UsdGeom.Tokens.inherited
+            attr = gap.GetVisibilityAttr()
+            if attr.Get() != visibility:
+                attr.Set(visibility)
+
     def reset(self, scene, *, seed=None):
         self._ensure_sim()
         self._env.reset(seed=seed)
@@ -276,13 +291,7 @@ class Environment(YamArenaEmbodiment):
         for _ in range(self.spec.get("settle_actions", 24)):
             self._env.step(self._ready)
         if self.render_images:
-            from pxr import UsdGeom
-            stage = self._base.sim.stage
-            prefix = self._base.scene["cassette"].cfg.prim_path.replace(".*", "0")
-            for k in range(len(config.GAPS)):
-                prim = stage.GetPrimAtPath(f"{prefix}/Layer/Gap{k}")
-                if prim.IsValid():
-                    UsdGeom.Imageable(prim).MakeVisible()
+            self._show_gaps([False] * len(config.GAPS))
             for _ in range(4):
                 self._base.sim.render()
         self._t = 0.0
@@ -346,14 +355,7 @@ class Environment(YamArenaEmbodiment):
     def _task_step(self):
         self.metrics = self.scorer.evaluate(self.state())
         if self.render_images:
-            from pxr import UsdGeom
-            stage = self._base.sim.stage
-            prefix = self._base.scene["cassette"].cfg.prim_path.replace(".*", "0")
-            for k, cleared in enumerate(self.metrics["gaps_cleared"]):
-                if cleared:
-                    prim = stage.GetPrimAtPath(f"{prefix}/Layer/Gap{k}")
-                    if prim.IsValid():
-                        UsdGeom.Imageable(prim).MakeInvisible()
+            self._show_gaps(self.metrics["gaps_cleared"])
             self._base.sim.render()
         return StepResult(
             observation=self._observation(),

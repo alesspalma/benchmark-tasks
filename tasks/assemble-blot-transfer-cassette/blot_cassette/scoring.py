@@ -29,7 +29,7 @@ class Scorer:
         layer_z = cassette["links"]["Layer"][2] + .007
         rolling = (
             .00055 <= compression <= .0048
-            and abs(axle[2] - C.ROLLER_R - layer_z) <= .0025
+            and abs(axle[2] - C.ROLLER_R - layer_z) <= .0008
             and abs(shear) <= .004
             and dy >= .00015
             and abs(axle[1] - C.ORIGIN[1] - shear) <= .042
