@@ -1,1 +1,1 @@
-"""Bimanual control of a spring-return tape measure."""
+"""Bimanual skate guarding and packing on the YAM station."""

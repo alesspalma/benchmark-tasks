@@ -108,6 +108,48 @@ class Writer:
             }
         )
 
+    def rounded_box(self, s, path, size, position, color, radius, bevel, collide=True):
+        """A convex rounded rectangle with chamfered upper and lower edges."""
+        from math import cos, pi, sin
+
+        width, length, height = size
+        points = []
+        levels = ((-height / 2, bevel), (-height / 2 + bevel, 0),
+                  (height / 2 - bevel, 0), (height / 2, bevel))
+        corners = ((1, 1), (-1, 1), (-1, -1), (1, -1))
+        for z, inset in levels:
+            for corner, (sx, sy) in enumerate(corners):
+                px = sx * (width / 2 - radius)
+                py = sy * (length / 2 - radius)
+                for sample in range(4):
+                    angle = pi / 2 * (corner + sample / 3)
+                    points.append(self.Gf.Vec3f(
+                        position[0] + px + (radius - inset) * cos(angle),
+                        position[1] + py + (radius - inset) * sin(angle),
+                        position[2] + z,
+                    ))
+        count = len(corners) * 4
+        faces = [list(reversed(range(count)))]
+        for ring in range(len(levels) - 1):
+            lower = ring * count
+            upper = lower + count
+            for i in range(count):
+                next_i = (i + 1) % count
+                faces.append([lower + i, lower + next_i, upper + next_i, upper + i])
+        faces.append(list(range(len(points) - count, len(points))))
+        mesh = self.Geom.Mesh.Define(s, path)
+        mesh.CreatePointsAttr(points)
+        mesh.CreateFaceVertexCountsAttr([len(face) for face in faces])
+        mesh.CreateFaceVertexIndicesAttr([i for face in faces for i in face])
+        mesh.CreateSubdivisionSchemeAttr("none")
+        if collide:
+            self.Phy.MeshCollisionAPI.Apply(mesh.GetPrim()).CreateApproximationAttr("convexHull")
+        self._finish(s, mesh, color, collide)
+        self.records.append({"asset": Path(s.GetRootLayer().identifier).stem,
+                             "solid": path, "kind": "rounded_box", "size": list(size),
+                             "position": list(position), "radius": radius, "bevel": bevel,
+                             "color": list(color)})
+
     def cylinder(
         self, s, path, radius, length, position, color, axis="Z", collide=True
     ):

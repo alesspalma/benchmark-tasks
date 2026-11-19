@@ -76,8 +76,8 @@ class Environment(YamArenaEmbodiment):
             raise ValueError("Fixed reset and 20 Hz required")
         super().__init__(scene="station", object_jitter=0, control_hz=20, **kwargs)
         camera = self.rig.top_cam
-        position = np.array([.79, -.13, 1.21])
-        sight = np.array([.405, -.016, .779]) - position
+        position = np.array([.66, -.24, 1.37])
+        sight = np.array([.363, .027, .830]) - position
         sight /= np.linalg.norm(sight)
         screen_right = np.cross(sight, [0.0, 0.0, 1.0])
         screen_right /= np.linalg.norm(screen_right)
@@ -315,26 +315,32 @@ class Environment(YamArenaEmbodiment):
             aligned and .013 <= extension <= .045
             and -.004 <= toe_gap <= .009 and -.004 <= heel_gap <= .009
         )
-        footprint = np.array([
-            [x, y, z] for x in (-.046, .046) for y in (-.132, .140) for z in (0., .157)
-        ]) @ boot_rotation.T + pose[:3]
+        # Use the actual profile stations. A full-height rectangle around the
+        # whole boot adds empty corners, especially above the rounded toe box.
+        boot_points = config.BOOT_CORNERS @ boot_rotation.T + pose[:3]
+        footprint = boot_points
+        if engaged:
+            footprint = np.vstack((boot_points, config.TOE_CORNERS @ toe_rotation.T + toe[:3],
+                                   config.HEEL_CORNERS @ heel_rotation.T + heel[:3]))
         inside_horizontal = bool(np.all(
             np.abs(footprint[:, :2] - config.BAG[:2]) <= np.array(config.BAG_SIZE[:2]) / 2 - .002
         ))
-        runner = np.array([
-            [x, y, z] for x in (-.0024, .0024) for y in (config.RUNNER_HEEL, config.RUNNER_TOE)
-            for z in (0., .015)
-        ]) @ boot_rotation.T + pose[:3]
+        runner = config.RUNNER_CORNERS @ boot_rotation.T + pose[:3]
         packed = (
             inside_horizontal
-            and float(footprint[:, 2].min()) <= config.TABLE + config.BAG_FLOOR + .026
+            and float(boot_points[:, 2].min()) <= config.TABLE + config.BAG_FLOOR + .026
             and float(runner[:, 2].max()) <= config.TABLE + config.BAG_SIZE[2]
         )
         hands = {n: tcp_world(self._base.scene[n]) for n in ARMS}
+        handles = [(pose[:3] + boot_rotation @ point, .087) for point in (
+            config.BOOT_TOE_GRIP, config.BOOT_HEEL_GRIP,
+        )] + [
+            (toe[:3] + toe_rotation @ config.GUARD_TOE_GRIP, .077),
+            (heel[:3] + heel_rotation @ [0., 0., .016], .077),
+        ]
         hand_clear = all(
-            np.linalg.norm(hand - (pose[:3] + boot_rotation @ config.GRIP_BOOT)) >= .093
-            and np.linalg.norm(hand - (heel[:3] + heel_rotation @ [0., 0., .016])) >= .077
-            for hand in hands.values()
+            np.linalg.norm(hand - handle) >= clearance
+            for hand in hands.values() for handle, clearance in handles
         )
         return {
             "boot_pose": pose.tolist(), "guard_toe_pose": toe.tolist(),

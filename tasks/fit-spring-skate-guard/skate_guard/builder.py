@@ -24,17 +24,15 @@ def _rotation_x(degrees):
 def skate(w):
     s = w.stage("skate")
     b = w.body(s, "/Asset/Boot", 0.61, ccd=True)
-    for i, (cy, width, length, top) in enumerate((
-        (-0.113, 0.063, 0.037, 0.101),
-        (-0.076, 0.066, 0.065, 0.157),
-        (-0.014, 0.077, 0.075, 0.105),
-        (0.049, 0.088, 0.074, 0.081),
-        (0.101, 0.075, 0.055, 0.066),
-        (0.131, 0.057, 0.018, 0.057),
-    )):
-        w.box(s, f"{b}/BootSections{i}", (width, length, top - 0.036),
-              (0, cy, (top + 0.036) / 2), BOOT)
-        w.box(s, f"{b}/Sole{i}", (width + 0.004, length, 0.009), (0, cy, 0.034), SOLE)
+    for i, (cy, width, length, top) in enumerate(C.BOOT_SECTIONS):
+        w.rounded_box(s, f"{b}/BootSections{i}", (width, length, top - 0.036),
+                      (0, cy, (top + 0.036) / 2), BOOT, radius=.008, bevel=.003)
+        w.rounded_box(s, f"{b}/Sole{i}", (width + 0.004, length, 0.009),
+                      (0, cy, 0.034), SOLE, radius=.008, bevel=.002)
+    for side in (-1, 1):
+        for i, y in enumerate((-.091, -.071, -.051)):
+            w.box(s, f"{b}/QuarterStripe{side}_{i}", (.0018, .009, .052),
+                  (side * .0332, y, .110), STEEL, _rotation_x(-18), collide=False)
     w.box(s, b + "/Tongue", (0.057, 0.079, 0.012), (0, -0.001, 0.119),
           LINING, _rotation_x(-30), collide=False)
     for i in range(7):
@@ -42,7 +40,7 @@ def skate(w):
         z = 0.136 - 0.0075 * i
         w.box(s, f"{b}/Lace{i}", (0.054, 0.0042, 0.0022), (0, y, z), WHITE,
               _rotation_x(-24), collide=False)
-    for i, y in enumerate((-0.091, 0.092)):
+    for i, y in enumerate(C.HOLDER_STATIONS):
         w.box(s, f"{b}/Holder{i}", (0.014, 0.041, 0.026), (0, y, 0.0215), WHITE)
     w.box(s, b + "/Runner", (0.0048, 0.222, 0.014), (0, 0.003, 0.007), STEEL)
     # Short rounded-off profiles at the tip and heel retain under the end hooks.
@@ -69,6 +67,15 @@ def _end_hook(w, s, path, y, y_offset, sign, color):
           (0, y - sign * 0.0045 - y_offset, 0.029), color)
 
 
+def _grip_ribs(w, s, path, local_y, color):
+    for side, x in enumerate((-.016, .016)):
+        w.box(s, f"{path}/GripFace{side}", (.004, .048, .026),
+              (x, local_y, .013), color)
+        for rib, y in enumerate((local_y - .020, local_y + .020)):
+            w.box(s, f"{path}/GripRib{side}_{rib}", (.006, .006, .018),
+                  (x, y, .010), color)
+
+
 def guard(w):
     s = w.stage("guard")
     toe = w.body(s, "/Asset/Toe", 0.077, articulation=True, ccd=True)
@@ -77,6 +84,8 @@ def guard(w):
     _channel(w, s, heel, C.HEEL_AT_REST - 0.006, 0.006, C.HEEL_BODY_Y, HEEL)
     _end_hook(w, s, toe, C.GUARD_TOE_INNER, 0, 1, GUARD)
     _end_hook(w, s, heel, C.HEEL_AT_REST, C.HEEL_BODY_Y, -1, HEEL)
+    _grip_ribs(w, s, toe, C.GUARD_TOE_GRIP[1], GUARD)
+    _grip_ribs(w, s, heel, C.GUARD_HEEL_GRIP[1] - C.HEEL_BODY_Y, HEEL)
     # Narrow overlapping track bridges the junction as the two cups spread.
     w.box(s, toe + "/TrackBottom", (0.013, 0.072, 0.0032),
           (0, -0.034, 0.0035), GUARD, collide=False)
@@ -104,8 +113,19 @@ def guard(w):
 
 def rest(w):
     s = w.stage("bench_rest")
-    w.box(s, "/Asset/Shim", (0.031, 0.251, 0.029),
-          (-.009, .013, .0145), (0.55, 0.30, 0.14))
+    for name, y, top in (("Toe", .095, .095), ("Cuff", -.076, .019)):
+        w.box(s, f"/Asset/{name}Block", (.088, .066, top - .006),
+              (0, y, (top - .006) / 2), (0.55, 0.30, 0.14))
+        w.box(s, f"/Asset/{name}Rubber", (.088, .066, .006),
+              (0, y, top - .003), (0.15, 0.16, 0.16))
+    return s
+
+
+def guard_rest(w):
+    s = w.stage("guard_rest")
+    for label, y, top in (("Toe", .061, .042), ("Heel", -.053, .042)):
+        w.box(s, f"/Asset/{label}Shim", (.038, .065, top),
+              (0, y, top / 2), (0.55, 0.30, 0.14))
     return s
 
 
@@ -115,15 +135,20 @@ def bag(w):
     w.box(s, "/Asset/PaddedBase", (x, y, C.BAG_FLOOR),
           (0, 0, C.BAG_FLOOR / 2), DARK)
     for sign in (-1, 1):
-        w.box(s, f"/Asset/LongPanel{sign}", (0.004, y, z),
-              (sign * (x / 2 - 0.002), 0, z / 2), BAG_COLOR)
-        w.box(s, f"/Asset/ShortPanel{sign}", (x, 0.004, z),
-              (0, sign * (y / 2 - 0.002), z / 2), BAG_COLOR)
-        w.cylinder(s, f"/Asset/ZipperEdge{sign}", 0.003, y,
-                   (sign * (x / 2 - 0.002), 0, z), DARK, axis="Y", collide=False)
-        for i, py in enumerate((-0.092, 0.092)):
-            w.box(s, f"/Asset/Webbing{sign}_{i}", (0.002, 0.025, z),
-                  (sign * x / 2, py, z / 2), DARK, collide=False)
+        w.box(s, f"/Asset/EndPanel{sign}", (x, .004, z),
+              (0, sign * (y / 2 - .002), z / 2), BAG_COLOR)
+        w.cylinder(s, f"/Asset/EndZipper{sign}", .003, x,
+                   (0, sign * (y / 2 - .002), z), DARK, axis="X", collide=False)
+        for i, px in enumerate((-.065, .065)):
+            w.box(s, f"/Asset/Webbing{sign}_{i}", (.025, .002, z),
+                  (px, sign * y / 2, z / 2), DARK, collide=False)
+    w.box(s, "/Asset/FarPanel", (.004, y, z), (x / 2 - .002, 0, z / 2), BAG_COLOR)
+    w.box(s, "/Asset/NearLip", (.004, y, .039),
+          (-x / 2 + .002, 0, .0195), BAG_COLOR)
+    w.box(s, "/Asset/FoldedFlap", (.086, y, .004),
+          (-x / 2 - .042, 0, .006), BAG_COLOR, collide=False)
+    w.box(s, "/Asset/FlapZipper", (.004, y, .004),
+          (-x / 2 - .082, 0, .009), DARK, collide=False)
     return s
 
 
@@ -133,9 +158,10 @@ def create_assets(directory):
     w = Writer(directory)
     assets = []
     for name, kind, factory, pos, rotation in (
-        ("skate", "rigid", skate, C.BOOT_START, C.SIDE),
-        ("guard", "articulation", guard, C.GUARD_START, C.SIDE),
-        ("bench_rest", "base", rest, np.r_[C.GUARD_START[:2], C.TABLE], np.eye(3)),
+        ("skate", "rigid", skate, C.BOOT_START, C.INVERTED),
+        ("guard", "articulation", guard, C.GUARD_START, C.INVERTED),
+        ("bench_rest", "base", rest, np.r_[C.BOOT_START[:2], C.TABLE], np.eye(3)),
+        ("guard_rest", "base", guard_rest, np.r_[C.GUARD_START[:2], C.TABLE], np.eye(3)),
         ("bag", "base", bag, C.BAG, np.eye(3)),
     ):
         assets.append(dict(name=name, type=kind, position=pos.tolist(),

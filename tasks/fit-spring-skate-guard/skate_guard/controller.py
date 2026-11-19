@@ -81,8 +81,8 @@ class ScriptedPolicy(PolicyBase):
         if joint_pos is not None:
             error = target - np.asarray(joint_pos)
             error[[6, 13]] = 0.0
-            self.integral = np.clip(self.integral + 0.6 * 0.05 * error, -0.15, 0.15)
-            target = target + self.integral
+            self.integral = np.clip(self.integral + 1.75 * 0.05 * error, -0.24, 0.24)
+            target = target + self.integral + 0.40 * error
         target = np.clip(
             target, self.info.action_space.low, self.info.action_space.high
         )
