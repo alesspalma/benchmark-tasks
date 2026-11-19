@@ -69,6 +69,8 @@ def main():
         "started_at_utc": datetime.now(UTC).isoformat(),
         "control_hz": 20,
         "physics_hz": c.PHYSICS_HZ,
+        "physics_device": a.physics_device,
+        "render_device": a.device,
         "instruction": c.INSTRUCTION,
         "controller_inputs": ["elapsed time", "joint positions"],
         "cameras_enabled": not a.no_cameras,

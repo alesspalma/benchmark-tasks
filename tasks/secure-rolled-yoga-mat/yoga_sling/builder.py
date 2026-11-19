@@ -68,6 +68,41 @@ def flex(w, s, name, a, b, anchor, oa, ob):
     j.CreateCollisionEnabledAttr(False)
 
 
+def elastic_segment(w, stage, body, radius, height, degrees, origin):
+    angles = np.radians(degrees)
+    points = np.column_stack((radius * np.cos(angles), np.zeros(len(angles)),
+                              height * np.sin(angles)))
+    for i, (a, b) in enumerate(zip(points, points[1:])):
+        direction = b - a
+        length = np.linalg.norm(direction)
+        tangent = direction / length
+        radial = np.cross([0., 1., 0.], tangent)
+        frame = np.column_stack((radial, [0., 1., 0.], tangent))
+        w.box(stage, body + f"/Tape{i:02}", (.003, c.BAND_WIDTH, length + .0005),
+              (a + b) / 2 - origin, WEB, frame)
+
+
+def bending_wing(w, stage, parent, name, center, degrees, height):
+    angle = math.radians(degrees[0])
+    anchor = np.array([c.BAND_RADIUS * math.cos(angle), 0., height * math.sin(angle)])
+    wing = w.body(stage, "/Asset/" + name, .006, position=center + anchor, ccd=True)
+    elastic_segment(w, stage, wing, c.BAND_RADIUS, height, degrees, anchor)
+    j = w.Phy.RevoluteJoint.Define(stage, "/Asset/" + name + "Bend")
+    j.CreateBody0Rel().SetTargets([parent])
+    j.CreateBody1Rel().SetTargets([wing])
+    j.CreateLocalPos0Attr(w.Gf.Vec3f(*map(float, anchor)))
+    j.CreateAxisAttr("Y")
+    j.CreateLowerLimitAttr(-12.)
+    j.CreateUpperLimitAttr(12.)
+    j.CreateCollisionEnabledAttr(False)
+    drive = w.Phy.DriveAPI.Apply(j.GetPrim(), "angular")
+    drive.CreateTypeAttr("force")
+    drive.CreateTargetPositionAttr(0.)
+    drive.CreateStiffnessAttr(.75 * math.pi / 180)
+    drive.CreateDampingAttr(.038 * math.pi / 180)
+    return wing
+
+
 def sling(w):
     s = w.stage("sling")
     center = np.array([-.14, 0., .005])
@@ -79,7 +114,7 @@ def sling(w):
             center + [0., sign * .0475, 0.],
             np.array([-.16, sign * .207, .007]),
             np.array([-.088, sign * c.BAND_Y, .017]),
-            np.array([0., sign * c.BAND_Y, c.BAND_RADIUS + .002]),
+            np.array([0., sign * c.BAND_Y, c.BAND_UPPER_HEIGHT + .002]),
         ]
         parent, origin = shoulder, center
         for i, (u, v) in enumerate(zip(points, points[1:])):
@@ -97,16 +132,25 @@ def sling(w):
         loop_pos = np.array([0., sign * c.BAND_Y, 0.])
         outer = w.body(s, "/Asset/" + side + "BandTop", .029, position=loop_pos, ccd=True)
         lower = w.body(s, "/Asset/" + side + "BandBottom", .023, position=loop_pos, ccd=True)
-        arc(w, s, outer + "/UpperElastic", c.BAND_RADIUS, c.BAND_WIDTH, .003,
-            np.radians(np.arange(0, 181, 15)), WEB)
-        arc(w, s, lower + "/LowerElastic", c.BAND_RADIUS, c.BAND_WIDTH, .003,
-            np.radians(np.arange(180, 361, 15)), WEB)
-        for k, end in enumerate((-1, 1)):
-            w.box(s, outer + f"/Overlap{k}", (.003, c.BAND_WIDTH, .032),
-                  (end * c.BAND_RADIUS, 0., -.013), WEB)
+        elastic_segment(w, s, outer, c.BAND_RADIUS, c.BAND_UPPER_HEIGHT,
+                        np.arange(60, 121, 10), np.zeros(3))
+        elastic_segment(w, s, lower, c.BAND_RADIUS, c.BAND_LOWER_HEIGHT,
+                        np.arange(240, 301, 10), np.zeros(3))
+        upper_positive = bending_wing(w, s, outer, side + "UpperPositive", loop_pos,
+                                      np.arange(60, -1, -10), c.BAND_UPPER_HEIGHT)
+        upper_negative = bending_wing(w, s, outer, side + "UpperNegative", loop_pos,
+                                      np.arange(120, 181, 10), c.BAND_UPPER_HEIGHT)
+        bending_wing(w, s, lower, side + "LowerPositive", loop_pos,
+                     np.arange(300, 361, 10), c.BAND_LOWER_HEIGHT)
+        bending_wing(w, s, lower, side + "LowerNegative", loop_pos,
+                     np.arange(240, 179, -10), c.BAND_LOWER_HEIGHT)
+        for wing, end in ((upper_positive, 1), (upper_negative, -1)):
+            anchor_x = end * .5 * c.BAND_RADIUS
+            w.box(s, wing + "/ElasticSplice", (.003, c.BAND_WIDTH, .032),
+                  (end * c.BAND_RADIUS - anchor_x, 0., -.007 - c.BAND_UPPER_HEIGHT * math.sqrt(3) / 2), WEB)
         flex(w, s, side + "BandSeam", parent, outer, points[-1], origin, loop_pos)
         spring(w, s, side + "Elastic", outer, lower, (0.,0.,0.), (0.,0.,0.),
-               210., 3.5, -.016, .014, .010)
+               210., 3.5, -.020, .016, c.BAND_CLOSE_TRAVEL)
     return w.save(s)
 
 
@@ -124,7 +168,7 @@ def create_assets(directory):
             {"name": "mat", "type": "articulation", "file": mat(w),
              "position": (c.MAT_X, 0., c.MAT_Z)},
             {"name": "sling", "type": "articulation", "file": sling(w),
-             "position": (c.BAND_X, 0., c.BAND_Z)},
+             "position": (c.BAND_X, 0., c.BAND_Z + c.WARMUP_CLEARANCE)},
             {"name": "riser", "type": "base", "file": riser(w)},
         ],
         "settle_actions": 7,

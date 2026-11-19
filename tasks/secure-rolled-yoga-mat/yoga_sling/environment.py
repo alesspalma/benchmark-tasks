@@ -76,8 +76,8 @@ class Environment(YamArenaEmbodiment):
             raise ValueError("Fixed reset and 20 Hz required")
         super().__init__(scene="station", object_jitter=0, control_hz=20, **kwargs)
         camera = self.rig.top_cam
-        position = np.array([.62, -.32, 1.49])
-        sight = np.array([.46, -.01, .79]) - position
+        position = np.array([.060, -.020, 1.670])
+        sight = np.array([.335, 0., .830]) - position
         sight /= np.linalg.norm(sight)
         screen_right = np.cross(sight, [0.0, 0.0, 1.0])
         screen_right /= np.linalg.norm(screen_right)
@@ -216,8 +216,7 @@ class Environment(YamArenaEmbodiment):
                 }
                 initial.joint_vel = {".*": 0.0}
             cfg.sim.use_newton_actuators = False
-            if self.physics_device == "cpu":
-                cfg.sim.use_fabric = False
+            cfg.sim.use_fabric = self.render_images
             cfg.sim.physics = PhysxCfg(
                 enable_ccd=True,
                 gpu_max_rigid_contact_count=2**20,
@@ -264,6 +263,20 @@ class Environment(YamArenaEmbodiment):
     def reset(self, scene, *, seed=None):
         self._ensure_sim()
         self._env.reset(seed=seed)
+        # The arena's object event restores root pose. Reset the spring and
+        # spherical coordinates too, so no preceding trial or Kit warmup affects
+        # the relaxed native shape at the start of a new episode.
+        for name in ("mat", "sling"):
+            asset = self._base.scene[name]
+            initial_root = asset.data.default_root_state.torch.clone()
+            if name == "sling":
+                initial_root[:, 2] = config.BAND_Z
+            asset.write_root_state_to_sim(initial_root)
+            joint_positions = asset.data.default_joint_pos.torch.clone()
+            joint_velocities = asset.data.default_joint_vel.torch.clone()
+            asset.write_joint_state_to_sim(joint_positions, joint_velocities)
+            asset.reset()
+        self._base.sim.forward()
         self._instruction = scene.instruction
         for _ in range(self.spec.get("settle_actions", 24)):
             self._env.step(self._ready)
