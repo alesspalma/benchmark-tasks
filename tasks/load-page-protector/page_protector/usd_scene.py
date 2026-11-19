@@ -45,11 +45,14 @@ class Writer:
         fixed=False,
         articulation=False,
         ccd=False,
+        orientation=None,
     ):
         x = self.Geom.Xform.Define(s, path)
         x.AddTranslateOp().Set(self.Gf.Vec3d(*map(float, position)))
+        if orientation is None:
+            orientation = (0., 0., 0., 1.)
         x.AddOrientOp(precision=self.Geom.XformOp.PrecisionDouble).Set(
-            self.Gf.Quatd(1, 0, 0, 0)
+            self.Gf.Quatd(float(orientation[3]), self.Gf.Vec3d(*map(float, orientation[:3])))
         )
         p = x.GetPrim()
         self.Phy.RigidBodyAPI.Apply(p)

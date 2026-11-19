@@ -1,4 +1,4 @@
-"""Physical coverage, under-film order, flatness and release scoring."""
+"""Judge sheet containment, physical flatness, bottoming and release."""
 
 import itertools
 
@@ -7,11 +7,20 @@ from yam_arena.urdf import quat_xyzw_to_matrix
 
 from . import config as c
 
-LOCAL = np.array(list(itertools.product(
-    (-c.PAPER_HALF, 0., c.PAPER_HALF),
-    (-c.PAPER_WIDTH / 2, 0., c.PAPER_WIDTH / 2),
-    (0.,),
-)))
+HALF = np.array([c.PANEL_LENGTH / 2, c.PAPER_WIDTH / 2, c.PAPER_THICKNESS / 2])
+PANEL_SAMPLES = np.array(list(itertools.product(
+    (-HALF[0], 0., HALF[0]), (-HALF[1], 0., HALF[1]), (0.,))))
+EDGES = np.array([[HALF[0], -HALF[1], 0.], [HALF[0], HALF[1], 0.]])
+
+
+def link_frame(pose):
+    pose = np.asarray(pose)
+    return pose[:3], quat_xyzw_to_matrix(pose[3:])
+
+
+def leading_corners(page):
+    position, rotation = link_frame(page["links"]["Leading"])
+    return EDGES @ rotation.T + position
 
 
 class Scorer:
@@ -19,42 +28,45 @@ class Scorer:
         self.since = None
 
     def evaluate(self, state):
-        paper = state["objects"]["page"]
-        pose = np.asarray(paper["pose"])
-        rotation = quat_xyzw_to_matrix(pose[3:])
-        samples = LOCAL @ rotation.T + pose[:3]
-        x, y, z = samples.T
-        upper = state["objects"]["sleeve"]["links"]["UpperFilm"]
-        upper_rotation = quat_xyzw_to_matrix(upper[3:])
-        under = (samples - upper[:3]) @ upper_rotation[:, 2] <= -.00025
-        across = np.abs(y - c.SLEEVE_Y) <= c.INNER_HALF_WIDTH + .0005
-        within = (x >= c.MOUTH) & (x <= c.FAR_EDGE) & across
-        flat = float(np.ptp(z)) < .006 and abs(float(rotation[2, 2])) > .985
-        low = float(np.min(z)) >= c.LOWER_FACE - .0008
-        still = float(np.linalg.norm(paper["velocity"])) < .09
-        closed = abs(state["objects"]["sleeve"]["joints"]["FilmFlex"]) <= .018
-        released = all(
-            all(min(float(np.linalg.norm(np.asarray(point) - sample))
-                    for sample in samples) >= .035
-                for point in hand["points"][:2])
-            for hand in state["hands"].values()
+        page = state["objects"]["page"]
+        link_frames = [link_frame(page["links"][name]) for name in c.PAPER_PANELS]
+        samples = np.array([PANEL_SAMPLES @ rot.T + pos for pos, rot in link_frames])
+        x, y, z = ((samples - c.MOUTH) @ c.SLEEVE_ROTATION).transpose(2, 0, 1)
+        upper_pos, upper_rotation = link_frame(state["objects"]["sleeve"]["links"]["UpperFilm"])
+        under = (samples - upper_pos) @ upper_rotation[:, 2] <= -.00013
+        within = ((x >= 0.) & (x <= c.SLEEVE_DEPTH + .001)
+                  & (np.abs(y) <= c.INNER_HALF_WIDTH + .0005))
+        inside = within & under & (z >= -.0007)
+        tips = np.array([tip for hand in state["hands"].values() for tip in hand["points"][:2]])
+        clear = all(
+            np.min(np.linalg.norm(np.maximum(np.abs((tips - pos) @ rot) - HALF, 0.), axis=1)) >= .035
+            for pos, rot in link_frames
         )
-        complete = bool(np.all(within & under) and flat and low and still and closed and released)
+        bends = np.array(list(page["joints"].values()))
+        flat = float(np.ptp(z)) <= .006 and np.all(np.abs(bends) <= np.deg2rad(6.))
+        front = (leading_corners(page) - c.MOUTH) @ c.SLEEVE_ROTATION
+        bottomed = np.all(front[:, 0] >= c.SLEEVE_DEPTH - .009)
+        closed = abs(state["objects"]["sleeve"]["joints"]["FilmFlex"]) <= .018
+        still = (np.linalg.norm(page["velocity"][:3]) <= .016
+                 and np.linalg.norm(page["velocity"][3:]) <= .3)
+        good = bool(np.all(inside) and flat and closed and still and clear and bottomed)
         t = state["time_s"]
-        self.since = (t if self.since is None else self.since) if complete else None
+        self.since = (t if self.since is None else self.since) if good else None
         success = self.since is not None and t - self.since >= .45
-        coverage = float(np.sum(within & under)) / len(samples)
-        partial = .5 if released and flat and low and 0.55 <= coverage < 1.0 else 0.
+        # The leading third in the pocket is meaningful released progress.
+        partial = bool(clear and still and np.all(inside[-1]))
         return {
-            "score": 1.0 if success else partial,
+            "score": 1. if success else .5 if partial else 0.,
             "success": success,
-            "inside_samples": int(np.sum(within & under)),
-            "paper_lowest_m": float(np.min(z)),
-            "paper_highest_m": float(np.max(z)),
-            "trailing_edge_m": float(np.min(x) - c.MOUTH),
-            "furthest_edge_m": float(np.max(x) - c.MOUTH),
+            "inside_samples": int(np.sum(inside)),
+            "near_edge_m": float(np.min(x)),
+            "front_corners_x_m": front[:, 0].tolist(),
+            "front_corners_y_m": front[:, 1].tolist(),
+            "front_corners_height_m": front[:, 2].tolist(),
             "lip_angle_rad": float(state["objects"]["sleeve"]["joints"]["FilmFlex"]),
-            "sheet_flat": flat,
+            "max_page_bend_rad": float(np.max(np.abs(bends))),
+            "sheet_flat": bool(flat),
             "cover_closed": closed,
-            "hands_clear": released,
+            "hands_clear": bool(clear),
+            "bottomed": bool(bottomed),
         }

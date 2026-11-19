@@ -1,39 +1,37 @@
 # Load a printed page into a clear sheet protector
 
-This prototype uses a full-size Letter sheet and a ring-bound, top-loading
-polypropylene sheet protector. One YAM gripper opens and supports the clear
-film while the other handles the loose page. The intended outcome is a flat,
-fully contained sheet with both hands clear.
-
-**Validation status:** The native reference has not achieved full insertion.
-The scene and commands are retained for reproducing and diagnosing contact
-failures. It is not a submission candidate.
+File a loose Letter handout in a clear top-loading sleeve. One YAM arm
+opens and holds the thin film while the other brings the page level with
+the mouth, registers both leading corners, and feeds the sheet under the
+film. The film can close after the sheet reaches the bottom seam.
 
 ## Setup and reset
 
-Use an [Avery 75540 top-loading Letter sheet protector][protector] or an
-equivalent clear polypropylene, reinforced three-hole document pocket. Open
-a standard three-ring binder flat and load the pocket on its rings above the
-filed pages. Place a single 80 g/m², 279.4 × 215.9 mm printed sheet on a
-sloped plastic document stand next to the binder. Keep the page entirely
-outside the sleeve, print face up. No page edge is in the pocket at reset.
+Use the standard YAM worktop at 747.5 mm above the floor. Positive X
+points forward and positive Y points left. Use a [clear top-loading
+Letter protector][protector] in an open three-ring binder. The protector
+is polypropylene. Its modelled internal cavity is 289 × 222 mm with
+a 15 mm reinforced binding margin and a 9 mm upper lip overhang. Use
+a binder with two roughly 284 × 250 × 6 mm covers and a 9 mm stack of
+filed copy paper under the lower layer. Set the binder on an ordinary
+approximately 290 × 500 mm open-book rest inclined 24° to the tabletop.
+Its low ledge supports the bottom of the binder. The centre of the
+sleeve entrance is at X 481 mm, Y 5 mm and Z 888 mm. The opening faces
+the robots. The pocket slopes down away from them.
 
-The YAM worktop is 747.5 mm high, with +X forward and +Y left. The horizontal
-pocket's entrance is at X 485 mm, centred at Y 5 mm and Z 791.5 mm. The
-sealed end is at X 774 mm and the clear internal width is 220 mm. The upper
-lip projects 9 mm toward the robot from the lower lip. That separation is a
-simulation dimension and should be checked on the chosen physical pocket.
-The binder has two roughly 284 × 250 × 6 mm boards and 38 mm of filed pages.
-The stand supports the sheet at a 19° slope toward the table with its top
-edge centre at X 209 mm, Y −244 mm and Z 901 mm. Leave about 22 mm of
-paper beyond the backing tray at this edge so the gripper can approach
-both faces. Use a low full-width support ledge at the bottom of the stand.
-Reset by removing the sheet, flattening or replacing creased stock, closing
-the pocket, restoring the marked positions and opening both grippers.
+Print a single page on 120 g/m² white Letter presentation paper, about
+279 × 216 mm and 7.2 g. Set it print-side up on a separate plastic
+document stand about 266 × 226 mm, also inclined 24°. Centre the trailing
+paper edge at X 207 mm, Y −240 mm and Z 969 mm. Leave 22 mm of that edge
+past the backing so the pad can reach both faces. A short ledge holds
+the far end of the page while it sits on the stand. The loose sheet
+starts fully outside the sleeve, and both grippers start open.
+For reset, take the document out, replace it if creased, restore the
+marked positions and let the sleeve close before opening both grippers.
 
 ## Run and score
 
-Use the challenge YAM environment. Run from this folder.
+Run from this folder in the Robocurve YAM simulation environment.
 
 ```sh
 python -m pip install -e .
@@ -42,34 +40,41 @@ python run.py --device cuda:0 --physics-device cpu --no-cameras --policy hold --
 python run.py --device cuda:0 --physics-device cpu --no-cameras --policy on-top --output runs/on-top
 ```
 
-The fixed reset uses seed 1415158438, 480 Hz physics and 20 Hz control.
-The limit is 700 actions (35 seconds). The runner records three native
-640 × 360 feeds and writes scores and the source fingerprint to
-`receipt.json`. Use a top and a side photo and a ruler to inspect where
-the page rests. All three edges of the film opposite or to the sides of
-the mouth are sealed on a physical protector.
+The fixed reset uses seed 1415158438 and 480 Hz native physics. A trial
+lasts up to 760 actions (38 seconds at 20 Hz). The reference reads
+the native paper-link poses to guide the corners and sends joint-position
+and gripper commands through the standard action interface. The runner
+records three native 640 × 360 views and writes the result, per-step
+measurements, and source fingerprint. The wall-clock run time depends
+on rendering and the GPU.
 
-- **1.0** when the entire sheet lies inside and beneath the film, the
-  sheet lies flat with less than 6 mm height variation, the lip is at
-  most 1.03° open, and both gripper tips are at least 35 mm clear. The
-  completed state must be still for at least 0.45 seconds.
-- **0.5** for a released, flat sheet at the level of the lower film if
-  five to eight of nine equally spaced corner, edge-centre and centre
-  samples are inside the pocket and beneath the upper film.
-- **0.0** otherwise, including a page resting only on top of the
-  protector.
+Use a ruler and top and oblique photos or video to judge the score.
+Clearance means the closest gripper pad is at least 35 mm from the sheet.
 
-## Simulation model
+- **1.0** when the sheet is entirely inside and under the top film.
+  Both leading corners are within 9 mm of the bottom seam. The sheet
+  is within 6 mm of flat along the sleeve, with no bent corner, and
+  the lip has closed to within roughly 5.5 mm of its flat position.
+  Leave both grippers clear and the page still for at least 0.45 seconds.
+- **0.5** when at least the leading third (93 mm) is inside and beneath
+  the film and the sheet is stationary and released, with both grippers
+  clear.
+- **0.0** otherwise. Leaving the sheet above the film or on its separate
+  stand earns 0.0.
 
-The visible polypropylene surfaces are 0.10 mm translucent skins.
-The native contact geometry for the film and paper is 0.65 mm thick
-to stabilize collision tests. The binder physically supports the lower
-film. A passive hinge with a 7.4° motion limit approximates the upper
-film opening and closing. A light spring and the film's native mass
-close it when released. The prototype uses a rigid page to isolate
-pinch and insertion feasibility. This approximation does not represent
-page buckling or film flex across the mouth, and both matter for a
-finished version of the benchmark.
+## Simulation fidelity
+
+Paper is a native three-link elastic sheet, which can sag
+and buckle longitudinally against the sleeve. Its two passive flexures
+have a nominal restoring rate of 0.0105 N·m/rad and a ±48° travel limit.
+The film opens with a passive flexure, and the welded sides are represented
+by narrow contact envelopes following the closure. The paper and film
+are drawn at their thin-sheet scales and use 0.54 and 0.55 mm collision
+skins to stabilize native contacts. An optically thin surface renders
+the clear pocket over the independent collision layers. The model uses a 9 mm easy-load lip
+overhang and estimated material parameters. The stands support their
+respective items. The gripper opens the sleeve and crosses both corners
+under the film before gravity can finish seating the sheet.
 
 ## Third-party assets and licenses
 
@@ -81,7 +86,8 @@ simulation setup reuse the same team's `tasks/core-an-apple` scaffold.
 | Asset | Source and use | License |
 | --- | --- | --- |
 | I2RT YAM arm, gripper geometries and split arm appearance | I2RT URDF and meshes supplied by the [pinned adapter][adapter] | [MIT][i2rt-license] |
-| Station worktop, floor, lights and camera support | Procedural assets from the [station scene][room] | The adapter has [no declared repository license][adapter-license]. The runtime is [Apache-2.0][arena-license]. |
+| Station worktop, floor and lights | Procedural assets from the [station scene][room] | The adapter has [no declared repository license][adapter-license]. The runtime is [Apache-2.0][arena-license]. |
+| Clear-film shader | Built-in OmniPBR shader in the Isaac Sim renderer, configured by the task | Provided by the Isaac Sim installation. |
 | Overview and wrist cameras | [YAMLAb calibration][calibration], supplied by the adapter, with the overview pose authored by this task | [MIT for calibration][calibration-license] |
 
 [protector]: https://www.avery.com/products/sheet-protectors/75540

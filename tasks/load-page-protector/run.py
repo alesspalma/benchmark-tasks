@@ -70,7 +70,7 @@ def main():
         "control_hz": 20,
         "physics_hz": c.PHYSICS_HZ,
         "instruction": c.INSTRUCTION,
-        "controller_inputs": ["elapsed time", "joint positions"],
+        "controller_inputs": ["elapsed time", "joint positions", "native page link poses"],
         "cameras_enabled": not a.no_cameras,
     }
     (a.output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
@@ -89,6 +89,7 @@ def main():
             for s in env.spec["assets"]
         }
         policy = pc.ScriptedPolicy(mode=a.policy)
+        policy.feedback = env.diagnostics
         policy.bind(env.info)
         policy.reset(scene)
         (a.output / "reset.json").write_text(

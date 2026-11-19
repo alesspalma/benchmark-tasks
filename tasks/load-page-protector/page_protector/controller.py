@@ -8,11 +8,13 @@ from yam_arena import ik, station
 from yam_arena.constants import READY
 
 from . import config, plan
+from .scoring import leading_corners, link_frame
 
 
 class ScriptedPolicy(PolicyBase):
     def __init__(self, mode="demo"):
         self.mode = mode
+        self.feedback = None
         low = np.r_[ik.LOWER, 0.0, ik.LOWER, 0.0]
         high = np.r_[ik.UPPER, 1.0, ik.UPPER, 1.0]
         self.info = PolicyInfo(
@@ -38,8 +40,25 @@ class ScriptedPolicy(PolicyBase):
         if self.mode == "hold":
             self.duration = config.MAX_STEPS / 20
         self.phase = "ready"
+        self.entry_start = None
+        self.wrist_translation = np.zeros(3)
         self.worst_ik_m = 0.0
         self.worst_ik_rad = 0.0
+
+    def register(self, position, orientation, measured, page, leading_goal, blend):
+        hand, hand_rotation = ik.tcp_pose(measured[7:13], station.BASES["right"])
+        _, paper_rotation = link_frame(page["links"]["Rear"])
+        front = leading_corners(page).mean(axis=0)
+        match = config.SLEEVE_ROTATION @ paper_rotation.T @ hand_rotation
+        cosine = np.clip((np.trace(orientation.T @ match) - 1.) / 2., -1., 1.)
+        angle = np.arccos(cosine)
+        fraction = min(1., np.deg2rad(14.) / max(float(angle), 1e-6))
+        match = ik.slerp_matrix(orientation, match, fraction * .91 * blend)
+        registered = leading_goal - match @ hand_rotation.T @ (front - hand)
+        correction = np.clip(registered - position, [-.035, -.047, -.07],
+                             [.05, .047, .076]) * blend
+        self.wrist_translation += .24 * (correction - self.wrist_translation)
+        return position + self.wrist_translation, match
 
     def action_at(self, t, joint_pos=None):
         out = []
@@ -48,6 +67,9 @@ class ScriptedPolicy(PolicyBase):
             pos, rot, grip = self.starts[name]
             age = t
             label = ""
+            lead_goal = None
+            lead_previous = None
+            weight = 0.
             for w in self.moves.get(name, []):
                 goal = np.asarray(w["position"])
                 r = np.asarray(w["rotation"])
@@ -59,17 +81,40 @@ class ScriptedPolicy(PolicyBase):
                     grip += s * (g - grip)
                     label = w["label"]
                     labels.append(label)
+                    if "leading_target" in w:
+                        target = np.asarray(w["leading_target"])
+                        if lead_previous is None and self.feedback is not None:
+                            if self.entry_start is None:
+                                self.entry_start = leading_corners(
+                                    self.feedback()["objects"]["page"]).mean(axis=0)
+                            lead_previous = self.entry_start
+                        if lead_previous is not None:
+                            lead_goal = (1 - s) * lead_previous + s * target
+                            weight = s if label == plan.GUIDE_PHASES[0] else 1.
                     break
                 age -= w["duration"]
                 pos, rot, grip = goal, r, g
-            q, pe, re = ik.solve(
-                pos,
-                ik.matrix_to_quat_xyzw(rot),
-                self.q[name],
-                base_pos=station.BASES[name],
-                iters=60,
-            )
-            if pe > 0.002 or re > 0.03:
+                if "leading_target" in w:
+                    lead_previous = np.asarray(w["leading_target"])
+            applied = (name == "right" and self.feedback is not None
+                       and joint_pos is not None and lead_goal is not None)
+            nominal = (pos, rot)
+            if applied:
+                page = self.feedback()["objects"]["page"]
+                pos, rot = self.register(pos, rot, np.asarray(joint_pos), page, lead_goal, weight)
+            base = station.BASES[name]
+            seed = self.q[name]
+            target = ik.matrix_to_quat_xyzw(rot)
+            q, pe, re = ik.solve(pos, target, seed, base_pos=base, iters=60)
+            if applied and (pe > .001 or re > .024):
+                retry, rp, rr = ik.solve(pos, target, np.asarray(joint_pos)[7:13],
+                                         base_pos=base, iters=85)
+                if rp + .04 * rr < pe + .04 * re:
+                    q, pe, re = retry, rp, rr
+            if applied and (pe > .003 or re > .06):
+                q, pe, re = ik.solve(nominal[0], ik.matrix_to_quat_xyzw(nominal[1]),
+                                     seed, base_pos=base, iters=75)
+            if pe > .005 or re > .09:
                 raise RuntimeError(
                     f"Unreachable {name} reference target: {pe:.6f} m, {re:.6f} rad"
                 )

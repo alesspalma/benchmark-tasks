@@ -76,8 +76,8 @@ class Environment(YamArenaEmbodiment):
             raise ValueError("Fixed reset and 20 Hz required")
         super().__init__(scene="station", object_jitter=0, control_hz=20, **kwargs)
         camera = self.rig.top_cam
-        position = np.array([.62, -.32, 1.49])
-        sight = np.array([.46, -.01, .79]) - position
+        position = np.array([.86, -.10, 1.52])
+        sight = np.array([.47, -.13, .880]) - position
         sight /= np.linalg.norm(sight)
         screen_right = np.cross(sight, [0.0, 0.0, 1.0])
         screen_right /= np.linalg.norm(screen_right)
@@ -147,6 +147,13 @@ class Environment(YamArenaEmbodiment):
                 _APP.close()
                 raise RuntimeError("Crash reporter plugin unexpectedly loaded")
             atexit.register(_APP.close)
+        if self.render_images:
+            import carb.settings
+
+            settings = carb.settings.get_settings()
+            settings.set_bool("/rtx/material/omniRtxEnableOpacityOverride", False)
+            settings.set_bool("/rtx/pathtracing/fractionalCutoutOpacity", True)
+            settings.set_bool("/rtx/raytracing/fractionalCutoutOpacity", True)
         import torch
         from isaaclab.assets import ArticulationCfg, AssetBaseCfg, RigidObjectCfg
         from isaaclab_arena.assets.object import Object, ObjectType
@@ -188,7 +195,11 @@ class Environment(YamArenaEmbodiment):
                     asset_cfg_addon={"init_state": cls.InitialStateCfg()},
                 )
             )
-        all_objects = [*task_room("station", self.rig.top_cam), *objects]
+        # Put the observer above the scene without a freestanding mast in
+        # the paper transfer corridor or in any of the camera views.
+        room = task_room("station", self.rig.top_cam)
+        fixtures = [prop for prop in room if prop.name in ("floor", "dome_light", "lamp", "table")]
+        all_objects = [*fixtures, *objects]
         for o in all_objects:
             if isinstance(o, Object):
                 cls = {
@@ -207,6 +218,7 @@ class Environment(YamArenaEmbodiment):
             cfg = env_cfg_callback(20)(cfg)
             cfg.sim.dt = 1.0 / config.PHYSICS_HZ
             cfg.decimation = config.PHYSICS_HZ // 20
+            cfg.sim.render_interval = cfg.decimation
             for name in ARMS:
                 initial = getattr(cfg.scene, name).init_state
                 initial.joint_pos = {
@@ -271,7 +283,8 @@ class Environment(YamArenaEmbodiment):
                 self._base.sim.render()
         self._t = 0.0
         self.scorer.reset()
-        self.metrics = self.scorer.evaluate(self.state())
+        self.latest_state = self.state()
+        self.metrics = self.scorer.evaluate(self.latest_state)
         obs = self._observation()
         if self.render_images and any(np.std(x) < 5 for x in obs.images.values()):
             raise RuntimeError("Blank native camera reset")
@@ -329,7 +342,8 @@ class Environment(YamArenaEmbodiment):
         return result
 
     def _task_step(self):
-        self.metrics = self.scorer.evaluate(self.state())
+        self.latest_state = self.state()
+        self.metrics = self.scorer.evaluate(self.latest_state)
         if self.render_images:
             self._base.sim.render()
         return StepResult(
@@ -340,7 +354,7 @@ class Environment(YamArenaEmbodiment):
         )
 
     def diagnostics(self):
-        return self.state()
+        return self.latest_state
 
     def _observation(self):
         if self.render_images:
