@@ -1,0 +1,13 @@
+{
+  "title": "Roll a pasta sheet with a hand-crank roller",
+  "category": "Societal relevance",
+  "keywords": ["pasta", "bimanual", "dough", "hand crank", "feeding", "thickness"],
+  "instruction": "Feed the dough squarely into the pasta machine and turn the crank to roll one continuous, evenly thin sheet onto the board.",
+  "context": "A home pasta roller sets the thickness of fresh pasta by drawing the stock between two smooth steel rollers. The feeding hand keeps the leading edge square as the cranking hand provides rolling force.",
+  "setup": "A clamped hand-crank pasta roller has 150 mm smooth rollers and a 3.7 mm gap. One loose 92 × 86 × 4.8 mm pre-flattened sheet rests on a wooden cutting board to the left of the throat. A wooden receiving board lies below the exit. Both YAM arms start clear.",
+  "scoring": "Contact feasibility prototype. No outcome earns credit until a continuous sheet passes the native rollers and the released output thickness is validated.",
+  "run_limit": "600 actions (30 seconds at 20 Hz)",
+  "reset_notes": "Set the roller gap to 3.7 mm, clear the exit board and place the next loose 4.8 mm stock sheet at the measured starting coordinates.",
+  "fidelity": "A free two-skin sheet uses a native thickness spring, the roller pair uses force-limited counter-rotation and both arms make native contacts. The prototype treats the skins as rigid in plane. It has no permanent elongation or flexible output model.",
+  "scores": "Native contact probe: 0.0."
+}
