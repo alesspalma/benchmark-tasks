@@ -1,13 +1,20 @@
 {
   "title": "Roll a pasta sheet with a hand-crank roller",
-  "category": "Societal relevance",
-  "keywords": ["pasta", "bimanual", "dough", "hand crank", "feeding", "thickness"],
+  "category": "Societal relatability",
+  "keywords": [
+    "pasta",
+    "bimanual",
+    "dough",
+    "hand crank",
+    "feeding",
+    "thickness"
+  ],
   "instruction": "Feed the dough squarely into the pasta machine and turn the crank to roll one continuous, evenly thin sheet onto the board.",
   "context": "A home pasta roller sets the thickness of fresh pasta by drawing the stock between two smooth steel rollers. The feeding hand keeps the leading edge square as the cranking hand provides rolling force.",
-  "setup": "A clamped hand-crank pasta roller has 150 mm smooth rollers and a 3.7 mm gap. One loose 92 × 86 × 4.8 mm pre-flattened sheet rests on a wooden cutting board to the left of the throat. A wooden receiving board lies below the exit. Both YAM arms start clear.",
-  "scoring": "Contact feasibility prototype. No outcome earns credit until a continuous sheet passes the native rollers and the released output thickness is validated.",
-  "run_limit": "600 actions (30 seconds at 20 Hz)",
-  "reset_notes": "Set the roller gap to 3.7 mm, clear the exit board and place the next loose 4.8 mm stock sheet at the measured starting coordinates.",
-  "fidelity": "A free two-skin sheet uses a native thickness spring, the roller pair uses force-limited counter-rotation and both arms make native contacts. The prototype treats the skins as rigid in plane. It has no permanent elongation or flexible output model.",
-  "scores": "Native contact probe: 0.0."
+  "setup": "A 188 × 202 mm clamped steel hand-crank pasta roller has 150 mm rolls, a 3.7 mm gap, and a freely rotating plastic handle. One loose 92 × 86 × 4.8 mm plain durum sheet rests on the left edge of a 176 × 170 mm elevated wooden preparation board. A smooth 223 × 150 mm receiving board stands below the exit at a 24° incline. Both YAM grippers start open. Exact coordinates and stock preparation are in the README.",
+  "scoring": "Score the released, continuous sheet on the receiving board. Full credit requires all six evenly spaced thickness readings within 3.45–4.15 mm, centerline length at least 107 mm, endpoint separation at least 90% of this length, no folded section more than 13 mm above the board, and the sheet remaining on the board for 0.4 s. Other outcomes score zero. Measure with a light-touch caliper, ruler and trial video.",
+  "run_limit": "900 actions (45 seconds at 20 Hz)",
+  "reset_notes": "Fit a fresh 92 × 86 × 4.8 mm plain durum and water stock piece on the marked preparation board. Clear the receiving board. Set the roller to the 3.7 mm gap.",
+  "fidelity": "Native contacts drive the steel rollers and bend a six-section sheet. A reduced dough model retains local thickness reduction under measured opposing roll contact and forward shaft motion. Each compressed section gains length at nearly constant volume. The continuous surface follows the section joints. Dough tearing and adhesion are omitted.",
+  "scores": "Demo: 1.0 after 589 actions."
 }

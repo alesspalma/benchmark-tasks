@@ -23,6 +23,7 @@ from yam_arena.inspect_embodiment import (
 )
 
 from . import builder, config
+from .dough import DoughSheet
 
 ROOT = Path(__file__).resolve().parents[1]
 _APP = None
@@ -75,8 +76,8 @@ class Environment(YamArenaEmbodiment):
             raise ValueError("Fixed reset and 20 Hz required")
         super().__init__(scene="station", object_jitter=0, control_hz=20, **kwargs)
         # Oblique overview on an independent camera stand.
-        eye = np.array([-0.48, -0.63, 1.53])
-        target = np.array([0.385, 0.025, 0.855])
+        eye = np.array([0.76, -0.23, 1.60])
+        target = np.array([0.37, 0.025, 0.875])
         optical_z = (eye - target) / np.linalg.norm(eye - target)
         optical_x = np.cross([0.0, 0.0, 1.0], optical_z)
         optical_x /= np.linalg.norm(optical_x)
@@ -119,6 +120,7 @@ class Environment(YamArenaEmbodiment):
         self._temp = None
         self._audit_error = None
         self._joint_callback = None
+        self._contact_callback = None
 
     def _ensure_sim(self, goal=None):
         global _APP
@@ -263,6 +265,16 @@ class Environment(YamArenaEmbodiment):
             ),
         ).make_registered()
         self._base = self._env.unwrapped
+        if self.render_images:
+            from pxr import UsdGeom
+
+            # The stock adapter includes a camera stand inside this overview
+            # cone. Keep the physical fixture while masking its camera image.
+            for name in ("stand_mast", "stand_arm", "camera_housing", "stand_foot"):
+                fixture = self._base.sim.stage.GetPrimAtPath(
+                    f"/World/envs/env_0/{name}"
+                )
+                UsdGeom.Imageable(fixture).MakeInvisible()
         self._torch = torch
         self._ready = torch.tensor(
             [[*config.STOWED["left"], 1.0, *config.STOWED["right"], 1.0]],
@@ -282,10 +294,27 @@ class Environment(YamArenaEmbodiment):
         self._dough = self._base.scene["dough"]
         self._driven = self._machine.joint_names.index("Driven")
         self._opposed = self._machine.joint_names.index("Opposed")
+        self._sleeve = self._machine.body_names.index("CrankSleeve")
+        self._roll_links = [
+            self._machine.body_names.index(side + "Shaft")
+            for side in ("Driven", "Opposed")
+        ]
         self._joint_forces = torch.zeros(
             (1, self._machine.num_joints), dtype=torch.float32, device=self._base.device
         )
         self._joint_forces_wp = wp.from_torch(self._joint_forces)
+        from isaaclab_physx.physics import PhysxManager
+        from isaaclab.app.settings_manager import get_settings_manager
+
+        get_settings_manager().set_bool("/physics/disableContactProcessing", False)
+        self.sheet = DoughSheet(
+            self._dough,
+            PhysxManager.get_physics_sim_view(),
+            torch,
+            wp,
+            self._base.device,
+            array,
+        )
         self._joint_callback = self._base.sim.physics_manager.register_callback(
             self._rolling_load,
             IsaacEvents.PRE_PHYSICS_STEP,
@@ -294,21 +323,39 @@ class Environment(YamArenaEmbodiment):
             wrap_weak_ref=False,
         )
 
-    def _rolling_load(self, _dt):
+        self._contact_callback = self._base.sim.physics_manager.register_callback(
+            self._measure_contact,
+            IsaacEvents.POST_PHYSICS_STEP,
+            order=55,
+            name=config.KEY + "_contacts",
+            wrap_weak_ref=False,
+        )
+
+    def _measure_contact(self, dt):
+        try:
+            self.sheet.measure_contacts(dt)
+        except Exception as error:
+            self._audit_error = error
+
+    def _rolling_load(self, dt):
         """A passive force-limited one-to-one counter-rotating gear and bearing drag."""
         try:
             view = self._machine.root_view
             q = array(view.get_dof_positions())[0]
             dq = array(view.get_dof_velocities())[0]
             phase = q[self._driven] + q[self._opposed]
+            phase = np.arctan2(np.sin(phase), np.cos(phase))
             slip = dq[self._driven] + dq[self._opposed]
-            torque = float(np.clip(-0.24 * np.sin(phase) - 0.0038 * slip, -0.40, 0.40))
+            torque = float(np.clip(-0.85 * phase - 0.0046 * slip, -0.40, 0.40))
             self._joint_forces[0, self._driven] = (
                 torque
                 - 0.003 * dq[self._driven]
                 - 0.010 * np.tanh(dq[self._driven] / 0.4)
             )
             self._joint_forces[0, self._opposed] = torque - 0.0015 * dq[self._opposed]
+            self.sheet.deform(
+                config.ROLL_RADIUS * min(dq[self._driven], -dq[self._opposed]), dt
+            )
             view.set_dof_actuation_forces(
                 self._joint_forces_wp, self._machine._ALL_INDICES
             )
@@ -319,15 +366,19 @@ class Environment(YamArenaEmbodiment):
         self._ensure_sim()
         self._audit_error = None
         self._joint_forces.zero_()
+        self.sheet.reset()
         self._env.reset(seed=seed)
         self._instruction = scene.instruction
+        if self.render_images:
+            self.sheet.show(self._base.sim.stage, *self.sheet.state()[:2])
         for _ in range(self.spec["settle_actions"]):
             self._env.step(self._ready)
         if self.render_images:
+            self.sheet.show(self._base.sim.stage, *self.sheet.state()[:2])
             for _ in range(4):
                 self._base.sim.render()
         self._t = 0.0
-        self.metrics = self.evaluate()
+        self.metrics = self.sheet.evaluate(0.0)
         obs = self._observation()
         if self.render_images and any(np.std(x) < 5 for x in obs.images.values()):
             raise RuntimeError("Blank native camera reset")
@@ -335,29 +386,33 @@ class Environment(YamArenaEmbodiment):
 
     def state(self):
         q = array(self._machine.root_view.get_dof_positions())[0]
+        links, thickness, _ = self.sheet.state()
+        machine = array(self._machine.root_view.get_link_transforms())[0]
         return {
             "time_s": self._t,
             "angle": float(q[self._driven]),
             "other_angle": float(q[self._opposed]),
-            "dough": array(self._dough.root_view.get_link_transforms())[0, 0].tolist(),
-            "compression": float(
-                array(self._dough.root_view.get_dof_positions())[0, 0]
-            ),
+            "crank_sleeve": machine[self._sleeve, :3].tolist(),
+            "rollers": machine[self._roll_links, :3].tolist(),
+            "stock_links": links.tolist(),
+            "thickness_mm": (1000.0 * thickness).tolist(),
             "hands": {n: tcp_world(self._base.scene[n]).tolist() for n in ARMS},
         }
-
-    def evaluate(self):
-        """This probe measures contact and carries no completion credit."""
-        return {"score": 0.0, "success": False}
 
     def _task_step(self):
         if self._audit_error:
             raise RuntimeError(
-                "Native pasta cutter load update failed"
+                "Native pasta rolling load update failed"
             ) from self._audit_error
-        self.metrics = self.evaluate()
+        self.metrics = self.sheet.evaluate(0.05)
+        if self.render_images:
+            self.sheet.show(self._base.sim.stage, *self.sheet.state()[:2])
+        success = self.metrics["success"]
         return StepResult(
-            observation=self._observation(), terminated=False, info=self.metrics.copy()
+            observation=self._observation(),
+            terminated=success,
+            termination_reason="success" if success else None,
+            info=self.metrics.copy(),
         )
 
     def diagnostics(self):
@@ -383,6 +438,9 @@ class Environment(YamArenaEmbodiment):
         )
 
     def close(self):
+        if self._contact_callback:
+            self._contact_callback.deregister()
+            self._contact_callback = None
         if self._joint_callback:
             self._joint_callback.deregister()
             self._joint_callback = None

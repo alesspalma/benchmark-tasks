@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import importlib
 import json
+import shutil
 import socket
 import subprocess
 import time
@@ -26,6 +27,45 @@ def plain(value):
     if isinstance(value, (list, tuple)):
         return [plain(v) for v in value]
     return value
+
+
+def compose(output, width, height):
+    top, left, right = (output / f"{name}_cam.mp4" for name in ("top", "left", "right"))
+    graph = (
+        f"[0:v]scale={2 * width}:{2 * height}:flags=lanczos[overview];"
+        "[1:v][2:v]hstack[wrist];[overview][wrist]vstack[out]"
+    )
+    subprocess.run(
+        [
+            "ffmpeg",
+            "-nostdin",
+            "-loglevel",
+            "error",
+            "-i",
+            str(top),
+            "-i",
+            str(left),
+            "-i",
+            str(right),
+            "-filter_complex_threads",
+            "1",
+            "-filter_complex",
+            graph,
+            "-map",
+            "[out]",
+            "-c:v",
+            "libx264",
+            "-crf",
+            "22",
+            "-pix_fmt",
+            "yuv420p",
+            "-movflags",
+            "+faststart",
+            str(output / "demo.mp4"),
+        ],
+        check=True,
+    )
+    shutil.copyfile(output / "setup-top_cam.png", output / "setup.png")
 
 
 def main():
@@ -70,7 +110,12 @@ def main():
         "control_hz": 20,
         "physics_hz": c.PHYSICS_HZ,
         "instruction": c.INSTRUCTION,
-        "controller_inputs": ["elapsed time", "joint positions"],
+        "controller_inputs": [
+            "elapsed time",
+            "joint positions",
+            "held sheet pose",
+            "crank sleeve pose",
+        ],
         "cameras_enabled": not a.no_cameras,
     }
     (a.output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
@@ -137,7 +182,9 @@ def main():
             writers[name] = writer
         with (a.output / "trace.jsonl").open("w") as trace:
             for k in range(a.max_steps):
-                action = policy.action_at((k + 1) / 20, obs.state["joint_pos"])
+                action = policy.action_at(
+                    (k + 1) / 20, obs.state["joint_pos"], env.diagnostics()
+                )
                 result = env.step(Action(data=action))
                 steps = k + 1
                 obs = result.observation
@@ -188,6 +235,11 @@ def main():
             rc = w.wait()
             if rc:
                 errors[name] = rc
+        if writers and not errors and receipt["status"] == "completed":
+            try:
+                compose(a.output, a.width, a.height)
+            except subprocess.CalledProcessError as error:
+                errors["composite"] = error.returncode
         receipt.update(
             elapsed_wall_s=time.monotonic() - start,
             source_unchanged=e.source_fingerprint() == source,

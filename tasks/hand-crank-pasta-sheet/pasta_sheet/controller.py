@@ -5,6 +5,7 @@ from inspect_robots.policy import PolicyBase, PolicyInfo
 from inspect_robots.types import Action, ActionChunk
 from inspect_robots_yam.config import action_box
 from yam_arena import ik
+from yam_arena.urdf import quat_xyzw_to_matrix
 
 from . import config, plan
 
@@ -24,6 +25,8 @@ class ScriptedPolicy(PolicyBase):
 
     def reset(self, scene):
         self.moves = plan.waypoints(self.mode)
+        self.guide = None
+        self.stock_released = False
         self.q = {n: np.asarray(config.STOWED[n]).copy() for n in ("left", "right")}
         self.starts = {
             n: (*ik.tcp_pose(self.q[n], config.BASES[n]), 1.0) for n in self.q
@@ -40,7 +43,24 @@ class ScriptedPolicy(PolicyBase):
         self.worst_ik_m = 0.0
         self.worst_ik_rad = 0.0
 
-    def action_at(self, t, joint_pos=None):
+    def action_at(self, t, joint_pos=None, feedback=None):
+        if (
+            feedback is not None
+            and self.guide is None
+            and t >= 6.23
+            and self.mode not in ("hold", "crank-only")
+        ):
+            stock = np.asarray(feedback["stock_links"])
+            tcp, hand_frame = ik.tcp_pose(
+                np.asarray(joint_pos[:6]), config.BASES["left"]
+            )
+            stock_frame = quat_xyzw_to_matrix(stock[1, 3:])
+            desired = np.array([[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [-1.0, 0.0, 0.0]])
+            hand_to_stock = hand_frame.T @ stock_frame
+            guide_rot = desired @ hand_to_stock.T
+            shift = guide_rot @ hand_frame.T @ (stock[:3, :3].mean(axis=0) - tcp)
+            self.guide = guide_rot, shift
+            self.moves = plan.waypoints(self.mode, self.guide)
         out = []
         labels = []
         for name in ("left", "right"):
@@ -61,6 +81,10 @@ class ScriptedPolicy(PolicyBase):
                     break
                 age -= w["duration"]
                 pos, rot, grip = goal, r, g
+            if name == "right" and feedback is not None:
+                pos, grip = self.track_crank(t, label, pos, grip, feedback)
+            if name == "left" and self.guide is not None and feedback is not None:
+                pos, rot, grip = self.feed_until_caught(t, pos, rot, grip, feedback)
             q, pe, re = ik.solve(
                 pos,
                 ik.matrix_to_quat_xyzw(rot),
@@ -90,6 +114,40 @@ class ScriptedPolicy(PolicyBase):
         self.previous = result
         self.phase = " / ".join(labels) or "settle"
         return result
+
+    def feed_until_caught(self, time, pos, rot, grip, feedback):
+        if self.stock_released or time < 14.85:
+            return pos, rot, grip
+        tip_height = feedback["stock_links"][-1][2]
+        if tip_height < config.NIP[2] - 0.011 or time >= 24.0:
+            self.stock_released = True
+            return pos, rot, grip
+        guide_rot, shift = self.guide
+        advance = min((time - 14.85) * 0.0075, 0.025)
+        # Keep the genuine jaw grip and feed until the stock is seen below the
+        # nip. Releasing just above this point leaves it balanced on one roll.
+        return config.NIP + [0.0, 0.0, 0.061 - advance] - shift, guide_rot, 0.024
+
+    @staticmethod
+    def track_crank(t, label, pos, grip, feedback):
+        """Follow the appliance's moving knob in the same way as a visual servo."""
+        sleeve = np.asarray(feedback["crank_sleeve"])
+        shaft = np.asarray(feedback["rollers"][0])
+        if 2.4 <= t < 4.6:
+            progress = np.clip((t - 2.4) / 1.30, 0.0, 1.0)
+            gap = 0.078 * (1.0 - ik.smoothstep(progress))
+            return sleeve - gap * plan.CRANK[:, 2], 0.72 if t < 3.72 else 0.18
+        if 4.6 <= t < 9.5:
+            return sleeve, 0.114
+        if "crank while" in label or "draw the outfeed" in label:
+            radial = sleeve - shaft
+            tangent = np.cross([0.0, 1.0, 0.0], radial)
+            tangent /= np.linalg.norm(tangent)
+            # A small tangential lead loads the physical bearing through the
+            # gripper. No action sets the shaft position or its velocity.
+            lead = 0.009 if t < 29.0 else 0.019
+            return sleeve + lead * tangent, 0.082 if t < 29.0 else 0.045
+        return pos, grip
 
     def act(self, observation):
         t = float(observation.state_time) + 0.05
