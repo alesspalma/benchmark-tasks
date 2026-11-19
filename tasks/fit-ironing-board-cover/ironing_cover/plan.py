@@ -7,11 +7,12 @@ from yam_arena.urdf import quat_xyzw_to_matrix
 from . import config as C
 from .motion import Program, rotation
 
-DOWN = rotation("Y", -np.pi/6) @ rotation("Z", np.pi) @ quat_xyzw_to_matrix(DOWN_XYZW)
+FINGERS_ALONG_BOARD = rotation("Z", np.pi) @ quat_xyzw_to_matrix(DOWN_XYZW)
 
 
-def hem(sign, y, z, grip=1., x=0.):
-    return np.array([C.BOARD_X + x, sign * y, C.BOARD_TOP + z]), DOWN, grip
+def hem(sign, y, z, grip=1., x=0., tilt=30.):
+    orientation = rotation("Y", -np.deg2rad(tilt)) @ FINGERS_ALONG_BOARD
+    return np.array([C.BOARD_X + x, sign * y, C.BOARD_TOP + z]), orientation, grip
 
 
 def waypoints(mode):
@@ -25,9 +26,16 @@ def waypoints(mode):
     p.add(.88, "pull nose hem below the deck", left=hem(1,.408,-.029,.035))
     if mode != "lifted":
         p.add(.88, "draw heel hem under the deck", right=hem(-1,.408,-.029,.035))
-    p.add(.55, "release the elastic before moving the wrists", left=hem(1,.408,-.029,.58),
-          right=hem(-1,.408,.017 if mode == "lifted" else -.029,.58))
-    p.add(1.3, "withdraw across the hem ends", left=hem(1,.422,-.029,.58,-.144),
-          right=hem(-1,.422,.017 if mode == "lifted" else -.029,.58,-.144))
+    heel_z = .017 if mode == "lifted" else -.031
+    p.add(1.1, "angle fingertips below the rim without opening", left=hem(1,.416,-.031,.035,x=.005,tilt=78.),
+          right=hem(-1,.420,heel_z,.035,x=.005,tilt=74.))
+    p.add(1.1, "guide the captive hems inward under the rim", left=hem(1,.339,-.039,.035,x=.005,tilt=78.),
+          right=hem(-1,.416 if mode == "lifted" else .339,heel_z if mode == "lifted" else -.039,.035,x=.005,tilt=74.))
+    p.add(.45, "open fingers below the fitted hem", left=hem(1,.337,-.043,.7,tilt=77.),
+          right=hem(-1,.416 if mode == "lifted" else .337,heel_z if mode == "lifted" else -.043,.7,tilt=77.))
+    p.add(.85, "withdraw fingertips downward toward the mounts", left=hem(1,.408,-.055,.85,-.029,77.),
+          right=hem(-1,.422 if mode == "lifted" else .408,-.055,.85,-.029,77.))
+    p.add(.95, "clear the deck ends before lifting", left=hem(1,.428,-.057,1.,-.120,63.),
+          right=hem(-1,.428,-.057,1.,-.120,63.))
     p.add(1., "clear both ends", left=hem(1,.428,.108,1.,-.130), right=hem(-1,.428,.108,1.,-.130))
     return p.moves
