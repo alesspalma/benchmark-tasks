@@ -1,0 +1,19 @@
+{
+  "title": "Fit an elastic-edged cover on a tabletop ironing board",
+  "category": "Societal relatability",
+  "keywords": [
+    "ironing",
+    "laundry",
+    "padded cover",
+    "elastic hem",
+    "bimanual stretching"
+  ],
+  "instruction": "Fit the padded cover over the ironing board. Tuck the elastic edge under both ends and leave the ironing surface flat.",
+  "context": "Replacing a worn ironing-board cover means stretching its elastic edge around the bare board without lifting the opposite end off. Fit the elastic underneath at both ends so the padded surface stays flat when released.",
+  "setup": "A full-size 73 × 32 cm tabletop ironing board stands with its steel deck 10.5 cm above the worktop. Its narrow nose points left. A matching 6 mm cotton and foam ironing cover is placed face up on the board with both gathered end hems loose above the bare rim. No edge is tucked beneath the board. Start both YAM grippers open. See the README for board and cover placement.",
+  "scoring": "After the robot clears the cover for one second, score 1.0 if both elastic hems are visibly tucked below the steel rim, at least 13 mm inboard of the end outline, and the pad sits flat within a 12 mm depth gauge over the deck. Score 0.5 if exactly one end stays tucked. Give 0 in other cases.",
+  "run_limit": "520 actions (26 seconds at 20 Hz)",
+  "reset_notes": "Rest both ends of the cover on the deck, with each elastic seam above the surface, 57 mm inboard from the nearest end. Leave the board bare beneath both rims. Flatten the center pad without stretching the elastic.",
+  "fidelity": "A rigid steel deck supports a padded textile proxy. Native spring-loaded joints represent lengthwise elasticity and tuck compliance, with real friction against the mobile elastic hems. Visible end panels approximate the cloth surface. The model omits local wrinkles and distributed fabric forces.",
+  "scores": "Native prototype maximum completed score: 0.0."
+}
