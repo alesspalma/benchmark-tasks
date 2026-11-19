@@ -15,5 +15,6 @@
   "run_limit": "600 actions (30 seconds at 20 Hz)",
   "reset_notes": "Rest both ends of the cover on the deck, with each elastic seam above the surface, 57 mm inboard from the nearest end. Leave the board bare beneath both rims. Flatten the center pad without stretching the elastic.",
   "fidelity": "The full-size steel deck supports a replaceable padded cover. Native spring-loaded sliders model the elastic seams, which collide with the fingers and catch under the deck. The pad makes native contacts with the grippers and deck. The rendered fabric skin follows the actual pad and seam poses. The model omits local wrinkles and distributed stretch.",
-  "scores": "Demo: 1.0 after 553 actions."
+  "scores": "Demo: 1.0 after 553 actions. Dream-1: 0 after 600 actions.",
+  "media": "M-3HTWHQ"
 }
