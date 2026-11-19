@@ -1,0 +1,18 @@
+{
+  "title": "Secure a rolled yoga mat in a two-loop carrying sling",
+  "category": "Societal relatability",
+  "keywords": [
+    "exercise mat",
+    "elastic loops",
+    "springback",
+    "bimanual"
+  ],
+  "instruction": "Secure the rolled yoga mat in both loops of the carrying sling. Lift it by the sling, then set it down.",
+  "context": "The two elastic end loops compress the outer turn and keep the rolled mat from loosening or slipping out during transport.",
+  "setup": "A 610 mm wide pre-rolled foam exercise mat lies across a thin nonslip mat on a workbench. Its unrestrained outer turn springs open. A separate 28 mm wide elastic carrying sling has two empty end loops.",
+  "scoring": "The load must hang by two loops at opposite ends at least 35 mm above its starting height for 0.6 s, then stay secured after being set down and released. One retained end is worth 0.25; two retained ends without confirmed lifting are worth 0.5.",
+  "run_limit": "640 actions at 20 Hz",
+  "reset_notes": "Unseat both end loops and place the loosened mat across the nonslip pad.",
+  "fidelity": "The rolled mat uses a sprung full-width outer sector for foam rebound. The elastic loop apertures change under spring load and articulated shoulder-webbing segments carry the unsupported mat. The simulation does not resolve individual woven fibers.",
+  "scores": "Native contact prototype: 0.0 through 224 actions. Full task validation pending."
+}
