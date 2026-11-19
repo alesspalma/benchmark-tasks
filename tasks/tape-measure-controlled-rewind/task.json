@@ -8,10 +8,11 @@
   ],
   "instruction": "Rewind the tape measure under control and leave the hook seated against its case.",
   "context": "At the end of a measurement, the reel pulls the steel blade back as soon as the brake is released. Guiding the end hook keeps the blade from snapping against the case and leaves the tape ready to put away.",
-  "setup": "On a level wooden worktop, place one palm-sized self-locking tape measure upright. The rubber-covered 43 \u00d7 76 \u00d7 64 mm case has a top push release and a 25 mm steel blade extended and locked at 250 mm. The blade points parallel to the worktop edge toward the other arm. The 33 mm steel end hook is free. Both parallel grippers start clear.",
-  "scoring": "Use 20 fps video. Score 0 if the blade retracts over 35 mm between adjacent frames. With the case on the worktop within 16\u00b0 of level and moving under 25 mm/s, award 0.25, 0.5 or 0.75 for 60, 125 or 200 mm rewound, respectively. Award 1.0 when the hook remains within 4 mm of the case for 0.5 s and both gripper pad centres are at least 55 mm from the case centre and hook. All other outcomes score 0.",
+  "setup": "On a level wooden worktop, place one palm-sized self-locking tape measure upright. The rubber-covered 43 × 76 × 64 mm case has a top push release and a 25 mm steel blade extended and locked at 250 mm. The blade points parallel to the worktop edge toward the other arm. The 33 mm steel end hook is free. Both parallel grippers start clear.",
+  "scoring": "Use 20 fps video. Score 0 if the blade retracts over 35 mm between adjacent frames. With the case on the worktop within 16° of level and moving under 25 mm/s, award 0.25, 0.5 or 0.75 for 60, 125 or 200 mm rewound, respectively. Award 1.0 when the hook remains within 4 mm of the case for 0.5 s and both gripper pad centres are at least 55 mm from the case centre and hook. All other outcomes score 0.",
   "run_limit": "380 actions (19 seconds at 20 Hz)",
   "reset_notes": "Set the tool on its base. Draw the blade out 250 mm and let its self-lock engage. Leave the end hook free.",
   "fidelity": "The free case, release button and hook are native PhysX bodies. A spring-loaded joint represents travel of the short exposed steel blade. The brake releases through measured button motion and the reel pulls against the guiding gripper. The terminal blade has contact geometry. The remaining exposed strip and its marks follow reel travel visually. This model represents axial recoil over the setup span.",
-  "scores": "Native scripted demonstration 1.00. Dream-1 pending."
+  "scores": "Native scripted demonstration 1.00. Dream-1: 0 after 380 actions.",
+  "media": "M-S2Y664"
 }
