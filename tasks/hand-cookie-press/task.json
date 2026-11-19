@@ -1,7 +1,12 @@
 {
   "title": "Press three separate spritz cookies onto a baking sheet",
   "category": "Societal relatability",
-  "keywords": ["cookie press", "baking", "extrusion", "bimanual"],
+  "keywords": [
+    "cookie press",
+    "baking",
+    "extrusion",
+    "bimanual"
+  ],
   "instruction": "Use the cookie press to make three separate shaped cookies on the baking sheet.",
   "context": "A hand press portions and shapes spritz dough before baking. The press must stay flat during each loaded lever stroke, then lift clear so that the fresh cookie releases and retains the die pattern.",
   "setup": "A primed, full-size hand press stands on a clean aluminum baking sheet. It has a 51 mm grip, a nonslip 64 mm base, a six-lobe die and a ratcheting hand lever. The sheet measures 251 by 343 mm. Both YAM grippers start open and clear, and the sheet starts empty. The press holds 26 g of soft room-temperature dough.",
@@ -9,5 +14,6 @@
   "run_limit": "600 actions (30 seconds at 20 Hz)",
   "reset_notes": "Remove all dough from the sheet and return the lever to its open stop. Load and prime the press, wipe the die, and place it upright on the starting mark. Use a dry, ungreased sheet at room temperature.",
   "fidelity": "The free barrel, die, tray, gripping and spring-return lever have native contact dynamics. Forward lever travel advances a reduced ratchet model that meters mass against an estimated dough load. A near-flat seated die grows the six-lobe deposit. Off-sheet discharge expends dough. The model approximates spreading and overlap rather than simulating individual dough particles.",
-  "scores": "Native scripted demo scores 1.0 in 550 actions. The stationary and repeated-location controls each score 0.0 in 600 actions."
+  "scores": "Native scripted demo scores 1.0 in 550 actions. The stationary and repeated-location controls each score 0.0 in 600 actions. Dream-1: 0 after 600 actions.",
+  "media": "M-TQMMBM"
 }
