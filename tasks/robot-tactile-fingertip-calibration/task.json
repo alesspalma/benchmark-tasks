@@ -15,5 +15,6 @@
   "run_limit": "620 actions (31 seconds at 20 Hz)",
   "reset_notes": "Clear the impressions, clean the steel ball and silicone, and save an unloaded reference. Return the two free tools to their stands and both open grippers to the home pose.",
   "fidelity": "The free tools and silicone-window load use native collision and spring deflection. A diffuse three-channel lighting model renders the spherical contact patch from measured ball placement and window deflection. It approximates compliant silicone as a lumped spring and omits shear, spatial light falloff and camera noise. The captures are calibration inputs.",
-  "scores": "Demo: 1.0 after 449 actions."
+  "scores": "Demo: 1.0 after 449 actions. Dream-1: 0 after 620 actions.",
+  "media": "M-D9625S"
 }
