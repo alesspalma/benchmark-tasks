@@ -1,7 +1,13 @@
 {
   "title": "Seat two silicone lines in a peristaltic pump head",
   "category": "Other",
-  "keywords": ["peristaltic pump", "tube routing", "dual channel", "cam lever", "bimanual"],
+  "keywords": [
+    "peristaltic pump",
+    "tube routing",
+    "dual channel",
+    "cam lever",
+    "bimanual"
+  ],
   "instruction": "Seat both tubes in the open pump head, one in each track. Keep them straight at both retainers, close the lever, and let go for the water check.",
   "context": "A two-channel peristaltic head moves independent low-volume streams while keeping the drive out of contact with the liquid. Both hands guide opposite ends of each silicone tube through the retainers so the shared cam occludes both separate paths. Seating one tube and letting the other cross or miss a retainer prevents reliable dosing in both channels.",
   "setup": "A fixed 102 × 101 mm two-track bench pump head has a steel four-roller cradle, two 18 mm pitch retainers and an open yellow side lever. Two 8 mm OD × 352 mm silicone tubes are connected to 24 × 93 mm feed bottles and rest clear of the head on aluminum supports. Both discharge tips are free. Two 23 × 33 mm marked polypropylene cups wait beyond the opposite tube ends. Both YAM grippers start open and clear. The README gives fixed positions and material details.",
@@ -9,5 +15,6 @@
   "run_limit": "860 actions (43 seconds at 20 Hz)",
   "reset_notes": "Stop the drive and raise the cam to its open stop. Keep the inlet fittings connected, remove both tubes from the head and restore their starting positions on the external rests. Empty the receivers, refill the sources and return both arms to the ready position.",
   "fidelity": "Silicone bends through passive sprung links with native capsule contact. The robot physically seats both tubes and presses a native over-center cam against two independent spring shoes. A reduced-order water check uses measured seating, closure, compression and actual outlet positions with a calibrated volume per drive revolution. The stream and cup graphics show that volume. Tube wall flattening, drive motion and droplets are modeled in aggregate.",
-  "scores": "Demo: 1.0 after 706 actions."
+  "scores": "Demo: 1.0 after 706 actions. Dream-1: 0 after 860 actions.",
+  "media": "M-7A8DFX"
 }
