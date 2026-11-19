@@ -1,7 +1,13 @@
 {
   "title": "Prepare a blot-transfer cassette and roll out trapped air",
   "category": "Other",
-  "keywords": ["bimanual", "laboratory handling", "wet laminate", "roller", "cassette"],
+  "keywords": [
+    "bimanual",
+    "laboratory handling",
+    "wet laminate",
+    "roller",
+    "cassette"
+  ],
   "instruction": "Hold the wet layers aligned, roll the trapped air out, then close the cassette.",
   "context": "Cassette preparation for wet laboratory transfer requires uniform contact across the working area. Voids interrupt that contact, so the operator braces the loose layers at their edge while moving a hand roller across the wet area under pressure. The task uses an inert full-size trainer for this manual operation.",
   "setup": "A fixed 139 × 106 mm ABS tray on a riser supports a 100 × 75 mm water-wetted PET contact face over compliant layers. Three visible air pockets at marked positions have diameters of 14, 16 and 14 mm. A 121 × 92 mm clear sliding lid starts at the 127 mm open stop. A loose brayer with a 106 mm wide, 28 mm diameter rubber drum and polymer grip rests beside the cassette in a two-seat open saddle. The README specifies the dimensions, locations and reset.",
@@ -9,5 +15,6 @@
   "run_limit": "540 actions (27 seconds at 20 Hz)",
   "reset_notes": "Restore the sheet registration, three distinct visible pockets, open lid and brayer on its two seats. Use only the inert wet laminate.",
   "fidelity": "The rubber drum rotates on a free native axle. The loose layers compress and shear under contact, and the lid moves through a native slider. Loaded, aligned rolling clears visible gap witnesses through a reduced wet-interface model. The layers and water are represented by a spring-supported patch and aggregate air response.",
-  "scores": "Demo: 1.0 after 484 actions."
+  "scores": "Demo: 1.0 after 484 actions. Dream-1: 0 after 540 actions.",
+  "media": "M-ZZN9S9"
 }
