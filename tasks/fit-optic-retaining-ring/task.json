@@ -1,0 +1,19 @@
+{
+  "title": "Seat a lens tube's recessed retaining ring",
+  "category": "Other",
+  "keywords": [
+    "optical lab",
+    "lens tube",
+    "two-prong spanner",
+    "recessed tool engagement",
+    "bimanual manipulation"
+  ],
+  "instruction": "Hold the lens tube steady. Use the two-prong spanner to seat the recessed retaining ring against the lens without touching its clear face. Withdraw the spanner and release the tube.",
+  "context": "Microscopy and imaging benches mount individual optics in threaded lens tubes before optical alignment. Keep the glass seated while landing both spanner teeth in narrow slots below the tube mouth. The ring must hold the edge firmly enough to keep the optic seated during handling and leave the clear aperture usable.",
+  "setup": "A loose 57 mm diameter by 47 mm aluminum SM2-size lens tube stands on a 92 × 90 × 18 mm low-friction light inspection pad on a 620 × 770 mm bench. A 50.8 mm diameter by 4 mm glass lens rests on the lower shoulder. Its 2.54 mm slotted SM2 retaining ring is finger-started about 12 mm below the upper lip with approximately 0.10 mm axial clearance. A 104 mm steel two-prong spanner with a polymer handle is in its rest. Both YAM arms start clear.",
+  "scoring": "Score 1.0 for a clean, flush optic that holds during a 0.80 N rim check and leaves the 38 mm light aperture clear. Require stable release for 0.70 s with both hands 67 mm clear and the spanner withdrawn by 55 mm. Score 0.5 for the same clean, flush and released state with at least 26° ring advance and inward travel, but residual play. Score 0 for any clear-face contact or any other outcome.",
+  "run_limit": "620 actions (31 seconds at 20 Hz)",
+  "reset_notes": "Place the lens on the shoulder and back off the ring one sixth of a turn from first edge contact. Set both slots along the bench x-axis. Stand the loose tube on the light pad and put the spanner in its rest. Start both arms in their open, clear pose.",
+  "fidelity": "Native collisions constrain both steel prongs, the recess, optic rim and seat. The ring has independent rotation and axial travel. A force-limited coupling uses the actual 40 TPI thread lead and resists rotation. The glass is a rigid clear optic. Aperture inspection uses measured alignment and geometry. Face contact is checked against its clear disk.",
+  "scores": "Demo: 1.0 after 483 actions."
+}
