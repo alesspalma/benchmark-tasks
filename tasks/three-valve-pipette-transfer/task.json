@@ -1,0 +1,19 @@
+{
+  "title": "Charge a three-valve pipette filler and dispense 5 mL",
+  "category": "Other",
+  "keywords": [
+    "laboratory handling",
+    "bimanual",
+    "pneumatics",
+    "graduated pipette",
+    "three-valve filler"
+  ],
+  "instruction": "Use the three-valve pipette bulb to transfer 5.0 mL of water from the blue source beaker to the clear receiving beaker. Keep water out of the bulb and off the worktop.",
+  "context": "A three-valve rubber safety filler gives a graduated pipette separate controls for evacuating the bulb, drawing to a graduation and venting for delivery. The arms cooperate to charge the bulb. One holds the pipette vertical during aspiration and takes it to the receiver while the other operates the suction and delivery valves.",
+  "setup": "A dry 350 × 10 mm glass serological pipette, nominal 10 mL capacity with 0.1 mL graduations, starts upright in a weighted steel retort stand with a rubber grip sleeve and a fitted 50 mL natural rubber A/S/E filler. A faces the left arm. S and E are accessible from the right. A dark band marks 5.0 mL. The blue and clear glass beakers each have a 46 mm inner diameter and 53 mm overall height. The blue beaker contains 62.0 mL of blue-dyed water and the clear one is empty. Both are secured to the worktop. The bulb starts relaxed at atmospheric pressure and both YAM grippers are open. The README lists dimensions and positions.",
+  "scoring": "Weigh the delivered water in the receiving beaker and compare its volume to 5.0 mL. Award 1.0 for an error of at most 0.20 mL with at most 0.06 mL retained in the pipette, otherwise 0.75 for an error of at most 0.50 mL, 0.50 for an error of at most 1.00 mL or 0.25 for an error of at most 3.00 mL. A spill of more than 0.20 mL at any point or water entering the bulb gives 0. Other outcomes give 0.",
+  "run_limit": "700 actions (35 seconds at 20 Hz)",
+  "reset_notes": "Refill the blue source to 62.0 mL with blue-dyed water. Empty the receiver and dry the pipette. Let the bulb expand and vent it to atmosphere. Return the pipette to its stand and both beakers to their starting marks.",
+  "fidelity": "Gripper contact moves four native joints for the bulb squeeze and its three spring-return valves. The pneumatic model uses pressure, head and physical tip position to determine aspiration, retention and drainage. Conserved water volumes produce a visible meniscus. The bulb compliance is lumped and the liquid model is quasi-static.",
+  "scores": "Scripted demo: 1.0 in 570 actions. Stationary control: 0.0 in 700 actions. No delivery-valve press: 0.0 in 700 actions."
+}
