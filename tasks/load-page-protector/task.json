@@ -15,5 +15,6 @@
   "run_limit": "760 actions (38 seconds at 20 Hz)",
   "reset_notes": "Remove the filed sheet. Replace if creased. Restore the marked stand, binder and loose sheet positions, close the sleeve and open both grippers.",
   "fidelity": "Full-size paper and polypropylene sleeve. Three elastic native-contact paper panels sag and buckle lengthwise. A passive flexure opens the film, with bonded-side contact envelopes. The 0.15 mm paper and 0.10 mm film use 0.54 and 0.55 mm collision skins. The 9 mm lip overhang and spring rates are model estimates.",
-  "scores": "Native scripted demo: 1.0 after 581 actions (29.05 s). Dream-1 pending."
+  "scores": "Native scripted demo: 1.0 after 581 actions (29.05 s). Dream-1: 0 after 760 actions.",
+  "media": "M-N9UJ3F"
 }
