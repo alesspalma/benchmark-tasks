@@ -14,5 +14,6 @@
   "run_limit": "1,380 actions (69 seconds at 20 Hz)",
   "reset_notes": "Remove both bands and return the sling to its starting marks. Reroll the foam, set it on the grip pad with the loose outer turn uppermost and let it recover. Start with empty loops and both grippers open and clear.",
   "fidelity": "The mat outer turn uses a native spring to approximate foam rebound. Each elastic webbing loop has six contact-bearing sections, four bending joints and a spring aperture. The shoulder webbing transmits sling tension through native flexible joints. The foam and webbing compliance are lumped rather than fiber-resolved.",
-  "scores": "Demo: 1.0 after 1273 actions. Hosted model score pending."
+  "scores": "Demo: 1.0 after 1273 actions. Dream-1: 0 after 1380 actions.",
+  "media": "M-JE2FLU"
 }
