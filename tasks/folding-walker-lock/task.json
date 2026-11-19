@@ -14,5 +14,6 @@
   "run_limit": "400 actions (20 seconds at 20 Hz)",
   "reset_notes": "Press both releases, fold sides inward to the two specified angles, and set the walker down on its footprint marks. Restore both arm ready poses and clear the walking area. Use a seated training manikin.",
   "fidelity": "Native PhysX simulation uses a full-size free walker, its independent hinges, the sprung button travel, and the moving floor and gripper contacts. An angular cam effort depresses each button when folded. A unilateral spring represents the pin's loaded bearing once it seats. Geometry and resistance support a bench lock check.",
-  "scores": "Demo: 1.0."
+  "scores": "Demo: 1.0. Dream-1: 0 after 400 actions.",
+  "media": "M-MGB4MJ"
 }
