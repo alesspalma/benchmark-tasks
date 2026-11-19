@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from inspect_robots.embodiment import PRIVILEGED_SUCCESS
 from inspect_robots.types import Observation, StepResult
-from inspect_robots_yam.config import observation_space
+from inspect_robots_yam.config import DEFAULT_CAMERAS, observation_space
 from yam_arena import ik
 from yam_arena.constants import ARM_JOINTS, FINGER_JOINTS, READY
 from yam_arena.inspect_embodiment import (
@@ -271,9 +271,10 @@ class Environment(YamArenaEmbodiment):
         self._tab = self._base.scene["sheet_edge"]
         self._cloth = self._base.scene["cloth"]
         manager = self._base.sim.physics_manager
-        self._hub = manager.get_physics_sim_view().create_rigid_body_view(
-            "/World/envs/env_*/roller/Hub"
-        )
+        simulation_view = manager.get_physics_sim_view()
+        hub_path = "/World/envs/env_0/roller/Hub"
+        self._hub = simulation_view.create_rigid_body_view(hub_path)
+        self._handle = simulation_view.create_rigid_body_view("/World/envs/env_*/roller/Handle")
         self._material_callback = manager.register_callback(
             self._material_step, IsaacEvents.PRE_PHYSICS_STEP, order=50,
             name=config.KEY + "_material", wrap_weak_ref=False,
@@ -283,11 +284,11 @@ class Environment(YamArenaEmbodiment):
         return self._wp.array(np.asarray(value, dtype=np.float32).reshape(1, 3),
                               device=self._base.device)
 
-    def _apply(self, view, force, position):
+    def _apply(self, view, force=None, position=None, torque=None):
         view.apply_forces_and_torques_at_position(
-            force_data=self._vector(force),
-            torque_data=None,
-            position_data=self._vector(position),
+            force_data=None if force is None else self._vector(force),
+            torque_data=None if torque is None else self._vector(torque),
+            position_data=None if position is None else self._vector(position),
             indices=self._index,
             is_global=True,
         )
@@ -298,21 +299,41 @@ class Environment(YamArenaEmbodiment):
         try:
             view = self._roller.root_view
             hub = array(self._hub.get_transforms())[0]
+            hub_velocity = array(self._hub.get_velocities())[0]
             tab = array(self._tab.root_view.get_transforms())[0]
             cloth = array(self._cloth.root_view.get_transforms())[0]
-            angle = float(array(view.get_dof_positions())[0, 0])
-            force, load = self.material.advance(float(dt), hub, tab, cloth, angle)
+            spin = float(array(view.get_dof_velocities())[0, 0])
+            force = self.material.advance(float(dt), hub, tab, cloth, hub_velocity[3:])
+            drag = -materials.BEARING_DRAG * spin * self.material.rotation[:, 1]
+            self._apply(self._handle, torque=-drag)
             self._apply(self._tab.root_view, force, tab[:3])
+            hub_force = np.zeros(3)
+            hub_torque = drag.copy()
             if self.material.progress < config.SHEET_LENGTH:
-                self._apply(self._hub, -force, self.material.front)
-            elif load > 0.:
-                self._apply(self._hub, np.array([0., 0., load]), hub[:3])
-            self._apply(self._cloth.root_view, np.array([0., 0., -load]), cloth[:3])
+                hub_force -= force
+                hub_torque += np.cross(self.material.front - hub[:3], -force)
+            if self.material.load:
+                cloth_velocity = array(self._cloth.root_view.get_velocities())[0]
+                offset = -config.RADIUS * self.material.cloth_rotation[:, 2]
+                contact = hub[:3] + offset
+                roller_speed = hub_velocity[:3] + np.cross(hub_velocity[3:], offset)
+                cloth_speed = cloth_velocity[:3] + np.cross(cloth_velocity[3:], contact - cloth[:3])
+                nap_force = self.material.nap_force(roller_speed - cloth_speed)
+                hub_force += nap_force
+                hub_torque += np.cross(offset, nap_force)
+                self._apply(self._cloth.root_view, -nap_force, contact)
+            self._apply(self._hub, hub_force, hub[:3], torque=hub_torque)
         except Exception as error:
             self._audit_error = error
 
     def _render_material(self):
         self.material.render(self._base.sim.stage)
+
+    def _refresh_cameras(self, frames=1):
+        for _ in range(frames):
+            self._base.sim.render()
+        for name in DEFAULT_CAMERAS:
+            self._base.scene[name].update(0., force_recompute=True)
 
     def reset(self, scene, *, seed=None):
         self._ensure_sim()
@@ -325,8 +346,7 @@ class Environment(YamArenaEmbodiment):
             self._env.step(self._ready)
         if self.render_images:
             self._render_material()
-            for _ in range(4):
-                self._base.sim.render()
+            self._refresh_cameras(frames=4)
         self._t = 0.0
         self.scorer.reset()
         if self._audit_error:
@@ -395,7 +415,7 @@ class Environment(YamArenaEmbodiment):
         self.metrics = self.scorer.evaluate(self.state())
         if self.render_images:
             self._render_material()
-            self._base.sim.render()
+            self._refresh_cameras()
         return StepResult(
             observation=self._observation(),
             terminated=self.metrics["success"],

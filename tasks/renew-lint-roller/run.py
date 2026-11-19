@@ -169,7 +169,7 @@ def main():
                     writer.stdin.write(
                         np.ascontiguousarray(result.observation.images[name]).tobytes()
                     )
-                if result.terminated or (a.policy != "hold" and steps / 20 > policy.duration):
+                if result.terminated:
                     break
         (a.output / "final.json").write_text(
             json.dumps(plain(env.diagnostics())) + "\n"

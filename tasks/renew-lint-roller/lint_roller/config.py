@@ -14,18 +14,20 @@ MAX_STEPS = 480
 RADIUS = .0254
 WIDTH = .1016
 SHEET_LENGTH = math.tau * RADIUS + .0032
-TAB_Y = -.018
-TAB_SIZE = (.008, .025, .004)
-TAB_MASS = .004
+TAB_Y = -.034
+TAB_SIZE = (.014, .022, .0022)
+TAB_MASS = .0028
+DRY_ZONE = .019
+START_ANGLE = -math.pi / 2
+TAB_TILT = math.radians(-76)
 REST = .030
 ROLLER = np.array([.259, -.034, TABLE + REST + RADIUS])
-SEAM = np.array([.006, TAB_Y, RADIUS])
-TAB_OFFSET = np.array([.010, TAB_Y, RADIUS + .005])
+SEAM = np.array([-RADIUS, TAB_Y, 0.])
+TAB_OFFSET = np.array([-.029, TAB_Y, .012])
 TAB = ROLLER + TAB_OFFSET
 HANDLE_Y = .124
 CLOTH_SIZE = np.array([.220, .218, .004])
 CLOTH = np.array([.426, .020, TABLE + CLOTH_SIZE[2] / 2])
-PILE = .0016
 DIRT = np.array([
     [x + shift, y + offset, .0035]
     for x, shift in ((-.063, .000), (-.030, .003), (.000, -.003), (.030, .002), (.063, -.001))

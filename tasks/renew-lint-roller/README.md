@@ -7,9 +7,11 @@ peel front and loaded rolling contact on a loose fabric workpiece.
 
 The commercial reference is a 4 in Scotch-Brite household lint roller with
 perforated removable sheets. The newer seam overlaps the previous sheet by
-about 1/8 inch. The used sheet can be lifted at this edge, unwound, and
-separated before cleaning another area.
-[3M roller dimensions and features][roller] · [3M sheet geometry][seam]
+about 1/8 inch. An easy-peel liner uses a low-tack starter zone, with a
+shallow raised corner for pinching. Lift the dry corner, unwind the sheet
+to its perforation and remove it to expose fresh adhesive.
+[3M roller][roller] · [3M seam geometry][seam] · [3M low-tack liner][easy-peel]
+· [Embossed starter design][embossing]
 
 ## Setup and reset
 
@@ -29,13 +31,16 @@ above the floor datum.
 | --- | --- |
 | Worktop | Existing 1.10 × 1.30 m YAM worktop. Two parallel-jaw arms on the usual pedestals. |
 | Lint roller | Cylindrical adhesive portion Ø50.8 × 101.6 mm, centre X 259 mm and Y −34 mm. Its rotation axis is parallel to Y. A plastic handle Ø28 × 80 mm lies along +Y with the ordinary grip centred 126 mm from the roller centre. |
-| Used sheet | A single complete used circumference with 3.2 mm overlap. It begins with its accessible outer edge facing up. The compliant simulation uses a short folded edge, continuous with the wrap. |
+| Used sheet | A single complete used circumference with 3.2 mm overlap and a dry starter zone extending 19 mm from the separation line. Turn the split to face the robot. Orient the raised starter corner 34 mm along the right half of the roll and about 12 mm above the roller axis. The rest of the wrap starts adhered to the underlying sheet. |
 | Blue cloth and lint | 220 × 218 × 4 mm felt swatch, centred X 426 mm and Y 20 mm, long edge parallel to X. Place 20 pale cotton tufts in a regular five-by-four array covering about 126 × 65 mm around its centre. |
 | Roller rest | Support the head on a 73 × 110 × 30 mm rubber pad and the handle end on a 57 × 21 × 38 mm rubber pad. Put the end pad 169 mm along positive Y from the head centre. Two 6 × 85 × 7 mm rubber ridges on the head pad keep the unheld head near its reset mark. Leave the gap below the grip open. |
 
 Each reset restores the roller and cloth to these poses with both grippers
 open. Remove fibres from the cloth and reset the array. Restore the used
-sheet and its seam orientation using the same roller type.
+sheet and its seam orientation using the same roller type. For a flat
+dry-edge liner, raise the outside edge of the dry corner about 12 mm
+with a fingertip and give the leading 14 mm a shallow crease. Leave the
+adhesive part completely wound on the roller.
 
 ## Scoring
 
@@ -83,15 +88,19 @@ inspect-robots run --embodiment lint_roller --policy lint_roller_scripted \
 
 ## Simulation and fidelity
 
-The real sizes, free-spinning spindle, accessible sheet seam, compliant
-peel force and loaded pass are retained. A lightweight rigid body supplies
-the grippable edge. An advancing flexible sheet mesh and tension law
-represent the rest of the backing. The tension is applied oppositely to
-the two native bodies. Starting layer depth, bending force and adhesion
-are modeling parameters. The cloth is a thin movable support with a
-compliant nap. Under a loaded rolling pass the model assigns the touched
-fibres to the local roller surface, where they remain visible. Source
-includes the geometry and material parameters for rebuilding the scene.
+The real sizes, free-spinning spindle, easy-peel sheet seam, compliant
+peel force and loaded pass are retained. A lightweight rigid body with a
+2.2 mm effective contact thickness supplies the grippable corner. An
+advancing flexible sheet mesh and damped tensile load represent the rest
+of the backing. The load is applied oppositely to the two native bodies.
+The 1.6 N unwind threshold is at the low end of 3M's measurements for
+commercial-style 4 in lint tape. The dry starter has lower resistance.
+The cloth has a native movable felt backing. Its compressible nap
+supplies normal reaction and friction at the physical contact line.
+Tufts are retained on the fresh adhesive when that contact line reaches
+them during rolling. They remain visible on the roller. The spindle
+uses a small viscous bearing drag. Source includes the geometry and
+material parameters for rebuilding the scene.
 
 ## Third-party assets and licenses
 
@@ -108,6 +117,8 @@ original geometry under the included MIT license.
 
 [roller]: https://www.3m.co.uk/3M/en_GB/p/d/v101241015/
 [seam]: https://multimedia.3m.com/mws/media/2167113O/scotch-brite-lint-roller-digital-launch-kit.pdf
+[easy-peel]: https://patents.google.com/patent/US20090226657A1/en
+[embossing]: https://patents.google.com/patent/US7090908B1/en
 [adapter]: https://github.com/kairosiann/yam-isaac-lab-arena/tree/0059d02a1a91bc6834c1d0846022891df0c78730
 [adapter-license]: https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/README.md#license
 [i2rt-license]: https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/assets/yam/LICENSE.i2rt

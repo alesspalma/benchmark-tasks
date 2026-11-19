@@ -1,5 +1,7 @@
 """Original lint roller, sheet edge and cloth geometry."""
 
+import math
+
 import numpy as np
 
 from . import config as C
@@ -38,6 +40,9 @@ def tab_asset(w):
     s = w.stage("sheet_edge")
     tab = w.body(s, "/Asset/Edge", C.TAB_MASS, ccd=True)
     w.box(s, tab + "/PaperEdge", C.TAB_SIZE, (0, 0, 0), PAPER)
+    m = w.Phy.MaterialAPI.Get(s, "/Asset/Physics")
+    m.CreateStaticFrictionAttr(.82)
+    m.CreateDynamicFrictionAttr(.72)
     phys = w.Px.PhysxRigidBodyAPI.Get(s, tab)
     phys.CreateDisableGravityAttr(True)
     phys.CreateLinearDampingAttr(10.)
@@ -48,7 +53,10 @@ def tab_asset(w):
 def cloth_asset(w):
     s = w.stage("cloth")
     cloth = w.body(s, "/Asset/Cloth", .034, ccd=True)
-    w.box(s, cloth + "/Weave", C.CLOTH_SIZE, (0, 0, 0), CLOTH)
+    w.box(s, cloth + "/Weave", C.CLOTH_SIZE, (0, 0, 0), CLOTH, collide=False)
+    backing = C.CLOTH_SIZE - [0., 0., .002]
+    w.box(s, cloth + "/FeltBacking", backing, (0, 0, -.001), CLOTH)
+    w.Geom.Imageable(s.GetPrimAtPath(cloth + "/FeltBacking")).MakeInvisible()
     for side in (-1, 1):
         w.box(s, cloth + ("/HemNear" if side < 0 else "/HemFar"), (C.CLOTH_SIZE[0], .005, .001),
               (0, side * (C.CLOTH_SIZE[1] / 2 - .004), C.CLOTH_SIZE[2] / 2), (.092, .30, .55),
@@ -79,7 +87,9 @@ def create_assets(directory):
         ("cloth", "rigid", C.CLOTH, cloth_asset(writer)),
         ("fixtures", "base", np.zeros(3), fixtures(writer)),
     ]
-    return {"assets": [
+    assets = [
         dict(name=name, type=kind, position=np.asarray(pose).tolist(), file=writer.save(stage))
         for name, kind, pose, stage in objects
-    ], "settle_actions": 18}
+    ]
+    assets[1]["quaternion"] = [0., math.sin(C.TAB_TILT / 2), 0., math.cos(C.TAB_TILT / 2)]
+    return {"assets": assets, "settle_actions": 18}

@@ -7,11 +7,18 @@ from yam_arena.urdf import quat_xyzw_to_matrix
 
 from . import config as C
 
-PEEL_FORCE = 0.85
-TAPE_STIFFNESS = 230.
+PEEL_FORCE = 1.60
+STARTER_FORCE = .58
+TAPE_STIFFNESS = 120.
+TAPE_DAMPING = .14
 FOLD_STIFFNESS = 22.
-NAP_STIFFNESS = 1300.
+FOLD_DAMPING = .14
 LOAD_REQUIRED = .8
+BEARING_DRAG = .00018
+NAP_STIFFNESS = 1500.
+NAP_HEIGHT = .0014
+NAP_FRICTION = .48
+NAP_TRACTION = 7.
 SHEET = (.91, .80, .56)
 DIRT = (.89, .76, .57)
 
@@ -25,9 +32,10 @@ class Tape:
         self.tension = 0.
         self.peak_tension = 0.
         self.peak_contact = 0.
-        self.roll_angle = 0.
         self.travel = 0.
         self.previous = None
+        self.previous_fold = None
+        self.previous_length = None
         self.roller = C.ROLLER.copy()
         self.rotation = np.eye(3)
         self.tab = C.TAB.copy()
@@ -41,64 +49,79 @@ class Tape:
     def radial(self, radians):
         return self.rotation @ np.array([math.sin(radians), 0., math.cos(radians)])
 
-    def advance(self, dt, hub, edge, cloth, angle):
+    def advance(self, dt, hub, edge, cloth, angular_velocity):
         self.roller, self.rotation = hub[:3], quat_xyzw_to_matrix(hub[3:])
         self.tab, self.tab_rotation = edge[:3], quat_xyzw_to_matrix(edge[3:])
         self.cloth, self.cloth_rotation = cloth[:3], quat_xyzw_to_matrix(cloth[3:])
-        self.roll_angle = angle
         released = self.progress >= C.SHEET_LENGTH
-        self.load = 0.
+        self.load = min(3., NAP_STIFFNESS * self.nap_compression())
+        self.peak_contact = max(self.peak_contact, self.load)
         if released:
             self.tension = 0.
-            lift = min(3.0, NAP_STIFFNESS * max(0., self.interference()))
-            self.load = lift
-            self.peak_contact = max(self.peak_contact, lift)
-            self.collect(angle)
+            self.collect(dt, angular_velocity)
             # Gravity acts on the removed flexible sheet through its leading edge.
-            return np.array([0., 0., -C.TAB_MASS * 9.81]), lift
+            return np.array([0., 0., -C.TAB_MASS * 9.81])
 
+        front_angle = C.START_ANGLE - self.progress / C.RADIUS
         self.front = (
             self.roller + self.rotation[:, 1] * C.TAB_Y
-            + C.RADIUS * self.radial(self.progress / C.RADIUS)
+            + C.RADIUS * self.radial(front_angle)
         )
         delta = self.tab - self.front
         length = float(np.linalg.norm(delta))
         direction = delta / max(length, 1e-7)
-        leader = float(np.linalg.norm(C.TAB_OFFSET - np.array([0., C.TAB_Y, C.RADIUS])))
+        leader = float(np.linalg.norm(C.TAB_OFFSET - C.SEAM))
         stretch = length - leader - .004 - self.progress
-        self.tension = float(np.clip(TAPE_STIFFNESS * stretch, 0., 5.5))
+        extension_speed = 0. if self.previous_length is None else (length - self.previous_length) / dt
+        self.previous_length = length
+        self.tension = 0.
+        if stretch > 0.:
+            self.tension = float(np.clip(TAPE_STIFFNESS * stretch + TAPE_DAMPING * extension_speed, 0., 3.8))
         self.peak_tension = max(self.tension, self.peak_tension)
-        peel_angle = float(direction @ self.radial(self.progress / C.RADIUS))
-        if self.tension >= PEEL_FORCE and peel_angle >= -.30:
-            speed = min(.30, .24 * (self.tension - PEEL_FORCE))
+        peel_angle = float(direction @ self.radial(front_angle))
+        resistance = STARTER_FORCE if self.progress < C.DRY_ZONE else PEEL_FORCE
+        if self.tension >= resistance and peel_angle >= -.30:
+            speed = min(.30, .24 * (self.tension - resistance))
             self.progress = min(C.SHEET_LENGTH, self.progress + speed * dt)
         fold_offset = self.tab - (self.roller + self.rotation @ C.TAB_OFFSET)
-        bend = -FOLD_STIFFNESS * fold_offset
-        bend *= min(1., 1.2 / max(np.linalg.norm(bend), .00001))
-        fold = max(0., 1. - self.progress / .010)
-        return -self.tension * direction + fold * bend, 0.
+        fold_speed = np.zeros(3) if self.previous_fold is None else (fold_offset - self.previous_fold) / dt
+        self.previous_fold = fold_offset
+        bend = -FOLD_STIFFNESS * fold_offset - FOLD_DAMPING * fold_speed
+        bend *= min(1., .62 / max(np.linalg.norm(bend), .00001))
+        fold = max(0., 1. - self.progress / C.DRY_ZONE)
+        return -self.tension * direction + fold * bend
 
-    def interference(self):
-        axis = self.rotation[:, 1]
+    def nap_compression(self):
         normal = self.cloth_rotation[:, 2]
+        axis = self.rotation[:, 1]
         if abs(axis @ normal) > .11:
             return 0.
         offset = self.cloth_rotation.T @ (self.roller - self.cloth)
-        if abs(offset[0]) > C.CLOTH_SIZE[0] / 2 + .010 or abs(offset[1]) > C.CLOTH_SIZE[1] / 2:
+        width = C.CLOTH_SIZE[:2] / 2
+        if np.any(abs(offset[:2]) > width):
             return 0.
-        return C.RADIUS + C.PILE + C.CLOTH_SIZE[2] / 2 - offset[2]
+        return max(0., C.RADIUS + C.CLOTH_SIZE[2] / 2 + NAP_HEIGHT - offset[2])
 
-    def collect(self, angle):
-        current = self.roller - self.cloth, angle
+    def nap_force(self, contact_velocity):
+        normal = self.cloth_rotation[:, 2]
+        tangent = np.cross(self.rotation[:, 1], normal)
+        limit = NAP_FRICTION * self.load
+        drag = np.clip(NAP_TRACTION * (contact_velocity @ tangent), -limit, limit)
+        return self.load * normal - drag * tangent
+
+    def collect(self, dt, angular_velocity):
+        current = self.roller - self.cloth
         previous, self.previous = self.previous, current
         if previous is None or self.load < LOAD_REQUIRED:
             return
-        tangent = np.cross(self.rotation[:, 1], self.cloth_rotation[:, 2])
-        distance = abs(float((current[0] - previous[0]) @ tangent))
-        roll = C.RADIUS * abs(math.remainder(angle - previous[1], math.tau))
-        if distance < .00001 or not .43 <= roll / distance <= 1.85:
+        if abs(self.rotation[:, 1] @ self.cloth_rotation[:, 2]) > .11:
             return
-        self.travel += distance
+        tangent = np.cross(self.rotation[:, 1], self.cloth_rotation[:, 2])
+        travel = float((current - previous) @ tangent)
+        roll = C.RADIUS * (angular_velocity @ self.rotation[:, 1]) * dt
+        if abs(travel) < .00001 or not .43 <= roll / travel <= 1.85:
+            return
+        self.travel += abs(travel)
         for number, local in enumerate(C.DIRT):
             if number in self.captured:
                 continue
@@ -117,9 +140,13 @@ class Tape:
     def sheet_panels(self):
         axis = self.rotation[:, 1] * C.WIDTH / 2
         if self.progress < C.SHEET_LENGTH:
-            angles = np.linspace(self.progress / C.RADIUS, math.tau, 33)
+            front_angle = C.START_ANGLE - self.progress / C.RADIUS
+            angles = np.linspace(front_angle, C.START_ANGLE - math.tau, 33)
             seam = self.roller + (C.RADIUS + .0005) * self.radial(angles[0])
-            yield self.tab - self.rotation[:, 1] * C.TAB_Y, seam, axis
+            centre = self.tab if self.progress < C.DRY_ZONE else self.tab - self.rotation[:, 1] * C.TAB_Y
+            strip = self.rotation[:, 1] * C.TAB_SIZE[1] / 2 if self.progress < C.DRY_ZONE else axis
+            anchor = seam + self.rotation[:, 1] * C.TAB_Y if self.progress < C.DRY_ZONE else seam
+            yield centre, anchor, strip
             for a, b in zip(angles, angles[1:]):
                 yield (
                     self.roller + (C.RADIUS + .0005) * self.radial(a),

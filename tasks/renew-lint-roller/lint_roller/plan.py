@@ -8,8 +8,9 @@ from .motion import Program, rotation
 TOP = np.array([[0., -1., 0.], [-1., 0., 0.], [0., 0., -1.]])
 HOLD = rotation("Z", np.deg2rad(-90.)) @ TOP
 ROLL = rotation("Y", np.deg2rad(-15.)) @ HOLD
+PINCH = rotation("Y", np.deg2rad(-20.)) @ rotation("Z", np.deg2rad(90.)) @ TOP
 SEAM_APPROACH = 3.75
-SEAM_PINCH = 6.50
+SEAM_SAMPLE_END = 5.15
 
 
 def waypoints(mode="demo", seam=None):
@@ -18,9 +19,9 @@ def waypoints(mode="demo", seam=None):
         return p.moves
     handle = C.ROLLER + [0., C.HANDLE_Y, .002]
     edge = C.TAB if seam is None else seam
-    tab = edge + [-.012, .002, -.003]
+    tab = edge + [0., -.003, .002]
     brace = C.CLOTH + [.008, -.105, .005]
-    rolling_start = np.array([.331, C.CLOTH[1], C.TABLE + C.CLOTH_SIZE[2] + C.RADIUS - .0003])
+    rolling_start = np.array([.331, C.CLOTH[1], C.TABLE + C.CLOTH_SIZE[2] + C.RADIUS - .0065])
     rolling_end = rolling_start + [.173, 0., 0.]
     p.add(2.0, "approach the lint roller",
           left=(handle + [0., 0., .052], HOLD, .65))
@@ -28,21 +29,21 @@ def waypoints(mode="demo", seam=None):
           left=(handle, HOLD, .65))
     p.add(.65, "grasp the handle", left=(handle, HOLD, .02))
     p.add(1.5, "counterhold the roll and approach the factory seam",
-          left=(handle, HOLD, .02), right=(tab + [0., -.018, .034], TOP, .44))
+          left=(handle, HOLD, .02), right=(tab + [0., 0., .035], PINCH, .36))
     if mode != "dirty-roll":
-        p.add(1.25, "approach the outer sheet edge", right=(tab, TOP, .32))
-        p.add(.7, "pinch the sheet edge", right=(tab, TOP, 0.))
+        p.add(1.25, "approach the outer sheet edge", right=(tab, PINCH, .30))
+        p.add(.4, "pinch the sheet edge", right=(tab, PINCH, 0.))
         p.add(1.2, "lift the initial adhesive seam",
-              right=(tab + [-.024, -.020, .044], TOP, 0.))
-        pull = tab + [.085, -.187, .075]
+              right=(tab + [-.025, -.010, .045], PINCH, 0.))
+        pull = tab + [.025, -.174, .150]
         p.add(2.5, "unwind one complete sheet against adhesion",
-              right=(pull, TOP, 0.))
+              right=(pull, PINCH, 0.))
         p.add(.8, "finish the perforation release")
         discard = np.array([.298, -.224, .845])
         p.add(1.2, "carry off the spent sheet",
-              right=(discard, TOP, 0.))
+              right=(discard, PINCH, 0.))
         p.add(.6, "release the spent sheet",
-              right=(discard, TOP, .6))
+              right=(discard, PINCH, .6))
     if mode == "peel-only":
         p.add(.8, "hold the exposed fresh roll")
         return p.moves
@@ -54,7 +55,7 @@ def waypoints(mode="demo", seam=None):
           right=(brace, TOP, .11))
     p.add(1.2, "load the roller on the cloth",
           left=(rolling_start + [0., C.HANDLE_Y, .001], ROLL, .02))
-    p.add(3.2, "roll across the lint patch without sliding",
+    p.add(3.8, "roll across the lint patch without sliding",
           left=(rolling_end + [0., C.HANDLE_Y, .001], ROLL, .02))
     p.add(.5, "hold the complete cleaned patch in view")
     p.add(1., "lift the roller away",

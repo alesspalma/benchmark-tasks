@@ -42,7 +42,7 @@ class ScriptedPolicy(PolicyBase):
         self.worst_ik_rad = 0.0
 
     def action_at(self, t, joint_pos=None):
-        locating_seam = plan.SEAM_APPROACH <= t <= plan.SEAM_PINCH
+        locating_seam = plan.SEAM_APPROACH <= t <= plan.SEAM_SAMPLE_END
         if locating_seam and self.seam_feedback is not None and self.mode in ("demo", "peel-only"):
             measured = self.seam_feedback()
             measured = config.TAB + np.clip(measured - config.TAB, -.025, .025)
