@@ -14,5 +14,5 @@
   "run_limit": "640 actions at 20 Hz",
   "reset_notes": "Unseat both end loops and place the loosened mat across the nonslip pad.",
   "fidelity": "The rolled mat uses a sprung full-width outer sector for foam rebound. The elastic loop apertures change under spring load and articulated shoulder-webbing segments carry the unsupported mat. The simulation does not resolve individual woven fibers.",
-  "scores": "Native contact prototype: 0.0 through 224 actions. Full task validation pending."
+  "scores": "Native first-loop probe: 0.0 through 219 actions. Full task validation pending."
 }
