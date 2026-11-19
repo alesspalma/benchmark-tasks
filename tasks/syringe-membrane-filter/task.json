@@ -15,5 +15,6 @@
   "run_limit": "500 steps (25 seconds at 20 Hz)",
   "reset_notes": "Restore an empty, dry receiving vial and dry tray. Load 7.0 mL of freshly resuspended inert sample, attach a fresh prewetted filter, and seat the filter rim on the upright holder.",
   "fidelity": "The full-size free syringe, plunger, flange and labware use native contacts. Measured plunger displacement expels a corresponding liquid volume against a rate-dependent membrane load. A reduced jet model sends that volume through the fixed, prewetted membrane to the vial or catch tray according to outlet pose. The coupled filter captures the sized inert particles. Threads, membrane pores and individual droplets are represented in aggregate.",
-  "scores": "Demo: 1.0 after 344 actions."
+  "scores": "Demo: 1.0 after 344 actions. Dream-1: 0 after 500 actions.",
+  "media": "M-H2FQVF"
 }
