@@ -87,13 +87,12 @@ def cassette(w):
 def cradle(w):
     s = w.stage("cradle")
     x, y, z = C.ROLLER_START
-    floor_z = z - C.ROLLER_R - .005
-    w.box(s, "/Asset/Foot", (.156, .064, floor_z-C.TABLE),
-          (x, y, (floor_z+C.TABLE)/2), GREY)
+    # The two flat seats are entirely outboard of the fork and drum.
+    # Their inside edges leave 6.5 mm of lateral clearance to the fork.
+    support = z + .0195
     for k, side in enumerate((-1, 1)):
-        support = z + .0195
-        w.box(s, f"/Asset/Shoulder{k}", (.016, .049, support-floor_z),
-              (x+side*.066, y, (floor_z+support)/2), ABS)
+        w.box(s, f"/Asset/Seat{k}", (.009, .034, support-C.TABLE),
+              (x+side*.069, y, (C.TABLE+support)/2), ABS)
     return w.save(s)
 
 

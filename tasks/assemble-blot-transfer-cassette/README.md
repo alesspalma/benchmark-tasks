@@ -18,7 +18,7 @@ Use the repository's Isaac Lab Arena/YAM environment. The scene uses a fixed lay
 python -B run.py --device cuda:0 --physics-device cpu --no-cameras --output /tmp/cassette-native-prototype
 ```
 
-The native run writes a reset snapshot, a final snapshot, a contact trace and a score receipt. The prototype presently fails the brayer transport, so the native reference never clears a pocket. The branch is an experimental record.
+The native run writes a reset snapshot, a final snapshot, a contact trace and a score receipt. The open saddle allows brayer pickup and transport. The native reference clears no pocket because it maintains loaded rolling contact only briefly and the loose sheet slips during the traverse.
 
 ## Assets and terms
 
