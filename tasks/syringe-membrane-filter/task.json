@@ -1,0 +1,19 @@
+{
+  "title": "Clarify an analytical sample through a syringe membrane",
+  "category": "Other",
+  "keywords": [
+    "analytical sample preparation",
+    "syringe filtration",
+    "laboratory research",
+    "bimanual",
+    "pressure control"
+  ],
+  "instruction": "Filter the sample into the marked vial. Collect at least 4 mL of clear filtrate without spilling more than 0.2 mL.",
+  "context": "Manual syringe filtration is standard particle-removal sample preparation for liquid chromatography. The robot lifts and supports the loaded syringe by its barrel while advancing the plunger against membrane resistance and keeping the open outlet aimed at a narrow receiving vial.",
+  "setup": "On a 240 × 250 mm polypropylene spill tray, a needleless 10 mL Luer-lock syringe with 7.0 mL of a water and inert polystyrene particle suspension stands outlet-down on its 61 mm stand. Its 25 mm regenerated-cellulose syringe filter (0.45 µm) is secured and prewetted. A clear 20 mL vial with a 25 mm opening is empty and upright in a polypropylene puck, 3 mm nearer the robot bases and 165 mm to the right of the syringe. Its orange line marks 4 mL. The robot starts with both grippers clear.",
+  "scoring": "Score 0 for a spill over 0.2 mL, cloudy output, or no clear filtrate in the marked vial. Otherwise score the clear volume divided by 4 mL, capped at 1. Use a tared scale for collection and spills. Compare the vial against water over 2 mm black and white stripes: output with less than 80% of the water photo contrast is cloudy. Either arm may support the syringe.",
+  "run_limit": "500 steps (25 seconds at 20 Hz)",
+  "reset_notes": "Restore an empty, dry receiving vial and dry tray. Load 7.0 mL of freshly resuspended inert sample, attach a fresh prewetted filter, and seat the filter rim on the upright holder.",
+  "fidelity": "The full-size free syringe, plunger, flange and labware use native contacts. Measured plunger displacement expels a corresponding liquid volume against a rate-dependent membrane load. A reduced jet model sends that volume through the fixed, prewetted membrane to the vial or catch tray according to outlet pose. The coupled filter captures the sized inert particles. Threads, membrane pores and individual droplets are represented in aggregate.",
+  "scores": "Demo: 1.0 after 344 actions."
+}
