@@ -6,6 +6,13 @@ from .usd_scene import Writer
 STEEL = (.32, .38, .42)
 PAD = (.08, .47, .62)
 EDGE = (.89, .43, .08)
+DECK_OUTLINE = [
+    (-.145, -.330), (-.131, -.355), (-.104, -.365), (.104, -.365),
+    (.131, -.355), (.145, -.330), (.16, -.280), (.16, .100),
+    (.142, .186), (.113, .264), (.071, .329), (.027, .359), (0, .365),
+    (-.027, .359), (-.071, .329), (-.113, .264), (-.142, .186),
+    (-.16, .100), (-.16, -.280),
+]
 
 
 def profile(w, stage, path, outline, low, high, color, collide=True):
@@ -29,12 +36,7 @@ def profile(w, stage, path, outline, low, high, color, collide=True):
 
 def board(w):
     stage = w.stage("board")
-    outline = [(-.145,-.330),(-.131,-.355),(-.104,-.365),(.104,-.365),
-               (.131,-.355),(.145,-.330),(.16,-.280),(.16,.100),
-               (.142,.186),(.113,.264),(.071,.329),(.027,.359),(0,.365),
-               (-.027,.359),(-.071,.329),(-.113,.264),(-.142,.186),
-               (-.16,.100),(-.16,-.280)]
-    profile(w, stage, "/Asset/SteelDeck", outline, -C.BOARD_THICK, 0., STEEL)
+    profile(w, stage, "/Asset/SteelDeck", DECK_OUTLINE, -C.BOARD_THICK, 0., STEEL)
     for y in (-.224, .212):
         w.box(stage, f"/Asset/Crossbar{y}", (.246,.021,.025),
               (0,y,-.037), (.20,.21,.22))
@@ -69,6 +71,7 @@ def cover(w):
     pad = w.body(stage, "/Asset/Pad", .124, articulation=True, ccd=True)
     w.Px.PhysxArticulationAPI.Get(stage, pad).CreateEnabledSelfCollisionsAttr(False)
     w.box(stage, pad + "/PaddedCentre", (.321, .500, C.TOP), (0.,-.030,0.), PAD)
+    w.Geom.Imageable(stage.GetPrimAtPath(pad + "/PaddedCentre")).MakeInvisible()
     for sign, end, width in ((1,"Nose",.073),(-1,"Heel",.222)):
         end_y = sign * C.NEUTRAL_LENGTH
         panel = w.body(stage, f"/Asset/{end}Textile", .022, (0., end_y, 0.), ccd=True)
@@ -81,6 +84,7 @@ def cover(w):
                    (flare/2,-.234),(-flare/2,-.234)]
         profile(w, stage, panel + "/PadEnd", [(x,y*sign) for x,y in (polygon if sign == 1 else reversed(polygon))],
                 -C.TOP/2, C.TOP/2, PAD, collide=False)
+        w.Geom.Imageable(stage.GetPrimAtPath(panel + "/PadEnd")).MakeInvisible()
         w.cylinder(stage, lip + "/SewnElastic", .006, width,
                    (0.,0.,0.), EDGE, axis="X")
         w.box(stage, lip+"/HemSleeve", (width,.011,.010), (0.,-.004*sign,.003), PAD)

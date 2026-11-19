@@ -10,7 +10,11 @@ Lay the loose cover face up, aligned to the board's centerline. Place the two ga
 
 ## Score a trial
 
-Give 1.0 if the released cover sits flat and both ends remain secured for one second. Inspect underneath or use a side video with a small mm ruler. Both exposed elastic seam midpoints must lie below the steel rim and 13–79 mm inboard of the farthest point on the corresponding end. The center pad should sit parallel to the deck and within 12 mm of its installed height. Give 0.5 if one elastic end remains under the rim with both hands clear, and 0 otherwise. The simulator checks the same end geometry, level pad and one-second released settling window. Any arm roles or order are allowed.
+Use a ruler and a side or underside video. For each end, locate the middle of the elastic seam. A tucked seam midpoint is 1–15 mm below the underside of the rolled steel rim, 13–79 mm inboard of the furthest point of its end, and within 15 mm of the board centreline. View from below if the steel rim hides the seam from the overhead camera.
+
+A flat, centred pad has its centre within 12 mm of the deck centre in each direction. At four locations on the pad, 120 mm to either side of the centreline and 250 mm toward the heel or 210 mm toward the nose, the top is within 12 mm of installed height. Use the nominal pad thickness of 6 mm above the steel deck as the height datum. Both hands must be at least 65 mm from each seam midpoint and outside the board's clearance volume. That volume extends 193 mm on each side of the centreline, 413 mm from centre toward either end and 55 mm above the work surface.
+
+Give 1.0 if both seams are tucked and the flat, centred pad stays in place with both hands clear for one second. Give 0.5 if the hands are clear and at least one seam is tucked while any full-credit condition is still unmet. Give 0 otherwise. Arms and operation order can be swapped. In the reference sequence, the right arm presses the padded surface while the left stretches and seats the nose. The left then takes the counterhold before the right stretches and seats the heel.
 
 ## Run
 
@@ -23,11 +27,11 @@ python run.py --device cuda:0 --no-cameras --policy hold --output runs/hold
 python run.py --device cuda:0 --no-cameras --policy lifted --output runs/lifted
 ```
 
-At 20 action steps per second, the 520-action budget is 26 seconds of task time. The local runner reports actual elapsed wall time, final score and native measurements in `receipt.json` and records each step to `trace.jsonl`. It starts each camera file with frame zero and writes every subsequent RGB frame at 20 fps. The lower-cost headless controls are a stationary policy and a policy that leaves the heel hem lifted while releasing the nose.
+At 20 action steps per second, the 600-action budget is 30 seconds of task time. The local GPU recording takes approximately one minute. The local runner reports actual elapsed wall time, final score and native measurements in `receipt.json` and records each step to `trace.jsonl`. It starts each camera file with frame zero and writes every subsequent RGB frame at 20 fps. The lower-cost headless controls are a stationary policy and a policy that seats the nose and releases the cover while the heel remains loose on top of the deck.
 
 ## Simulation fidelity
 
-Robot motions are ordinary 14-component YAM arm and gripper actions. The prismatic spring proxies represent stretch against both ends and compliance at the tucked hem. The board, sewn hems and center pad use native PhysX contact. The two moving padded textile panels are visual proxies for the cloth surface. Local fabric wrinkling and distributed forces are approximated by the native motion of the sewn ends. No extra grasp hardware is attached to the cover.
+Robot motions are ordinary 14-component YAM arm and gripper actions. The prismatic spring proxies represent stretch against both ends and compliance at the tucked hem. The board, sewn hems and center pad use native PhysX contact. The single rendered fabric skin and skirt follow the pad and actual native seam positions. Local fabric wrinkling and distributed stretch are reduced to the native motion of the sewn ends. The 105 N/m lengthwise spring is a model parameter. Real trials use the cover and ruler checks specified above. The grippers hold the cover by its gathered elastic hems.
 
 ## Asset licenses
 

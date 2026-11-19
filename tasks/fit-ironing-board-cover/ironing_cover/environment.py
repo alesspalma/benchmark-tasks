@@ -266,6 +266,10 @@ class Environment(YamArenaEmbodiment):
             for n in ARMS
         }
         self._cover = self._base.scene["cover"]
+        if self.render_images:
+            from .cloth_visual import CoverVisual
+
+            self._cover_visual = CoverVisual(self._base.sim.stage, self._base.scene.env_prim_paths[0])
 
     def reset(self, scene, *, seed=None):
         self._ensure_sim()
@@ -275,8 +279,10 @@ class Environment(YamArenaEmbodiment):
             self._env.step(self._ready)
         self._t = 0.0
         self.scorer.reset()
-        self.metrics = self.scorer.evaluate(self.state())
+        initial = self.state()
+        self.metrics = self.scorer.evaluate(initial)
         if self.render_images:
+            self._cover_visual.update(initial)
             for _ in range(4):
                 self._base.sim.render()
         obs = self._observation()
@@ -285,6 +291,8 @@ class Environment(YamArenaEmbodiment):
         return obs
 
     def state(self):
+        from yam_arena.urdf import quat_xyzw_to_matrix
+
         C = config
         view = self._cover.root_view
         transforms = dict(zip(self._cover.body_names, array(view.get_link_transforms())[0], strict=True))
@@ -296,20 +304,31 @@ class Environment(YamArenaEmbodiment):
                       and C.BOARD_TOP - .033 <= hem[2] <= C.BOARD_TOP - .019)
             for (end, hem), sign in zip(hems.items(), (1, -1))
         }
-        flat = bool(abs(pad[0] - C.BOARD_X) <= .012 and abs(pad[1]) <= .036
-                    and abs(pad[2] - C.START_Z) <= .012 and np.linalg.norm(pad[3:6]) <= .07)
+        rotation = quat_xyzw_to_matrix(pad[3:])
+        samples = np.array([[x, y, 0.] for x in (-.12, .12) for y in (-.25, .21)])
+        peak_lift = float(np.max(np.abs((samples @ rotation.T)[:, 2] + pad[2] - C.START_Z)))
+        alignment = np.abs(pad[:2] - [C.BOARD_X, 0.])
+        flat = bool(np.max(alignment) <= .012 and peak_lift <= .012)
+        hands_clear = all(
+            (hand[2] > C.BOARD_TOP + .055 or abs(hand[0] - C.BOARD_X) > .193 or abs(hand[1]) > .413)
+            and all(np.linalg.norm(hand - hem) > .065 for hem in hems.values())
+            for hand in hands.values()
+        )
         return {
             "pad_pose": pad.tolist(),
             "hem_positions": {name: point.tolist() for name, point in hems.items()},
             "hands": {name: point.tolist() for name, point in hands.items()},
             "extension_m": dict(zip(self._cover.joint_names, array(view.get_dof_positions())[0].tolist())),
-            "seated": seated, "cover_flat": flat,
-            "hands_clear": all(np.linalg.norm(hand - hem) > .065 for hand in hands.values() for hem in hems.values()),
+            "seated": seated, "cover_flat": flat, "pad_lift_m": peak_lift,
+            "pad_alignment_m": alignment.tolist(), "hands_clear": hands_clear,
         }
 
     def _task_step(self):
         state = self.state()
         self.metrics = self.scorer.evaluate(state)
+        if self.render_images:
+            self._cover_visual.update(state)
+            self._base.sim.render()
         return StepResult(
             observation=self._observation(), terminated=self.metrics["success"],
             termination_reason="success" if self.metrics["success"] else None,

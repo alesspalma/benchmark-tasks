@@ -9,11 +9,11 @@
     "bimanual stretching"
   ],
   "instruction": "Fit the padded cover over the ironing board. Tuck the elastic edge under both ends and leave the ironing surface flat.",
-  "context": "Replacing a worn ironing-board cover means stretching its elastic edge around the bare board without lifting the opposite end off. Fit the elastic underneath at both ends so the padded surface stays flat when released.",
-  "setup": "A full-size 73 × 32 cm tabletop ironing board stands with its steel deck 10.5 cm above the worktop. Its narrow nose points left. A matching 6 mm cotton and foam ironing cover is placed face up on the board with both gathered end hems loose above the bare rim. No edge is tucked beneath the board. Start both YAM grippers open. See the README for board and cover placement.",
-  "scoring": "After the robot clears the cover for one second, score 1.0 if both elastic hems are visibly tucked below the steel rim, at least 13 mm inboard of the end outline, and the pad sits flat within a 12 mm depth gauge over the deck. Score 0.5 if exactly one end stays tucked. Give 0 in other cases.",
-  "run_limit": "520 actions (26 seconds at 20 Hz)",
+  "context": "The gathered seam at the nose holds a replacement cover as you stretch the other end over the steel rim. Counterhold the cover while each elastic end retracts under the deck so the finished ironing surface stays flat and centred.",
+  "setup": "A 73 × 32 cm tabletop ironing board stands on four rubber feet with its steel deck 10.5 cm above the worktop. The left YAM arm faces the tapered nose and the right faces the broad heel. A matching cotton cover with a 6 mm foam pad lies face up on the deck. Both gathered elastic seams start loose, 57 mm inboard from the ends. The rims are bare beneath the board. Start both YAM grippers open and clear. The README lists tabletop positions.",
+  "scoring": "Score 1.0 if both elastic seam midpoints stay 1–15 mm below the deck underside and 13–79 mm inboard of their ends, within 15 mm of the board centreline. Require the pad centre within 12 mm of deck centre along both axes, four surface checks within 12 mm of installed height, and both hands clear for 1 s. Score 0.5 for a released cover with at least one hem tucked to the same geometry before all full-credit conditions are met, and 0 otherwise.",
+  "run_limit": "600 actions (30 seconds at 20 Hz)",
   "reset_notes": "Rest both ends of the cover on the deck, with each elastic seam above the surface, 57 mm inboard from the nearest end. Leave the board bare beneath both rims. Flatten the center pad without stretching the elastic.",
-  "fidelity": "A rigid steel deck supports a padded textile proxy. Native spring-loaded joints represent lengthwise elasticity and tuck compliance, with real friction against the mobile elastic hems. Visible end panels approximate the cloth surface. The model omits local wrinkles and distributed fabric forces.",
-  "scores": "Native prototype maximum completed score: 0.0."
+  "fidelity": "The full-size steel deck supports a replaceable padded cover. Native spring-loaded sliders model the elastic seams, which collide with the fingers and catch under the deck. The pad makes native contacts with the grippers and deck. The rendered fabric skin follows the actual pad and seam poses. The model omits local wrinkles and distributed stretch.",
+  "scores": "Demo: 1.0 after 553 actions."
 }

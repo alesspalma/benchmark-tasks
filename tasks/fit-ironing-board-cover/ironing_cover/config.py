@@ -7,7 +7,7 @@ from yam_arena.constants import READY
 KEY = "ironing_cover"
 INSTRUCTION = "Fit the padded cover over the ironing board. Tuck the elastic edge under both ends and leave the ironing surface flat."
 DESCRIPTION = "A 73 by 32 cm tabletop ironing board supports a loose, unfitted padded cotton cover."
-MAX_STEPS = 520
+MAX_STEPS = 600
 PHYSICS_HZ = 240
 BASES = station.BASES
 STOWED = {side: READY for side in BASES}
