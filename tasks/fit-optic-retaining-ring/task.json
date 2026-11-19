@@ -15,5 +15,6 @@
   "run_limit": "620 actions (31 seconds at 20 Hz)",
   "reset_notes": "Place the lens on the shoulder and back off the ring one sixth of a turn from first edge contact. Set both slots along the bench x-axis. Stand the loose tube on the light pad and put the spanner in its rest. Start both arms in their open, clear pose.",
   "fidelity": "Native collisions constrain both steel prongs, the recess, optic rim and seat. The ring has independent rotation and axial travel. A force-limited coupling uses the actual 40 TPI thread lead and resists rotation. The glass is a rigid clear optic. Aperture inspection uses measured alignment and geometry. Face contact is checked against its clear disk.",
-  "scores": "Demo: 1.0 after 483 actions."
+  "scores": "Demo: 1.0 after 483 actions. Dream-1: 0 after 620 actions.",
+  "media": "M-6SFGTP"
 }
