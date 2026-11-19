@@ -1,0 +1,13 @@
+{
+  "title": "Set the height and tension of a table-tennis net",
+  "category": "Societal relatability",
+  "keywords": ["table tennis", "net tension", "cord take-up", "bimanual manipulation"],
+  "instruction": "Set the table-tennis net to playing height and tension, then let go.",
+  "context": "A net prepared for a match has to hold a level top edge after the adjusters are released. Wind the top cord against its elastic resistance with one hand and set the friction-fit near guide to height with the other. The net uses the standard light height gauge and weighted midpoint check. Either hand assignment and any order are valid.",
+  "setup": "A regulation 2.740 × 1.525 m table has a 25 mm wooden deck at 760 mm and two steel table clips 1,830 mm apart. The far guide is 152.5 mm above the deck. The near guide is 166.5 mm high. The cotton-blend net is on both posts and its top cord is slack. A ratcheting reel with an 8 mm winding radius and 32 mm hand-knob radius is ready at the near post. Both YAM grippers start clear. The README specifies all poses and the reset.",
+  "scoring": "Read light-gauge heights 300 mm in from each post and hang a separate 100 g gauge at the midpoint. Score 1.0 for both light heights within 4 mm of 152.5 mm and the loaded midpoint within 4 mm of 142.5 mm, with the hardware released, ratchet holding, and both hands at least 64 mm away for 0.75 s. Score 0.5 for a retained, steady adjustment meeting the loaded midpoint check after release. Score 0.25 for retained middle take-up of at least 20 N after release. Score 0 otherwise.",
+  "run_limit": "460 actions (23 seconds at 20 Hz)",
+  "reset_notes": "Keep both clamps mounted. Set the near groove to 166.5 mm and release the winding tension. Keep the far end at 152.5 mm. Start both grippers clear.",
+  "fidelity": "The near guide and winding reel are native joints operated through robot contact. Cord take-up produces an opposing elastic reel torque. A load-limited ratchet bearing and a friction shoe retain the adjustments. The measured endpoints and elastic span model determine the woven net's shape and the gauge readings under the separate 100 g load.",
+  "scores": "Demo: 1.0"
+}
