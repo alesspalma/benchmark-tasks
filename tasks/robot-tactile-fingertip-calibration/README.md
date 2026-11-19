@@ -15,7 +15,7 @@ a photometric map. [GelSight calibration, §3.5][paper] and the
 The round indenter is 8 mm in diameter, centered on a 6 mm stainless stem and a
 20 × 21 × 32 mm handle. Total length is 97 mm. The handle starts upright in a
 low bench stand with three equally spaced guide pegs around the stem. The
-42 × 36 × 42 mm, approximately 76 g nylon fingertip enclosure has a
+42 × 36 × 42 mm nylon fingertip enclosure has a
 26 × 30 × 4 mm silicone sensing pad, an internal RGB camera, and oblique
 red, green and blue illumination. It stands pad up on a 100 mm high open rack,
 with its long side 45° from the bench x axis. The rack leaves both gripping
@@ -30,37 +30,28 @@ left, z up, measured in mm from the table surface. The sensor starts at
 (397, -139, 5) using the stem-axis origin 3 mm below the ball surface. The YAM
 bases are 610 mm apart. The three capture regions in the pad frame, referenced
 to the pad center, are (-6, -5), (6, -5) and (0, 6) mm. Use corresponding
-position guides in the capture software or marks on the bezel outside the
-viewing area. The three status marks on the simulated housing indicate saved
-frames. In a physical trial, the capture application's thumbnail strip provides
-the same readout. Use a reflective silicone sensor with a field of view that
-contains the three regions and their contact patches, such as the
-[design documented by Yuan et al.][paper]. The simulated housing dimensions
-are original and can be reconstructed from the printed sizes and
-`tactile_calibration/builder.py`; the steel ball is a standard diameter. A low-cost development fixture uses a
-304 stainless ball screwed to a small handle, a 3D-printed dark camera
-enclosure with an acrylic backing, a 4 mm cast optical silicone pad,
-an off-the-shelf USB camera board with adjustable focus, and three oblique
-RGB LED groups. The camera is focused on the silicone surface and each
-color illuminates from a different side. Use the documented sensor design
-and capture software for lens/light arrangement, then mark the stated
-regions in pixels after a scale calibration. No custom metal machining
-is needed apart from a standard ball mount.
+marks on the bezel outside the viewing area. The three status marks on the
+simulated housing indicate saved frames. The physical detector uses an
+Arducam B0520 USB camera, a cast and coated 4 mm silicone pad, and three
+separately positioned RGB lights. Follow the [dimensioned build and pad
+recipe](physical/BUILD.md) for the parts, alignment, optical calibration and
+recorder commands. The pad can be replaced independently of the housing.
 
 ## Run, inspect, and reset
 
-Save a contact-free baseline from the sensor with autoexposure disabled. In
-the real capture, use the baseline-subtracted image to locate each single
-contiguous indentation and its diameter. Use a calibrated pixel-to-mm scale.
-A saved frame counts if the contact center is within 2.3 mm of the target,
-the contact diameter is 4.7–6.5 mm, and those conditions hold for at least
-0.4 s. Keep the ball clean. Save one image per region. Award one third per
-accepted region, with any repeated capture of a region counting once. Three
-filled regions is full credit. An empty recording is zero. Use the sensor
-images as evidence, including an unloaded frame wherever useful for
-background subtraction. There is no required arm assignment or region order.
+On physical hardware, [run the included recorder](physical/BUILD.md#prepare-and-score-a-physical-trial)
+with the clean pad unloaded and fixed camera exposure. The program takes
+the baseline, then measures each patch's center and area-equivalent diameter
+in the calibrated image. The center must be within 2.3 mm of a target and the
+diameter within 4.7–6.5 mm for an uninterrupted 0.4 s of valid camera frames.
+The recorder times the hold from the camera frames and automatically saves
+one camera image and its timestamped hold sequence per region. The score is
+the number of distinct regions captured divided by three. No extra operator
+triggers captures. Either arm can support the enclosure, and region order is
+free.
 
-The simulated gel load is about 0.94–2.06 N in the valid window, derived
+The simulation models the housing at 76 g. The simulated gel load is about
+0.94–2.06 N in the valid window, derived
 from the 1,250 N/m nominal effective stiffness. This is a design model, not
 a material characterization. An actual elastomer has a nonlinear,
 position-dependent force–indentation curve. Use visible contact diameter
@@ -94,6 +85,7 @@ reference impressions, before fitting a complete hardware calibration.
 | Fingertip enclosure, silicone-pad assembly, region marks and status lights | Original procedural geometry in this task, MIT. |
 | Steel-ball indenter, stem, and handle | Original procedural geometry in this task, MIT. |
 | Nylon sensor rack and peg holder | Original procedural geometry in this task, MIT. |
+| Physical build instructions and capture software | Original documentation and Python in this task, MIT. Manufacture the optical pad from the referenced materials and use the listed off-the-shelf components. |
 | YAM pair | Bundled I2RT [MIT terms and attribution][i2rt-license]; geometry split documented by the [adapter][split-meshes]. |
 | Worktop and station lighting | [Adapter procedural station][room]. The [adapter has no declared repository license][adapter-license]. |
 | Overview camera `top_cam` | Virtual sensor, task-authored pose from [YAMLAb optics][calibration] under [MIT][calibration-license]. Spawned by the [adapter][cameras]. |
