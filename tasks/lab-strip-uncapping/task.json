@@ -1,7 +1,12 @@
 {
   "title": "Pry the connected caps off a filled eight-tube strip",
   "category": "Other",
-  "keywords": ["laboratory handling", "bimanual", "press-fit", "prying"],
+  "keywords": [
+    "laboratory handling",
+    "bimanual",
+    "press-fit",
+    "prying"
+  ],
   "instruction": "Use the removal tool to uncap the eight-tube strip. Keep the tubes seated upright and put the connected cap strip in the empty dish.",
   "context": "A linked strip of eight tight-fitting caps keeps tube fills isolated. To access the tubes, engage the cap webbing with narrow prongs, counterhold the loose retainer and overcome the plug fits without moving or spilling the tubes.",
   "setup": "On a two-arm YAM bench, an unclamped 76 × 117 × 33 mm ABS retainer supports eight 0.20 mL polypropylene tubes at 9 mm pitch. Each tube holds 100 µL of coloured water under a linked push-on cap. The caps are fully seated. An open-handle polymer removal tool (85 × 40 × 12 mm, two 0.8 mm thick prongs) starts flat to the near right. An empty 114 × 105 × 14 mm dish sits to its right. Robot hands start open, with the tool and retainer untouched. The README gives the object centres and long axes.",
@@ -9,5 +14,6 @@
   "run_limit": "480 actions (24 seconds at 20 Hz)",
   "reset_notes": "Return the retainer, tool and dish to their marked poses. Refill all eight tubes to 100 µL with inert coloured water, reseat every plug and leave the dish empty.",
   "fidelity": "Prongs, caps, rims and retainer have native contact geometry. An estimated per-plug force law resists withdrawal and releases over the final millimetre of travel. Connected webbing is rigid and the retained tube strip and carrier are one compound body. Tilt changes retained volume in opened wells through a quasi-static overflow model.",
-  "scores": "Scripted demo: 1.0 in 437 actions. Stationary control: 0.0. Unbraced pry: 0.0. Dream-1: pending."
+  "scores": "Scripted demo: 1.0 in 437 actions. Stationary control: 0.0. Unbraced pry: 0.0. Dream-1: 0 after 480 actions.",
+  "media": "M-XQP7TZ"
 }
