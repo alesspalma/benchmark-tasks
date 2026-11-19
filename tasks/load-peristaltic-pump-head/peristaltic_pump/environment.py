@@ -289,7 +289,7 @@ class Environment(YamArenaEmbodiment):
             from math import tanh
             angle = array(self._head.root_view.get_dof_positions())[0, self._cam]
             # A crossed spring pulls toward either mechanical stop.
-            torque = 0.25 * tanh((angle - 0.35) / 0.12)
+            torque = (0.24 if angle > 0.36 else 0.82) * tanh((angle - 0.36) / 0.12)
             self._effort[0, self._cam] = torque
             self._head.root_view.set_dof_actuation_forces(
                 self._effort_wp, self._head._ALL_INDICES
@@ -298,20 +298,36 @@ class Environment(YamArenaEmbodiment):
             self._audit_error = error
 
     def _update_fluid_visuals(self):
-        from pxr import Gf, UsdGeom
+        from pxr import Gf, UsdGeom, Vt
 
         stage = self._base.sim.stage
         for i, volume in enumerate(self.check.volumes):
+            path = f"/World/envs/env_0/bench/Stream{i}"
+            jet = UsdGeom.BasisCurves.Get(stage, path)
+            if not jet:
+                jet = UsdGeom.BasisCurves.Define(stage, path)
+                jet.CreateTypeAttr("linear")
+                jet.CreateCurveVertexCountsAttr([2])
+                jet.CreateWidthsAttr([0.0023, 0.0011])
+                jet.CreateDisplayColorAttr([Gf.Vec3f(*config.COLORS[i])])
             water = UsdGeom.Cylinder.Get(stage, f"/World/envs/env_0/bench/Collected{i}")
             if volume <= 0.0:
                 water.MakeInvisible()
+                jet.MakeInvisible()
                 continue
-            height = min(0.024, float(volume) / (np.pi * 0.0071 ** 2 * 1e6))
+            height = min(0.024, float(volume) / (np.pi * 0.010 ** 2 * 1e6))
             water.GetHeightAttr().Set(height)
             water.GetPrim().GetAttribute("xformOp:translate").Set(
-                Gf.Vec3d(float(config.HEAD[0] + config.LANES[i]), -0.160, 0.003 + height / 2)
+                Gf.Vec3d(*config.RECEIVERS[i], 0.003 + height / 2)
             )
             water.MakeVisible()
+            if self.check.active[i]:
+                endpoint = self.check.outlets[i] - np.array([0, 0, config.TABLE])
+                bottom = (endpoint[0], endpoint[1], 0.003 + height)
+                jet.GetPointsAttr().Set(Vt.Vec3fArray([Gf.Vec3f(*endpoint), Gf.Vec3f(*bottom)]))
+                jet.MakeVisible()
+            else:
+                jet.MakeInvisible()
 
     def reset(self, scene, *, seed=None):
         self._ensure_sim()
@@ -403,9 +419,6 @@ class Environment(YamArenaEmbodiment):
             termination_reason="success" if self.metrics["success"] else None,
             info=self.metrics.copy(),
         )
-
-    def native_feedback(self):
-        return self.state()["objects"]
 
     def diagnostics(self):
         return self.state()

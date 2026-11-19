@@ -18,7 +18,6 @@ class ScriptedPolicy(PolicyBase):
         self.info = PolicyInfo(
             name=config.KEY + "_scripted", action_space=action_box(low, high)
         )
-        self.feedback = None
         self.reset(None)
 
     def bind(self, info):
@@ -36,7 +35,7 @@ class ScriptedPolicy(PolicyBase):
             max((sum(w["duration"] for w in v) for v in self.moves.values()), default=0)
             + 2
         )
-        if self.mode == "hold":
+        if self.mode in ("hold", "open-head", "single-tube"):
             self.duration = config.MAX_STEPS / 20
         self.phase = "ready"
         self.worst_ik_m = 0.0

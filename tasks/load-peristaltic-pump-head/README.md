@@ -1,42 +1,60 @@
 # Seat two silicone lines in a peristaltic pump head
 
-Changing tubing on a two-channel head preserves the separation between two independent streams. Support the compliant ends as the tube crosses the opening, seat each tube through both retainers, and close the common over-center lever. The installation follows the two-channel sequence and equal-tube requirement in the [L/S Easy-Load II operating manual](https://digitalassets.avantorsciences.com/adaptivemedia/rendition?clid=SAPDAM&id=a7b40be8108c9fe84c637af6655668d54eba28d7&prid=original&vid=a7b40be8108c9fe84c637af6655668d54eba28d7).
+Changing tubing on a two-channel head preserves the separation between two independent streams. Guide opposite sides of each loose tube across the loading gap, seat it through both retainers, then close the common cam lever. The installation follows the two-channel loading sequence and equal-tube requirement in the [L/S Easy-Load II operating manual](https://digitalassets.avantorsciences.com/adaptivemedia/rendition?clid=SAPDAM&id=a7b40be8108c9fe84c637af6655668d54eba28d7&prid=original&vid=a7b40be8108c9fe84c637af6655668d54eba28d7).
 
 ## Physical setup and reset
 
-Use soft silicone pump tubing with 4.8 mm nominal bore, 8 mm OD and 288 mm length, two identical pieces distinguished by their color. A two-track, cam-closing head accepts both pieces side by side over its rollers. Fix the head to a wide training base with the accessible occlusion bed facing upward. The bench carries three low rests per tube. Their low edges keep the loose round pieces from rolling away. The grippers approach each side between the rests. Connect the drive only for the guarded evaluator's water check, after both hands have withdrawn. Stop and disconnect the drive before every reset.
+Use two equal 352 mm lengths of 8.0 mm OD × 4.8 mm ID silicone pump tubing, marked with different colors. Each has a press-fit inlet elbow on a small fixed feed bottle, with a freely movable continuous loading section and a discharge end open to air. Fill both sources with clean water. An optional drop of food coloring makes the streams visible. Connect the pump drive only for the evaluator's guarded water check after both hands are clear.
 
-All dimensions use metres and the installed station's origin. The right arm is at negative y. The worktop is at z = 0.7475. The head center is (0.358, 0.004) on the worktop, with the retainer centers 46 mm either side along y and sleeve centers 9 mm either side along x. Tube staging x coordinates are 0.444 and 0.263. The centers of the rests are at y = -0.121, -0.013 and 0.119. The tubes are completely clear of their loading tracks. Four 4 mL nominal cups stand at x = 0.349 and 0.367, at y = -0.160 and +0.160. They serve as independent source and receiving vessels for the plain-water performance check. The parts are procedural and the measured commercial operation is the two-channel loading method documented by the manufacturer.
+Use a full-size two-track head with a four-roller cradle and a shared over-center lever. The procedural benchmark head has a 102 × 101 mm footprint, aluminum retainers 92 mm apart along the tube axes and two parallel tracks 18 mm apart across the roller. Its exterior lever swings about the bed hinge via the yellow 19 mm diameter grip and 110 mm axle. Each aluminum parking support is 90 × 16 mm and sits outside of the head. The silicone may slide along each smooth support. No clamp holds the loading section to the support. The two receiving cups have a 22 mm mouth, an outside diameter of 23 mm and a 33 mm height.
 
-## Scoring a trial
+Measurements below are in metres in the YAM station frame, with positive Y toward the left arm. The worktop surface is at z = 0.7475.
 
-Inspect both sides of the closed head for crossed, unseated or visibly crushed tubing. The tube centerlines should stay within 4.1 mm of their assigned lane through both retainers and remain held after release. With the hands withdrawn, apply the guarded three-second, 24 rpm drive check and measure the output in separate graduated vessels. A 1 mL or greater yield through an acceptable channel earns 0.5. Either tube may be in either lane. No output or an unsafe/damaged path earns zero for that channel. In simulation the native compression shoes substitute for a direct tube wall pressure sensor. The evaluator measures the relaxed tube geometry, closure and compression travel, and integrates 1.7 mL per rotor revolution only on an eligible channel. Cup-level markers show that measured result. This bench approximates the tubing and drive response and is intended for initial contact feasibility testing.
+| Part | Starting position or orientation |
+|---|---|
+| Pump | Body center at x = 0.358 and y = 0.004. Retainer centers at y = −0.042 and 0.050. Roller tracks are at x = 0.367 and 0.349. The lever starts open at 70 degrees. |
+| Orange feed fitting | x = 0.335, outlet y = −0.174 and z = 0.8405. Tube initially extends along +Y above that x and is clear of both tracks. |
+| Blue feed fitting | x = 0.307, outlet y = −0.174 and z = 0.8405. Tube initially extends along +Y above that x and is clear of both tracks. |
+| Parking supports | x = 0.345, y = −0.133 and 0.130, z = 0.8365 at the top. |
+| Two empty receiving cups | x = 0.383 and 0.348, y = 0.170. |
+| YAM pair | Bases at y = ±0.305, both grippers open in the fixed ready pose. |
 
-## Run natively
+On reset, stop the drive, open the lever, withdraw the loading sections and return them to the external supports. Retain the original inlet connections. Empty the cups and replenish the clean water. A real setup can use the dimensioned bench head or equivalent two-channel commercial components that preserve access to both retainers. Check that the lever and outlet ends remain within the robot's normal reach.
 
-Use the Inspect Robots YAM Isaac Lab environment. For a 32-second action window at 20 Hz, the unchanged reset layout uses seed `1415158438`.
+## Score a trial
+
+Inspect the closed head and both exits after the grippers are clear. Each loaded tube passes through both retainers and over the roller. It stays within 4.1 mm of its track center and within 5 mm of the centerline height at both retainers and between them. The cam must be within 4 degrees of its closed stop. Neither tube may cross, kink or leave the roller path. Use a ruler and a photograph for alignment. Keep hands off the active loading section and lever.
+
+In the guarded check, run a 24 rpm drive for three seconds. Each correctly installed channel earns 0.5 when its own cup collects at least 1.0 mL. A cup with no correctly installed line earns zero. Neither color is tied to a specific track. Switching color-to-track mapping is valid when each tube is independently routed, remains uncrossed and discharges into its corresponding cup. A dropped outlet, missed retainer, unlatched cam or stationary episode earns zero for every affected channel.
+
+In Isaac Lab the native motion of the two pressure shoes measures loaded occlusion. A load of 1.2 to 6.5 mm at each shoe is the modeled cross-section displacement range for the bench head, using 850 N/m elastic support as a reduced-order contact response. The evaluator checks continuous positive-Y centerlines, the pose of both outlets above catch mouths, the independent occlusion loads and the released cam. Once eligible for 0.5 s, each clear channel accumulates volume using the L/S 25 nominal rate of 1.7 mL per revolution at the fixed check speed. The colored stream and cup level show the measured simulated outcome. The camera and fluid proxies do not change tube or cam physics.
+
+## Run and score in Isaac Lab
+
+Use Inspect Robots, the pinned YAM adapter and the accepted-license Isaac Lab Arena runtime. The episode has one fixed layout and seed `1415158438`, with 860 actions maximum at 20 Hz.
 
 ```bash
 python -m pip install -e . --no-deps
 python run.py --device cuda:0 --output /tmp/peristaltic-demo
 python run.py --device cuda:0 --no-cameras --policy hold --output /tmp/peristaltic-hold
 python run.py --device cuda:0 --no-cameras --policy open-head --output /tmp/peristaltic-open
+python run.py --device cuda:0 --no-cameras --policy single-tube --output /tmp/peristaltic-single
 ```
 
-The native runner writes measured state and score, the initial camera frames, and all 20 Hz views when cameras are enabled. Output paths are exclusive so evidence stays attributable to its source fingerprint. The controller issues joint-position commands only.
+`receipt.json` reports the score, steps, source fingerprint and camera data. The rendered run records all initial and action frames natively in each of the three 640 × 360 views. The reference is a sequence of YAM gripper joint targets with ordinary joint-state tracking. The scorer reads native tube and cam motion after physics steps. The stationary control uses the entire horizon. The open-head control routes both tubes and skips the cam operation. The single-tube control routes the orange tube and attempts lever closure without loading the second channel.
 
-## Asset licenses
+## Assets and licenses
 
 | Asset | Source and license |
 |---|---|
 | Head case and two retainers | Procedural geometry in `builder.py`, MIT (`LICENSE`). |
-| Roller geometry | Procedural cylinders in `builder.py`, MIT (`LICENSE`). |
-| Cam, lever and spring shoes | Procedural geometry and constraints in `builder.py`, MIT (`LICENSE`). |
-| Two flexible tubes | Procedural capsules in `builder.py`, MIT (`LICENSE`). |
-| Loose tube staging rests | Procedural geometry in `builder.py`, MIT (`LICENSE`). |
-| Cups and liquid witness | Procedural geometry in `builder.py`, MIT (`LICENSE`). |
+| Roller and flange geometry | Procedural cylinders in `builder.py`, MIT (`LICENSE`). |
+| Cam, side lever and spring shoes | Procedural geometry and constraints in `builder.py`, MIT (`LICENSE`). |
+| Both feed bottles, elbows and flexible tubes | Procedural geometry and constraints in `builder.py`, MIT (`LICENSE`). |
+| Two external tube supports | Procedural geometry in `builder.py`, MIT (`LICENSE`). |
+| Receiver cups and liquid visualization | Original geometry in `builder.py` and `environment.py`, MIT (`LICENSE`). |
 | Pair of YAM models | [i2rt YAM terms](https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/assets/yam/LICENSE.i2rt) through the pinned adapter. |
-| YAM worktop and room | Procedural [adapter geometry](https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/scene.py), with no separate asset license declared. |
+| Worktop and room | Procedural [adapter geometry](https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/scene.py), with no separate asset license declared. |
 | Overview camera | Task-authored placement with [MIT YAMLAb calibration](https://github.com/ARISE-Initiative/yamlab/blob/ec0455d2b4ce35f21fc126418ea5e74ac567133d/LICENSE). |
 | Left wrist camera | [MIT YAMLAb calibration](https://github.com/ARISE-Initiative/yamlab/blob/ec0455d2b4ce35f21fc126418ea5e74ac567133d/LICENSE) through the pinned adapter. |
 | Right wrist camera | [MIT YAMLAb calibration](https://github.com/ARISE-Initiative/yamlab/blob/ec0455d2b4ce35f21fc126418ea5e74ac567133d/LICENSE) through the pinned adapter. |

@@ -37,7 +37,7 @@ def main():
     p.add_argument("--device", default="cpu")
     p.add_argument("--physics-device", default="cpu")
     p.add_argument("--no-cameras", action="store_true")
-    p.add_argument("--policy", choices=("demo", "hold", "off-vial"), default="demo")
+    p.add_argument("--policy", choices=("demo", "hold", "open-head", "single-tube"), default="demo")
     p.add_argument("--max-steps", type=int, default=c.MAX_STEPS)
     p.add_argument("--seed", type=int, default=1415158438)
     p.add_argument("--width", type=int, default=640)
@@ -70,7 +70,7 @@ def main():
         "control_hz": 20,
         "physics_hz": c.PHYSICS_HZ,
         "instruction": c.INSTRUCTION,
-        "controller_inputs": ["elapsed time", "joint positions", "native tube and hinge poses"],
+        "controller_inputs": ["elapsed time", "joint positions"],
         "cameras_enabled": not a.no_cameras,
     }
     (a.output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
@@ -89,7 +89,6 @@ def main():
             for s in env.spec["assets"]
         }
         policy = pc.ScriptedPolicy(mode=a.policy)
-        policy.feedback = env.native_feedback
         policy.bind(env.info)
         policy.reset(scene)
         (a.output / "reset.json").write_text(
