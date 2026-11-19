@@ -1,0 +1,13 @@
+{
+  "title": "Seat two silicone lines in a peristaltic pump head",
+  "category": "Other",
+  "keywords": ["laboratory equipment", "peristaltic pump", "tube routing", "cam lever", "bimanual"],
+  "instruction": "Seat both tubes in the open pump head, one in each track. Keep them straight at both retainers, close the lever, and let go for the water check.",
+  "context": "A two-channel peristaltic head moves independent low-volume streams while keeping the drive out of contact with the liquid. During a tubing change, both ends of each compliant tube must reach opposite retainers without crossing or pinching outside the roller path. The shared cam loads both tracks together.",
+  "setup": "An unpowered 102 mm wide two-track pump head is fixed to a bench, with a steel four-roller cradle, two retainers with 18 mm track pitch, and its yellow cam lever open. Two equal silicone tubes, 8 mm OD × 288 mm long, start loose on separate three-point bench rests. Four marked cups stand beyond the tube ends for the evaluator's water check. The two YAM arms start open and clear. The README gives the fixed positions and physical setup.",
+  "scoring": "Score 0.5 for each tube that is uncrossed, stays straight through both retainers, stays compressed in a closed head after the hands release, and delivers at least 1 mL of water in the evaluator's guarded check at 24 rpm for 3 s. A twisted or damaged tube, hand contact, or an open lever during the check gives zero for the affected channel. Either tube may occupy either track.",
+  "run_limit": "640 actions (32 seconds at 20 Hz)",
+  "reset_notes": "Disconnect the pump drive, open the cam to its stop, remove the tubes and lay them independently on their rests. Empty the receivers and restore the source cups. Return both arms to the open ready pose.",
+  "fidelity": "Silicone flex is represented by sprung 35 mm links with native capsule contact. A passively biased native cam closes onto two separate spring shoes that measure compression. The evaluator's low-speed water check is a calibrated volume model gated by cam closure, compression and the settled continuous paths. Local cross-section deformation and individual droplets are represented in aggregate.",
+  "scores": "Prototype only."
+}
