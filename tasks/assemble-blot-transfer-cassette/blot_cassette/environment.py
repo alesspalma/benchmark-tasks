@@ -77,8 +77,8 @@ class Environment(YamArenaEmbodiment):
         super().__init__(scene="station", object_jitter=0, control_hz=20, **kwargs)
         camera = self.rig.top_cam
         # Overview of the cassette and roller cradle.
-        position = np.array([.690, -.180, 1.340])
-        sight = np.array([.414, -.008, .861]) - position
+        position = np.array([.555, -.275, 1.340])
+        sight = np.array([.397, -.022, .881]) - position
         sight /= np.linalg.norm(sight)
         screen_right = np.cross(sight, [0.0, 0.0, 1.0])
         screen_right /= np.linalg.norm(screen_right)
@@ -269,12 +269,14 @@ class Environment(YamArenaEmbodiment):
             for n in ARMS
         }
 
-    def _show_gaps(self, cleared):
-        from pxr import UsdGeom
+    def _show_gaps(self):
+        from pxr import Gf, UsdGeom
 
         stage = self._base.sim.stage
         cassette = f"{self._base.scene.env_prim_paths[0]}/cassette/Layer"
-        for index, removed in enumerate(cleared):
+        for index, ((x, _, radius), y, removed) in enumerate(
+            zip(config.GAPS, self.scorer.pockets, self.scorer.cleared)
+        ):
             path = f"{cassette}/Gap{index}"
             gap = UsdGeom.Imageable.Get(stage, path)
             if not gap:
@@ -283,6 +285,12 @@ class Environment(YamArenaEmbodiment):
             attr = gap.GetVisibilityAttr()
             if attr.Get() != visibility:
                 attr.Set(visibility)
+            translate, scale = UsdGeom.Xformable(gap).GetOrderedXformOps()
+            if abs(translate.Get()[1] - y) > 1e-7:
+                translate.Set(Gf.Vec3d(x, y, .00712))
+                remaining = config.SHEET_WIDTH / 2 - abs(y)
+                squeeze = min(1., max(.10, remaining / radius))
+                scale.Set(Gf.Vec3f(1., squeeze, 1.))
 
     def reset(self, scene, *, seed=None):
         self._ensure_sim()
@@ -290,12 +298,12 @@ class Environment(YamArenaEmbodiment):
         self._instruction = scene.instruction
         for _ in range(self.spec.get("settle_actions", 24)):
             self._env.step(self._ready)
+        self.scorer.reset()
         if self.render_images:
-            self._show_gaps([False] * len(config.GAPS))
+            self._show_gaps()
             for _ in range(4):
                 self._base.sim.render()
         self._t = 0.0
-        self.scorer.reset()
         self.metrics = self.scorer.evaluate(self.state())
         obs = self._observation()
         if self.render_images:
@@ -355,7 +363,7 @@ class Environment(YamArenaEmbodiment):
     def _task_step(self):
         self.metrics = self.scorer.evaluate(self.state())
         if self.render_images:
-            self._show_gaps(self.metrics["gaps_cleared"])
+            self._show_gaps()
             self._base.sim.render()
         return StepResult(
             observation=self._observation(),

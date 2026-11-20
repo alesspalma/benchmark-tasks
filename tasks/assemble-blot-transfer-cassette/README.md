@@ -1,50 +1,56 @@
-# Clear and close a wet-laminate cassette
+# Prepare a blot-transfer cassette and roll out trapped air
 
-A hand roller removes air gaps from the wet contact area of a laboratory cassette. One arm braces the loose layers at an exposed corner while the other rolls across them under pressure. The arms then close the cassette without shifting the layers. The 75 × 100 mm cassette reproduces that handling operation with inert layers. [Manufacturer's dimensions](https://www.bio-rad.com/sites/default/files/webroot/web/pdf/lsr/literature/Bulletin_2033C.pdf) · [Manufacturer's cassette geometry and roller use](https://www.bio-rad.com/webroot/web/pdf/lsr/literature/10019593D.pdf)
+An air pocket breaks contact between a soft gel and the membrane placed over it. The operator holds the wet stack in registration, advances a rubber roller to an exposed edge to vent the air, and closes the cassette without shifting or damaging the layers. One arm braces a dry carrier tab while the other operates the free-axle roller. The full-size cassette uses a hinged, perforated cover and an inert wet gel-and-membrane stack. [Bio-Rad cassette assembly and handling, pp. 5–7](https://www.bio-rad.com/webroot/web/pdf/lsr/literature/M1703930.pdf)
 
-## Setup and reset
+## Fixture and materials
 
-All positions below are in millimetres in the YAM station frame, with +x forward, +y to the left, and the worktop at z = 747.5. The standard arms start open and clear of the props, with bases 610 mm apart. The overview faces the loose brayer, cassette and lid. Each wrist has the standard YAM close view.
+All dimensions are in millimetres. [Cassette and reset template](fixture/cassette.scad) provides printable parts for the standalone mechanical cassette. Use the OpenSCAD part selector to export the base, cover, carrier, riser, saddle and pocket placement template individually. Print the wet-contact components in PETG or ABS. Fit a 3 × 120 stainless pin with snug end retainers in the hinge. Use a loose removable rear stop to hold the cover at 96°. Put 7 mm soft open-cell foam strips on the underside of the cover ribs so they retain the stack on closure. A caliper can verify the closed frame gap and stack fit before recording trials.
 
-| Item | Construction and initial placement |
+| Item | Construction |
 | --- | --- |
-| Cassette tray and riser | Print the 139 × 106 × 9 ABS tray and the 237 × 163 × 78.5 riser. The tray's bottom centre is at (365, 25, 826). It sits horizontally. The guide rails run along x to support the open cover. |
-| Backing and working layer | Fit a 106 × 79 × 2 backing pad in the tray. Use a 102 × 84 × 4 silicone lower layer with an ordinary exposed margin and 100 × 75 upper contact area of water-wetted clear PET. Lay it on the backing pad with the long edge along x and the edges registered. The simulated compliant layer starts with its upper face near z = 843. |
-| Three visible pockets | Use a fine dropper to leave the three dry spots in the water film under the clear sheet before laying it down. Centre them at (336, 3), (377, 23) and (393, 46) in plan view, with approximate diameters of 14, 16 and 14 mm. Confirm that they are distinct in a reset photo and measure the registration border with a ruler. |
-| Guided cover | Use a 121 × 92 PET lid with a rigid ABS frame and a 19 × 70 × 19 edge grip. Draw it along x through 127 mm of travel to the tray end. Reset it at the full-open stop with its centre at (492, 25, 856). The geometry in `builder.py` dimensions the rails and frame components. |
-| Brayer | Stage the rubber drum with its axle parallel to x at (365, −116, 857). The drum is 106 mm wide and 28 mm in diameter, with a free axle in a cross yoke. The polymer grip is 20 × 23 × 44, with its centre 81 mm above the axle. |
-| Open brayer saddle | Make two 9 × 34 ABS supports with top faces at z = 876.5, equally spaced 69 mm either side of the drum centre along x. The seats support only the outboard bridge. Lift clearance is open above the tool and shoulders. |
+| Cassette | 139 × 106 base, 124 × 95 perforated cover, 3 mm hinge pin. The pivot is 66 mm forward and 27 mm above the bottom centre of the base. Screw the base to the riser through the four holes using M3 hardware. |
+| Carrier | The removable tray insert has exposed dry corner tabs and marks for the 100 × 75 working area. Place a 106 × 82 × 2 open-cell foam pad and 104 × 78 × 0.8 cellulose backing paper on it. |
+| Fragile gel and membrane | Place a 100 × 75 × 4 plain, clear 1% by mass agarose-in-water gel slab on the backing paper. Use a 100 × 75 hydrated transparent regenerated-cellulose sheet, 0.2 mm nominal wet thickness. The agarose and cellulose serve as blank mechanical test material. |
+| Roller | Use a 106 mm wide, 28 mm diameter smooth rubber brayer with a freely rotating axle, a bridge yoke and a 20 × 23 × 44 dry grip centred 81 mm above the axle. The saddle supports the two outboard shoulders of its yoke. |
+| Pad protection | Fit thin, snug, wipeable gripper pad sleeves for a shared robot. Use the dry tabs, the dry roller grip and the cover grip. Wipe the handles and change sleeves if they have touched the wet area. |
 
-Discard the reset photo after the measurements are recorded. Rewet the test area and restore the three pockets, the open cover and the brayer between runs. All test material is inert. A real trial uses the same visible contact area and closure check. The reference validation uses simulation.
+The YAM table is at z = 747.5, with +x forward and +y toward the left arm. Put the tray bottom centre at (365, 25, 826) and the horizontal axle of the parked roller at (365, −116, 857), parallel to x. Set the upper faces of the two saddle seats 129 mm above the bench, 69 mm outboard of the axle centre and 34 mm deep along y. The tabletop-to-cassette dimensions are embodied in the CAD. Both arms start clear of the fixture.
+
+## Repeatable reset
+
+1. Place the pad and backing paper in the carrier and centre the gel, long edge parallel to x. Keep the side tabs and grips dry. Use a 1 mL graduated syringe to spread 0.50 mL of distilled water over the gel surface. Wet the blank cellulose sheet with a further 0.30 mL, then lay it down without stretching it so it matches the gel outline.
+2. Hold the reset template 3 mm above the stack on temporary spacers, square to the carrier marks, to locate the three centres. The centre offsets from the gel centre are (−29, −22), (12, −2), and (28, 21) mm. Use a blunt 1 mm flexible tip on a graduated syringe, slid parallel to the layers from the nearer open side. Place nominal 40, 50 and 40 µL air aliquots at the respective centres and withdraw the tip along the same path. Remove the template before the episode. Use low angled light and a millimetre rule for the reset photo. Accept three separate pockets centred within 2 mm of the marks and within 2 mm of the nominal 14, 16 and 14 mm diameters. Reseat the sheet and repeat the reset if a pocket merges, leaks at the edge or falls outside this range.
+3. Return the cover to its rear stop and place the roller on the saddle with its handle dry and upright. Record the initial pocket centres and the gel and membrane outlines in the overhead view. Use a fresh gel and sheet if either has a crease, tear or permanent indentation.
 
 ## Scoring
 
-Record a photo of the clear area and registered borders after rolling and before covering. Award 0.25 for each of the three marked pockets visibly absent, up to 0.75. Award 1.0 when all three are gone, the sheet edges finish within 3 mm of their registration marks, and the lid has stayed within 4 mm of its closed stop for 0.5 s. Score 0 if no pocket is cleared. Either arm can brace, roll or close.
+Use the overhead video with a millimetre scale at the side of the cassette. A pocket earns 0.25 when rolling visibly drives it to an exposed edge and vents it there. Award 1.0 when all three vent, the stack is within 3 mm of its registration marks and the cover rests within 2° of its closed position for 0.5 s. A torn, deeply indented or grossly shifted stack receives 0. Either arm can brace, roll or close. A closed cover or the disappearance of a pocket in the interior earns no pocket credit.
 
-In simulation, a pocket clears when the rotating drum traverses at least 4 mm of its face under load and the layers stay within 4 mm of registration. The test uses native axle rotation, near-surface geometry and spring travel. Clearance is marked by the disappearance of the visible pale pocket. Spring-supported shear and compression represent the wet compliant stack. The tester can judge the physical result from the photo and ordinary rulers, without measuring actuator forces.
+The simulator uses a spring-supported wet stack with native shear and vertical deflection, a free-axle rubber drum, and a native revolute cover hinge. The bounded air transport model advances a pocket only in the direction of a near-surface, loaded rolling nip that reaches it. The model caps advance by travel of the nip relative to the mobile stack. Each witness moves with its pocket and contracts as it approaches the edge, and is removed when its centre reaches the exposed edge. The shared springs represent the aggregate compliance of the soft layers and backing. Sustained excessive compression or shear latches damage in the scorer. The benchmark validates native mechanics and a reduced-order model of air transport.
 
 ## Run and score
 
-Use the repository's Isaac Lab Arena/YAM environment. The scene uses a fixed layout, seed 1415158438, 20 Hz controls and a 540-action (27 second) limit. From this directory:
+Use the repository Isaac Lab Arena/YAM environment. The fixed reset has seed 1415158438, 20 Hz control and a 540-action (27 second) limit.
 
 ```sh
 python -B run.py --device cuda:0 --physics-device cpu --output /tmp/cassette-demo
 python -B run.py --device cuda:0 --physics-device cpu --no-cameras --policy hold --output /tmp/cassette-hold
 python -B run.py --device cuda:0 --physics-device cpu --no-cameras --policy hover --output /tmp/cassette-hover
+python -B run.py --device cuda:0 --physics-device cpu --no-cameras --policy short --output /tmp/cassette-short
 ```
 
-Each run writes its reset snapshot, native trace and score receipt. The camera run records the initial image and each subsequent frame in three 640 × 360 streams. The no-action control spans all 540 actions. The hover control picks up the brayer and closes the lid but leaves the roller above the sheet during the sweep.
+Each run writes its reset snapshot, native trace and score receipt. Camera runs record the initial image and every action frame in three native 640 × 360 streams. The no-action control spans all 540 actions. The hover control handles the tool and cover without rolling on the wet stack. The short control rolls under load and then closes the cover while air is still inside the stack.
 
-For Inspect Robots, install this directory with `python -m pip install --no-deps -e .`, then pass `blot_cassette` as the embodiment and `dream` as the policy. The hosted task's seed, instruction and action limit are the same as in `task.json`.
+For Inspect Robots, install this directory with `python -m pip install --no-deps -e .`, then pass `blot_cassette` as the embodiment and `dream` as the policy. The hosted task uses the same seed, instruction and action limit.
 
 ## Assets and terms
 
 | Asset | Provenance and licence |
 | --- | --- |
 | Tray and stand | Original procedural geometry, task MIT licence |
-| Backing and working sheet | Original procedural geometry, task MIT licence |
+| Carrier, gel and membrane | Original procedural geometry, task MIT licence |
 | Pocket witness graphics | Original procedural geometry, task MIT licence |
-| Guided lid | Original procedural geometry, task MIT licence |
+| Hinged cassette cover | Original procedural geometry, task MIT licence |
 | Brayer | Original procedural geometry, task MIT licence |
 | Brayer saddle | Original procedural geometry, task MIT licence |
 | YAM arms and grippers | [Split I2RT geometry](https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/assets/yam/dream/SOURCE), [I2RT asset terms](https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/assets/yam/LICENSE.i2rt) |
