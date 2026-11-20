@@ -1,0 +1,20 @@
+{
+  "title": "Fill a piping bag and scrape the spatula clean",
+  "category": "Societal relatability",
+  "keywords": [
+    "baking",
+    "cuffed decorating bag",
+    "offset spatula",
+    "bimanual wiping",
+    "soft packaging"
+  ],
+  "instruction": "Fill the piping bag with the icing on the spatula. Pinch the cuff around the blade and draw the spatula out cleanly, then leave the bag upright and return the spatula to its rest.",
+  "context": "A cuffed piping bag needs to hold still while the blade enters and to press around the blade as it leaves, separating sticky buttercream from the spatula without putting it on the outside of the bag.",
+  "setup": "Two YAMs 610 mm apart, table 1110 × 1250 × 747.5 mm. Starting layout measured from the bases' midpoint, X away and Y left. A clean 305 mm plastic piping bag is folded to 175 mm with a plastic coupler and stainless round tip. Its 142 mm high plastic tumbler, centred at (288, 22) mm, has a 100 mm base and 114 mm rim. The 110 × 60 mm cuff extends about 43 mm above the rim, with its long axis 83° from +X toward +Y. A stainless offset spatula with a 92 × 27 mm blade and a 117 × 22 mm polymer handle points 110° clockwise from +X. Its handle is centred at (213, -228) mm in a shallow 117 × 72 mm ceramic rest. A 30 ± 1 g portion of ready-to-use buttercream covers the final 55 mm of the spatula blade. Both grippers are open and clear.",
+  "scoring": "0–0.8 as 0.8 times the fraction of the starting icing mass transferred to the inside of the bag. 1.0 for at least 87.5% transferred, the bag upright in its tumbler, the spatula stable in its rest and both grippers clear for 1 continuous second. Grade net icing in the bag on a gram scale, with the dry bag and coupler tared, and check the final arrangement on video.",
+  "run_limit": "720 actions (36 seconds at 20 Hz).",
+  "reset_notes": "Restock a pre-cuffed, clean tip-fitted bag and 30 ± 1 g of ready-to-use buttercream at 20–22 °C. Clean and dry the tumbler, spatula and rest. Fit clean nitrile finger cots if the rig is shared.",
+  "fidelity": "A standard-scale folded bag uses spring-supported cuff surfaces and a tapered catch pocket. Native blade deflection and cuff compression gate the icing release rule during physical withdrawal. An icing overlay advances from the loaded blade to the bag. The tumbler, bag, offset spatula and grippers move via native contact.",
+  "scores": "Demo: 1.0 in 591 actions. Dream-1: 0.0 after 720 actions.",
+  "media": "M-MJ6FRD"
+}
