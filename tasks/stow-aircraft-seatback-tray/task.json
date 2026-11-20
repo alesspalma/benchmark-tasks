@@ -1,0 +1,19 @@
+{
+  "title": "Stow a full-size aircraft seatback tray table",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual",
+    "aircraft passenger seat",
+    "gravity-loaded hinge",
+    "swivel latch"
+  ],
+  "instruction": "Stow the tray table securely against the seatback.",
+  "context": "An airline passenger folds away the meal table after use. The table must remain stowed once the passenger lets go.",
+  "setup": "A fixed full-size economy passenger seat faces away from two YAM arms on floor pedestals 610 mm apart. Its 462 × 570 mm shell leans 7° toward the arms. An empty ABS-faced tray table, 418 × 260 × 17 mm and 910 g with its aluminum hinge ears, starts horizontal 802 mm above the floor. A 39 mm nylon swivel keeper starts rotated aside above the tray. The arms start clear. The README and the scene generator provide the full geometry.",
+  "scoring": "0.25 for a tray within 3° of its upper stop while the keeper is open. 0.65 with the tray raised and the keeper rotated 83–94° from the open stop. 1.0 if both conditions persist for one second after both grippers withdraw clear of the tray and latch. Zero if the tray is down. Measure from the final side-view and overhead video, or with an angle gauge. Either hand can support the table or operate the keeper.",
+  "run_limit": "380 actions at 20 Hz (19 seconds).",
+  "reset_notes": "Lower the empty tray to the horizontal stop and turn the keeper fully aside. Verify the stops and the released position before the trial. Return both arms to their neutral pose.",
+  "fidelity": "A full-size, gravity-loaded rigid panel and fixed passenger-seat shell preserve the documented hinge arc, table mass, reach and clearance. The rotary keeper physically intercepts the panel edge. Two ideal revolute joints represent the paired tray hinges and swivel pin, with measured geometry and modeled joint friction. The rest of the cabin is outside the workcell.",
+  "scores": "Demo: 1.0 in 330 actions. Dream-1: 0.0 after 380 actions.",
+  "media": "M-QU9DKC"
+}
