@@ -1,0 +1,20 @@
+{
+  "title": "Remove and separate both robot mop-pad assemblies",
+  "category": "Societal relevance",
+  "keywords": [
+    "bimanual",
+    "household robots",
+    "turnover",
+    "peeling",
+    "hook and loop"
+  ],
+  "instruction": "Turn over the robot vacuum and remove both mop-pad assemblies. Peel off the cloth pads. Put the cloth pads in the blue tray and the plastic carriers in the green tray.",
+  "context": "Separate the washable microfiber cloth from the reusable carriers on a full-size dual-spin robot mop. The two arms turn the weighted cleaner in a service cradle, remove each magnetic assembly, counterhold its carrier while peeling the cloth, and sort the materials for cleaning.",
+  "setup": "A 35 cm, 4.28 kg robot mop starts upright in a passive aluminum turnover cradle on an 92 × 116 cm laminated bench. Two underside assemblies each have a 120 mm polymer carrier and a 148 mm annular microfiber pad. An 950 × 282 mm blue sorting tray receives the cloth. A green sorting tray farther away has two 194 × 176 mm wells for the carriers.",
+  "scoring": "0.15 for turning the chassis upside down, plus 0.15 for each carrier removed from its mount and 0.15 for each intact cloth pad separated from its carrier. Full score requires both carriers and both cloth pads in their respective trays, at rest and released for at least 0.5 seconds, with the chassis still inverted.",
+  "run_limit": "1,400 control steps (70 seconds at 20 Hz)",
+  "reset_notes": "Reload the fixed station with the cleaner upright, both magnetic carriers attached and both cloth pads pressed flat against their carriers. Both sorting trays start empty.",
+  "fidelity": "The full-size cleaner uses the Roomba Plus 505 layout and mass. A passive over-center cradle supports the turnover. A raised center hub and widened cloth fringe give the grippers purchase. Breakaway constraints model magnetic and hook-and-loop retention, and an articulated cloth ring bends while the arms pull it off over the sorting tray.",
+  "scores": "Demo: 1.0 in 1269 actions. Dream-1: 0.0 after 1400 actions.",
+  "media": "M-NBXSWN"
+}
