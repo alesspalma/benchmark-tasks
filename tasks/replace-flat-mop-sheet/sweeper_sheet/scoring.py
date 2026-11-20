@@ -13,6 +13,8 @@ class Scorer:
     def reset(self):
         self.lift_checks = self.hold = 0
         self.lifted = False
+        self.wipe_origin = None
+        self.wipe_distance = 0.
 
     def evaluate(self, state):
         head = np.asarray(state["head"]["Head"])
@@ -57,15 +59,29 @@ class Scorer:
         self.lifted |= self.lift_checks >= 5
         hands_clear = all(abs(hand[0] - head[0]) > .11 or abs(hand[1] - head[1]) > .246
                           or hand[2] - head[2] > .14 for hand in state["hands"].values())
-        down = bool(np.linalg.norm(head[:2] - [c.X,0.]) < .026
-                    and abs(height) < .008 and rot[2,2] >= .993)
-        ready = all(retained.values()) and self.lifted and flat and down and hands_clear
+        level = bool(abs(height) < .008 and rot[2,2] >= .993)
+        on_tile = bool(rot[2,2] >= .978 and c.WIPE_MIN_X-.023 <= head[0] <= c.WIPE_MAX_X
+                       and abs(head[1]) < .037 and abs(rot[0,0]) > .96)
+        pad_axes = quat_xyzw_to_matrix(pad[3:])
+        lowest = pad[2] - np.abs(pad_axes[2]) @ [.0635, c.WRAP_Y, .00225]
+        pad_grounded = bool(abs(lowest - c.PLATFORM) < .0022)
+        if self.lifted and near_handle and on_tile and pad_grounded and flat and all(retained.values()):
+            if self.wipe_origin is None:
+                self.wipe_origin = float(head[0])
+            self.wipe_distance = max(self.wipe_distance, abs(float(head[0]) - self.wipe_origin))
+        else:
+            self.wipe_origin = None
+        on_fixture = bool(level and np.linalg.norm(head[:2] - [c.X,0.]) < .026)
+        down = on_tile or on_fixture
+        ready = (all(retained.values()) and self.lifted and flat and on_tile and pad_grounded and hands_clear
+                 and self.wipe_distance >= c.WIPE_DISTANCE)
         self.hold = self.hold + 1 if ready else 0
         full = self.hold >= 10
         return {
             "score": 1. if full else .4 * sum(retained.values()) if flat and down and hands_clear else 0.,
             "success": full, "captured": retained, "flat": flat, "set_down": down,
-            "lift_verified": self.lifted, "height_m": height,
+            "lift_verified": self.lifted, "height_m": height, "wipe_distance_m": self.wipe_distance,
+            "pad_grounded": pad_grounded,
             "hands_clear": bool(hands_clear), "strip_local_m": strip_local,
             "strip_height_in_bite_m": strip_to_bite, "check_grip_near_handle": near_handle,
         }

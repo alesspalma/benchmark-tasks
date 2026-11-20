@@ -1,5 +1,5 @@
 {
-  "title": "Fit a strip-clamp flat mop pad",
+  "title": "Fit a clean pad onto a floor mop and wipe the tile",
   "category": "Societal relatability",
   "keywords": [
     "mop",
@@ -8,13 +8,13 @@
     "bimanual",
     "strip clamp"
   ],
-  "instruction": "Fit the dry pad under the flat mop head and close both strip clamps. Lift the head by its handle, then set it down with the pad still fitted.",
-  "context": "A loose strip lets a dry mop pad bunch or pull free during cleaning. The two end clamps need a folded fixation strip under each bite so the pad covers the head and stays flat.",
-  "setup": "A 402 × 111 mm polypropylene flat mop head rests on an unattached, dry 404 × 127 mm microfibre pad over a 158 × 414 × 43 mm service tile. Two 60 × 43 mm sewn strips lean loose against side guides and both hinged nylon clamps start open. The head can lift out of the fixture.",
-  "scoring": "0.4 per folded strip retained under its closed clamp with the pad flat and centred within 10 mm. 1.0 if both retain the pad during a lift at least 31 mm above the tile for 0.25 s, before the mop is set down level and released for 0.5 s. Score 0 if the pad is displaced or neither strip is retained.",
-  "run_limit": "680 actions (34 seconds at 20 Hz)",
-  "fidelity": "The full-size flat head, clamp hinges and cloth contacts are native PhysX. Two jointed strips approximate local creases and use aggregate friction. A passive torque curve represents each over-centre latch. The folding head stays latched flat throughout pad service and the handle is a short fitting on one swivel axis.",
-  "reset_notes": "Return the loose dry pad to the tile and lean the unfastened strips against their guides. Set the flat head over the loose pad. Open both clamps and return both arms to the ready pose.",
-  "scores": "Demo: 1.0 in 488 actions. Dream-1: 0.0 after 680 actions.",
-  "media": "M-SUN9KG"
+  "instruction": "Fit the dry cleaning pad onto the floor mop and close both end clamps. Lift the mop by its handle, then slide it across the tiled area with the pad still fitted.",
+  "context": "Fit a clean reusable pad before dry-mopping a hard floor. The 1.22 m handle stays attached from the start. Both end strips must stay under their clips during a lift and a wiping stroke, so a loose pad cannot pass just by lying under the frame.",
+  "setup": "A 402 × 111 mm polypropylene flat mop with a 1.22 m aluminium pole starts on a loose 404 × 127 mm microfibre pad. Both nylon clamps are open. Two 60 × 43 mm cloth strips lean against guides. A 158 × 414 mm loading tile adjoins a 256 × 478 mm floor sample raised to YAM working height. A 162 mm-wide rounded rail supports the long pole.",
+  "scoring": "0.4 per strip retained under its closed clamp with the pad flat and centred within 10 mm. For 1.0, retain both during a lift of at least 31 mm for 0.25 s, slide the pad at least 60 mm in contact with the floor sample, and leave the mop on the tile with both clamps closed and both hands clear for 0.5 s.",
+  "run_limit": "760 actions (38 seconds at 20 Hz)",
+  "fidelity": "The full-length aluminium pole and 40 cm head move on native swivel joints. The 40 cm strip-clamp mechanism follows the Vileda CombiSpeed Pro. A raised tile and rounded support rail keep the full-size work within YAM reach. Jointed fabric strips approximate local bends, and a passive torque curve represents the over-centre clips.",
+  "reset_notes": "Return the full mop and loose dry pad to the loading tile. Put the pole on the support rail, open both end clamps, lean the free strips against the guides, and put both arms in the ready pose.",
+  "scores": "Demo: 1.0 in 559 actions. Dream-1: 0.0 after 760 actions.",
+  "media": "M-V4D4A5"
 }

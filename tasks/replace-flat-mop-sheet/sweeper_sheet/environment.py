@@ -76,8 +76,8 @@ class Environment(YamArenaEmbodiment):
             raise ValueError("Fixed reset and 20 Hz required")
         super().__init__(scene="station", object_jitter=0, control_hz=20, **kwargs)
         camera = self.rig.top_cam
-        position = np.array([.801, -.098, 1.33])
-        sight = np.array([.365, .0, .808]) - position
+        position = np.array([1.31, -.98, 1.75])
+        sight = np.array([.664, .0, .91]) - position
         sight /= np.linalg.norm(sight)
         screen_right = np.cross(sight, [0.0, 0.0, 1.0])
         screen_right /= np.linalg.norm(screen_right)
@@ -288,6 +288,7 @@ class Environment(YamArenaEmbodiment):
         joints = self._head.data.default_joint_pos.clone()
         for index, side in zip(self._clip_indices, config.END_POINTS.values(), strict=True):
             joints[0,index] = side * np.radians(62.)
+        joints[0,self._head.joint_names.index("PolePitch")] = np.radians(config.POLE_REST_ANGLE)
         self._head.write_joint_position_to_sim(joints)
         folds = self._cloth.data.default_joint_pos.clone()
         for tag, side in config.END_POINTS.items():

@@ -5,9 +5,12 @@ from yam_arena import station
 from yam_arena.constants import READY
 
 KEY = "sweeper_sheet"
-INSTRUCTION = "Fit the dry pad under the flat mop head and close both strip clamps. Lift the head by its handle, then set it down with the pad still fitted."
+INSTRUCTION = (
+    "Fit the dry cleaning pad onto the floor mop and close both end clamps. "
+    "Lift the mop by its handle, then slide it across the tiled area with the pad still fitted."
+)
 DESCRIPTION = INSTRUCTION
-MAX_STEPS = 680
+MAX_STEPS = 760
 PHYSICS_HZ = 240
 BASES = station.BASES
 STOWED = {side: READY for side in BASES}
@@ -26,6 +29,11 @@ CLAMP_Y = .145
 CLAMP_LENGTH = .043
 CLAMP_Z = .0216
 HANDLE_Z = HEAD_Z + .075
+POLE_LENGTH = 1.22
+POLE_REST_ANGLE = 70.
+WIPE_MIN_X = .116
+WIPE_MAX_X = .226
+WIPE_DISTANCE = .060
 END_POINTS = {"Left": 1, "Right": -1}
 LIFT_HEIGHT = .031
 

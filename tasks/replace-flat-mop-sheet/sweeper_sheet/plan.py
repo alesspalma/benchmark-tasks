@@ -70,10 +70,13 @@ def waypoints(mode):
     p.add(.75,"grasp the connector",right=(hold,handle_basis,.09))
     p.add(1.4,"lift to check the pad stays under the head",right=(hold+[0.,0.,.045],handle_basis,.09))
     p.add(.55,"hold the fitted pad clear of the tile",right=(hold+[0.,0.,.045],handle_basis,.09))
-    rest = hold + [-.007,.003,-.003]
-    p.add(.70,"centre the fitted mop over the support",
-          right=(rest+[0.,0.,.048],handle_basis,.09))
-    p.add(1.45,"set the fitted mop down",right=(rest,handle_basis,.09))
-    p.add(.72,"release the handle",right=(rest,handle_basis,.65))
-    p.add(1.0,"leave both hands clear",right=(rest+[0.,-.16,.105],handle_basis,.75))
+    wipe_start = np.array([.201, .003, c.HANDLE_Z-.005])
+    wipe_end = np.array([.111, .003, c.HANDLE_Z-.005])
+    p.add(1.65,"carry the lifted mop over the floor sample",
+          right=(wipe_start+[0.,0.,.048],handle_basis,.09))
+    p.add(1.35,"lower the fitted pad onto the tile",right=(wipe_start,handle_basis,.09))
+    p.add(1.85,"draw the fitted pad across the tile",right=(wipe_end,handle_basis,.09))
+    p.add(.60,"let the mop settle on the tile",right=(wipe_end,handle_basis,.09))
+    p.add(.72,"release the handle",right=(wipe_end,handle_basis,.65))
+    p.add(1.25,"leave both hands clear",right=(wipe_end+[.04,-.16,.105],handle_basis,.75))
     return p.moves

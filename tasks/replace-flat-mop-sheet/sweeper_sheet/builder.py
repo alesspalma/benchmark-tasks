@@ -12,13 +12,13 @@ STRIP = (.74,.73,.54)
 RUBBER = (.19,.22,.24)
 
 
-def hinge(w, stage, name, parent, child, pos, limits, spring=0., damping=.001, target=0.):
+def hinge(w, stage, name, parent, child, pos, limits, spring=0., damping=.001, target=0., axis="X"):
     joint = w.Phy.RevoluteJoint.Define(stage, "/Asset/" + name)
     joint.CreateBody0Rel().SetTargets([parent])
     joint.CreateBody1Rel().SetTargets([child])
     joint.CreateLocalPos0Attr(w.Gf.Vec3f(*pos))
     joint.CreateLocalPos1Attr(w.Gf.Vec3f(0))
-    joint.CreateAxisAttr("X")
+    joint.CreateAxisAttr(axis)
     joint.CreateLowerLimitAttr(limits[0])
     joint.CreateUpperLimitAttr(limits[1])
     joint.CreateCollisionEnabledAttr(False)
@@ -32,10 +32,19 @@ def hinge(w, stage, name, parent, child, pos, limits, spring=0., damping=.001, t
 
 def room(w):
     stage = w.stage("workcell")
-    w.box(stage, "/Asset/Bench", (1.18, 1.25, .06), (.30, 0., c.TABLE - .03), (.58,.48,.34))
+    w.box(stage, "/Asset/Bench", (1.28, 1.25, .06), (.35, 0., c.TABLE - .03), (.58,.48,.34))
     w.box(stage, "/Asset/Floor", (6.,6.,.025), (.0,0.,-.0375), (.29,.32,.36))
     w.box(stage, "/Asset/Tile", (.158, .414, c.PLATFORM-c.TABLE),
           (c.X, 0., (c.PLATFORM+c.TABLE)/2), (.44,.46,.49))
+    w.box(stage, "/Asset/FloorSample", (.256,.478,c.PLATFORM-c.TABLE),
+          (.142,0.,(c.TABLE+c.PLATFORM)/2), (.66,.63,.57))
+    for index, y in enumerate((-.119, 0., .119)):
+        w.box(stage, f"/Asset/Grout{index}", (.256,.0026,.0004),
+              (.142,y,c.PLATFORM+.0003), (.43,.41,.37), collide=False)
+    w.box(stage, "/Asset/PoleStand", (.078,.165,.233),
+          (.88,0.,c.TABLE+.1165), (.29,.33,.34))
+    w.cylinder(stage, "/Asset/PoleRoller", .017,.162,
+               (.88,0.,c.TABLE+.233), (.27,.30,.32), axis="Y")
     for side in (-1,1):
         w.box(stage,f"/Asset/SideLocator{side}",(.014,.156,.015),
               (c.X+side*.081,0.,c.PLATFORM+.0075),(.33,.35,.39))
@@ -65,6 +74,13 @@ def head(w):
     w.cylinder(stage,shaft+"/HandleStub",.0115,.058,(0,0,.026),PLASTIC)
     w.cylinder(stage,shaft+"/HandleGrip",.014,.023,(0,0,.036),RUBBER)
     hinge(w,stage,"HandleSwivel",base,shaft,(0.,0.,.038),(-62.,62.),.095,.025)
+    w.box(stage,shaft+"/OffsetSwivelFork",(.052,.026,.015),(.026,0.,.024),JAW)
+    pole = w.body(stage, "/Asset/Pole", .162, position=(.050,0.,.064), ccd=True)
+    w.cylinder(stage,pole+"/HingePin",.011,.021,(0,0,0),JAW,axis="Y")
+    w.cylinder(stage,pole+"/AluminiumPole",.010,c.POLE_LENGTH,(0,0,c.POLE_LENGTH/2),(.74,.77,.77))
+    w.cylinder(stage,pole+"/TopGrip",.014,.165,(0,0,c.POLE_LENGTH-.078),JAW)
+    w.cylinder(stage,pole+"/Collar",.013,.045,(0,0,.210),JAW)
+    hinge(w,stage,"PolePitch",shaft,pole,(.050,0.,.026),(0.,88.),0.,.22,axis="Y")
     for tag,side in c.END_POINTS.items():
         p = (0., side*c.CLAMP_Y, c.CLAMP_Z)
         clip = w.body(stage,"/Asset/"+tag+"Clip",.013,position=p)

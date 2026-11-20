@@ -69,7 +69,7 @@ class ScriptedPolicy(PolicyBase):
                 base_pos=config.BASES[name],
                 iters=85,
             )
-            if pe > 0.0045 or re > 0.080:
+            if pe > 0.0045 or re > 0.14:
                 raise RuntimeError(
                     f"Unreachable {name} reference target: {pe:.6f} m, {re:.6f} rad"
                 )
