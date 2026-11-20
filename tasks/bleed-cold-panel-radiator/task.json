@@ -1,0 +1,20 @@
+{
+  "title": "Bleed a cold panel radiator and catch the first steady water",
+  "category": "Societal relatability",
+  "keywords": [
+    "radiator",
+    "home maintenance",
+    "valve",
+    "water catch",
+    "bimanual"
+  ],
+  "instruction": "Bleed the cold radiator, catch the water in the cup, and close the vent as soon as the water runs steadily.",
+  "context": "A trapped air pocket keeps part of a household radiator cold. Venting requires turning the keyed valve, catching the first continuous water and closing the vent before losing unnecessary water.",
+  "setup": "A cold 500 × 300 mm steel panel radiator stands vertically at the far side of a worktop, its upper manual bleed valve facing the robot with a matching brass butterfly key fully seated. An empty Ø80 × 75 mm reusable polypropylene cup stands loose to the left. A gravity head supplies clean water after an initial 40 mL air pocket exits. Both YAM arms start clear. The README specifies stocked parts, fixed coordinates, header height and reset volumes.",
+  "scoring": "Score 0.4 for venting the air and catching 3–22 mL of water. Score 0.75 if the valve is also shut within 6° of the closed witness. Score 1.0 if the valve stays shut with a dry outlet, the cup rests upright, the key is seated or on the worktop, and both hands are clear for one second. Spill above 2 mL, overbleeding or stopping before water arrives earns zero. Either arm can turn the key or position the cup.",
+  "run_limit": "620 actions (31 seconds at 20 Hz)",
+  "reset_notes": "Fill from the open cold header, withdraw the specified volume with the bleed vent open, then start with the vent shut and the matching square key seated. Put the dry empty cup at its mark. The README specifies a reproducible 40 mL air pocket and spill check.",
+  "fidelity": "Full-size radiator, loose cup and keyed valve use native collisions and a passive revolute stem. The measured aperture vents a finite air pocket, then yields water under the cold gravity head. The reduced-order trajectory and volume model accounts for water passing through the actual cup mouth and spill. Visible water is a rendering of that model.",
+  "scores": "Demo: 1.0 in 448 actions. Dream-1: 0.0 after 620 actions.",
+  "media": "M-BEMHE3"
+}
