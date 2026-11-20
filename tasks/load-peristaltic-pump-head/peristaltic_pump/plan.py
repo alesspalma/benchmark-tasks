@@ -29,14 +29,15 @@ def waypoints(mode):
     tubes = list(zip(("orange", "blue"), C.STAGING, C.LANES))
     for tube, source, lane in tubes[:1] if mode == "single-tube" else tubes:
         x = C.HEAD[0] + lane + (0.0015 if lane > 0 else 0.0)
+        inlet_x = x + (0.010 if lane > 0 else 0.0)
         p.add(2.0, f"approach the {tube} tube from above", left=line(0, source, raised, 0.235), right=line(1, source, raised, 0.235))
         p.add(2.25, f"straddle the {tube} tube", left=line(0, source, staged - 0.008, 0.235), right=line(1, source, staged - 0.008, 0.235))
         p.add(0.55, "settle on the grasp line")
         p.add(1.1, f"pinch both sides of the {tube} tube", left=line(0, source, staged - 0.008, 0.015), right=line(1, source, staged - 0.008, 0.015))
         p.add(1.0, f"lift the {tube} tube out of its rest", left=line(0, source, staged + 0.022, 0.015), right=line(1, source, staged + 0.022, 0.015))
-        p.add(1.8, f"route the {tube} tube over the two-track roller", left=line(0, x, staged + 0.022, 0.015), right=line(1, x, staged + 0.022, 0.015))
-        p.add(1.3, f"press the {tube} tube through both retainers", left=line(0, x, loaded - 0.013, 0.015), right=line(1, x, loaded - 0.013, 0.015))
-        p.add(0.8, "release the seated tube", left=line(0, x, loaded - 0.013, 0.14), right=line(1, x, loaded - 0.013, 0.14))
+        p.add(1.8, f"route the {tube} tube over the two-track roller", left=line(0, x, staged + 0.022, 0.015), right=line(1, inlet_x, staged + 0.022, 0.015))
+        p.add(1.3, f"press the {tube} tube through both retainers", left=line(0, x, loaded - 0.013, 0.015), right=line(1, inlet_x, loaded - 0.013, 0.015))
+        p.add(0.8, "release the seated tube", left=line(0, x, loaded - 0.013, 0.14), right=line(1, inlet_x, loaded - 0.013, 0.14))
         p.add(1.3, "clear the retainers", left=line(0, x, raised, 0.235), right=line(1, x, raised, 0.14))
     if mode == "open-head":
         return p.moves

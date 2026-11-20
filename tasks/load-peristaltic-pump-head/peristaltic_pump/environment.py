@@ -156,6 +156,7 @@ class Environment(YamArenaEmbodiment):
                 raise RuntimeError("Crash reporter plugin unexpectedly loaded")
             atexit.register(_APP.close)
         import torch
+        from isaaclab import sim as sim_utils
         from isaaclab.assets import ArticulationCfg, AssetBaseCfg, RigidObjectCfg
         from isaaclab_arena.assets.object import Object, ObjectType
         from isaaclab_arena.environments.arena_env_builder import ArenaEnvBuilder
@@ -167,7 +168,7 @@ class Environment(YamArenaEmbodiment):
         from isaaclab_arena.utils.pose import Pose
         from isaaclab_physx.physics.physx_manager import IsaacEvents
         from yam_arena.embodiment import BimanualYamEmbodiment
-        from yam_arena.scene import env_cfg_callback, task_room
+        from yam_arena.scene import env_cfg_callback
 
         self._temp = tempfile.TemporaryDirectory(prefix=config.KEY + "-")
         self.spec = builder.create_assets(self._temp.name)
@@ -197,21 +198,17 @@ class Environment(YamArenaEmbodiment):
                     asset_cfg_addon={"init_state": cls.InitialStateCfg()},
                 )
             )
-        room = task_room("station", self.rig.top_cam)
-        all_objects = [
-            *(o for o in room if "stand" not in o.name and "housing" not in o.name),
-            *objects,
-        ]
-        for o in all_objects:
-            if isinstance(o, Object):
-                cls = {
-                    ObjectType.RIGID: RigidObjectCfg,
-                    ObjectType.ARTICULATION: ArticulationCfg,
-                }.get(o.object_type, AssetBaseCfg)
-                o.asset_cfg_addon = {
-                    **o.asset_cfg_addon,
-                    "init_state": cls.InitialStateCfg(),
-                }
+        objects.extend([
+            Object(
+                name="room_fill", object_type=ObjectType.BASE,
+                spawner_cfg=sim_utils.DomeLightCfg(intensity=580.0),
+            ),
+            Object(
+                name="bench_light", object_type=ObjectType.BASE,
+                spawner_cfg=sim_utils.SphereLightCfg(intensity=670.0, radius=0.20),
+                initial_pose=Pose(position_xyz=(0.28, -0.32, 1.80)),
+            ),
+        ])
 
         def configure(cfg):
             from isaaclab_physx.physics.physx_manager_cfg import PhysxCfg
@@ -250,7 +247,7 @@ class Environment(YamArenaEmbodiment):
         )
         arena = IsaacLabArenaEnvironment(
             name=self.info.environment_id,
-            scene=Scene(all_objects),
+            scene=Scene(objects),
             embodiment=robot,
             env_cfg_callback=configure,
         )

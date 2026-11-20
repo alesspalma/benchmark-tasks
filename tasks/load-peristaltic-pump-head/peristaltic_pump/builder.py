@@ -123,9 +123,22 @@ def bench(w):
     return s
 
 
+def room(w):
+    s = w.stage("workcell")
+    w.box(s, "/Asset/Worktop", (1.20, 1.22, 0.065),
+          (0.365, 0, C.TABLE - 0.0325), (0.57, 0.48, 0.33))
+    for i, x in enumerate((-.19, .90)):
+        for j, y in enumerate((-.55, .55)):
+            w.box(s, f"/Asset/Leg{i}{j}", (.060, .060, .6825),
+                  (x, y, .34125), HOUSING)
+    w.box(s, "/Asset/Floor", (8., 8., .02), (0, 0, -.01),
+          (.32, .37, .39))
+    return s
+
 def create_assets(directory):
     w = Writer(directory)
-    assets = [{"name": "head", "type": "articulation", "file": w.save(pump(w)), "position": (0, 0, 0)},
+    assets = [{"name": "workcell", "type": "base", "file": w.save(room(w)), "position": (0, 0, 0)},
+              {"name": "head", "type": "articulation", "file": w.save(pump(w)), "position": (0, 0, 0)},
               {"name": "bench", "type": "base", "file": w.save(bench(w)), "position": (0, 0, C.TABLE)}]
     for i, name in enumerate(C.TUBE_NAMES):
         assets.append({"name": name, "type": "articulation", "file": w.save(tube(w, name, C.COLORS[i], C.STAGING[i])),

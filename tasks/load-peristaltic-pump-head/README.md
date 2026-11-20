@@ -4,9 +4,9 @@ Changing tubing on a two-channel head preserves the separation between two indep
 
 ## Physical setup and reset
 
-Use two equal 352 mm lengths of 8.0 mm OD × 4.8 mm ID silicone pump tubing, marked with different colors. Each has a press-fit inlet elbow on a small fixed feed bottle, with a freely movable continuous loading section and a discharge end open to air. Fill both sources with clean water. An optional drop of food coloring makes the streams visible. Connect the pump drive only for the evaluator's guarded water check after both hands are clear.
+Use two equal 352 mm lengths of 8.0 mm OD × 4.8 mm ID silicone pump tubing, marked with different colors. Each starts connected to a separate vented water bottle with a free discharge tip. The two aluminum parking supports are 90 × 16 mm. The two marked polypropylene cups have a 22 mm mouth, 23 mm outer diameter and 33 mm height.
 
-Use a full-size two-track head with a four-roller cradle and a shared over-center lever. The procedural benchmark head has a 102 × 101 mm footprint, aluminum retainers 92 mm apart along the tube axes and two parallel tracks 18 mm apart across the roller. Its exterior lever swings about the bed hinge via the yellow 19 mm diameter grip and 110 mm axle. Each aluminum parking support is 90 × 16 mm and sits outside of the head. The silicone may slide along each smooth support. No clamp holds the loading section to the support. The two receiving cups have a 22 mm mouth, an outside diameter of 23 mm and a 33 mm height.
+The custom 102 × 101 mm two-track bench head has four freely turning stainless rollers, two 18 mm pitch tracks, two end retainers 92 mm apart, two independent spring-loaded pressure shoes and an over-center handle. [Fabrication and assembly](fixture/BUILD.md) covers the printable parts, hardware list, spring setup, guarded drive and timed check. [OpenSCAD fabrication model](fixture/pump.scad) and [drive sketch](fixture/water_check/water_check.ino) are included.
 
 Measurements below are in metres in the YAM station frame, with positive Y toward the left arm. The worktop surface is at z = 0.7475.
 
@@ -19,15 +19,19 @@ Measurements below are in metres in the YAM station frame, with positive Y towar
 | Two empty receiving cups | x = 0.383 and 0.348, y = 0.170. |
 | YAM pair | Bases at y = ±0.305, both grippers open in the fixed ready pose. |
 
-On reset, stop the drive, open the lever, withdraw the loading sections and return them to the external supports. Retain the original inlet connections. Empty the cups and replenish the clean water. A real setup can use the dimensioned bench head or equivalent two-channel commercial components that preserve access to both retainers. Check that the lever and outlet ends remain within the robot's normal reach.
+### Bottle pickup and priming
+
+1. Use two 24 mm outside diameter HDPE bottles with a fixed 90° barbed elbow in each cap. Inside each bottle, connect a 4 mm OD × 2.5 mm ID pickup to the cap fitting. Cut its lower end on a 45° bevel and fix it 5 mm above the bottle floor, below the marked fill line. Make a separate 1 mm air vent in each cap. Fill with 18 mL of clean water, with each free surface below its parked outlet tip. Keep the two circuits separate.
+2. With the drive isolated and the cam open, attach a 10 mL syringe with a hose-barb adapter to the free discharge end. Draw water from the bottle until the full working line has no visible air and at least 2 mL of bubble-free water reaches the syringe barrel. With its free tip above the source's water level, remove the adapter and wipe off the exterior drop. Repeat on the other channel. The circuit is fully primed at episode start, with both discharge tips free.
+3. Place both primed working sections across the two open rests, the same orientation as the setup image, and tared empty cups at the positions above. Check that the outlet tips remain above the bottle fill levels in both the parked and correctly seated positions. Replace any lost source water before setting the cup tare. Reset the cam to 70°, start the rotor with an axle indexed at 12 o'clock, and put both robot arms in the ready pose. Repeat the syringe step after breaking either line or when air is visible before a run.
 
 ## Score a trial
 
 Inspect the closed head and both exits after the grippers are clear. Each loaded tube passes through both retainers and over the roller. It stays within 4.1 mm of its track center and within 5 mm of the centerline height at both retainers and between them. The cam must be within 4 degrees of its closed stop. Neither tube may cross, kink or leave the roller path. Use a ruler and a photograph for alignment. Keep hands off the active loading section and lever.
 
-In the guarded check, run a 24 rpm drive for three seconds. Each correctly installed channel earns 0.5 when its own cup collects at least 1.0 mL. A cup with no correctly installed line earns zero. Neither color is tied to a specific track. Switching color-to-track mapping is valid when each tube is independently routed, remains uncrossed and discharges into its corresponding cup. A dropped outlet, missed retainer, unlatched cam or stationary episode earns zero for every affected channel.
+After 0.5 s with both hands clear, run the guarded drive at 24 rpm for a continuous three seconds. Weigh each tared cup immediately afterward using a scale with 0.1 g resolution. Each correctly installed channel earns 0.5 when its own cup gains at least 1.0 g of water (approximately 1.0 mL). A cup with no correctly installed line earns zero. Neither color is tied to a specific track. Switching color-to-track mapping is valid when each tube is independently routed, remains uncrossed and discharges into its corresponding cup. A dropped outlet, missed retainer, unlatched cam or stationary episode earns zero for every affected channel.
 
-In Isaac Lab the native motion of the two pressure shoes measures loaded occlusion. A load of 1.2 to 6.5 mm at each shoe is the modeled cross-section displacement range for the bench head, using 850 N/m elastic support as a reduced-order contact response. The evaluator checks continuous positive-Y centerlines, the pose of both outlets above catch mouths, the independent occlusion loads and the released cam. Once eligible for 0.5 s, each clear channel accumulates volume using the L/S 25 nominal rate of 1.7 mL per revolution at the fixed check speed. The colored stream and cup level show the measured simulated outcome. The camera and fluid proxies do not change tube or cam physics.
+In Isaac Lab the native motion of the two pressure shoes measures loaded occlusion. A load of 1.2 to 6.5 mm at each shoe is the modeled cross-section displacement range for the bench head, using 850 N/m elastic support as a reduced-order contact response. The evaluator checks continuous positive-Y centerlines, the pose of both outlets above catch mouths, the independent occlusion loads and the released cam. Once eligible for 0.5 s, each clear channel accumulates volume using the L/S 25 nominal rate of 1.7 mL per revolution at the fixed check speed. The score requires all 60 consecutive flow steps for a channel, even if the volume threshold is reached sooner. Loss of eligibility restarts its check. The colored stream and cup level show the measured simulated outcome. The camera and fluid proxies do not change tube or cam physics.
 
 ## Run and score in Isaac Lab
 
@@ -54,7 +58,9 @@ python run.py --device cuda:0 --no-cameras --policy single-tube --output /tmp/pe
 | Two external tube supports | Procedural geometry in `builder.py`, MIT (`LICENSE`). |
 | Receiver cups and liquid visualization | Original geometry in `builder.py` and `environment.py`, MIT (`LICENSE`). |
 | Pair of YAM models | [i2rt YAM terms](https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/assets/yam/LICENSE.i2rt) through the pinned adapter. |
-| Worktop and room | Procedural [adapter geometry](https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/scene.py), with no separate asset license declared. |
+| Worktop, legs and floor | Task-authored box geometry in `builder.py`, MIT (`LICENSE`). |
+| Room lights | Task-authored light placement and intensity in `environment.py`, MIT (`LICENSE`). |
+| Fabrication and drive controller | Task-authored OpenSCAD and Arduino source in `fixture/`, MIT (`LICENSE`). |
 | Overview camera | Task-authored placement with [MIT YAMLAb calibration](https://github.com/ARISE-Initiative/yamlab/blob/ec0455d2b4ce35f21fc126418ea5e74ac567133d/LICENSE). |
 | Left wrist camera | [MIT YAMLAb calibration](https://github.com/ARISE-Initiative/yamlab/blob/ec0455d2b4ce35f21fc126418ea5e74ac567133d/LICENSE) through the pinned adapter. |
 | Right wrist camera | [MIT YAMLAb calibration](https://github.com/ARISE-Initiative/yamlab/blob/ec0455d2b4ce35f21fc126418ea5e74ac567133d/LICENSE) through the pinned adapter. |

@@ -10,8 +10,10 @@ from .motion import rotation
 
 TUBE_CENTER = C.TABLE + C.BED_Z + C.TUBE_R
 SAMPLE_Y = C.HEAD[1] + np.array([-0.046, -0.022, 0.0, 0.022, 0.046])
-CHECK_STEPS = 60
-PUMP_ML_PER_STEP = 1.7 * 24 / 60 / 20
+CONTROL_HZ = 20
+GUARD_STEPS = CONTROL_HZ // 2
+CHECK_STEPS = 3 * CONTROL_HZ
+PUMP_ML_PER_STEP = 1.7 * 24 / 60 / CONTROL_HZ
 
 
 def tube_geometry(links):
@@ -37,6 +39,7 @@ def inspect_track(geometry, lane, receiver):
 class PumpCheck:
     def __init__(self):
         self.volumes = np.zeros(2)
+        self.flow_steps = np.zeros(2, dtype=int)
         self.steady = np.zeros(2, dtype=int)
         self.assignment = (0, 1)
         self.active = np.zeros(2, dtype=bool)
@@ -68,18 +71,19 @@ class PumpCheck:
                               for (ok, _, _, capture), travel in zip(aligned, compressed)])
         if order != self.assignment:
             self.steady[:] = 0
-            self.volumes[:] = 0.0
         self.assignment = order
         self.outlets = np.array([tubes[i][0] for i in order])
         self.steady = np.where(checkable, self.steady + 1, 0)
-        self.active = (self.steady > 10) & (self.steady <= CHECK_STEPS + 10)
-        self.volumes = np.where(checkable, self.volumes + self.active * PUMP_ML_PER_STEP, 0.0)
-        score = float(0.5 * np.count_nonzero(self.volumes >= 1.0))
+        self.flow_steps = np.clip(self.steady - GUARD_STEPS, 0, CHECK_STEPS)
+        self.active = (self.steady > GUARD_STEPS) & (self.steady <= GUARD_STEPS + CHECK_STEPS)
+        self.volumes = self.flow_steps * PUMP_ML_PER_STEP
+        passed = (self.flow_steps == CHECK_STEPS) & (self.volumes >= 1.0)
+        score = float(0.5 * np.count_nonzero(passed))
         return {
             "score": score, "success": score == 1.0, "valve_angle_deg": math.degrees(angle),
             "track_lateral_error_mm": [row[1] for row in aligned],
             "track_height_error_mm": [row[2] for row in aligned],
             "outlet_over_receiver": [row[3] for row in aligned],
             "occlusion_mm": (1e3 * compressed).tolist(), "water_ml": self.volumes.tolist(),
-            "hands_clear": clear,
+            "hands_clear": clear, "flow_check_steps": self.flow_steps.tolist(),
         }
