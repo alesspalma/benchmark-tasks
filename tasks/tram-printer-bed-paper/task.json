@@ -1,0 +1,21 @@
+{
+  "title": "Set a 3D printer's corner height with a paper feeler",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "3D printing",
+    "FDM",
+    "robot fabrication",
+    "bed tramming",
+    "bimanual contact",
+    "paper feeler"
+  ],
+  "instruction": "Adjust the front-right wheel until the paper moves under the cold nozzle with light drag. Leave the paper and wheel released.",
+  "context": "Robot builders use extrusion printers to make gripper fingers, sensor mounts and other tooling. Setting the first-layer gap is a routine setup step. One arm adjusts the wheel beneath the plate and the other checks the narrow gap with the paper.",
+  "setup": "An unpowered open-frame filament printer sits on a 1,100 × 1,250 mm oak bench. The 235 × 235 mm spring-steel and aluminum build plate rests on four screw-and-spring supports. A stationary brass nozzle is over its front-right support. A 179 × 58 mm strip of ordinary 80 gsm paper lies under the nozzle diagonally with its folded near edge overhanging. The nearby black adjustment wheel is 59 mm across.",
+  "scoring": "Score the released front-right adjustment after the wheel turns at least 2° in the raising direction. Score 0.25 for a gap over 0.10 and up to 0.135 mm, 0.5 for 0.065–0.10 mm, and 0.75 for that target gap plus 12 mm of cumulative paper travel under light drag. Score 1.0 after the grippers clear the wheel, paper and bed and the intact paper stays on the bed for one second. Use feeler blades and trial video.",
+  "run_limit": "660 actions (33 seconds at 20 Hz)",
+  "reset_notes": "Home the cold printer and place the nozzle directly over the front-right screw. Lock carriage travel for this corner test. Reset the other support settings and back the front-right wheel off 48 degrees from its calibrated position. Place a flat, dry paper strip under the nozzle with the front end overhanging.",
+  "fidelity": "A 235 mm plate rests on four modeled screw springs with 0.70 mm lead. Holding and rotating their 59 mm wheels requires pad contact. The nozzle and full-thickness paper physically contact. A passive axial spring captures combined head and plate compliance. The thin paper and its folded free end are connected by a passive bend. The Y bed and X carriage stay fixed for one cold corner adjustment.",
+  "scores": "Demo: 1.0 in 605 actions. Dream-1: 0.0 after 660 actions.",
+  "media": "M-K77K7V"
+}
