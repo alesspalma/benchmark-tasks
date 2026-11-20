@@ -1,0 +1,20 @@
+{
+  "title": "Reload both fixed lines on a string trimmer",
+  "category": "Societal relatability",
+  "keywords": [
+    "yard maintenance",
+    "bimanual",
+    "nylon line",
+    "spring retention",
+    "precision insertion"
+  ],
+  "instruction": "Load the two fresh nylon strips into the empty string-trimmer head and leave both securely seated.",
+  "context": "Home string trimmers lose usable cutting length as nylon wears against the ground. On an ECHO Rapid Loader 21560056 head, each replacement strip is fed through a small side eyelet and held by a spring grip. The cutting length outside and the inner tips in the service recess make the finished installation inspectable.",
+  "setup": "An inert full-size ECHO-type shaft and two-line head are supported cutting-face up. The plastic head is 108 mm across with two brass eyelets facing opposite sides. The eyelets start empty, 87.5 mm above the worktop. Two orange 203.2 × 2.41 mm nylon strips lie parallel on separate rubber channel rests, centered 255 mm to either side. Two standard parallel-gripper YAM arms face the worktop with 610 mm between bases. See the README for exact reset coordinates, stock and fixture.",
+  "scoring": "Award 0.5 per side for one released strip through the correct eyelet with 31–43 mm of insertion reaching the central recess and 158–174 mm exposed. Both grippers must clear and neither endpoint may shift more than 2 mm in one second. Check a gentle outward 0.5 N pull; both strips must stay seated. A missing strip, a strip lying alongside a slot, or a shallow fit earns 0 for that side. Either arm can load either side in either order.",
+  "run_limit": "460 actions (23 seconds at 20 Hz)",
+  "reset_notes": "Remove fitted strips inward through the center recess with the engine inoperative. Confirm both eyelets are empty. Center two straight ECHO 8 in × .095 in nylon strips on their separate rests. Return both arms to ready.",
+  "fidelity": "A full-size head and eyelets use native contacts with spring sprags that approximate the stock one-way collets. Real 203.2 × 2.41 mm precut line is represented by a straight rigid collision body with increased inertia for stable finger contact. The braced shaft and motor are inert. Neither the scored fit nor the reference controller depends on a prescribed arm assignment.",
+  "scores": "Demo: 1.0 in 348 actions. Dream-1: 0.0 after 460 actions.",
+  "media": "M-7BFDUC"
+}
