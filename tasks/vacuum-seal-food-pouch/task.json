@@ -1,0 +1,20 @@
+{
+  "title": "Vacuum-seal a filled pouch in a countertop sealer",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual",
+    "vacuum sealing",
+    "food storage",
+    "flexible packaging",
+    "gasket"
+  ],
+  "instruction": "Vacuum-seal the filled food pouch, then take it out and leave it flat on the counter.",
+  "context": "The entire open edge of a food pouch has to lie across an external sealer's heating strip and inside its vacuum channel. A corner outside the gasket leaks or leaves a gap in the weld. Guide both edges into the chamber, then keep the lid down while turning its keeper.",
+  "setup": "A full-size external suction sealer with a 386 × 191 mm ABS base, hinged lid, foam gasket, rotary lock and Vacuum & Seal button sits on a laminate counter. Its lid is open and the rotary lock is set to Open. A 197 × 266 mm embossed nylon/PE pouch with a dry load lies unsealed on the counter, with its open end facing the sealer and 18 mm ahead of the front deck. Both YAM arms begin clear. Dimensions and preparation are in the README.",
+  "scoring": "0 if the mouth is out of the vacuum channel. 0.2 when the full width is across the heating strip inside the channel. 0.4 if the lid is also shut and latched in Operate. 0.7 when the completed cycle makes an intact vacuum seal. 1.0 if the sealed pouch is fully withdrawn and flat on the counter for one second with grippers clear. Inspect the entire weld and check that the film stays tight around the load after removal.",
+  "run_limit": "1,000 actions at 20 Hz (50 seconds)",
+  "reset_notes": "Use one new standard food pouch, sealed on three sides, per trial. Reuse the smooth dry test load and wipe the gasket and seal bar. Set Open, lift the lid, straighten the new opening and place the replacement pouch using the counter dimensions in the README.",
+  "fidelity": "Full-size sealer geometry, rotary keeper, gasket contact and button are native. Three hinged film panels retain the pouch neck's edge curl and whole-width alignment. Whole-width registration and the actuated cycle stand in for pump and heater physics. The film visually contracts and a weld line appears when the cycle completes.",
+  "scores": "Demo: 1.0 in 917 actions. Dream-1: 0.0 after 1000 actions.",
+  "media": "M-YVQ49M"
+}
