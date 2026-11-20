@@ -1,0 +1,20 @@
+{
+  "title": "Fit a strip-clamp flat mop pad",
+  "category": "Societal relatability",
+  "keywords": [
+    "mop",
+    "cleaning",
+    "cloth",
+    "bimanual",
+    "strip clamp"
+  ],
+  "instruction": "Fit the dry pad under the flat mop head and close both strip clamps. Lift the head by its handle, then set it down with the pad still fitted.",
+  "context": "A loose strip lets a dry mop pad bunch or pull free during cleaning. The two end clamps need a folded fixation strip under each bite so the pad covers the head and stays flat.",
+  "setup": "A 402 × 111 mm polypropylene flat mop head rests on an unattached, dry 404 × 127 mm microfibre pad over a 158 × 414 × 43 mm service tile. Two 60 × 43 mm sewn strips lean loose against side guides and both hinged nylon clamps start open. The head can lift out of the fixture.",
+  "scoring": "0.4 per folded strip retained under its closed clamp with the pad flat and centred within 10 mm. 1.0 if both retain the pad during a lift at least 31 mm above the tile for 0.25 s, before the mop is set down level and released for 0.5 s. Score 0 if the pad is displaced or neither strip is retained.",
+  "run_limit": "680 actions (34 seconds at 20 Hz)",
+  "fidelity": "The full-size flat head, clamp hinges and cloth contacts are native PhysX. Two jointed strips approximate local creases and use aggregate friction. A passive torque curve represents each over-centre latch. The folding head stays latched flat throughout pad service and the handle is a short fitting on one swivel axis.",
+  "reset_notes": "Return the loose dry pad to the tile and lean the unfastened strips against their guides. Set the flat head over the loose pad. Open both clamps and return both arms to the ready pose.",
+  "scores": "Demo: 1.0 in 488 actions. Dream-1: 0.0 after 680 actions.",
+  "media": "M-SUN9KG"
+}
