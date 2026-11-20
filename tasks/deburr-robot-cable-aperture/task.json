@@ -1,0 +1,21 @@
+{
+  "title": "Deburr the cable aperture in a robot tool plate",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "robot tool plate",
+    "end-of-arm tooling",
+    "deburring",
+    "swivel blade",
+    "edge following",
+    "bimanual"
+  ],
+  "instruction": "Deburr the upper edge all the way around the cable opening in the robot tool plate. Leave the opening clear and the plate undamaged, then put the plate and deburring tool back in their rests.",
+  "context": "A robot tooling plate carries power and sensing lines through an oblong opening beside its mounting holes. Finishing that cut edge lets the cable sleeve seat without snagging. The two hands control a loose workpiece and follow two straight runs and two rounded ends under cutting load.",
+  "setup": "On a 1100 × 1220 mm workbench, a 154 × 168 × 10 mm 6061 aluminum tool plate lies burr-side up on two 20 × 76 × 38 mm steel parallels. It has four counterbored mounting holes and an oblong 88 × 42 mm opening 40 mm to the right of centre. A 145 mm handheld swivel deburrer with a nylon grip and S10 steel blade stands in a protective holder on the right. Both grippers start open.",
+  "scoring": "Multiply the fraction of upper rim length cleared by 0.8, or by 0.2 if the wall was gouged. Award 1.0 for at least 98% of the rim cleared with the wall intact, plate and tool back in their rests, and grippers clear for 0.75 seconds. Inspect with a loupe and cotton swab, and check sleeve fit with the supplied gauge.",
+  "run_limit": "2200 actions (110 seconds at 20 Hz)",
+  "reset_notes": "Use the supplied 6061 plate profile to make identical stock. Confirm the upper cut edge has a small continuous burr, with the underside, exterior, and mounting holes finished. Reset the plate upper face up on its two parallels and the blade in the holder.",
+  "fidelity": "Native plate and tool contacts govern the grip and the clockwise cut. The S10 blade has a native swivel and axial compliance. Its measured cutting nose must traverse the rim under contact load to clear the displayed burr. The mounting holes are visual and lie away from the cut.",
+  "scores": "Demo: 1.0 in 2157 actions. Dream-1: 0.0 after 2200 actions.",
+  "media": "M-MQMJKA"
+}
