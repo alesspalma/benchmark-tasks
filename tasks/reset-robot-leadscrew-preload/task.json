@@ -1,0 +1,20 @@
+{
+  "title": "Restore the preload of a robot leadscrew nut",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "robot maintenance",
+    "lead screw",
+    "axial play",
+    "ramp cam",
+    "bimanual"
+  ],
+  "instruction": "Reset the preload of the leadscrew nut. Leave the unloaded stage ready for its play and drag checks.",
+  "context": "During robot-axis assembly, the compensating nut can twist on its ramps and create excessive drag. The technician holds the front nut, turns the cam down its ramps until the threads relax, then lets the torsion spring establish a working preload. The resulting nut must limit both reversal play and running drag for repeatable positioning.",
+  "setup": "A 360 × 125 mm benchtop plate secures bearings and a Ø16 × 337 mm trapezoidal screw at 109 mm above the table. A floating 44 mm housing surrounds the front and rear nut halves. The 48 mm brass-coloured compensation cam starts high on its ramps, with both arms open and clear. The twist of the housing is allowed against two travel stops.",
+  "scoring": "Score 0.25 after a measured excursion that opens at least 0.30 mm reversal play. Score 0.5 when play is at most 0.10 mm under opposing 5 N axial checks and estimated quasistatic running drag is at most 18.5 N mm. Score 1.0 when both also persist through a hands-clear check that turns the screw at least 16 degrees under a 20 N mm torque cap within the episode. Either arm can steady the housing or work the cam.",
+  "run_limit": "420 actions (21 seconds at 20 Hz)",
+  "reset_notes": "Set the cold, unpowered cam at its marked 57-degree high-load reset. Use the procedure and low-force verification in the README.",
+  "fidelity": "The ring and counterheld housing use native revolutes and robot contacts. A measured cam angle drives reduced-order ramp thrust, sleeve friction and screw-flank friction. A bounded test torque moves the native screw. Axial reversal play is the calculated gap and compliance response of the paired flanks at ±5 N. The original fixture and free sleeve are buildable around stock Tr16×4 hardware.",
+  "scores": "Demo: 1.0 in 345 actions. Dream-1: 0.0 after 420 actions.",
+  "media": "M-M3VTHM"
+}
