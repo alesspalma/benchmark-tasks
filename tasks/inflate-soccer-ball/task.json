@@ -1,0 +1,20 @@
+{
+  "title": "Inflate a football through its needle valve to the marked pressure",
+  "category": "Societal relatability",
+  "keywords": [
+    "football",
+    "sports equipment",
+    "needle valve",
+    "piston pump",
+    "bimanual"
+  ],
+  "instruction": "Inflate the football to the green pressure band, then withdraw the needle straight and put the pump down.",
+  "context": "Coaches, players and sports facility staff routinely restore match balls to their marked pressure. One hand steadies the ball while the other seats the narrow needle. Both hands work the loose hand pump, one counterholding the barrel and one moving the piston. The needle must stay square and engaged until the dial enters the target pressure band.",
+  "setup": "A size 5 match football rests valve-up in a rubber ball ring fixed to the bench. An ordinary 3 mm needle stands unseated in a protective holder, connected by a flexible hose to a dual-action pressure gauge hand pump resting horizontally in rubber pads. The pump piston starts retracted and the football starts at 0.755 bar. The gauge marks the 0.790–0.825 bar band in green. The README gives full-size coordinates, stocked equipment references and independent pressure measurement.",
+  "scoring": "Score 0.35 for increasing ball pressure by at least 0.014 bar. Score 0.7 at 0.790–0.825 bar. Score 1.0 once the needle is withdrawn, the ball and pump are supported, and both hands stay clear for one second while the pressure remains in range. Overshoot above 0.85 bar earns zero. Pumping with an unseated needle does not increase ball pressure. Either arm can perform either role.",
+  "run_limit": "940 actions (47 seconds at 20 Hz)",
+  "reset_notes": "Use a gauge to set the ball to 0.755 ± 0.005 bar at room temperature. Return the ball, connected needle and pump to their marks and retract the piston. Begin with the needle in its stand and both grippers open.",
+  "fidelity": "The loose ball, 3 mm needle, rubber valve aperture, pump barrel and passive piston use native contact. A reduced-order air model integrates measured piston displacement only when the needle is seated and aligned, with pressure loss at a partial off-axis seal. The shell collision shape is rigid. The slack hose is rendered between connected endpoints and its reach bounds the air path.",
+  "scores": "Demo: 1.0 in 840 actions. Dream-1: 0.0 after 940 actions.",
+  "media": "M-7E2ABE"
+}
