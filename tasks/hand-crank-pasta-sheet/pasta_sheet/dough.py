@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections import deque
+
 import numpy as np
 from yam_arena.urdf import quat_xyzw_to_matrix
 
@@ -10,6 +12,8 @@ from . import config as C
 
 class DoughSheet:
     def __init__(self, asset, sim_view, torch, wp, device, from_sim):
+        from yam_arena.robot import asset_link_paths
+
         self.asset = asset
         self.view = asset.root_view
         self.array = from_sim
@@ -39,6 +43,20 @@ class DoughSheet:
             )
             for side in ("Driven", "Opposed")
         ]
+        link_paths = asset_link_paths()
+        hands = [
+            f"{prefix}/{arm}{link_paths[link]}"
+            for arm in ("LeftArm", "RightArm")
+            for link in ("gripper", "tip_left", "tip_right")
+        ]
+        self.hand_contacts = sim_view.create_rigid_contact_view(
+            hands, filter_patterns=[faces] * len(hands), max_contact_data_count=512
+        )
+        if (
+            self.hand_contacts.sensor_count != len(hands)
+            or self.hand_contacts.filter_count != len(faces)
+        ):
+            raise RuntimeError("Both grippers must be available for release scoring")
         self.reset()
 
     def reset(self):
@@ -47,7 +65,8 @@ class DoughSheet:
         self.peak_pair = np.zeros(C.SECTIONS)
         self.peak_rolls = np.zeros((2, C.SECTIONS))
         self.loaded_draw = np.zeros(C.SECTIONS)
-        self.hold_s = 0.0
+        self.released_ticks = deque(maxlen=8)
+        self.hand_force_peak = 0.0
         self.contact_force = np.zeros((2, C.SECTIONS))
         self.contact_average = np.zeros((2, C.SECTIONS))
         self.net_force = np.zeros(2)
@@ -62,6 +81,9 @@ class DoughSheet:
         )
 
     def measure_contacts(self, dt):
+        hand_forces = self.array(self.hand_contacts.get_contact_force_matrix(dt=dt))
+        hand_peak = float(np.linalg.norm(hand_forces, axis=-1).max())
+        self.hand_force_peak = max(self.hand_force_peak, hand_peak)
         links, _, _ = self.state()
         if not (abs(links[:, 2] - C.NIP[2]) < 0.029).any():
             self.contact_force.fill(0.0)
@@ -183,8 +205,11 @@ class DoughSheet:
         links, thickness, stretch = self.state()
         corners = self.cross_sections(links, thickness)
         center = corners.mean(axis=1)
-        arc = float(np.linalg.norm(np.diff(center, axis=0), axis=1).sum())
-        valid_thickness = (thickness >= 0.00345) & (thickness <= 0.00415)
+        section_ends = np.cumsum(np.linalg.norm(np.diff(center, axis=0), axis=1))
+        arc = float(section_ends[-1])
+        sample_distances = arc * (np.arange(C.SECTIONS) + 0.5) / C.SECTIONS
+        samples = thickness[np.searchsorted(section_ends, sample_distances)]
+        valid_thickness = (samples >= 0.00345) & (samples <= 0.00415)
         tray_points = (corners - C.CATCH_TOP) @ C.CATCH_FRAME
         normal = tray_points[:, :, 2]
         flat = (
@@ -195,24 +220,36 @@ class DoughSheet:
             np.abs(tray_points[:, :, 0]).max() < 0.5 * C.CATCH_LENGTH + 0.002
             and np.abs(tray_points[:, :, 1]).max() < 0.5 * C.CATCH_WIDTH + 0.002
         )
-        extended = arc >= 0.107
         straight = np.linalg.norm(center[-1] - center[0]) >= 0.90 * arc
-        filled = np.count_nonzero(valid_thickness & (self.plastic > 0.00058))
-        eligible = bool(
-            flat and on_board and extended and straight and filled == C.SECTIONS
+        filled = int(np.count_nonzero(valid_thickness))
+        hand_force = self.hand_force_peak
+        self.hand_force_peak = 0.0
+        released = hand_force < 0.02
+        if not (flat and on_board and straight and released and filled):
+            self.released_ticks.clear()
+        elif dt > 0.0:
+            # A short sheet can show thinning progress, but never earns full credit.
+            self.released_ticks.append(min(filled, C.SECTIONS - int(arc < 0.107)))
+        score = (
+            min(self.released_ticks) / C.SECTIONS
+            if len(self.released_ticks) == self.released_ticks.maxlen
+            else 0.0
         )
-        self.hold_s = self.hold_s + dt if eligible else 0.0
         return {
-            "score": 1.0 if self.hold_s >= 0.4 else 0.0,
-            "success": self.hold_s >= 0.4,
+            "score": score,
+            "success": score == 1.0,
             "section_positions": links[:, :3].tolist(),
             "thickness_mm": (1000.0 * thickness).tolist(),
+            "sampled_thickness_mm": (1000.0 * samples).tolist(),
             "length_mm": 1000.0 * arc,
             "stretch_mm": (1000.0 * stretch).tolist(),
             "flat": bool(flat),
             "on_board": bool(on_board),
             "straight": bool(straight),
-            "released_hold_s": self.hold_s,
+            "released": released,
+            "peak_gripper_contact_n": hand_force,
+            "thickness_checks_in_range": filled,
+            "released_hold_s": len(self.released_ticks) * 0.05,
             "peak_opposed_contact_n": self.peak_pair.tolist(),
             "peak_separate_roll_contact_n": self.peak_rolls.tolist(),
             "peak_roll_net_n": self.net_force.tolist(),

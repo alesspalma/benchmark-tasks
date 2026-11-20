@@ -18,7 +18,13 @@ Prepare the stock by mixing 100 g fine durum flour with 50 g water and kneading 
 
 ## Scoring
 
-Check the entire connected sheet as it rests on the receiving board. Measure thickness with a light-touch caliper at six evenly spaced points down the middle. The target range is 3.45–4.15 mm at every point. Use a ruler and photo to verify at least 107 mm centerline length, endpoint separation at least 90% of centerline length, and no fold lifting the sheet more than 13 mm through the board normal. The outfeed remains entirely on the board for 0.4 seconds. The same physical checks apply whichever hand cranks. See `pasta_sheet/dough.py` for the trial scorer and instrumented simulation checks.
+Use the trial video to confirm the continuous sheet rests entirely on the receiving board with both grippers clear of the dough for the final 0.4 seconds. The end-to-end distance must span at least 90% of the centerline length, and no fold may lift the sheet by more than 13 mm above the board. Measure the centerline with a ruler, divide it into six equal lengths, and take a light-touch caliper reading at the midpoint of each. Keep the sheet on the board and avoid pulling or flattening it while measuring.
+
+- Each of the six readings in the 3.45–4.15 mm band earns one sixth of a point. Five passing readings earn 5/6 (about 0.83).
+- Full credit also requires at least 107 mm of centerline length. A shorter sheet with six passing readings earns 5/6.
+- Award zero when the sheet fails the receiving-board, release, flatness or straightness checks, or when all six readings are outside the band.
+
+Either hand may crank. The simulator tracks actual contacts between the sheet and both grippers throughout each action and credits the lowest qualifying count across the eight actions of the released hold. Contact of at least 0.02 N breaks the hold. The physical trial uses the same hands-off requirement, observed on the trial video. See `pasta_sheet/dough.py` for the scorer and diagnostics.
 
 ## Run
 
@@ -31,6 +37,8 @@ python -B run.py --policy feed-only --no-cameras --physics-device cpu --output f
 ```
 
 The reference sends the standard 14-dimensional joint and finger commands using read-only held-stock pose and crank sleeve feedback. `hold` leaves both arms at reset for the complete budget. `feed-only` attempts to feed a stock piece while leaving the crank alone. The standard observations for hosted policies are three RGB camera views and the normal YAM joint positions from Inspect Robots.
+
+The published recordings were verified by replaying their original robot actions through the revised scorer. The scripted demo scores 1.0 in 589 recorded actions, and the Dream-1 trial scores 0.0 in 900 recorded actions.
 
 ## Simulation fidelity and asset licenses
 
