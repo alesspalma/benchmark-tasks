@@ -1,0 +1,21 @@
+{
+  "title": "Reconnect a toilet flapper chain and test the flush",
+  "category": "Societal relatability",
+  "instruction": "Reconnect the flapper chain to the trip lever directly above the flapper with about half an inch of slack. Use the outside handle to test the flush and let the flapper reseat.",
+  "context": "A disconnected flapper chain leaves a familiar toilet handle unable to flush. The free end must be fitted to the correct eye while holding the moving trip lever steady. A full handle stroke then proves that the chain raises the valve, and the slack allows the flapper to seal again after the flush.",
+  "keywords": [
+    "toilet",
+    "gravity flush",
+    "flapper",
+    "home repair",
+    "spring clip",
+    "bimanual"
+  ],
+  "setup": "A lid-off full-size gravity tank with a two-inch flush valve sits above an empty catch pan. The tank has a 5.2 L clean-water charge and its fill supply is closed. The lower chain end is already attached to the seated rubber flapper. The free spring hook lies on an interior sill, clear of three eyes on the front trip arm. The exterior handle is at rest and both YAM hands start clear. See the README for dimensions, positions, and the manufacturer's repair method.",
+  "scoring": "0 for a free clip or an attachment to the wrong eye. 0.25 for a retained attachment to the eye directly above the flapper. 0.50 if that fitting leaves 6–19 mm of slack with the handle at rest and flapper seated. 0.80 if the linked exterior handle discharges at least 3.7 L with the fitting retained. 1.0 when this test passes and the handle returns to within 7° of rest, the seated flapper has 6–19 mm of slack, and no continuing flow is visible with both hands clear for 0.6 s.",
+  "reset_notes": "Empty the catch pan, clean and reseat the flapper, unclip the upper spring hook and rest it freely on the sill with the lower chain end still attached. Set the exterior handle at rest and refill the tank with 5.2 L of clean water. Start with both hands open and clear.",
+  "run_limit": "640 actions at 20 Hz (32 seconds)",
+  "fidelity": "A full-size gravity tank has native rigid contacts, a revolute trip lever and flapper, and a free rigid spring hook. A bounded spring tongue retains the hook at a pin and a tension-only chain lifts the flapper. A head-driven volume model governs the visible clean-water discharge through the open valve into a catch pan. The fill supply stays shut for the single flush test.",
+  "scores": "Demo: 1.0 in 345 actions. Dream-1: 0.0 after 640 actions.",
+  "media": "M-AAUYSD"
+}
