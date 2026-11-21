@@ -1,0 +1,20 @@
+{
+  "title": "Refill a fountain pen from bottled ink",
+  "category": "Societal relatability",
+  "keywords": [
+    "fountain pen",
+    "ink converter",
+    "piston",
+    "submerged fluid transfer",
+    "bimanual"
+  ],
+  "instruction": "Fill the fountain pen's converter with blue ink, then put the pen back on its rest.",
+  "context": "Refill a reusable writing pen without scraping the nib or pulling air into the reservoir. One hand holds the pen's nib and feed at the filling depth, while the other works the converter's spring-return pump. The pen returns to an upright rest with its fill level visible. [Pilot filling guide](https://www.pilot.co.jp/support/manual/fountain/fountain_en.pdf)",
+  "setup": "An empty 1.10 mL push-button converter, 80 mm long and 9 mm in diameter, is installed in the uncapped nib section of a fountain pen. Its 12.6 mm polymer grip stands nib-down on a shoulder-supporting ceramic rest at X 339 mm and Y 119 mm. An open 64 mm glass bottle with a 46 mm mouth, a 24 mm filling insert, and 30 mL of blue ink stands at X 377 mm and Y -33 mm. The detached cap and barrel lie behind them. The desk is 747.5 mm high; the README lists exact reset dimensions and end-state measurements.",
+  "scoring": "0 for a nib strike against the bottle bottom or if the final bottle is outside 10 degrees of upright or 20 mm from its mark. Otherwise award 0.25 for at least 0.12 mL, 0.55 for at least 0.50 mL, and 0.80 for at least 0.90 mL in the converter. Award 1.0 for at least 0.90 mL with the pen supported upright on its rest and both grippers 44 mm clear for 0.50 s. Use the clear reservoir fill line or weigh the pen section. Either arm can take either role.",
+  "run_limit": "580 actions at 20 Hz (29 seconds).",
+  "reset_notes": "Rinse and drain the converter, restore the 30 mL ink level, wipe the nib, and stand the uncovered converter and grip section on the rest. Restore both robot arms to ready poses with jaws open.",
+  "fidelity": "The pen, bottle, rest, grippers and spring-returned pump use native physics. Native plunger travel and feed submersion determine liquid volume, drawn from the bottle into a visible converter. The reduced-order fluid model omits slosh, the meniscus and individual air bubbles.",
+  "scores": "Demo: 1.0 in 479 actions. Dream-1: 0.0 after 580 actions.",
+  "media": "M-3LWAES"
+}
