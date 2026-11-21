@@ -1,0 +1,20 @@
+{
+  "title": "Crimp a filled turnover in a hinged pastry press",
+  "category": "Societal relatability",
+  "keywords": [
+    "filled pastry",
+    "hinged press",
+    "crimping",
+    "bimanual",
+    "deformable food"
+  ],
+  "instruction": "Finish folding the press and squeeze it to seal the filled turnover. Reopen the press and leave the sealed turnover resting in the lower well.",
+  "context": "A continuous crimp keeps the filling inside a hand pie. Counterhold the lower die while pressing the opposite tab, then reopen the die to check the seal before transferring the pastry to a tray.",
+  "setup": "A four-inch polypropylene pastry press sits on a 215 × 116 × 32 mm work board with two locating pads. Both recessed halves have serrated rims and finger tabs. A detent holds the upper die at a 46° opening. A 101 mm round raw wrapper and a level teaspoon of thick fruit filling are loaded in the press. The bench is 747.5 mm high. Both YAM grippers start open and clear.",
+  "scoring": "0 if the wrapper does not fold around the filling. 0.25 if folded but the curved seam gapes or comes apart during reopening. 0.65 for a continuous crimp before the press is fully opened and hands clear. 1.0 when the press is reopened within 24° of flat and the sealed pastry rests in the lower well with both grippers clear for 0.6 seconds. A gap larger than 3 mm or exposed filling prevents full credit.",
+  "run_limit": "720 actions (36 seconds at 20 Hz)",
+  "reset_notes": "Use a fresh round wrapper and a level teaspoon of thick filling. Clean the press, set the lower die between the locating pads, and stage the loaded upper die in the opening detent.",
+  "fidelity": "The press hinge and gripper contacts use rigid-body physics. Two thin dough lobes represent the wrapper. A force law approximates the response of moist dough against the upper die and the resistance of the completed seam. The filling is a cohesive mound.",
+  "scores": "Demo: 1.0 in 356 actions. Dream-1: 0.0 after 720 actions.",
+  "media": "M-GLV878"
+}
