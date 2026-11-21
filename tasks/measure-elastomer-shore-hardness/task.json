@@ -1,0 +1,20 @@
+{
+  "title": "Measure rubber hardness with a handheld Shore A durometer",
+  "category": "Other",
+  "keywords": [
+    "elastomer quality control",
+    "materials testing",
+    "Shore A durometer",
+    "spring-contact metrology",
+    "bimanual manipulation"
+  ],
+  "instruction": "Place the rubber coupon flat on the steel platen. Take five readings with the handheld Shore A durometer. Measure at least 12 mm from the edges and 6 mm apart, holding the foot flat and still for one second at each point.",
+  "context": "Materials laboratories measure rubber indentation hardness to verify compounds used in seals and gaskets. Hardness affects seal compression loads and resistance to extrusion under pressure. This bench trial measures a robot's ability to place a loose rubber specimen flat on a firm support and repeatedly seat a handheld instrument squarely and steadily against its spring resistance. ASTM D2240 describes the measurement, with the production-lab method and seal-design references documented in the README.",
+  "setup": "A 100 × 70 × 10 mm single-layer nominal 60 Shore A rubber coupon sits loose on a narrow 89 × 44 × 12 mm rest. A 140 × 115 mm steel platen is centered 410 mm forward and 18 mm left of the midpoint between arm bases. The coupon rest is 303 mm forward and 148 mm left. The approximately 110 × 43 × 40 mm digital handheld Shore A durometer stands ungrasped on two 16 mm high open ledges 331 mm forward and 162 mm right, with the pressure foot supported and its indenter free. The bench is 747.5 mm high, and both arms start raised with open grippers.",
+  "scoring": "Award 0.20 for each of five valid readings. The coupon's four corners rest on the rigid steel platen. The pressure foot sits flush and stable for one continuous second, its axis within 5° of the surface normal, and the display shows a stable 55–65 Shore A reading. Each measurement center is at least 12 mm from all edges and at least 6 mm from every earlier scored center. Verify the timing and contact in the video, the centers with a ruler or scaled overhead image, and the value on the display. A repeat at the same spot adds zero. Either arm can handle either object.",
+  "run_limit": "820 actions at 20 Hz (41 seconds).",
+  "reset_notes": "Use a flat, clean, dry single-layer coupon conditioned at 23 ± 2 °C. Check the instrument against its reference block and the coupon against its expected nominal range. Return the coupon and upright ungrasped gauge to their open rests at the specified coordinates. Start with the indenter free in the rest gap and the measurement memory cleared.",
+  "fidelity": "The full-size gauge has a 32 mm annular pressure foot (flat-face collision on the specimen) and native prismatic indenter with 2.5 mm stroke, 0.55 N preload and 3,000 N/m spring rate. Opposing local indentation forces on the steel indenter and rubber drive the display through the measured stroke. The specimen uses a rigid bulk shape for grasping and a localized compliant law for indentation, calibrated for flat nominal 60 Shore A rubber.",
+  "scores": "Demo: 1.0 in 745 actions. Dream-1: 0.0 after 820 actions.",
+  "media": "M-WTBDDM"
+}
