@@ -1,0 +1,19 @@
+{
+  "title": "Reload a spring-fed self-service cup dispenser",
+  "category": "Impact on jobs",
+  "keywords": [
+    "food-service restocking",
+    "nested paper cups",
+    "spring-fed dispenser",
+    "bimanual insertion"
+  ],
+  "instruction": "Reload the spring-fed dispenser with the six nested cups. Then pull one cup out onto the blue serving mat and leave five in the dispenser.",
+  "context": "Fast Food and Counter Workers replenish drink-station cup stocks during service (3,855,900 U.S. jobs in 2025, BLS). Beverage-station training includes stocking cups, and equipment instructions cover refilling cup tubes. In this spring-fed self-service station, the worker centers a loose stack and pushes it mouth-first through the retaining levers against the follower, so cups are presented one at a time. The BLS count is occupation-wide. See README for the employment, training and equipment sources.",
+  "setup": "Two YAM arms on 610 mm centers face a 747.5 mm high worktop. The center of an empty full-size in-counter spring-fed dispenser is 442 mm forward and 30 mm left of the midpoint between the bases. Its 457 mm tube has a spring follower and three resilient inward radial levers. Six matching 8 oz disposable paper cups sit loose and nested with their mouths down on a 36 mm supply riser, 313 mm forward and 110 mm right of the midpoint. The serving mat is 342 mm forward and 226 mm right. No cup begins engaged in the opening. Use a San Jamar C5250C18 Euro Sentry and matching 81 mm rim cups in a physical station.",
+  "scoring": "Award 0.25 for at least two nested, stable cups with the working cup presented base up and both grippers clear. Award 0.65 for all six cups stable and nested in the opening with both grippers clear for at least 0.5 seconds. Award 1.0 once all six have been loaded, one has been extracted and is mouth-down with its whole rim inside the mat, and the remaining five cups and extracted cup are stable with both grippers clear for 0.5 seconds. Use a side-view camera to check the working cup against a height mark and check the cup count before loading and after the trial. All other outcomes score 0.",
+  "run_limit": "620 actions at 20 Hz (31 seconds).",
+  "reset_notes": "Remove all cups from the dispenser, confirm its follower returns under the levers, and place six clean, undamaged matching cups, nested mouth-down, on the supply riser. Clear the mat and reset both arms with open grippers.",
+  "fidelity": "Each paper cup is a free, rigid thin-wall contact body with a tapered wall and rolled rim. Three spring-guided retaining levers and a vertically spring-loaded follower act through native contact and preserve the working refill and single-cup release behavior. The rigid paper-cup model represents undeformed cups.",
+  "scores": "Demo: 1.0 in 570 actions. Dream-1: 0.0 after 620 actions.",
+  "media": "M-4XTE4X"
+}
