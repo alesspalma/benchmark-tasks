@@ -19,18 +19,18 @@ objects start with zero jitter.
 
 | Object | Parts and size | Starting centre in bench coordinates |
 | --- | --- | --- |
-| Tube strip and carrier | Eight polypropylene tubes at 9 mm pitch, forming one row of nominal 0.20 mL tubes. The dry 76 × 117 × 33 mm ABS retainer assembly weighs about 148 g and sits loose on the bench. | X 371 mm, Y 60 mm |
-| Cap strip | Eight connected plugs, 2.7 mm insertion depth, 6.4 mm flange diameter. Polypropylene webbing spans the same [9 mm pitch][cap-dimensions]. The complete strip weighs 1.8 g. | Fully seated on the eight mouths |
+| Tube strip and carrier | Eight polypropylene tubes at 9 mm pitch, forming one row of nominal 0.20 mL tubes. For the physical trial use [Applied Biosystems MicroAmp Optical 8-Tube Strip, 0.2 mL][physical-tubes], catalog no. **4316567**. The dry 76 × 117 × 33 mm ABS retainer assembly weighs about 148 g and sits loose on the bench. | X 371 mm, Y 60 mm |
+| Cap strip | For the physical trial use one clear [Applied Biosystems MicroAmp Optical 8-Cap Strip][physical-caps], catalog no. **4323032**. It has eight flat-top press-in caps joined by webbing and lifts off as one piece. The modeled strip has a 9 mm pitch, 2.7 mm insertion depth, 6.4 mm flanges and 1.8 g mass. | Fully seated on the eight mouths |
 | Removal tool | 85 × 40 × 12 mm polymer hand tool with two 1.7 mm wide prongs, 0.8 mm thick, spaced 36 mm apart. The rails and crosspieces form an open handle. | X 245 mm, Y −183 mm, long axis parallel to X, teeth face +X |
 | Discard dish | Empty 114 × 105 × 14 mm polymer dish. | X 248 mm, Y −306 mm |
 | Liquid | 100 µL food-coloured water per tube. | All eight tubes, with no loose liquid on the bench |
 
-For a physical setup, use a compatible capped eight-tube strip in a
-tray/retainer and a [MicroAmp multi-removal tool][tool], or use the dimensions
-of the native tool and retainer in `strip_uncapping/builder.py`. The CAD
-builder uses millimetre-equivalent, dimensioned native solids. Print the dimensioned
-retainer in ABS or PETG and use ordinary polypropylene consumables seated in
-it. The external retainer walls are the ordinary grasp surface.
+Seat the specified tube strip in the loose tray/retainer and use a [MicroAmp
+Multi Removal Tool (4313950)][tool] for the physical trial. The manufacturer
+lists the cap strip and tube strip together in its [consumables guide][compatibility].
+The dimensioned tool and retainer are defined in `strip_uncapping/builder.py`.
+The retainer can be printed in ABS or PETG. Use its outer walls as the grasp
+surface.
 Check that the tool's prongs insert beneath the webbing and both tips bear on
 it before the handle reaches the tube rims. Fill the tubes with food-coloured
 water for a physical trial. After each run, refill any depleted tube, seat all
@@ -102,8 +102,9 @@ dynamics.
 ## Asset licenses
 
 All tool, retainer, tube, caps, water and dish geometry is authored here and
-covered by the included MIT license. The manual and commercial items listed
-above document the real procedure and dimensions.
+covered by the included MIT license. The manual and commercial items above
+document the real procedure and specify the physical consumables. The simulated
+dimensions and loading law describe the bench model.
 
 | Asset | Source and licensing |
 | --- | --- |
@@ -113,9 +114,11 @@ above document the real procedure and dimensions.
 | Fixed and wrist cameras | Procedural adapter stations and MIT-licensed [YAMLAb calibration][calibration] with the [calibration license][calibration-license]. The overview viewpoint is set in this task. |
 | Overview camera housing | Procedural [adapter station primitive][station] with the adapter's [declared license status][adapter-license]. The camera is suspended overhead. |
 
-[guide]: https://assets.thermofisher.com/TFS-Assets/LSG/manuals/cms_095288.pdf#page=37
+[guide]: https://assets.thermofisher.com/TFS-Assets/LSG/manuals/4485764_dual_96std_starter_kit_UG.pdf#page=13
 [tool]: https://www.thermofisher.com/order/catalog/product/4313950
-[cap-dimensions]: https://shop.brand.de/media/import/1/27/32406/42485/53752/56329/55264/Data_sheet_PCR_cap-strips_EN.pdf
+[physical-caps]: https://www.thermofisher.com/order/catalog/product/4323032
+[physical-tubes]: https://www.thermofisher.com/order/catalog/product/4316567
+[compatibility]: https://assets.thermofisher.com/TFS-Assets/LSG/manuals/100070431_miniamp_miniampplus_starter_kit_UG.pdf#page=10
 [adapter]: https://github.com/kairosiann/yam-isaac-lab-arena/tree/0059d02a1a91bc6834c1d0846022891df0c78730
 [adapter-license]: https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/README.md#license
 [i2rt-license]: https://github.com/kairosiann/yam-isaac-lab-arena/blob/0059d02a1a91bc6834c1d0846022891df0c78730/yam_arena/assets/yam/LICENSE.i2rt
