@@ -1,0 +1,20 @@
+{
+  "title": "Clamp a polymer coupon on an ATR-FTIR crystal",
+  "category": "Other",
+  "keywords": [
+    "bimanual",
+    "FTIR",
+    "attenuated total reflection",
+    "sample preparation",
+    "contact pressure"
+  ],
+  "instruction": "Place the polymer coupon flat over the diamond sampling window. Keep it centred while turning down the pressure knob to its normal load. Leave the coupon clamped and withdraw both hands.",
+  "context": "ATR-FTIR identifies polymers by their infrared absorption bands. A solid must lie flat and make firm, repeatable contact with the diamond. This task reproduces the solid-card setup in Thermo Fisher's instrument guide, including the hand-operated pressure tower and its preload-limiting clutch.",
+  "setup": "A fixed 346 × 324 mm aluminum and polymer FTIR instrument sits at the rear of a 748 mm-high bench. The front sampling bay has a 58 mm diameter steel plate with a centred 1.8 mm diamond window, a 15 mm diameter flat pressure tip and a 56 mm knurled manual knob. The tip starts raised just clear of the edge-insertion path. An 85.6 × 54 × 2.5 mm polyethylene coupon lies flat with one edge over a blue polymer sample tray to the left. Both arms start ready with open jaws. The README specifies positions and physical equivalents.",
+  "scoring": "0 if the coupon is not flat on the plate or fails to cover the full 15 mm pressure footprint over the diamond. 0.5 if that placement is correct without sustained firm contact. 1.0 if the correct coupon remains flat under the pressure tip at normal clutch load (at least 155 N on a force-calibrated fixture), moving by at most 2.5 mm while unsupported by either hand for 0.6 s. For a stock Everest tower verify the click at its nominal 178 N and confirm that the preview shows the polyethylene absorption bands. Either arm arrangement is valid.",
+  "run_limit": "640 actions (32 seconds at 20 Hz)",
+  "reset_notes": "Start with a clean, dry diamond plate and a previously collected background. Raise the pressure tip, return the clean coupon to its designated tray with the handling edge exposed, and open both grippers in ready pose. Keep the tower aligned over the diamond.",
+  "fidelity": "The full-scale sampling bay, card, wheel and sliding tip have native contact geometry. A force-limited spring maps wheel rotation to press travel. The dial reports nominal load from measured tip compression. Native axial loads are regularized to 6.5% for thin-coupon contact stability, with calibrated wheel torque and self-locking threads. Placement and tip contact are graded independently. The optical train is outside the simulation scope.",
+  "scores": "Demo: 1.0 in 574 actions. Dream-1: 0.0 after 640 actions.",
+  "media": "M-N5385Y"
+}
