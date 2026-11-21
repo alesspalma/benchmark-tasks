@@ -1,0 +1,20 @@
+{
+  "title": "Replace the worn felt cap on a swivel chair glide",
+  "category": "Societal relatability",
+  "keywords": [
+    "chair repair",
+    "felt glide",
+    "snap fit",
+    "bimanual",
+    "prying"
+  ],
+  "instruction": "Use the flat-blade tool to remove the worn felt cap from the chair foot. Snap on the new felt cap so it fits flush and the glide can still swivel.",
+  "context": "The felt wear surface on a chair foot can be replaced independently of the swivel that lets the foot sit flat on the floor. The repair requires levering a thin fitted cap off a moving nylon body, then aligning and seating a fresh cap around the whole rim.",
+  "setup": "A full-size 15-inch four-leg chair has its polypropylene seat upside down on a padded table, with its backrest over the table edge. The 22.2 mm steel legs end in nylon swivel glides. The near foot has a worn Ø30 mm snap-on felt cap, and an identical new cap rests felt-up on a parts stand. A 109 mm flat-blade tool and a compact rubber mallet lie on the bench, beside the parts stand. The open robot hands start clear.",
+  "scoring": "0.35 if the old cap has detached and is at least 45 mm from the original seat. Award 1.0 if all four sectors around the new nylon skirt are captured, the skirt is flush to within 1.8 mm, and the cap stays on after both grippers clear for at least 0.60 s. The original swivel remains mounted and free to pivot. Otherwise 0.0.",
+  "run_limit": "760 steps (38 seconds at 20 Hz)",
+  "reset_notes": "Snap the worn cap back onto the near service foot, centre the swivel in its working arc, and put the fresh cap felt-up on the parts stand. Return the flat-blade tool and mallet to the marked bench poses. The chair's seat rests on the same pad every trial.",
+  "fidelity": "Full-size generated chair, free native swivel and native tool contacts. Four bounded elastic forces model the sectors of the nylon snap rim and release under local separation. The simulated glide swivels on one axis through ±15°, preserving the freedom that must be counterheld. The gripper applies a firm controlled seating load. A rubber mallet is also available.",
+  "scores": "Demo: 1.0 in 558 actions. Dream-1: 0.0 after 760 actions.",
+  "media": "M-279XM5"
+}
