@@ -1,0 +1,20 @@
+{
+  "title": "Verify an installed robot suction cup holds vacuum",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "robot maintenance",
+    "vacuum gripper",
+    "leak test",
+    "bimanual",
+    "pressure retention"
+  ],
+  "instruction": "Open the vacuum supply and seat the aluminum test plate against the suction cup. Isolate the supply and let the cup hold the plate on its own for two seconds with at least 40 kilopascals of vacuum. Support the plate before pressing the vent and return it to its rest.",
+  "context": "Commission an installed cobot suction gripper for automated pick-and-place. A running vacuum source can mask a leaking cup. Isolating the circuit while the tool holds a known nonporous plate proves the installed cup can retain its grip. One arm seats and supports the plate while the other works the pressure circuit.",
+  "setup": "A down-facing 52 mm rubber bellows cup hangs on a fixed cobot vacuum head with the lip 172.5 mm above the worktop. A 107 × 91 × 7 mm aluminum plate with a blue handling tab lies on two padded rails to its left. A downstream 0–80 kPa gauge, blue push-pull supply spool, and orange spring vent sit on the stand. Start at atmospheric pressure with the supply isolated. See the README for sizes, material, plumbing and datums.",
+  "scoring": "0.35 when the sealed, elevated plate reaches 40 kPa vacuum under supply. 0.75 when it remains elevated without either arm supporting it at 40 kPa or above for two continuous seconds with supply isolated. 1.0 after a supported vent and returning the plate level to its padded rest with the supply isolated, gauge below 3 kPa, and both hands clear for half a second. All other initial outcomes score zero.",
+  "run_limit": "780 actions at 20 Hz (39 seconds)",
+  "reset_notes": "Clean the cup and test plate. Start with the plate flat across both rest rails, the supply closed, the vent released and the gauge at zero.",
+  "fidelity": "The native plate and contact lip retain full dimensions and weight. A native axial spring represents bellows compliance. Pressure at the gauge follows the measured valve positions and sealing geometry. The sealed pressure–area load acts on the plate. Seal leakage and air flow use a lumped model.",
+  "scores": "Demo: 1.0 in 478 actions. Dream-1: 0.0 after 780 actions.",
+  "media": "M-B633CN"
+}
