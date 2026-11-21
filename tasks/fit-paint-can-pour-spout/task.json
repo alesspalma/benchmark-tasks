@@ -1,0 +1,21 @@
+{
+  "title": "Fit a snap-on paint-can spout and pour into a roller tray",
+  "category": "Societal relatability",
+  "keywords": [
+    "painting",
+    "paint can",
+    "pour spout",
+    "roller tray",
+    "snap seal",
+    "bimanual"
+  ],
+  "instruction": "Fit the orange pour lid to the paint can and pour paint into the roller tray until it reaches the blue fill line. Return the can upright with the lid attached.",
+  "context": "A snap-on vented lid directs paint into a roller tray and keeps the rolled rim clean. The operator stabilizes the can while seating the flexible skirt, then controls the tilt and stops when the tray reaches its fill line. [Paint-can pour lids](https://www.shurline.com/products/detail/prodid/87/item/paint-can-lids)",
+  "setup": "A standard 164 × 188 mm gallon tinplate can on a rubber mat contains 410 mL of washable magenta paint. Its wire bail is folded down over its outside stop and a removable support grip is clipped opposite the bail. An orange 177 mm snap-on lid rests detached on a small puck with the spout extended and its vent open. The gray 215 × 320 mm roller tray has a 198 × 208 mm well and a blue mark at roughly 181 mL. Stage all objects as pictured on a 747.5 mm bench between two open YAM arms. Materials, coordinates, and reset details are in the README.",
+  "scoring": "0 if the lid is unseated, more than 8 mL leaves the tray, more than 5 mL escapes at the rim, or more than 210 mL reaches the tray. With all four rim sectors seated within 3 mm, award 0.30 before 50 mL reaches the tray through the spout, 0.60 for 50–144 mL, and 0.80 for 145–210 mL. Award 1.0 once at 0.80 the stream stops and the sealed can sits on its mat within 7° of upright, with both arms clear for 0.55 s. Score from the video, rim gap, and liquid volume. Either arm can take either role.",
+  "run_limit": "740 actions at 20 Hz (37 seconds)",
+  "reset_notes": "Drain and wipe the tray and lid, return 410 mL of paint to the open can, unfold the lid spout, open the vent, and return all three objects to their marked positions.",
+  "fidelity": "The tin, bail and separate snap-on lid use native contact. Compliant skirt forces press against the rolled bead and retain the fitted lid with bounded force. Gravity head and measured lid gaps control a conserved paint volume through the spout and rim. Flight and landing decide collection and spill. Paint viscosity and splatter are approximate, and the loaded body uses a representative fixed mass.",
+  "scores": "Demo: 1.0 in 668 actions. Dream-1: 0.0 after 740 actions.",
+  "media": "M-3RGZXY"
+}
