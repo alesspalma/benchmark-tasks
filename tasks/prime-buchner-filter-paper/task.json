@@ -1,0 +1,20 @@
+{
+  "title": "Prime a Büchner funnel and capture the solids",
+  "category": "Other",
+  "keywords": [
+    "laboratory",
+    "vacuum filtration",
+    "bimanual",
+    "filter paper",
+    "pouring"
+  ],
+  "instruction": "Seat the filter paper in the Büchner funnel and wet it with the rinse water. Filter the bead suspension so the beads stay on the paper and the water collects in the flask. Return both beakers upright.",
+  "context": "In a standard vacuum filtration, a wet paper disk seals against the perforated plate so water passes through while the suspended solids remain above it. The robot must seat this disk without creasing its rim, then wet it and feed the slurry at a controlled rate. Water and countable polymer beads make both the separation and any bypass visible.",
+  "setup": "A clamped 250 mL side-arm glass flask supports a porcelain Büchner funnel with a 102 mm mouth and a 76 mm perforated floor on a rubber adapter. Vacuum tubing leads to a running regulated vacuum. A loose 70 mm cellulose filter rests dry on a 54 mm diameter clean stand. Two spouted polypropylene beakers hold 17 mL rinse water and 55 mL water with 36 orange inert beads. The two YAM grippers start open. The README specifies the full-size equipment and placement.",
+  "scoring": "Award 0 if the paper does not lie flat across the holes, 0.25 for a seated disk with failed wetting, any beads in the flask or over 3 mL bench spill, and 0.5 if it is flat and visibly wet with no beads in the flask and at most 3 mL spill. Award 1.0 when those conditions hold, at least 50 mL of suspension water reaches the flask, at least 34 of 36 beads stay on the disk, and both beakers are upright within 50 mm of their starts with hands clear of the funnel and beakers for 0.5 seconds. Check photos, a scale and marked volumes.",
+  "run_limit": "1,200 actions (60 seconds at 20 Hz)",
+  "reset_notes": "Empty the flask, remove the used disk and recover the beads. Fit a fresh dry 70 mm disk on its clean rest and refill the two beakers. Keep the clamped flask, adapter and vacuum supply in place.",
+  "fidelity": "Native contact governs the beakers and the loose rigid paper proxy. A finite-volume model follows flow from the moving lips into the funnel and down to the flask. The wet seated paper gates edge bypass from the bead suspension. Visible collection and escaped beads track the conserved amounts. Vacuum pressure, fibres and droplets are reduced models.",
+  "scores": "Demo: 1.0 in 1117 actions. Dream-1: 0.0 after 1200 actions.",
+  "media": "M-VCENNG"
+}
