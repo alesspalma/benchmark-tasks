@@ -1,0 +1,21 @@
+{
+  "title": "Unload a selected silicon die from a vacuum-release tray",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "semiconductor packaging",
+    "bare silicon die",
+    "vacuum-release carrier",
+    "manual vacuum pump",
+    "vacuum pickup pen",
+    "two arms"
+  ],
+  "instruction": "Unload the silicon die nearest the blue corner of the vacuum-release tray. Seat the tray on the vacuum plate, evacuate the tray, and use the vacuum pen to set that die face up in the receiving pocket. Leave the other dies in place and vent the release tray when finished.",
+  "context": "Bare semiconductor dies can be shipped on a pocketless gel membrane that retains them until vacuum at the back of the carrier releases them. Gel-Pak documents use of this tray technology for the parts used in high-bandwidth optical transceivers for AI infrastructure. In this manual unloading step, one YAM arm seats the loaded carrier and operates the hand pump. The other uses a squeeze-release vacuum pen to move a single die without disturbing the others. An aligned seal and a square pen contact are needed for the transfer. See [Gel-Pak's AI component manufacturing case study](https://www.gelpak.com/case-studies/driving-efficiency-in-ai-component-manufacturing/) and the [vacuum-release carrier operating guide](https://www.gelpak.com/vacuum-release-tray-user-guide/).",
+  "setup": "Place a Gel-Pak 4-inch Vacuum Release tray and a compatible gasketed vacuum plate on an ESD work surface. Connect the plate to a manual check-valved vacuum pump with gauge and vent, such as a VHP-24 or equivalent capable of at least 25 inHg. Clamp the pump's stationary handle in a padded cradle so that its lever and vent are accessible. Place three 12 × 12 × 0.8 mm dummy silicon dies face up in a 48 mm grid at three corners of a square on the tray. The marker denotes the selected corner. Stage a manual vacuum pickup pen with a 6.35 mm ESD-safe cup in an open-top stand. Place a receiving tray with a 22 mm square pocket within reach. Begin with the loaded tray off the plate and its lid removed, the pump vented, and the receiving pocket empty. The task README gives positions and equipment references.",
+  "scoring": "Score 0.25 while the tray is seated flat at 25 inHg or higher and all dies remain in place. Score 0.50 once the pen has lifted the selected die at least 14 mm off the evacuated tray with its neighbors undisturbed. Score 0.75 when that die rests within 10° of level, face up in the receiving pocket, with the pen released. Score 1.0 once those conditions hold for 0.45 s with the pickup cup at least 35 mm from the die and the tray seated and vented below 2 inHg. Score 0 if a neighbor is lifted or moves more than 3 mm relative to the source tray. Read the pump gauge and measure with top and side video views beside a fixed scale. Either arm may take either role.",
+  "run_limit": "900 steps (45 seconds at 20 Hz)",
+  "reset_notes": "Vent the plate, return the loaded tray and upright pen to their start locations, and empty the receiving pocket. With the die faces up, return each to its original marked position. Verify free spring return of both pump and pen, clean sealing surfaces, and a zero gauge before restarting.",
+  "fidelity": "The tray, die, pen, vacuum plate, spring-loaded pump and vent have native rigid contacts. The pen holds a die through a bounded suction force after button travel and the formation of a square cup seal. The tray uses a pressure-dependent tack force at the die interface and the pressure model is driven by swept pump travel and the physical vent. It represents the real membrane's change in contact area without explicitly deforming the mesh.",
+  "scores": "Demo: 1.0 in 754 actions. Dream-1: 0.0 after 900 actions.",
+  "media": "M-YGMUUX"
+}
