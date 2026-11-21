@@ -22,6 +22,18 @@ CLIP_END = 103.
 CLIP_LENGTH = .072
 BOOK_HEIGHT = .207
 PAGE_WIDTH = .143
+PAGE_CENTER_Y = .074
+PRINT_BOTTOM = .002
+PRINT_TOP = BOOK_HEIGHT - .002
+PRINT_FRONT = -.01386
+PIVOT_RADIUS = .006
+PIVOT_DEPTH = .007
+STRIP_SIZE = (.0045, .054, .013)
+BEND_SIZE = (.010, .014, .012)
+RETURN_SIZE = (.012, .008, .010)
+RUBBER_SIZE = (.007, .013, .012)
+RETURN_CENTER = (.002, 0., 0.)
+RUBBER_CENTER = (.0065, 0., 0.)
 BOOK_START = 16.
 STAND_ORIGIN = np.array([.407, 0., TABLE + .028])
 FRAME = axis_angle_matrix(np.array([0., 1., 0.]), np.radians(30.))
@@ -38,3 +50,11 @@ def sign(side):
 
 def pivot(side):
     return np.array([PIVOT_X, sign(side) * PIVOT_Y, PIVOT_Z])
+
+
+def strip_center(side):
+    return (-.016, -sign(side) * .027, 0.)
+
+
+def bend_center(side):
+    return (-.010, -sign(side) * .054, 0.)

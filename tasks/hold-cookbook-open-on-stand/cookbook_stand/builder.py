@@ -97,13 +97,11 @@ def stand(w):
         pivot = C.pivot(side)
         r = rotation("X", np.radians(-sigma * C.CLIP_START))
         clip = body(w, s, f"/Asset/Clip{i}", .012, C.world(pivot), C.FRAME @ r)
-        w.cylinder(s, clip + "/Pivot", .006, .007, (0, 0, 0), BLACK, "X")
+        w.cylinder(s, clip + "/Pivot", C.PIVOT_RADIUS, C.PIVOT_DEPTH, (0, 0, 0), BLACK, "X")
         # Raised spring strip gives fingers access to the metal and leaves room
         # for the shoe to yield toward the reader as it passes the paper edge.
-        w.box(s, clip + "/Strip", (.0045, .054, .013),
-              (-.016, -sigma * .027, 0.), BLACK)
-        w.box(s, clip + "/Bend", (.010, .014, .012),
-              (-.010, -sigma * .054, 0), BLACK)
+        w.box(s, clip + "/Strip", C.STRIP_SIZE, C.strip_center(side), BLACK)
+        w.box(s, clip + "/Bend", C.BEND_SIZE, C.bend_center(side), BLACK)
         lower, upper = (-C.CLIP_END + C.CLIP_START, 5.) if sigma == 1 else (
             -5., C.CLIP_END - C.CLIP_START)
         pivot_joint = joint(w, s, f"/Asset/Pivot{i}", root, clip, C.world(pivot),
@@ -114,8 +112,8 @@ def stand(w):
         offset = np.array([0., -sigma * C.CLIP_LENGTH, 0.])
         shoe = body(w, s, f"/Asset/Shoe{i}", .003, C.world(pivot + r @ offset),
                     C.FRAME @ r)
-        w.box(s, shoe + "/Return", (.012, .008, .010), (.0020, 0, 0), BLACK)
-        w.box(s, shoe + "/Rubber", (.007, .013, .012), (.0065, 0, 0), (.31, .34, .29))
+        w.box(s, shoe + "/Return", C.RETURN_SIZE, C.RETURN_CENTER, BLACK)
+        w.box(s, shoe + "/Rubber", C.RUBBER_SIZE, C.RUBBER_CENTER, (.31, .34, .29))
         spring = joint(w, s, f"/Asset/Spring{i}", clip, shoe, offset, np.eye(3),
                        "X", -.029, .015, linear=True)
         drive(w, spring, 190., .72, 6., target=.003, linear=True)
@@ -123,7 +121,7 @@ def stand(w):
 
 
 def draw_spread(w, s, path, sigma):
-    y = sigma * .074
+    y = sigma * C.PAGE_CENTER_Y
     w.box(s, path + "/PageBlock", (.0125, C.PAGE_WIDTH, C.BOOK_HEIGHT - .004),
           (-.0075, y, (C.BOOK_HEIGHT + .002) / 2), PAPER)
     w.box(s, path + "/ClothBoard", (.0024, C.PAGE_WIDTH + .007, C.BOOK_HEIGHT),
@@ -132,8 +130,7 @@ def draw_spread(w, s, path, sigma):
         w.box(s, f"{path}/LeafEdge{i}", (.00012, .0003, C.BOOK_HEIGHT - .0045),
               (-.00215 - .00112 * i, sigma * (.074 + C.PAGE_WIDTH / 2 + .0003),
                (C.BOOK_HEIGHT + .002) / 2), (.79, .72, .57), collide=False)
-    print_face(w, s, path, center_y=y, width=C.PAGE_WIDTH, height=C.BOOK_HEIGHT - .002,
-               front=-.01386, page_number=24 if sigma == 1 else 25)
+    print_face(w, s, path, center_y=y, page_number=24 if sigma == 1 else 25)
 
 
 def book(w):
