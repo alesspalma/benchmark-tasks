@@ -1,0 +1,20 @@
+{
+  "title": "Measure robot-joint lost motion under reversed proof loads",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "robot actuator",
+    "reducer inspection",
+    "lost motion",
+    "torsional compliance",
+    "bimanual"
+  ],
+  "instruction": "Measure the lost motion of the robot joint. Hold the gold input lock down, load the blue handle at both proof marks until both readings register, then release the handle and lock.",
+  "context": "Robot actuator qualification uses the output-angle change between opposite low torques while the reducer input is locked. Verifying that lost motion supports repeatable positioning under load reversal in assembled robots. Both hands maintain the temporary input lock and apply calibrated opposing loads before reading the angle display. [Harmonic Drive engineering reference](https://harmonicdrive.de/fileadmin/Downloads/Produkte/Kataloge/Harmonic_Drive_Gears_EN_1053522.pdf)",
+  "setup": "Use a de-energized compact 10 N·m robot-joint reducer in a fixed 258 × 335 mm steel bench plate. Its 112 mm aluminum output flange has a 115 mm steel loading arm with a blue captive spring handle. An opposing gold spring-returned input-lock yoke fits over the input reaction key. An angle encoder or digital indicator reads the output angle relative to the bench, with separate negative, positive and differential readings. The measuring head starts at neutral and the lock starts raised. Fixture coordinates and reusable build details are in the README.",
+  "scoring": "Capture one reading when the input lock is down at least 9 mm and the input stays within 16 arcmin of zero, and the output turns at least 2 arcmin relative to the input in the direction of the load, while the handle applies a same-sign torque of 0.32–0.48 N·m for at least 0.55 s with output readings varying by no more than 3 arcmin. Earn 0.40 for one reading. Earn 0.80 for both signs and a positive-minus-negative span of 8–70 arcmin on this calibration unit. Earn 1.0 after both handles return to rest with the grippers at least 55 mm clear for 0.45 s. Use the fixed view, travel marks, and digital readout. Either arm may perform either role.",
+  "run_limit": "540 actions at 20 Hz (27 seconds).",
+  "reset_notes": "Clear the two result registers, zero the angle readout with the centered unloaded joint, and verify the axis is de-energized and the input yoke returns to the raised stop. The blue spring load handle starts at the center index. Return both arms to the documented ready poses.",
+  "fidelity": "The fixture, input-lock yoke, load carriage and output shaft have native contact or joint motion. Native linear and torsional springs reproduce the test's bidirectional force and deflection. The strain-wave teeth and full reducer hysteresis curve are omitted. Angle readouts are derived from the actual loaded flange rotation.",
+  "scores": "Demo: 1.0 in 271 actions. Dream-1: 0.0 after 540 actions.",
+  "media": "M-9WN7HN"
+}
