@@ -1,0 +1,21 @@
+{
+  "title": "Cut and serve an even slice with a hinged cheese wire",
+  "category": "Societal relatability",
+  "instruction": "Cut an even 8 mm slice from the cheese block with the wire slicer and place the slice on the side plate.",
+  "context": "A manual wire board makes even portions from firm cheese without the wedge of a thick knife. The hands control both the loose stock and the tensioned wire, then prove that the cut is complete by lifting the chosen serving away independently.",
+  "keywords": [
+    "kitchen",
+    "cheese",
+    "wire slicer",
+    "portioning",
+    "bimanual",
+    "contact"
+  ],
+  "setup": "A 241 × 151 × 22 mm wooden wire board rests on rubber feet on the YAM bench. Its stainless wire and original-style hinged handle start raised 52°. Locate the rigid 72 × 54 × 31 mm cheese block on the board 25 mm short of the slot and 24 mm left of center, an empty 134 mm side plate to the left, and a visible 8 mm thickness mark by the slot. Both hands begin open and clear. See README for the world positions and fixture dimensions.",
+  "scoring": "0 until the block is flat and square with the center of its serving face within 4 mm of the 8 mm gauge mark. That setup scores 0.25. A completely severed serving scores 0.65. Award 1.0 when one intact 6–10 mm slice lifts 25 mm on its own while the bulk stays on the board, then rests entirely on the plate, with the wire at least 32° above the board and the hands clear for 0.5 s.",
+  "reset_notes": "Wipe the slot and cheese board, raise the wire to its open stop, replace the block with a fresh intact one of the same dimensions, and empty the side plate.",
+  "run_limit": "660 actions at 20 Hz (33 seconds)",
+  "fidelity": "The board, handle and stock are native geometry at household scale. A two-body finite bond and seven-section swept-wire resistance represent one cut plane. Full-depth, resisted wire travel through the cheese releases the bond. Both pieces keep their independent native motion throughout.",
+  "scores": "Demo: 1.0 in 494 actions. Dream-1: 0.0 after 660 actions.",
+  "media": "M-NYTAV6"
+}
