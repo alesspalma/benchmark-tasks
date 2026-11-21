@@ -1,0 +1,21 @@
+{
+  "title": "Mount a dual-suction shower basket and load it",
+  "category": "Societal relatability",
+  "keywords": [
+    "shower basket",
+    "bathroom storage",
+    "glazed tile",
+    "suction cups",
+    "cam levers",
+    "bimanual"
+  ],
+  "instruction": "Mount the shower basket on the glazed tile wall. Press both suction cups flat against the tile and close both levers. Put the blue shampoo bottle upright in the basket, then let go.",
+  "context": "Lever-lock shower baskets add bottle storage to a tiled shower without drilling. The basket must be lifted and held square while the two cam cups are set. Both hands position the loose basket, then close opposite levers and load the basket. The visible result is an upright shampoo bottle on a basket that hangs from the wall after the grippers withdraw. The hardware and mounting sequence are documented for the [OXO StrongHold Suction Large Basket](https://www.oxo.com/strongholdtm-suction-large-basket.html).",
+  "setup": "Set a full-size 27.5 × 11.2 cm draining shower basket with two lever-activated suction cups on a counter facing a glazed ceramic wall. The two cups are approximately 52 mm across and 184 mm apart. Mount the tile panel securely with the glazed surface vertical. Use smooth glazed tiles around 30 × 27 cm with recessed 4 mm grout joints. Place the basket centered in front of the middle vertical grout joint, 16 cm from the wall measured from the suction lip faces, with both levers raised. Place a capped blue shampoo bottle 24 cm to the robot's right of the basket center and 2 cm farther toward the wall. The bottle is about 4 × 5 × 11 cm and weighs about 220 g. A sealed plastic bottle with fixed ballast gives the same load and is repeatable. The README gives the coordinates and levelling checks.",
+  "scoring": "0.25 for one closed cup lever whose whole pad is seated on glazed tile, and 0.50 for two. The basket must be raised clear of the counter and level with both pads above the lower grout line. 0.75 when both pads are seated and the capped bottle is upright with its full base in the basket. 1.0 after both grippers clear the basket and the loaded basket stays in place for at least 0.7 seconds. Side and overview views, a level line and the visible cam positions suffice to judge these milestones. Cups spanning grout and open levers earn no mounting credit. Either arm may take either role.",
+  "run_limit": "520 steps (26 seconds at 20 Hz)",
+  "reset_notes": "Lift both cam levers to release the cups, remove the bottle and set both objects back at the marked start locations. Wipe and dry the glazed tiles and suction lips between trials. Keep mounting and staging surfaces free of adhesive.",
+  "fidelity": "The basket, bottle, tile, two rotating cam levers and spring-compressed cup lips use native contacts. A cam closed while its cup is compressed flat against the tile creates bounded suction and shear retention. The seal fails if the lip crosses grout, peels away or exceeds its load limit. The spring-compressed lips represent the silicone cups' contact deflection without a deformable membrane or air-flow solver.",
+  "scores": "Demo: 1.0 in 423 actions. Dream-1: 0.0 after 520 actions.",
+  "media": "M-L4J9ZH"
+}
