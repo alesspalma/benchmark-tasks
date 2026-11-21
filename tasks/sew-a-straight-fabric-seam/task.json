@@ -1,0 +1,21 @@
+{
+  "title": "Sew a straight lap seam through two canvas swatches",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual",
+    "sewing",
+    "presser foot",
+    "feed dogs",
+    "canvas",
+    "seam allowance"
+  ],
+  "instruction": "Sew the two swatches together with a straight lap seam, 6.5 mm from the orange edge. Lift the joined swatches by the orange one to check the seam holds.",
+  "context": "A straight lap seam joins canvas panels used in everyday repairs, covers and upholstery. Precisely align two layers beneath a domestic presser foot, then use the machine’s feed to stitch through both layers without losing the edge allowance. [Canvas seam procedure](https://www.sailrite.com/Learning-to-Sew-Part-3-How-to-Sew-Basic-Seams) · [Domestic sewing machine operation](https://help.brother-usa.com/app/answers/detail/a_id/150689/p/7578).",
+  "setup": "Use a tabletop domestic straight-stitch sewing machine with hand start/stop and a raised presser foot, prethreaded with light thread. The bed is approximately 445 × 435 mm and 40 mm above the table. Mark a 6.5 mm stitching guide on the needle plate. Place two separate 145 × 140 mm flat woven canvas swatches on the bed, orange centered 244 mm forward and 154 mm left of the arm midpoint, teal 239 mm forward and 108 mm right. A 25 mm quilting clip on the outer edge of each piece provides a grasp clear of the stitching area. The needle is raised and the motor is off. See the README for relative machine and swatch positions.",
+  "scoring": "0 for no joining stitches. 0.25 for at least one stitch through both layers. 0.50 for at least 34 mm of physically joined seam with no successive stitch gap above 12 mm. 0.80 for at least 73 mm, no gap above 9 mm, and stitches within 4.5 mm of the specified 6.5 mm allowance. 1.0 after the presser foot is up and the machine is stopped, and the orange and teal centers rise at least 24 mm and 21 mm respectively, with both swatches clear of the bed for 0.4 s under a grasp on the orange piece alone. Check with an overhead ruler photo and trial video. Either arm may perform either role.",
+  "run_limit": "850 actions at 20 Hz (42.5 seconds).",
+  "reset_notes": "Replace sewn swatches with fresh canvas rectangles from the same template. Return both loose clips to their listed positions, clear thread tails in the working area, raise the foot and needle, and home both arms.",
+  "fidelity": "Native controls operate the lifter, foot, needle and start switch. The feed applies limited traction to fabric under the lowered foot while the needle is raised. Measured penetration through both fabric pieces produces visible stitches and a compliant force-limited join. Swatches have stiff in-plane geometry. Detailed wrinkles, thread-tail cutting and bobbin mechanics are omitted.",
+  "scores": "Demo: 1.0 in 657 actions. Dream-1: 0.0 after 850 actions.",
+  "media": "M-XAQMKL"
+}
