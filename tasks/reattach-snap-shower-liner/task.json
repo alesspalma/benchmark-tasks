@@ -1,0 +1,20 @@
+{
+  "title": "Snap the loose corner of a shower liner back onto its rod",
+  "category": "Societal relatability",
+  "keywords": [
+    "bathroom",
+    "shower liner",
+    "snap ring",
+    "reinforced eyelet",
+    "bimanual"
+  ],
+  "instruction": "Reattach the loose corner of the shower liner to the rod using the open ring on the counter. Snap the ring shut and leave the corner hanging from it.",
+  "context": "A fallen shower-liner corner can be rehung without taking down the rod or disturbing the other rings. One hand raises and aligns the loose reinforced hole; the other guides the open hook over the rod and through that hole before the clasp is pressed shut. This is the installed-rod clasp sequence documented for Moen SR2100 shower rings.",
+  "setup": "A round, horizontal 25.4 mm stainless shower rod is fixed 1.84 m above the floor across a 1.54 m opening. A 1.73 m long PEVA liner hangs below it. Its rightmost reinforced eyelet has a clear diameter of 21.6 mm, is detached, and sags below the adjacent supported eyelet. One open snap-closure replacement ring, with an 87 x 105 mm closed envelope, rests flat on a 184 x 158 mm tray on the counter. The tile, rod, remaining rings, and liner hem are visible in the starting images. See the README for the fixed reset measurements and mounting positions.",
+  "scoring": "0 if the replacement does not surround the rod. Award 0.32 for an open ring enclosing the rod while held, 0.56 when the ring either passes through the loose eyelet or closes, and 0.82 when both occur and the clasp seam is within 4.75 mm. Award 1.0 once the closed ring stays on the rod with its body through the eyelet, the loose eyelet centre at least 35 mm above its reset height, and both hands at least 47 mm clear for 0.70 seconds. A closed ring without the loose corner attached cannot earn full credit. Either hand may do either job.",
+  "run_limit": "560 steps (28 seconds at 20 Hz).",
+  "reset_notes": "Open the replacement clasp, unthread the loose corner and place the ring flat on the tray, clasp toward the wall. Leave the adjacent eyelets hanging from their installed rings. Let the free corner sag under its own weight before the hands approach.",
+  "fidelity": "The rod, ring, hinged clasp and reinforced eyelet use native contact. Bounded over-centre spring torque models the snap action. The unsupported liner corner folds at the adjacent supported top hem; the rest hangs in its ordinary supported configuration. The fold captures the weight and local compliance of the loose corner without solving the entire liner as a deformable sheet.",
+  "scores": "Demo: 1.0 in 518 actions. Dream-1: 0.0 after 560 actions.",
+  "media": "M-5HR2PD"
+}
