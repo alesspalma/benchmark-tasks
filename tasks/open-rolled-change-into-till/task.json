@@ -1,0 +1,19 @@
+{
+  "title": "Open a roll of change and refill the cash drawer",
+  "category": "Societal relatability",
+  "keywords": [
+    "cash drawer",
+    "coin roll",
+    "bimanual",
+    "pouring"
+  ],
+  "instruction": "Open the blue nickel roll over the cash drawer edge. Empty all the nickels into the compartment marked 5¢ and put the paper in the scrap tray.",
+  "context": "Checkout operators replenish a till using wrapped change. Holding both ends at the opening edge lets the operator break the paper, carry the two loaded halves and empty them without losing coins into a neighboring compartment.",
+  "setup": "A 340 × 350 mm fixed open steel cash drawer with three empty hard-plastic coin wells sits on the YAM bench. A blue 5¢ label marks the central 237 × 148 mm adjustable well. The steel opening edge projects above the front part of that well. A full kraft-paper roll of 40 standard nickel coins lies across a shallow green felt center rest. The green 109 × 338 mm hard-plastic scrap tray is nearer the arms. Both grippers start open and clear.",
+  "scoring": "An intact roll scores 0. An opened roll scores 0.2 plus 0.6 times the fraction of the original 40 nickels wholly inside the marked well. Score 1.0 when all 40 nickels and both paper pieces remain in their respective receptacles and each center stays within 2 mm for at least 0.6 seconds.",
+  "run_limit": "800 actions at 20 Hz (40 seconds)",
+  "reset_notes": "Clear the drawer and scrap tray. Place a fresh crimped 40-nickel paper roll across the felt rest with its long axis parallel to the front of the bench.",
+  "fidelity": "The forty nickels are native rigid-body discs. The paper roll uses two collidable crimped sleeves and six elastic seam sectors. A bending concentration at the steel edge lowers the tensile fracture threshold. After fracture, the coins can leave only by moving through the open sleeve mouths under contact and gravity.",
+  "scores": "Demo: 1.0 in 720 actions. Dream-1: 0.0 after 800 actions.",
+  "media": "M-64PKVH"
+}
