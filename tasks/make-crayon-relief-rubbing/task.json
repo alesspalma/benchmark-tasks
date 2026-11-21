@@ -1,0 +1,20 @@
+{
+  "title": "Make a crayon rubbing of a raised fern",
+  "category": "Societal relatability",
+  "keywords": [
+    "crayon rubbing",
+    "contact",
+    "bimanual",
+    "wax transfer",
+    "paper"
+  ],
+  "instruction": "Make a clear rubbing of the raised fern with the broad side of the blue wax block. Steady the loose paper while rubbing. Leave the paper flat and put the wax block down beside it.",
+  "context": "A classroom crayon rubbing reproduces a raised pattern through loose paper. One hand holds the sheet in register while the other sweeps a broad wax face over it. The paper can slip under the drag, so legible transfer depends on balancing pressure and grip.",
+  "setup": "Two standard YAM arms face a 1080 × 1250 mm laminate tabletop 747.5 mm above the floor. Center an A5 148 × 210 mm sheet of 80 gsm printer paper over a 126 × 200 × 3 mm PLA plate with 1.2 mm raised fern relief. Two 118 × 19 × 1.2 mm silicone strips lie under the paper at the side margins. Center the sheet and plate 327 mm forward of the midpoint between the arm bases, with their short dimensions pointing forward. The plate sits on 1.5 mm silicone rubber. Put an unwrapped blue 41 × 23 × 12 mm wax block broad-side down on its 61 × 40 × 2 mm rubber rest, at 370 mm forward and 174 mm toward the right arm. Long dimensions of block and rest point forward. Start with untouched paper and both arms in the standard ready pose.",
+  "scoring": "Use a square overhead photo of the finished A5 sheet aligned by its corners to the supplied fern template. Count as blue every 2 mm grid area with at least 34% of the contrast between blank paper and a solid swatch of the wax. Full credit requires blue covering at least 86% of the fern and blue outside the fern no greater than 15% of the template's area. The sheet must be face up and flat within 16 mm and 8° of its start, the wax block lying on its broad face beside it, and hands clear for the final half second. Partial scores and the simple photo-overlay procedure are in the README.",
+  "run_limit": "620 steps at 20 Hz (31 seconds).",
+  "reset_notes": "Replace the used sheet with blank A5 80 gsm paper and center it on the undamaged plate. Put the wax block on the rest broad-face down and return both arms to the standard ready pose.",
+  "fidelity": "PhysX simulates the loose sheet, wax block and raised plate at full size. Paper bending is represented by a thin rigid sheet with pressure concentration on the raised pattern. A surface model deposits wax from the measured sliding contact force, relative motion and footprint of the broad wax face. It renders that same wax record on the sheet. Wax wear and paper tearing are outside the modeled range.",
+  "scores": "Demo: 1.0 in 543 actions. Dream-1: 0.0 after 620 actions.",
+  "media": "M-H7G6RM"
+}
