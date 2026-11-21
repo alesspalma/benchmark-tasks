@@ -1,0 +1,20 @@
+{
+  "title": "Load the film in a manual 35 mm camera",
+  "category": "Societal relatability",
+  "keywords": [
+    "film photography",
+    "35 mm camera",
+    "film leader",
+    "film advance",
+    "bimanual"
+  ],
+  "instruction": "Pull the 35 mm film leader straight to the orange mark, close the back, and work the advance lever until the rewind knob turns.",
+  "context": "Loading a reusable 35 mm film camera requires seating the cartridge, aligning the film leader to the loading index, and closing the back so it engages the transport. The advance lever can move even if the film missed the transport. The rewind knob confirms that the cartridge is paying out film. The Pentax 17 instruction manual (pp. 16–18) documents this procedure.",
+  "setup": "Place a full-size manual-wind camera back-up in a nonskid support with the rear cover open. The 25 mm cartridge sits under the well retainers with the short leader facing the gate. One arm draws the leader to the registration index and later strokes the advance lever. The other arm latches the back after the film reaches the index.",
+  "scoring": "Award 0.50 when a seated cartridge has its film leader correctly aligned to the orange mark, and 0.75 for engaged film under a latched back. Award 1.0 once the lever draws at least 13 mm of new film from the cartridge, the rewind witness turns at least 40 degrees, and the back remains latched as the lever returns and both hands clear the controls. Use the highest completed milestone. Either arm can perform any operation.",
+  "run_limit": "660 actions at 20 Hz (33 seconds).",
+  "reset_notes": "Rewind the reusable training film to its short exposed leader. Open the back to its resting position and put the cartridge in the well with the exposed leader facing the gate. Both grippers start open in their normal ready poses.",
+  "fidelity": "The retained cassette, projecting leader, hinged back, advance lever and rewind knob have native joints or rigid-body contacts. The extension is represented by a semirigid leader on a prismatic bearing. Bounded forces represent initial registration at the sprocket and transport under the latched cover.",
+  "scores": "Demo: 1.0 in 439 actions. Dream-1: 0.0 after 660 actions.",
+  "media": "M-Y9YYGA"
+}
