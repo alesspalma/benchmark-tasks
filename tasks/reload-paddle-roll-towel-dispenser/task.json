@@ -1,0 +1,19 @@
+{
+  "title": "Reload a push-paddle roll towel dispenser",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual manipulation",
+    "custodial work",
+    "paper feeding",
+    "dispenser"
+  ],
+  "instruction": "Reload the open paper towel dispenser with the new roll. Tuck the free edge between the feed rollers and work the paddle until a usable tail protrudes from the bottom slot. Close the cover securely, leaving the tail exposed.",
+  "context": "Building custodians routinely replenish restroom towel supplies in schools, offices, healthcare facilities and other buildings. This manual dispenser requires feeding a loose paper edge into a live roller nip while operating the spring paddle, then securing the dispenser for the next user. O*NET lists restroom servicing and supplying as a core duty (https://www.onetonline.org/link/details/37-2011.00). BLS records 2,432,600 U.S. janitor and building-cleaner jobs in 2025 (https://www.bls.gov/OOH/building-and-grounds-cleaning/janitors-and-building-cleaners.htm).",
+  "setup": "A wall-mounted GP PRO 54338A-style manually driven dispenser has an approximately 320 × 365 × 265 mm plastic cover and housing, rubber feed rollers, a spring-returned paddle and an outlet lip at 754 mm above the floor. The empty cover rests at its open service stop. A 200 mm wide, 184 mm diameter hardwound paper roll with a 51 mm cardboard core rests on a wheeled service trolley that aligns the roll axis with the internal supports. The two cradle centres are 263 mm apart. The clean leader hangs from the bottom of the roll. The dispenser’s feed nip is empty. A two-arm YAM bench faces the fixture. Manufacturer specification and loading guide are linked in the README.",
+  "scoring": "0 if the roll is unsupported or out of its seats. A seated roll rests on its holders within 25 mm fore-aft, 19 mm axially and 22 mm vertically of their centre, with its axis aligned within 14°. Earn 0.25 for a seated roll, 0.50 once at least 25 mm of continuous attached paper protrudes from the bottom lip, and 0.75 once at least 70 mm protrudes. Earn 1.0 when there is at least 70 mm of attached paper and the cover is latched within 2° of flush for 0.5 seconds after both hands clear the dispenser. Measure the exposed length from the outlet lip to the bottom paper edge.",
+  "run_limit": "800 control steps at 20 Hz (40 seconds)",
+  "reset_notes": "Remove the loaded roll and rewind or tear off the fed length. Place an identical fresh roll back on the service trolley with a clean loose 110–125 mm leader facing down and forward. Clear the nip, open the cover to its service stop and allow the unloaded paddle spring to return.",
+  "fidelity": "Full-size roll, wall-mounted case, cover, and physical paddle travel implement the bottom-feed workflow. The paper uses a hinged free edge and native payout joint. A compliant path model replaces rigid paper contacts at the drums and outlet, so actual entry and paddle travel govern feeding. The cover uses a spring catch. The model omits wrinkles, tearing and the full stored winding.",
+  "scores": "Demo: 1.0 in 641 actions. Dream-1: 0.0 after 800 actions.",
+  "media": "M-Q4KJFD"
+}
