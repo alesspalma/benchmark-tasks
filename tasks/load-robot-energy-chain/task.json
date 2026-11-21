@@ -1,0 +1,21 @@
+{
+  "title": "Load two cables into a robot-axis cable carrier",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "robot installation",
+    "linear axis",
+    "energy chain",
+    "cable carrier",
+    "snap crossbars",
+    "bimanual"
+  ],
+  "instruction": "Lay the blue and orange cables into the robot axis's cable carrier. Snap both crossbars closed, then give the exposed end of the pair a gentle upward tug and leave the cables captured.",
+  "context": "During installation of a linear robot axis, the cables must stay inside a controlled bend path. One hand guides the springy service leads below the carrier's seating plane while the other closes both snap crossbars. An upward pull checks containment before the axis is operated. The igus E2/000 installation reference documents the snap-open crossbars for filling a travelling carrier.",
+  "setup": "Install a stationary, de-energized robot linear-axis section on a 272 × 458 mm steel plate. Its 74 mm wide polymer carrier runs left to right beside two linear guides. Two adjacent 86 mm yellow snap crossbars start open at 84° with the blue and orange 9 mm cables raised above them. The paired leads share a strain relief and two service ties. A steel mark at the exposed end serves as the pull witness. The README gives measured offsets and materials.",
+  "scoring": "A station is populated when both cable jackets are below the crossbar's seating plane and between the carrier sides. Award 0.30 for two populated stations, 0.55 when at least one populated bar is snapped within 5° of flush, and 0.80 if both are. Award 1.0 when both stay seated with both leads in the carrier during an upward pull of at least 16 mm at the exposed end, then hold for 0.60 seconds after both hands leave the working area. Use the highest applicable milestone. Either arm may do either job.",
+  "run_limit": "570 actions at 20 Hz (28.5 seconds).",
+  "reset_notes": "Open both crossbars to their detents. Lift the exposed pair above the service opening and let the wires settle in the raised shape shown in the setup image. Keep the fixture de-energized. Both arms begin retracted with open fingers.",
+  "fidelity": "The de-energized axis uses a fixed guide, trough and carrier body. The exposed paired cables have native jacket contact and three spring-connected bending segments. Native hinges, hard stops and a bounded bistable detent torque model each snap crossbar. The score measures the actual cable path, crossbar angle and end movement.",
+  "scores": "Demo: 1.0 in 509 actions. Dream-1: 0.0 after 570 actions.",
+  "media": "M-T6Y4GS"
+}
