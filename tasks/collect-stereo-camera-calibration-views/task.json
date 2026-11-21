@@ -1,0 +1,20 @@
+{
+  "title": "Calibrate the relative pose of two separately mounted robot cameras",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "bimanual",
+    "robot perception",
+    "stereo extrinsics",
+    "camera commissioning",
+    "checkerboard"
+  ],
+  "instruction": "Hold the checkerboard by its blank edges and show the whole grid to both stereo cameras. Collect eight steady paired views covering different parts of the image at different tilts and distances, then return the board to its stand.",
+  "context": "When individually calibrated machine-vision heads are mounted on a new robot vision rig, their relative rotation and baseline depend on the mounts. Commissioning the stereo system requires synchronized views of a common target. One arm controls each blank margin of the rigid plate to obtain diverse in-focus stereo observations without covering the grid. A fixed-intrinsic fit and a held-out rectification check verify the resulting dataset.",
+  "setup": "A full-size 310 × 190 × 8 mm matte checkerboard on rigid expanded PVC is loose in a blue ABS bench stand. Its 26 mm squares form an 8 × 6 grid. The two separately mounted fixed-focus heads sit 108 mm apart on an aluminium rail and record synchronized 640 × 360 pairs. The station tracks qualified pairs on an eight-light strip. The README gives the dimensions and hardware reset.",
+  "scoring": "Award 0.09 for each distinct synchronized pair in which both cameras see all 35 corners with sufficient image margin and scale. Award 0.82 once eight diverse pairs give a fixed-intrinsic stereo fit with reprojection RMS at most 0.80 px, an 84–132 mm baseline and held-out vertical disparity RMS at most 1.10 px. Award 1.0 when the qualified set is saved and the board rests upright in its stand with both grippers clear for 0.35 seconds. Either arm may use either margin.",
+  "run_limit": "760 actions (38 seconds at 20 Hz)",
+  "reset_notes": "Empty the paired image list, switch the eight capture indicators off, and seat the plate loosely in the stand facing the fixed camera heads. Begin with the grippers open and clear. Keep the known intrinsics and the same rigid camera mounting during each trial.",
+  "fidelity": "The reference run performs native rigid-body manipulation and scores the rendered pixels of two synchronized pinhole feeds. The fixed known intrinsic matrices model calibrated, distortion-corrected lenses. The extra feeds are reserved for scoring. The policy observes the normal three YAM views.",
+  "scores": "Demo: 1.0 in 644 actions. Dream-1: 0.0 after 760 actions.",
+  "media": "M-CJZA85"
+}

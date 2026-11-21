@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="310mm" height="190mm" viewBox="0 0 310 190">
+  <title>Eight by six calibration checkerboard with 26 mm squares</title>
+  <defs>
+    <pattern id="checks" x="51" y="17" width="52" height="52" patternUnits="userSpaceOnUse">
+      <rect width="52" height="52" fill="white"/>
+      <path d="M0 0h26v26H0z M26 26h26v26H26z" fill="black"/>
+    </pattern>
+  </defs>
+  <rect width="310" height="190" fill="white"/>
+  <rect x="51" y="17" width="208" height="156" fill="url(#checks)"/>
+  <rect x="0.25" y="0.25" width="309.5" height="189.5" fill="none" stroke="#888" stroke-width="0.5"/>
+</svg>
