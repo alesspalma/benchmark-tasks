@@ -1,0 +1,21 @@
+{
+  "title": "Focus and lock a robot inspection camera lens",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "robot vision",
+    "machine vision",
+    "camera commissioning",
+    "manual focus",
+    "locking screw",
+    "bimanual"
+  ],
+  "instruction": "Adjust the focus ring until the inspection monitor shows sharp black-and-white bars. Hold that setting while tightening the focus locking screw, then take both hands away.",
+  "context": "A robot inspection station needs usable optical resolution at its actual work plane. Adjust a manual C-mount focus ring using the live image and hold that setting while securing it against drift.",
+  "setup": "A two-arm YAM bench carries a 58 × 49 × 47 mm aluminum inspection camera on a steel stand, a 16 mm C-mount lens with a 46 mm focus ring and radial M4 lock screw, a 122 × 82 mm backlit line chart 500 mm from the lens, and a 326 × 191 mm live monitor. The lens starts defocused with its screw loose. The ring has a 41 mm-radius clamp-on throw lever. The grippers start at their ready poses. Bench coordinates, chart spacing and fixed camera settings are in the README.",
+  "scoring": "Measure the Michelson contrast of the real sensor image using the dark bar centres and intervening bright gaps. Below 0.38 scores 0. From 0.38 scores 0.25. At least 0.64 scores 0.55. Score 1.0 if contrast is at least 0.64, the screw is seated and the focus setting is held with both grippers withdrawn for at least 0.6 s. A light physical pull on the throw lever can verify retention after the trial.",
+  "reset_notes": "Loosen the locking screw by about 65 degrees and reset to a visibly defocused image with contrast below 0.25. Keep the chart, aperture and exposure fixed.",
+  "run_limit": "520 actions (26 seconds at 20 Hz)",
+  "fidelity": "The lens ring and screw move on native contact-driven bearings. The screw's rotation produces finite axial thread travel and passive clamp torque. A fixed line target is sampled from the lens optical axis, with a thin-lens defocus disc computed from the measured focus-ring angle. The rendered live preview and numerical contrast use the same optical image.",
+  "scores": "Demo: 1.0 in 329 actions. Dream-1: 0.0 after 520 actions.",
+  "media": "M-BTT5RP"
+}
