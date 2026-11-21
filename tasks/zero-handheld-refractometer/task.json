@@ -1,0 +1,19 @@
+{
+  "title": "Zero a handheld optical refractometer with a water blank",
+  "category": "Other",
+  "keywords": [
+    "analytical preparation",
+    "calibration",
+    "refractometry",
+    "bimanual manipulation"
+  ],
+  "instruction": "Zero the handheld refractometer using the distilled-water dropper. Leave the prism cover closed so the reading can be checked.",
+  "context": "A distilled-water blank zeros the optical scale before measuring soluble solids in food, beverage and sample-preparation labs. This requires dosing the small exposed prism, spreading a film under its cover, and turning the actual adjustment shaft while counterholding the handheld instrument.",
+  "setup": "A full-size aluminum-and-rubber 166 × 34 × 36 mm analog 0–32 °Brix refractometer lies glass-up in an open rest on a 960 × 1170 mm bench, 747.5 mm high. Its center is 366 mm forward of the robot bases and 27 mm left of center. The daylight plate is wide open and the wet zero is initially biased to +1.2 °Brix. An amber-bulb polyethylene dropper containing four 36 µL water drops and a steel-slotted instrument driver stand separately at (348, −160) and (457, −173) mm on the bench. Both arms start clear.",
+  "scoring": "0.25 for retaining at least two drops on the prism and spilling at most one. 0.45 if the lid is also seated within 7° and the prism is horizontal within 13°, giving a readable boundary. 0.65 if the contrast boundary also lies within one 0.2 °Brix division of zero. 1.0 when this calibrated state persists for 0.5 s with the instrument on its rest and both hands clear. Confirm wetting through the daylight plate and the boundary through the illuminated eyepiece.",
+  "run_limit": "660 actions at 20 Hz (33 seconds).",
+  "reset_notes": "Use an analog 0–32 °Brix instrument with a swing plate and accessible top screw (Cole-Parmer 81150-36 or ATAGO MASTER-M). Set a wet reading near +1.2 °Brix, then open the plate and wipe the prism dry. Refill the dropper with 0.144 mL distilled water at 20 ± 2 °C and reset the tools as specified.",
+  "fidelity": "Full-size bench tools have native contacts, a physical slotted screw and a swinging daylight plate. The squeeze bulb has one compliant degree of freedom. Drop emission follows actual compression and geometric landing, with volume conserved. A retained-film approximation and a screw-driven optical boundary represent the water blank and eyepiece.",
+  "scores": "Demo: 1.0 in 625 actions. Dream-1: 0.0 after 660 actions.",
+  "media": "M-XJ2BEE"
+}
