@@ -22,10 +22,11 @@ from yam_arena.inspect_embodiment import (
     YamArenaEmbodiment,
 )
 from yam_arena.runtime import tcp_world
+from yam_arena.urdf import quat_xyzw_to_matrix
 
 from . import builder, config
 from .circuit import Circuit
-from .scoring import Scorer
+from .scoring import Scorer, supports_plate
 
 ROOT = Path(__file__).resolve().parents[1]
 _APP = None
@@ -275,6 +276,11 @@ class Environment(YamArenaEmbodiment):
 
         self._fixture = self._base.scene["fixture"]
         self._plate = self._base.scene["plate"]
+        self._lip_index = self._fixture.body_names.index("Bellows")
+        self._plate_contact_view = self._bind_plate_contacts()
+        self._hand_forces = np.zeros((len(ARMS), 3, 3))
+        self._hand_touch = False
+        self._plate_supported = False
         self._force = torch.zeros((1, 3), dtype=torch.float32, device=self._base.device)
         self._torque = torch.zeros_like(self._force)
         self._force_view = wp.from_torch(self._force)
@@ -294,12 +300,59 @@ class Environment(YamArenaEmbodiment):
             for n in ARMS
         }
 
+    def _bind_plate_contacts(self):
+        import carb
+        import omni.usd
+        from isaaclab_physx.physics import PhysxManager
+        from pxr import UsdPhysics
+
+        carb.settings.get_settings().set_bool("/physics/disableContactProcessing", False)
+        stage = omni.usd.get_context().get_stage()
+        bodies = [str(p.GetPath()) for p in stage.Traverse()
+                  if "/env_0/" in str(p.GetPath()) and p.HasAPI(UsdPhysics.RigidBodyAPI)]
+        plate, = (p for p in bodies if p.endswith("/plate/TestPlate"))
+        bellows, = (p for p in bodies if p.endswith("/fixture/Bellows"))
+        filters = []
+        for arm in ("LeftArm", "RightArm"):
+            for link in ("gripper", "tip_left", "tip_right"):
+                path, = (p for p in bodies if f"/{arm}/" in p and p.endswith(f"/{link}"))
+                filters.append(path)
+        filters.append(bellows)
+        return PhysxManager.get_physics_sim_view().create_rigid_contact_view(
+            [plate], filter_patterns=[filters], max_contact_data_count=128,
+        )
+
     def _pneumatic_step(self, dt):
         view = self._fixture.root_view
         positions = array(view.get_dof_positions())[0]
         joints = dict(zip(self._fixture.joint_names, positions))
         pose = array(self._plate.root_view.get_transforms())[0]
-        force, torque = self.circuit.advance(joints, pose, dt)
+        lip = array(view.get_link_transforms())[0, self._lip_index]
+        contacts = self._plate_contact_view
+        forces = array(contacts.get_contact_force_matrix(dt=dt)).reshape(-1, 3)
+        self._hand_forces = forces[:-1].reshape(len(ARMS), 3, 3)
+        self._hand_touch = bool(np.any(np.linalg.norm(self._hand_forces, axis=2) > 0.05))
+        self._plate_supported = any(supports_plate(hand) for hand in self._hand_forces)
+        rim_normal = quat_xyzw_to_matrix(lip[3:])[:, 2]
+        rim_load = max(0.0, -float(forces[-1] @ rim_normal))
+        rim_contact = False
+        if rim_load >= config.MIN_RIM_LOAD_N:
+            _, _, _, separation, counts, starts = contacts.get_contact_data(dt=dt)
+            count = int(array(counts).reshape(-1)[-1])
+            start = int(array(starts).reshape(-1)[-1])
+            rim_contact = count > 0 and bool(np.any(
+                array(separation).reshape(-1)[start:start + count] <= 0.00003
+            ))
+        previous_pressure = self.circuit.pressure
+        force, torque = self.circuit.advance(
+            joints, pose, lip, dt, rim_load=rim_load, rim_contact=rim_contact
+        )
+        elevated = bool(pose[2] >= config.PICK[2] + 0.11)
+        self.scorer.observe_hold(self.circuit, elevated=elevated, hand_touch=self._hand_touch, dt=dt)
+        self.scorer.observe_vent(
+            vent=self.circuit.vent, elevated=elevated,
+            previous_pressure=previous_pressure, supported=self._plate_supported,
+        )
         self._force[0] = self._torch.as_tensor(force, device=self._base.device)
         self._torque[0] = self._torch.as_tensor(torque, device=self._base.device)
         self._plate.root_view.apply_forces_and_torques_at_position(
@@ -332,7 +385,15 @@ class Environment(YamArenaEmbodiment):
         return obs
 
     def state(self):
-        result = {"time_s": self._t, "objects": {}}
+        result = {
+            "time_s": self._t,
+            "objects": {},
+            "plate_contacts": {
+                "supported": self._plate_supported,
+                "hand_touch": self._hand_touch,
+                "hand_forces_n": dict(zip(ARMS, self._hand_forces.tolist())),
+            },
+        }
         for s in self.spec["assets"]:
             if s["type"] == "base":
                 continue

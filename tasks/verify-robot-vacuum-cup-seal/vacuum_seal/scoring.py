@@ -6,6 +6,19 @@ from yam_arena.urdf import quat_xyzw_to_matrix
 from . import config as C
 
 
+def supports_plate(forces):
+    """Forces on the plate from the palm and the two finger bodies, in world N."""
+    _, first, second = forces
+    first_load = np.linalg.norm(first)
+    second_load = np.linalg.norm(second)
+    opposed = (
+        first_load >= C.MIN_PINCH_FORCE_N
+        and second_load >= C.MIN_PINCH_FORCE_N
+        and first @ second <= -0.55 * first_load * second_load
+    )
+    return bool(opposed or forces[:, 2].sum() >= C.MIN_UPWARD_SUPPORT_N)
+
+
 class Scorer:
     def __init__(self):
         self.reset()
@@ -18,14 +31,37 @@ class Scorer:
         self.parked = 0.0
         self.min_pressure = None
         self.unsupported_vent = False
+        self.releasing = False
+
+    def observe_vent(self, *, vent, elevated, previous_pressure, supported):
+        """Witness the opening and supported pressure release at native physics rate."""
+        self.releasing = vent and elevated and (self.releasing or previous_pressure > 4.0)
+        if self.releasing:
+            self.unsupported_vent |= not supported
+            self.controlled_vent |= self.proved and supported
+
+    def observe_hold(self, circuit, *, elevated, hand_touch, dt):
+        """Track uninterrupted, hands-off isolation at native physics rate."""
+        if self.proved:
+            return
+        if (
+            elevated and circuit.sealed and circuit.pressure >= C.HOLD_PRESSURE_KPA
+            and not hand_touch and not circuit.supply and not circuit.vent
+        ):
+            self.hold += dt
+            self.min_pressure = min(self.min_pressure or circuit.pressure, circuit.pressure)
+        else:
+            self.hold = 0.0
+            self.min_pressure = None
 
     def evaluate(self, state, circuit, elapsed):
         plate = state["objects"]["plate"]
         pose = np.asarray(plate["pose"])
         position = pose[:3]
         rotation = quat_xyzw_to_matrix(pose[3:])
-        can_support = False
-        clear = True
+        contacts = state["plate_contacts"]
+        can_support = contacts["supported"]
+        clear = not contacts["hand_touch"]
         for hand in state["hands"].values():
             points = np.asarray(hand["points"])
             relative = (points - position) @ rotation
@@ -34,40 +70,19 @@ class Scorer:
                 & (np.abs(relative[:, 1]) <= 0.063)
                 & (np.abs(relative[:, 2]) <= 0.038)
             )
-            # A jaw grasp at the handle or a supported lower plate face both
-            # permit controlled venting, regardless of which arm does it.
             near_handle = (
                 np.min(np.linalg.norm(relative - C.HANDLE_LOCAL, axis=1)) < 0.027
             )
             clear &= not (near_object or near_handle)
-            under_face = np.any(
-                (np.abs(relative[:, 0]) <= 0.056)
-                & (np.abs(relative[:, 1]) <= 0.048)
-                & (relative[:, 2] > -0.019)
-                & (relative[:, 2] < 0.001)
-            )
-            can_support |= bool(
-                (near_handle and hand["opening_m"] < 0.040) or under_face
-            )
         pressure = circuit.pressure
         elevated = position[2] >= C.PICK[2] + 0.11
         carrying = elevated and circuit.sealed and pressure >= C.HOLD_PRESSURE_KPA
         self.evacuated |= bool(carrying and circuit.supply)
         if not self.proved:
-            if carrying and clear and not circuit.supply and not circuit.vent:
-                self.hold += elapsed
-                self.min_pressure = (
-                    pressure
-                    if self.min_pressure is None
-                    else min(self.min_pressure, pressure)
-                )
-            else:
+            if not clear:
                 self.hold = 0.0
                 self.min_pressure = None
             self.proved = self.hold + 1e-9 >= 2.0
-        if self.proved and circuit.vent and elevated and pressure > 4.0:
-            self.controlled_vent |= can_support
-            self.unsupported_vent |= not can_support
         offset = position - C.PICK
         returned = (
             abs(offset[0]) <= 0.016
@@ -103,6 +118,8 @@ class Scorer:
             "supply_open": bool(circuit.supply),
             "vent_pressed": bool(circuit.vent),
             "lip_sealed": circuit.sealed,
+            "native_rim_contact": bool(circuit.rim_contact),
+            "native_rim_load_n": round(circuit.rim_load, 3),
             "bellows_compression_mm": round(1000 * circuit.compression, 3),
             "maximum_lip_gap_mm": round(1000 * circuit.max_gap, 3),
             "plate_elevated": bool(elevated),
@@ -110,6 +127,7 @@ class Scorer:
             "pressure_proof": bool(self.proved),
             "supported_vent": bool(self.controlled_vent),
             "unsupported_vent": bool(self.unsupported_vent),
+            "plate_supported_by_hand": bool(can_support),
             "plate_on_rest": bool(returned),
             "grippers_clear": bool(clear),
         }

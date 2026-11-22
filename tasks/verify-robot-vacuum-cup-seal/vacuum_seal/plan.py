@@ -26,7 +26,7 @@ def waypoints(mode):
     )
     right_orientation = frame([0.41, 0.11, -0.905], [0, -1, 0])
     pickup = C.PICK + C.HANDLE_LOCAL + [0, 0, 0.002]
-    seat = C.TARGET + C.HANDLE_LOCAL + [0, 0, 0.002]
+    seat = C.TARGET + C.HANDLE_LOCAL + [0.002, 0.0015, 0.002]
     seal_pose = seat + [0, 0, 0.003]
     regrasp = seat + [-0.001, 0, -0.004]
     spool = C.SPOOL + [0, 0, 0.0024]
@@ -69,9 +69,12 @@ def waypoints(mode):
             "Carry the plate below the cup",
             left=l(seat + [0, 0, -0.037], 0.10, True),
         )
-        p.add(
-            1.65, "Press the plate squarely into the bellows", left=l(seat, 0.10, True)
-        )
+        if mode == "gap":
+            p.add(1.65, "Hold the plate just below the lip", left=l(seat + [0, 0, -0.006], 0.10, True))
+            p.add(2.0, "Observe the open gap with supply flowing")
+            return p.moves
+        p.add(1.65, "Compress the lip squarely against the plate",
+              left=l(seal_pose, 0.10, True))
     p.add(0.85, "Let the pressure rise")
     if mode != "no_isolation":
         p.add(
@@ -89,7 +92,7 @@ def waypoints(mode):
         return p.moves
     current = slider_end if mode == "no_isolation" else spool
     p.add(
-        0.55,
+        1.05,
         "Release the spool and the supported test plate",
         left=l(seal_pose, 0.85, True),
         right=r(current, 0.80),
@@ -106,14 +109,16 @@ def waypoints(mode):
     p.add(
         1.45,
         "Return to support the test plate",
-        left=l(regrasp, 0.80, True),
+        left=None if mode == "unsupported_vent" else l(regrasp, 0.80, True),
         right=r(vent + [-0.032, 0.010, 0.076], 0.05),
     )
-    p.add(
-        0.65, "Take the load at the handle before venting", left=l(regrasp, 0.10, True)
-    )
+    p.add(0.65, "Take the load at the handle before venting" if mode != "unsupported_vent"
+          else "Leave the plate hanging with both hands clear",
+          left=None if mode == "unsupported_vent" else l(regrasp, 0.10, True))
     p.add(1.15, "Press the orange vent", right=r(vent - [0, 0, 0.006], 0.05))
     p.add(0.55, "Let the circuit reach atmospheric pressure")
+    if mode == "unsupported_vent":
+        return p.moves
     p.add(
         0.88,
         "Lower clear of the relaxed cup",

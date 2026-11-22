@@ -36,6 +36,22 @@ def slider(w, s, name, parent, child, origin, axis, limits, stiffness, damping, 
     drive.CreateMaxForceAttr(force)
 
 
+def bellows_tilt(w, s, name, parent, child, axis):
+    joint = w.Phy.RevoluteJoint.Define(s, "/Asset/" + name)
+    joint.CreateBody0Rel().SetTargets([parent])
+    joint.CreateBody1Rel().SetTargets([child])
+    joint.CreateAxisAttr(axis)
+    joint.CreateLowerLimitAttr(-8.0)
+    joint.CreateUpperLimitAttr(8.0)
+    joint.CreateCollisionEnabledAttr(False)
+    drive = w.Phy.DriveAPI.Apply(joint.GetPrim(), "angular")
+    drive.CreateTypeAttr("force")
+    drive.CreateTargetPositionAttr(0.0)
+    drive.CreateStiffnessAttr(0.60 * pi / 180)
+    drive.CreateDampingAttr(0.055 * pi / 180)
+    drive.CreateMaxForceAttr(0.55)
+
+
 def bench(w):
     s = w.stage("bench")
     w.box(
@@ -270,7 +286,11 @@ def station(w):
     vent = w.body(s, "/Asset/VentButton", 0.045, C.VENT)
     w.cylinder(s, vent + "/VentStem", 0.006, 0.021, (0, 0, -0.007), METAL)
     w.cylinder(s, vent + "/VentCap", 0.018, 0.012, (0, 0, 0.005), ORANGE)
-    cup = w.body(s, "/Asset/Bellows", 0.065, C.CUP_CENTER, ccd=True)
+    carrier = w.body(s, "/Asset/BellowsCarrier", 0.015, C.CUP_CENTER)
+    gimbal = w.body(s, "/Asset/BellowsGimbal", 0.015, C.CUP_CENTER)
+    for body in (carrier, gimbal):
+        w.Phy.MassAPI(s.GetPrimAtPath(body)).CreateDiagonalInertiaAttr(w.Gf.Vec3f(1e-6, 1e-6, 1e-6))
+    cup = w.body(s, "/Asset/Bellows", 0.035, C.CUP_CENTER, ccd=True)
     # The annular face, carried by the compliant native axial joint, has twelve
     # pressure-sector contact pads under the visual rolled lip.
     for i in range(12):
@@ -313,20 +333,24 @@ def station(w):
         s,
         "BellowsTravel",
         base,
-        cup,
+        carrier,
         C.CUP_CENTER,
         "Z",
-        (0, 0.010),
+        (0, C.BELLOWS_STROKE),
         C.STIFFNESS,
-        104,
+        16,
         130,
     )
+    bellows_tilt(w, s, "LipRoll", carrier, gimbal, "X")
+    bellows_tilt(w, s, "LipPitch", gimbal, cup, "Y")
     return s
 
 
 def plate(w):
     s = w.stage("test_plate")
     body = w.body(s, "/Asset/TestPlate", C.PLATE_MASS, ccd=True)
+    contact = w.Px.PhysxContactReportAPI.Apply(s.GetPrimAtPath(body))
+    contact.CreateThresholdAttr(0.0)
     w.rounded_box(
         s, body + "/MachinedCoupon", tuple(C.PLATE_SIZE), (0, 0, 0), METAL, 0.005, 0.001
     )
