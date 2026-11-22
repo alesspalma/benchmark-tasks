@@ -11,22 +11,26 @@ Use the two parallel-gripper YAM arms at 610 mm center spacing on a counter 747.
 | Object | Physical setup |
 |---|---|
 | Mixing jug | Clear food-safe polypropylene, 148 mm inside diameter, 160 mm rolled rim diameter and 155 mm high. Base center at 368 mm forward, 31 mm left. Its molded U-handle extends toward the left arm. The rubber-coated vertical handhold is 27 mm wide and 21 mm thick, with its center about 122 mm from the jug axis. |
-| Fill | Approximately 1.8 L of two food-safe purees of equal viscosity, one light orange and one darker orange, to a height of 113 mm from the jug base. Split the two colors roughly across a diameter at reset and remove the divider before starting. Keep the real evaluation fill cool. |
+| Fill | Equal portions of the same pumpkin soup base, with one portion dyed darker. Use the batch recipe below and fill to the 113 mm mark from the jug's inside bottom. |
 | Temperature cue | A clipped kitchen probe thermometer on the back side near the rim, with a visible inert training display set to 72 °C for the cold physical trials. |
 | Immersion blender | A 315 mm hand blender with a 58 mm stainless slotted bell, a 40 mm polymer motor handle with rubber grip, a visible motor light and an 8 mm spring-return power pad. Use a handheld one-touch type and keep any cord clear of the arms. The blender starts unpowered, upright in the rest. |
 | Drip rest | 110 mm glazed ceramic dish with a low rim, flat floor and shallow centering pads. Center at 374 mm forward, 166 mm right. The sitting plane is 9 mm above the counter. |
 
-Recreate the setup photograph for each trial. Rinse the blender, return its blade fully stopped, center both objects on their marks, and put the purees side by side in the jug. Remove the divider and restore both arms to their ready pose with jaws open. Run unsafe-order controls in simulation.
+Prepare both colors from one batch. Whisk 1,440 g of plain Libby's 100% Pure Pumpkin smooth with 720 g of water by weight, both at 20 ± 2 °C. Split into two 1,080 g batches. Stir 2.0 mL of water into the light batch and 2.0 mL of liquid red food coloring into the dark batch. Use the same dye product for a whole set of trials. Let both sit for two minutes and stir each gently with its own spoon before portioning. Check equal flow by standing a 40 mm inside-diameter ring on a level plate, filling it with 25 mL, lifting it straight up, and measuring the spread after 30 seconds. The two average spread diameters should agree within 10%. Check that equal-depth swatches of the two colors differ by at least 30 levels in one 8-bit RGB channel with the evaluation light and exposure locked. [Plain canned pumpkin specification](https://www.verybestbaking.com/libbys/products/libbys-100-pure-pumpkin-29-oz/)
+
+For quick resets, portion fresh light and dark soup by equal volume from the two master batches. Set a removable vertical polypropylene divider across the jug diameter and pour each color into its own half to the 113 mm fill mark. Lift the divider straight out, without stirring. Take the baseline image within 15 seconds and start the trial. Replace the mixed fill between trials. Rinse the blender, return it fully stopped to the clean rest, recenter both objects on their marks, and restore both arms to their ready pose with jaws open. Use the 20 ± 2 °C fill throughout. Run unsafe-order controls in simulation.
 
 ## Judge the physical result
 
 Use side or angled overhead video to see whether the entire bell guard enters the jug and is below the liquid before motor activation. Check that it remains submerged until the blade stops. The guard's top needs at least 4 mm of liquid above it, and the jug stays within 8° of upright during powered blending. A contact or status lamp on the momentary button and motor sound or rotation footage help establish the order. A start out of the liquid, an exposed rotating bell during withdrawal, or powered operation while the jug tips earns zero for the whole episode.
 
+Trace the jug base at reset and mark a 30 mm displacement limit around its center. Use a fixed overhead view with a ruler in the counter plane to track a visible center marker. A displacement of 30 mm or more during submerged powered blending, or at the final upright check, earns zero even if the jug is later recentered.
+
 For the color comparison, photograph the fill from above in diffuse illumination. Use the luminance or orange color channel that best distinguishes the two starting purees. Use reference swatches of the two batches at the same illumination to map their colors to 0 and 1. Sample the fill on 48 equal areas, formed by 16 wedges and three rings of equal area. Calculate the standard deviation divided by mean of the resulting concentration values.
 
 | Score | Outcome |
 |---|---|
-| 0.00 | No qualifying blend time, an unsafe event, or the jug fails the final upright position check. |
+| 0.00 | No qualifying blend time, an unsafe event, or the jug fails the powered or final position check. |
 | 0.25 | At least 1 second of safely submerged blade rotation. |
 | 0.50 | At least 2 seconds of safely submerged blade rotation and a concentration coefficient of variation no greater than 0.40. |
 | 0.75 | At least 4 seconds of safely submerged rotation, a coefficient of variation no greater than 0.19, and the blade stopped while submerged. |
