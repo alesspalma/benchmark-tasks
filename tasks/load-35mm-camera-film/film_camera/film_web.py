@@ -1,13 +1,14 @@
 """Camera geometry for the web between the cassette slot and the native leader."""
 
+import numpy as np
+from yam_arena.urdf import quat_xyzw_to_matrix
+
 from . import config as C
 
 
-def corners(payout):
-    mouth = -0.010
-    end = C.LEADER_DY - payout + 0.012
-    z = C.FILM_Z - C.SEAT_Z
-    return [(-0.0145, mouth, z), (-0.012, end, z), (0.012, end, z), (0.0145, mouth, z)]
+Z = C.FILM_Z - C.SEAT_Z
+MOUTH = [(-0.0145, -0.010, Z), (0.0145, -0.010, Z)]
+ATTACHMENT = np.array([(-0.012, 0.012, 0), (0.012, 0.012, 0)])
 
 
 def define(writer, stage, parent, color):
@@ -16,7 +17,8 @@ def define(writer, stage, parent, color):
     mesh.CreateDoubleSidedAttr(True)
     mesh.CreateFaceVertexCountsAttr([4])
     mesh.CreateFaceVertexIndicesAttr([0, 1, 2, 3])
-    mesh.CreatePointsAttr(corners(0.0))
+    endpoints = ATTACHMENT + [0, C.LEADER_DY, Z]
+    mesh.CreatePointsAttr([MOUTH[0], *endpoints.tolist(), MOUTH[1]])
     mesh.CreateDisplayColorAttr([writer.Gf.Vec3f(*color)])
 
 
@@ -26,9 +28,14 @@ class FilmWeb:
 
         path = "/World/envs/env_0/film_cartridge/Cassette/FilmWeb"
         self.points = UsdGeom.Mesh.Get(stage, path).GetPointsAttr()
-        self.payout = None
+        self.endpoints = None
 
-    def update(self, payout):
-        if self.payout is None or abs(payout - self.payout) > 0.0001:
-            self.points.Set(corners(payout))
-            self.payout = payout
+    def update(self, cartridge):
+        cassette = np.asarray(cartridge["pose"])
+        leader = np.asarray(cartridge["links"]["FilmLeader"])
+        leader_axes = quat_xyzw_to_matrix(leader[3:])
+        cassette_axes = quat_xyzw_to_matrix(cassette[3:])
+        endpoints = (ATTACHMENT @ leader_axes.T + leader[:3] - cassette[:3]) @ cassette_axes
+        if self.endpoints is None or np.max(np.abs(endpoints - self.endpoints)) > 0.0001:
+            self.points.Set([MOUTH[0], *endpoints.tolist(), MOUTH[1]])
+            self.endpoints = endpoints

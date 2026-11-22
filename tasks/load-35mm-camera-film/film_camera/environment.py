@@ -25,7 +25,7 @@ from yam_arena.runtime import tcp_world
 
 from . import builder, config
 from .film_web import FilmWeb
-from .scoring import Scorer, seated
+from .scoring import Scorer, aligned_leader, seated
 
 ROOT = Path(__file__).resolve().parents[1]
 _APP = None
@@ -279,16 +279,21 @@ class Environment(YamArenaEmbodiment):
 
             self._film_web = FilmWeb(get_current_stage())
         self._cam_ids = {name: i for i, name in enumerate(self._camera.joint_names)}
+        self._film_ids = {name: i for i, name in enumerate(self._cartridge.joint_names)}
+        self._leader_id = self._cartridge.body_names.index("FilmLeader")
         self._torques = torch.zeros(
             (1, self._camera.num_joints), device=self._base.device
         )
-        self._payout_force = torch.zeros((1, 1), device=self._base.device)
+        self._film_effort = torch.zeros(
+            (1, self._cartridge.num_joints), device=self._base.device
+        )
         self._torque_view = wp.from_torch(self._torques)
-        self._payout_view = wp.from_torch(self._payout_force)
+        self._film_effort_view = wp.from_torch(self._film_effort)
         self._engaged = False
         self._closed = False
         self._start_lever = 0.0
         self._stroke = 0.0
+        self._capture_payout = None
         self._callback = self._base.sim.physics_manager.register_callback(
             self._transport_forces,
             IsaacEvents.PRE_PHYSICS_STEP,
@@ -310,8 +315,15 @@ class Environment(YamArenaEmbodiment):
         # by the closed back. Apply explicit finite efforts to native bearings.
         q = array(self._camera.root_view.get_dof_positions())[0]
         qd = array(self._camera.root_view.get_dof_velocities())[0]
-        film_q = float(array(self._cartridge.root_view.get_dof_positions())[0, 0])
-        film_v = float(array(self._cartridge.root_view.get_dof_velocities())[0, 0])
+        film = self._cartridge.root_view
+        film_pos = array(film.get_dof_positions())[0]
+        film_vel = array(film.get_dof_velocities())[0]
+        payout, cross, skew = (
+            self._film_ids[n] for n in ("FilmPayout", "LeaderCross", "LeaderSkew")
+        )
+        film_q, film_v = film_pos[payout], film_vel[payout]
+        leader = array(film.get_link_transforms())[0, self._leader_id]
+        registered = aligned_leader(leader, -film_q)
         hinge, lever, rewind = (
             self._cam_ids[n] for n in ("BackHinge", "AdvancePivot", "RewindPivot")
         )
@@ -331,25 +343,36 @@ class Environment(YamArenaEmbodiment):
             self._closed = False
             self._engaged = False
             self._stroke = 0.0
+            self._capture_payout = None
         elif cover < 0.11 and not self._closed:
             self._closed = True
             self._start_lever = q[lever]
-            pose = array(self._cartridge.root_view.get_root_transforms())[0]
-            self._engaged = (
-                seated(pose) and config.PULL - 0.007 <= -film_q <= config.PULL + 0.006
-            )
+            pose = array(film.get_root_transforms())[0]
+            self._engaged = seated(pose) and registered
+            if self._engaged:
+                self._capture_payout = -film_q
+        # The film can move sideways and skew on the open deck. Once captured,
+        # the pressure plate and sprocket resist transverse slip and rotation.
+        self._film_effort[0, cross] = np.clip(
+            -(55.0 if self._engaged else 0.0) * film_pos[cross] - 1.2 * film_vel[cross],
+            -0.65, 0.65,
+        )
+        self._film_effort[0, skew] = np.clip(
+            -(0.002 if self._engaged else 0.0) * film_pos[skew],
+            -0.002, 0.002,
+        )
         if self._engaged:
             self._start_lever = min(self._start_lever, q[lever])
             stroke = np.clip((q[lever] - self._start_lever - 0.08) / 0.91, 0.0, 1.0)
             self._stroke = max(self._stroke, float(stroke))
-            target = -(config.PULL + config.ADVANCE * self._stroke)
-            self._payout_force[0, 0] = np.clip(
+            target = -(self._capture_payout + config.ADVANCE * self._stroke)
+            self._film_effort[0, payout] = np.clip(
                 95.0 * (target - film_q) - 0.8 * film_v, -1.0, 1.0
             )
         else:
             # The first registration tooth lightly holds a leader drawn into
             # the index range. It can still pull free until the back latches.
-            if abs((-film_q) - config.PULL) < 0.013:
+            if registered:
                 registration = 36.0 * (-config.PULL - film_q)
                 drag = 0.32
             else:
@@ -357,11 +380,11 @@ class Environment(YamArenaEmbodiment):
                     np.clip(-200.0 * film_q, -0.28, 0.28) if film_q > -0.004 else 0.0
                 )
                 drag = 0.23
-            self._payout_force[0, 0] = np.clip(
+            self._film_effort[0, payout] = np.clip(
                 registration - drag * film_v, -0.34, 0.34
             )
         knob_goal = (
-            np.clip((-film_q - config.PULL) * 100.0, 0.0, 1.85)
+            np.clip((-film_q - self._capture_payout) * 100.0, 0.0, 1.85)
             if self._engaged
             else 0.0
         )
@@ -371,9 +394,7 @@ class Environment(YamArenaEmbodiment):
         self._camera.root_view.set_dof_actuation_forces(
             self._torque_view, self._camera._ALL_INDICES
         )
-        self._cartridge.root_view.set_dof_actuation_forces(
-            self._payout_view, self._cartridge._ALL_INDICES
-        )
+        film.set_dof_actuation_forces(self._film_effort_view, self._cartridge._ALL_INDICES)
 
     def reset(self, scene, *, seed=None):
         self._ensure_sim()
@@ -382,14 +403,15 @@ class Environment(YamArenaEmbodiment):
         self._closed = False
         self._start_lever = 0.0
         self._stroke = 0.0
+        self._capture_payout = None
         camera_reset = self._torch.zeros_like(self._torques)
         camera_reset[0, self._cam_ids["BackHinge"]] = -np.deg2rad(config.DOOR_OPEN)
         self._camera.write_joint_state_to_sim(
             camera_reset, self._torch.zeros_like(camera_reset)
         )
         self._cartridge.write_joint_state_to_sim(
-            self._torch.zeros_like(self._payout_force),
-            self._torch.zeros_like(self._payout_force),
+            self._torch.zeros_like(self._film_effort),
+            self._torch.zeros_like(self._film_effort),
         )
         self.scorer.reset()
         self._instruction = scene.instruction
@@ -401,7 +423,7 @@ class Environment(YamArenaEmbodiment):
             raise RuntimeError(f"Non-finite native reset: {state}")
         self.metrics = self.scorer.evaluate(state, elapsed=0.0)
         if self.render_images:
-            self._film_web.update(self.metrics["film_payout_m"])
+            self._film_web.update(state["objects"]["film_cartridge"])
             for _ in range(4):
                 self._base.sim.render()
         obs = self._observation()
@@ -441,6 +463,7 @@ class Environment(YamArenaEmbodiment):
         result["transport"] = {
             "engaged": self._engaged,
             "stroke_fraction": self._stroke,
+            "payout_at_capture_m": self._capture_payout,
         }
         result["hands"] = {}
         for name in ARMS:
@@ -465,7 +488,7 @@ class Environment(YamArenaEmbodiment):
         state = self.state()
         self.metrics = self.scorer.evaluate(state, elapsed=config.CHECK_DT)
         if self.render_images:
-            self._film_web.update(self.metrics["film_payout_m"])
+            self._film_web.update(state["objects"]["film_cartridge"])
             self._base.sim.render()
         return StepResult(
             observation=self._observation(),

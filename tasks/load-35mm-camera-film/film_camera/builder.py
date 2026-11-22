@@ -119,6 +119,14 @@ def camera(w):
         GATE,
     )
     for edge in (-1, 1):
+        for side in (-1, 1):
+            w.box(
+                s,
+                b + f"/CassetteBearing{int(edge > 0)}{int(side > 0)}",
+                (0.005, 0.002, 0.010),
+                (C.X + edge * 0.021, C.SEAT_Y + side * 0.0138, C.SEAT_Z + 0.003),
+                GATE,
+            )
         w.box(
             s,
             b + f"/EndRetainer{int(edge > 0)}",
@@ -388,6 +396,12 @@ def cartridge(w):
     )
     film_web(w, s, b, FILM)
     leader_root = (0, C.LEADER_DY, C.FILM_Z - C.SEAT_Z)
+    payout = w.body(s, "/Asset/PayoutCarriage", 0.004, leader_root)
+    lateral = w.body(s, "/Asset/LeaderCarriage", 0.004, leader_root)
+    for body in (payout, lateral):
+        w.Phy.MassAPI(s.GetPrimAtPath(body)).CreateDiagonalInertiaAttr(
+            w.Gf.Vec3f(1e-7, 1e-7, 1e-7)
+        )
     tip = w.body(s, "/Asset/FilmLeader", 0.006, leader_root, ccd=True)
     w.rounded_box(
         s, tip + "/Leader", (0.024, 0.033, 0.0018), (0, -0.001, 0), FILM, 0.002, 0.00025
@@ -416,12 +430,17 @@ def cartridge(w):
         s,
         "FilmPayout",
         b,
-        tip,
+        payout,
         leader_root,
         "Y",
-        (-C.PULL - C.ADVANCE - 0.005, 0.001),
+        (-C.PULL - C.ADVANCE - 0.008, 0.001),
         linear=True,
     )
+    bearing(
+        w, s, "LeaderCross", payout, lateral, (0, 0, 0), "X",
+        (-0.011, 0.011), linear=True,
+    )
+    bearing(w, s, "LeaderSkew", lateral, tip, (0, 0, 0), "Z", (-22, 22))
     return s
 
 

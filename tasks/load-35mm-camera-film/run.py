@@ -38,7 +38,7 @@ def main():
     p.add_argument(
         "--policy",
         default="demo",
-        choices=("hold", "demo", "short_leader", "no_advance"),
+        choices=("hold", "demo", "short_leader", "no_advance", "misaligned"),
     )
     p.add_argument("--max-steps", type=int, default=c.MAX_STEPS)
     p.add_argument("--seed", type=int, default=1415158438)

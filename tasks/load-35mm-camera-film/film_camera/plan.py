@@ -15,21 +15,12 @@ def down(tilt, close_y=True):
     return np.column_stack((closing, np.cross(forward, closing), forward))
 
 
-def almost_vertical_strip():
-    forward = np.array([0.25, 0.46, -0.852])
-    forward /= np.linalg.norm(forward)
-    closing = np.array([1.0, 0.0, 0.0])
-    closing -= np.dot(closing, forward) * forward
-    closing /= np.linalg.norm(closing)
-    return np.column_stack((closing, np.cross(forward, closing), forward))
-
-
 def waypoints(mode):
     program = Program()
     if mode == "hold":
         return program.moves
     cassette_grip = down(36)
-    strip_grip = almost_vertical_strip()
+    strip_grip = down(16)
     door_grip = down(34)
     lever_grip = down(16)
 
@@ -64,7 +55,8 @@ def waypoints(mode):
         )
 
     start_y = C.SEAT_Y + C.LEADER_DY - 0.014
-    end_y = start_y - (C.PULL - 0.011 if mode != "short_leader" else 0.010)
+    end_y = start_y - (C.PULL + 0.004 if mode != "short_leader" else 0.010)
+    end_x = C.X + (0.015 if mode == "misaligned" else -0.002)
     top = C.FILM_Z + 0.005
 
     program.add(
@@ -86,12 +78,16 @@ def waypoints(mode):
     program.add(
         2.30,
         "Draw the leader straight across the film gate",
-        right=strip(end_y, top, 0.01),
+        right=strip(end_y, top, 0.01, x=end_x),
     )
     program.add(
-        0.80, "Keep the film leader level at the index", right=strip(end_y, top, 0.01)
+        0.80, "Hold the leader beside the index", right=strip(end_y, top, 0.01, x=end_x)
     )
-    program.add(0.45, "Release at the index", right=strip(end_y, top, 0.53))
+    program.add(0.45, "Release at the index", right=strip(end_y, top, 0.53, x=end_x))
+    program.add(
+        0.45, "Lift the open fingers off the film",
+        right=strip(end_y, top + 0.035, 0.53, x=end_x),
+    )
     program.add(
         1.12,
         "Clear the loading rails and camera cover",
