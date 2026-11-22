@@ -43,13 +43,12 @@ class ScriptedPolicy(PolicyBase):
         self.worst_ik_rad = 0.0
 
     def action_at(self, t, joint_pos=None, fixture=None):
-        if fixture is not None and self.mode != "hold":
-            phase_length = plan.SIDE_SECONDS
-            side = "R" if t > phase_length else "L"
-            age = t - phase_length if side == "R" else t
-            if age <= 3.35:
-                self.pickups[side] = plan.pickup_frames(fixture)[side]
-                self.moves = plan.waypoints(self.mode, self.pickups)
+        if fixture is not None and self.mode != "hold" and t <= plan.PICKUP_SECONDS+.4:
+            pickups = plan.pickup_frames(fixture)
+            if t <= plan.PICKUP_SECONDS:
+                self.pickups["L"] = pickups["L"]
+            self.pickups["R"] = pickups["R"]
+            self.moves = plan.waypoints(self.mode, self.pickups)
         out = []
         labels = []
         for name in ("left", "right"):

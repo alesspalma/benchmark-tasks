@@ -62,11 +62,11 @@ def slide(w, stage, parent, child, side):
     drive.CreateTargetPositionAttr(c.SIDES[side]*c.OPEN)
 
 
-def clamp_plate(w, stage, path, center, frame, sign):
+def clamp_plate(w, stage, path, center, frame, sign, throat_top):
     # Both cheeks have a lead-in; the narrowing near the base arrests the
     # tensioned line. The sprung cheek yields only in response to contact.
-    section = np.array([[.0044, -.006], [.0015, -.001], [.0015, .002],
-                        [.0062, .011], [.0086, .010], [.009, -.006]])
+    section = np.array([[.0044, -.006], [.0015, -.001], [.0015, throat_top],
+                        [.0062, throat_top+.009], [.0086, throat_top+.008], [.009, -.006]])
     pts = [center + frame @ [end, sign*width, z]
            for end in (-.009, .009) for width, z in section]
     faces = [(5, 4, 3, 2, 1, 0), (6, 7, 8, 9, 10, 11)]
@@ -88,9 +88,11 @@ def clamping_hook(w, stage, panel, side, center):
     frame = c.lock_axes(c.SIDES[side])
     w.rounded_box(stage, panel+"/HookSaddle", (.024, .021, .003),
                   center-[0., 0., .0045], METAL, radius=.003, bevel=.0005)
-    clamp_plate(w, stage, panel+"/FixedCheek", center, frame, -1)
-    jaw = w.body(stage, "/Asset/"+side+"Jaw", .006, c.PANEL_ROOT+center)
-    clamp_plate(w, stage, jaw+"/SpringCheek", np.zeros(3), frame, 1)
+    throat_top = c.THROAT_TOP[side]
+    clamp_plate(w, stage, panel+"/FixedCheek", center, frame, -1, throat_top)
+    opening = np.array([0., c.SIDES[side]*c.OPEN, 0.])
+    jaw = w.body(stage, "/Asset/"+side+"Jaw", .006, c.PANEL_ROOT+opening+center)
+    clamp_plate(w, stage, jaw+"/SpringCheek", np.zeros(3), frame, 1, throat_top)
     joint = w.Phy.PrismaticJoint.Define(stage, "/Asset/Jaw"+side)
     joint.CreateBody0Rel().SetTargets([panel])
     joint.CreateBody1Rel().SetTargets([jaw])
@@ -110,23 +112,42 @@ def clamping_hook(w, stage, panel, side, center):
     drive.CreateTargetPositionAttr(0.)
 
 
+def eyelet(w, stage, path, center, *, crosswise):
+    # A shallow steel guide surrounds the cord while leaving axial slip free.
+    along, across = (1, 0) if crosswise else (0, 1)
+    for index, sign in enumerate((-1., 1.)):
+        post = center.copy()
+        post[across] += sign*.006
+        size = np.array([.004, .004, .014])
+        size[along] = .008
+        w.box(stage, path+f"Side{index}", size, post, METAL)
+    for name, sign in (("Base", -1.), ("Bridge", 1.)):
+        plate = center+[0., 0., sign*.006]
+        size = np.array([.016, .016, .004])
+        size[along] = .008
+        w.box(stage, path+name, size, plate, METAL)
+
+
 def boot(w):
     stage = w.stage("boot")
     root = w.body(stage, "/Asset/Last", .75, fixed=True, articulation=True)
     toe(w, stage, root)
     for side, direction in c.SIDES.items():
-        panel = w.body(stage, "/Asset/"+side+"Panel", .043, c.PANEL_ROOT, ccd=True)
+        opening = np.array([0., direction*c.OPEN, 0.])
+        panel = w.body(stage, "/Asset/"+side+"Panel", .043, c.PANEL_ROOT+opening, ccd=True)
         w.rounded_box(stage, panel+"/Upper", (.151, .027, .045),
                       (.007, direction*.042, .016), PANEL, radius=.012, bevel=.005)
         w.rounded_box(stage, panel+"/LaceStay", (.100, .014, .010),
                       (.044, direction*.033, .031), LEATHER, radius=.006, bevel=.001)
+        w.rounded_box(stage, panel+"/ToeStay", (.065, .019, .015),
+                      (.098, direction*.044, .028), PANEL, radius=.005, bevel=.002)
         slide(w, stage, root, panel, side)
-        eyelet = c.ANCHOR * [1., direction, 1.] - c.PANEL_ROOT
-        w.rounded_box(stage, panel+"/Eyelet", (.010, .012, .005),
-                      eyelet+[0., 0., -.004], METAL, radius=.002, bevel=.0006)
-        lock = c.LOCK * [1., direction, 1.] - c.PANEL_ROOT
+        for index, guide in enumerate((c.ANCHOR, *c.LOWER_GUIDES)):
+            center = np.asarray(guide)*[1., direction, 1.] - c.PANEL_ROOT
+            eyelet(w, stage, panel+f"/Eyelet{index}", center, crosswise=index == 0)
+        lock = c.lock_center(side) - c.PANEL_ROOT
         clamping_hook(w, stage, panel, side, lock)
-        build_lace(w, stage, panel, side)
+    build_lace(w, stage)
     return stage
 
 

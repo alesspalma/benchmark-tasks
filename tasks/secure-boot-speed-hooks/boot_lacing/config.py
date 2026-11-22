@@ -20,8 +20,14 @@ LINK_LENGTH = .0075
 LINK_COUNT = 24
 PANEL_ROOT = np.array([.388, 0., .830+BOOT_RISE])
 OPEN = .013
-ANCHOR = np.array([.454, .040, .872+BOOT_RISE])
-LOCK = np.array([.410, .032, .885+BOOT_RISE])
+ANCHOR = np.array([.454, .040, .877+BOOT_RISE])
+LOCK = np.array([.410, .031, .889+BOOT_RISE])
+THROAT_TOP = {"L": .002, "R": .006}
+LOWER_GUIDES = ((.480, .047, .960), (.508, .043, .952))
+
+
+def lock_center(side):
+    return LOCK * [1., SIDES[side], 1.]
 
 
 def lock_axes(sign):
