@@ -10,7 +10,13 @@ Use a clean, dry kitchen bench with a 241 × 151 × 22 mm beechwood cheese board
 
 Robot bases are 610 mm apart. X points forward from the midpoint of the bases, Y points to the robot's left, and the table top is 747.5 mm high. The board surface is at Z 771.5 mm. The hinge is at X 425, Y 76 mm, with the wire slot directed toward the right. In the fixed reset, center the intact block at X 372, Y 24 mm. Center the side plate at X 345, Y 208 mm. The body of the board stays in place during the task.
 
-Reset with the same dry board and a fresh intact block. Wipe away scraps from the wire slot, empty the plate and leave the handle raised. Start both hands open and clear.
+### Stock preparation and reset
+
+Use regular Tillamook Medium Cheddar from the 2.5 lb block, with all trial portions cut from the same parent block. Store it wrapped or in a sealed container at 2–4 °C and use it by the package date. While chilled, square off one end with a clean straight knife, cut a 31 mm slab with a straightedge and thickness spacer, then trim the slab to 72 × 54 mm. Use a ruler or caliper to check all dimensions within ±1 mm. Batch-cut several pieces with the same spacers and seal them individually. Use a fresh, uncut piece for each trial. [Tillamook product specification](https://www.tillamook.com/products/cheese/medium-cheddar-block) · [FDA cold storage guidance](https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-thermometers-cold-facts-about-food-safety)
+
+Temper the sealed trial piece and an identical spare together in a 10 °C water bath. Probe the center of the spare. Start at 8–10 °C, using the trial piece as soon as the spare reaches that range. Open the pouch, blot any condensation with a clean paper towel, and place the block flat with its 31 mm dimension vertical.
+
+Use a removable set of food-contact silicone pad covers on both grippers. After every trial, remove the covers and wash them, the slicer wire and slot, and the plate with warm soapy water. Rinse and dry before reinstallation, or swap in a clean dry set. Reset the dry board with the fresh block, empty the plate and leave the handle raised. Start both hands open and clear. [Food-contact cleaning guidance](https://www.foodsafety.gov/keep-food-safe/4-steps-to-food-safety)
 
 ## Physical score
 
